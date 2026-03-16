@@ -1,18 +1,11 @@
 {
-    "voluntarios": [
+    "voluntariados": [
         {}
     ],
-
-
-"organizciones": [
-    {}
-],
-
-"horas": [
-    {}
-],
-
-"usuarios": [
-    {}
-]
+    "organizciones": [
+        {}
+    ],
+    "usuarios": [
+        {}
+    ]
 }
