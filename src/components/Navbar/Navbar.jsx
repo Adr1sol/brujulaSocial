@@ -11,9 +11,10 @@ const Navbar = () => {
         <span className={styles['nav-logo']}>Brújula Social</span>
       </Link>
       <ul className={styles['nav-links']}>
-        <li><Link to="/">Inicio</Link></li>
+        <li><Link to="/">Inicio
+        </Link></li>
         <li><Link to="/registro">Registro</Link></li>
-        <li><Link to="/inicio-user">Contacto</Link></li>
+        <li><a href="#footer">Contacto</a></li>
         <li><Link to="/">Sobre Nosotros</Link></li>
       </ul>
     </nav>

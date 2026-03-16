@@ -3,10 +3,10 @@ import styles from './Footer.module.css';
 
 const Footer = () => {
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} id="footer">
       <div className={styles['footer-content']}>
         <div className={styles['footer-section']}>
-          <h3>BrújulaSocial</h3>
+          <h3>Brújula Social</h3>
           <p>Orientación y conexión social para una mejor comunidad.</p>
         </div>
 
@@ -39,6 +39,7 @@ const Footer = () => {
           <h3>Legal</h3>
           <ul>
             <li><a href="/privacidad">Política de Privacidad</a></li>
+            <li><a href="/terminos">Términos y Condiciones</a></li>
           </ul>
         </div>
 
@@ -49,7 +50,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles['footer-bottom']}>
-        <p>&copy; 2026 BrújulaSocial. Todos los derechos reservados.</p>
+        <p>&copy; 2026 Brújula Social. Todos los derechos reservados.</p>
       </div>
     </footer>
   );
