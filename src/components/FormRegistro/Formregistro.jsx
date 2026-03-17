@@ -2,6 +2,7 @@ import styles from "./Formregistro.module.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import ServiceUsuario from "../../services/ServiceUsuario";
 
 function Formregistro() {
   const [tipo, setTipo] = useState("voluntario");
@@ -47,15 +48,9 @@ function Formregistro() {
     };
 
     try {
-      const response = await fetch("http://localhost:3001/usuarios", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newUser)
-      });
+      const response = await ServiceUsuario.postRegistro(newUser);
 
-      if (response.ok) {
+      if (response) {
         Swal.fire({
           icon: 'success',
           title: '¡Cuenta creada!',

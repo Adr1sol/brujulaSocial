@@ -113,6 +113,26 @@
       "Tipo": "org",
       "IdProvincia": 1,
       "FechaRegistro": "2026-03-17"
+    },
+    {
+      "id": "088e",
+      "Nombre": "andy obando",
+      "Correo": "andy@gmail.com",
+      "Contrasena": "a",
+      "Telefono": "71717171",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-17"
+    },
+    {
+      "id": "af64",
+      "Nombre": "Ana rivera",
+      "Correo": "adlf@gmail.com",
+      "Contrasena": "1",
+      "Telefono": "81818181",
+      "Tipo": "org",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-17"
     }
   ],
   "aplicaciones": [

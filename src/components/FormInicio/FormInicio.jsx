@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./FormInicio.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import ServiceUsuario from "../../services/ServiceUsuario";
 
 export default function FormInicio() {
   const [email, setEmail] = useState("");
@@ -14,11 +15,10 @@ export default function FormInicio() {
     setLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:3001/usuarios?Correo=${email}&Contrasena=${password}`);
-      const data = await response.json();
+      const users = await ServiceUsuario.getUsuarios();
+      const user = users.find(u => u.Correo === email && u.Contrasena === password);
 
-      if (data.length > 0) {
-        const user = data[0];
+      if (user) {
         Swal.fire({
           icon: 'success',
           title: `¡Bienvenido, ${user.Nombre}!`,
