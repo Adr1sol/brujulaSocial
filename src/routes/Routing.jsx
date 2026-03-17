@@ -1,45 +1,40 @@
-<<<<<<< HEAD
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import Home from "../pages/Home/Home";
 import Privacidad from "../pages/Privacidad";
 import Terminos from "../pages/Terminos";
+import InicioUser from "../pages/InicioUser";
+import RegistroUser from "../pages/RegistroUser";
+import Buscador from "../pages/Buscador";
+
+function ScrollToTop() {
+    const { pathname } = useLocation();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+    return null;
+}
 
 function Routing() {
     return (
         <Router>
+            <ScrollToTop />
             <Navbar />
             <main>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/privacidad" element={<Privacidad />} />
                     <Route path="/terminos" element={<Terminos />} />
-                    <Route path="/registro" element={<div style={{padding: '4rem', textAlign: 'center'}}><h1>Página de Registro</h1></div>} />
-                    <Route path="/inicio-user" element={<div style={{padding: '4rem', textAlign: 'center'}}><h1>Página de Contacto / Login</h1></div>} />
+                    <Route path="/registro" element={<RegistroUser />} />
+                    <Route path="/login" element={<InicioUser />} />
+                    <Route path="/buscador" element={<Buscador />} />
                 </Routes>
             </main>
             <Footer />
         </Router>
-    )
-=======
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import InicioUser from "../pages/InicioUser";
-import RegistroUser from "../pages/RegistroUser";
-import Buscador from "../pages/Buscador";
-
-function Routing() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<InicioUser />} />
-        <Route path="/registro" element={<RegistroUser />} />
-        <Route path="/buscador" element={<Buscador />} />
-      </Routes>
-    </BrowserRouter>
-  );
->>>>>>> 419df57affdc02fab6b9ff319ea9befe2ef44695
+    );
 }
 
-export default Routing;
+export default Routing;

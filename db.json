@@ -1,74 +1,127 @@
 {
-<<<<<<< HEAD
-  "users": [],
-  "projects": []
+  "categorias": [
+    {
+      "id": "1",
+      "NombreCategoria": "Medio Ambiente"
+    },
+    {
+      "id": "2",
+      "NombreCategoria": "Educación"
+    },
+    {
+      "id": "3",
+      "NombreCategoria": "Salud"
+    },
+    {
+      "id": "4",
+      "NombreCategoria": "Bienestar Animal"
+    },
+    {
+      "id": "5",
+      "NombreCategoria": "Cultura"
+    }
+  ],
+  "provincias": [
+    {
+      "id": "1",
+      "NombreProvincia": "San José"
+    },
+    {
+      "id": "2",
+      "NombreProvincia": "Alajuela"
+    },
+    {
+      "id": "3",
+      "NombreProvincia": "Cartago"
+    },
+    {
+      "id": "4",
+      "NombreProvincia": "Heredia"
+    },
+    {
+      "id": "5",
+      "NombreProvincia": "Guanacaste"
+    },
+    {
+      "id": "6",
+      "NombreProvincia": "Puntarenas"
+    },
+    {
+      "id": "7",
+      "NombreProvincia": "Limón"
+    }
+  ],
+  "disponibilidades": [
+    {
+      "id": "1",
+      "NombreDisponibilidad": "Fines de semana"
+    },
+    {
+      "id": "2",
+      "NombreDisponibilidad": "Por horas"
+    },
+    {
+      "id": "3",
+      "NombreDisponibilidad": "Remoto"
+    },
+    {
+      "id": "4",
+      "NombreDisponibilidad": "Entre semana"
+    }
+  ],
+  "organizaciones": [
+    {
+      "id": "1",
+      "idCategoria": 1,
+      "NombreOrganizacion": "EcoVoluntarios CR",
+      "idDisponibilidad": 1,
+      "IdProvincia": 1,
+      "Descripcion": "Organización dedicada a la limpieza y conservación de espacios naturales."
+    },
+    {
+      "id": "2",
+      "idCategoria": 2,
+      "NombreOrganizacion": "Fundación Aprende",
+      "idDisponibilidad": 4,
+      "IdProvincia": 2,
+      "Descripcion": "Apoyo educativo a niños y jóvenes en zonas vulnerables."
+    },
+    {
+      "id": "3",
+      "idCategoria": 4,
+      "NombreOrganizacion": "Rescate Animal",
+      "idDisponibilidad": 2,
+      "IdProvincia": 3,
+      "Descripcion": "Organización de bienestar animal."
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "1",
+      "Nombre": "María González",
+      "Correo": "maria@correo.com",
+      "Contrasena": "hashed_password",
+      "IdProvincia": 1,
+      "FechaRegistro": "2025-01-10"
+    },
+    {
+      "id": "4f4f",
+      "Nombre": "camil rivera",
+      "Correo": "a@gmail.com",
+      "Contrasena": "a",
+      "Telefono": "71328432",
+      "Tipo": "org",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-17"
+    }
+  ],
+  "aplicaciones": [
+    {
+      "id": "1",
+      "idUsuario": 1,
+      "idOrganizacion": 1,
+      "FechaAplicacion": "2025-03-01"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
-=======
-    "categorias": [
-        { "id": 1, "NombreCategoria": "Medio Ambiente" },
-        { "id": 2, "NombreCategoria": "Educación" },
-        { "id": 3, "NombreCategoria": "Salud" },
-        { "id": 4, "NombreCategoria": "Bienestar Animal" },
-        { "id": 5, "NombreCategoria": "Cultura" }
-    ],
-    "provincias": [
-        { "id": 1, "NombreProvincia": "San José" },
-        { "id": 2, "NombreProvincia": "Alajuela" },
-        { "id": 3, "NombreProvincia": "Cartago" },
-        { "id": 4, "NombreProvincia": "Heredia" },
-        { "id": 5, "NombreProvincia": "Guanacaste" },
-        { "id": 6, "NombreProvincia": "Puntarenas" },
-        { "id": 7, "NombreProvincia": "Limón" }
-    ],
-    "disponibilidades": [
-        { "id": 1, "NombreDisponibilidad": "Fines de semana" },
-        { "id": 2, "NombreDisponibilidad": "Por horas" },
-        { "id": 3, "NombreDisponibilidad": "Remoto" },
-        { "id": 4, "NombreDisponibilidad": "Entre semana" }
-    ],
-    "organizaciones": [
-        {
-            "id": 1,
-            "idCategoria": 1,
-            "NombreOrganizacion": "EcoVoluntarios CR",
-            "idDisponibilidad": 1,
-            "IdProvincia": 1,
-            "Descripcion": "Organización dedicada a la limpieza y conservación de espacios naturales."
-        },
-        {
-            "id": 2,
-            "idCategoria": 2,
-            "NombreOrganizacion": "Fundación Aprende",
-            "idDisponibilidad": 4,
-            "IdProvincia": 2,
-            "Descripcion": "Apoyo educativo a niños y jóvenes en zonas vulnerables."
-        },
-        {
-            "id": 3,
-            "idCategoria": 4,
-            "NombreOrganizacion": "Rescate Animal",
-            "idDisponibilidad": 2,
-            "IdProvincia": 3,
-            "Descripcion": "Organización de bienestar animal."
-        }
-    ],
-    "usuarios": [
-        {
-            "id": 1,
-            "Nombre": "María González",
-            "Correo": "maria@correo.com",
-            "Contrasena": "hashed_password",
-            "IdProvincia": 1,
-            "FechaRegistro": "2025-01-10"
-        }
-    ],
-    "aplicaciones": [
-        {
-            "id": 1,
-            "idUsuario": 1,
-            "idOrganizacion": 1,
-            "FechaAplicacion": "2025-03-01"
-        }
-    ]
-}
->>>>>>> 419df57affdc02fab6b9ff319ea9befe2ef44695
