@@ -1,4 +1,5 @@
-// POST VOLUNTARIOS - función para guardar un nuevo voluntario
+
+// POST Organizaciones
 async function postOrganizaciones(organizaciones) {
     try {
         const respuesta = await fetch("http://localhost:3001/organizaciones", {
@@ -19,7 +20,7 @@ async function postOrganizaciones(organizaciones) {
 }
 
 
-async function getOrganización() {
+async function getOrganizaciones() {
     try {
         const respuesta = await fetch("http://localhost:3001/organizaciones")
         const datos = await respuesta.json()
@@ -29,42 +30,42 @@ async function getOrganización() {
     }
 }
 
-// PUT voluntariado - función para actualizar un voluntariado existente
-async function putVoluntariado(voluntariado, id) {
+// PUT organización - función para actualizar una organización existente
+async function putOrganizaciones(organizaciones, id) {
     try {
-        const respuesta = await fetch("http://localhost:3001/voluntariado/" + id, {
+        const respuesta = await fetch("http://localhost:3001/organizaciones/" + id, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(voluntariado)
+            body: JSON.stringify(organizaciones)
         })
 
-        const datosVoluntariado = await respuesta.json();
+        const datosOrganizaciones = await respuesta.json();
 
-        return datosVoluntariado;
+        return datosOrganizaciones;
 
     } catch (error) {
-        console.error("Error al actualizar el voluntariado", error);
+        console.error("Error al actualizar las organizaciones", error);
     }
 }
 
 
-// DELETE voluntariado - función para eliminar un voluntariado
-async function deleteVoluntariado(id) {
+// DELETE organización - función para eliminar una organización
+async function deleteOrganizaciones(id) {
     try {
-        const respuesta = await fetch("http://localhost:3001/voluntariado/" + id, {
+        const respuesta = await fetch("http://localhost:3001/organizaciones/" + id, {
             method: "DELETE"
         })
 
-        const datosVoluntariado = await respuesta.json();
+        const datosOrganizaciones = await respuesta.json();
 
-        return datosVoluntariado;
+        return datosOrganizaciones;
 
     } catch (error) {
-        console.error("Error al eliminar el voluntariado", error);
+        console.error("Error al eliminar la organizaciones", error);
     }
 }
 
 
-export default { postVoluntariado, getVoluntariado, putVoluntariado, deleteVoluntariado }
+export default {postOrganizaciones, getOrganizaciones, putOrganizaciones, deleteOrganizaciones}
