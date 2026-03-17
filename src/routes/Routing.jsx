@@ -1,13 +1,19 @@
-import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
-import HomePage from "../pages/HomePage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import InicioUser from "../pages/InicioUser";
+import RegistroUser from "../pages/RegistroUser";
+import Buscador from "../pages/Buscador";
 
 function Routing() {
-    return(
-        <Router>
-            <Routes>
-                <Route path="/" element={<HomePage/>}/>
-            </Routes>
-        </Router>
-    )
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<InicioUser />} />
+        <Route path="/registro" element={<RegistroUser />} />
+        <Route path="/buscador" element={<Buscador />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
-export default Routing
+
+export default Routing;
