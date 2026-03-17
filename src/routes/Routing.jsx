@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
+import Home from "../pages/Home/Home";
 import Privacidad from "../pages/Privacidad";
 import Terminos from "../pages/Terminos";
 
@@ -10,12 +11,7 @@ function Routing() {
             <Navbar />
             <main>
                 <Routes>
-                    <Route path="/" element={
-                        <div style={{ padding: '4rem', textAlign: 'center' }}>
-                            <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Brújula Social</h1>
-                            <p style={{ color: '#64748b', fontSize: '1.2rem' }}>Conectando al voluntariado con el impacto social.</p>
-                        </div>
-                    } />
+                    <Route path="/" element={<Home />} />
                     <Route path="/privacidad" element={<Privacidad />} />
                     <Route path="/terminos" element={<Terminos />} />
                     <Route path="/registro" element={<div style={{padding: '4rem', textAlign: 'center'}}><h1>Página de Registro</h1></div>} />
