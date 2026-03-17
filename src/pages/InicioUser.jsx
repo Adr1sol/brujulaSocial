@@ -1,7 +1,13 @@
 import FormInicio from "../components/FormInicio/FormInicio";
+import Navbar from "../components/Navbar/NavBar";
 
 function InicioUser(){
-  return <FormInicio/>
+  return( 
+ <> 
+ <Navbar/>
+  <FormInicio/>
+</>
+)
 }
 
 export default InicioUser

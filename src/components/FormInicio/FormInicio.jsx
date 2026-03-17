@@ -5,7 +5,6 @@ export default function FormInicio() {
   return (
     <div className={styles.container}>
 
-      <img src="/logo.png" alt="Logo" className={styles.logo} />
 
       <div className={styles.card}>
 

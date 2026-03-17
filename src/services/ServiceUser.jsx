@@ -1,8 +1,10 @@
 // components/Services/Services.jsx
 import React from 'react';
 import './Services.css';
+import { useNavigate } from 'react-router-dom';
 
 const Services = () => {
+  const navigate = useNavigate()
   const projects = [
     {
       category: "EDUCACIÓN",
@@ -51,7 +53,11 @@ const Services = () => {
               <span className="location">📍 {proj.location}</span>
               <h3>{proj.title}</h3>
               <p>{proj.desc}</p>
-              <button className="btn-outline">Saber más</button>
+              <button className="btn-outline" 
+                onClick={()=>{
+                  navigate("/ruta")
+                }}
+              >Saber más</button>
             </div>
           </div>
         ))}

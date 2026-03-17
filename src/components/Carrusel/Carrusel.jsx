@@ -19,11 +19,15 @@ function Carrusel() {
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img src="../src/img/escuela.jpg" alt="" />
+                <img src="../src/img/basura playa.jpg" alt="playa" />
+                <img src="../src/img/escuela.jpg" alt="Escuela" />
+                <img src="../src/img/Puente.jpg" alt="Puente" />
+                <img src="../src/img/Refugio.jpg" alt="Refugio" />
+                <img src="../src/img/voluntariado.jpg" alt="Voluntariado" />
                 <Carousel.Caption>
                     <h3>Third slide label</h3>
                     <p>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                        Praesent commodo cu
                     </p>
                 </Carousel.Caption>
             </Carousel.Item>
