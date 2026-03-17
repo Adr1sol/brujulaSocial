@@ -133,6 +133,16 @@
       "Tipo": "org",
       "IdProvincia": 1,
       "FechaRegistro": "2026-03-17"
+    },
+    {
+      "id": "e8df",
+      "Nombre": "andy a",
+      "Correo": "a@gmail.com",
+      "Contrasena": "a",
+      "Telefono": "a",
+      "Tipo": "org",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-17"
     }
   ],
   "aplicaciones": [

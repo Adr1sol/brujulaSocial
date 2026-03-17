@@ -9,6 +9,8 @@ import InicioUser from "../pages/InicioUser";
 import RegistroUser from "../pages/RegistroUser";
 import Buscador from "../pages/Buscador";
 
+import NavbarOrg from "../components/NavbarOrg/NavbarOrg";
+
 function ScrollToTop() {
     const { pathname } = useLocation();
     useEffect(() => {
@@ -17,11 +19,13 @@ function ScrollToTop() {
     return null;
 }
 
-function Routing() {
+function MainLayout() {
+    const location = useLocation();
+    const isOrgPage = location.pathname === "/registerOrg";
+
     return (
-        <Router>
-            <ScrollToTop />
-            <Navbar />
+        <>
+            {isOrgPage ? <NavbarOrg /> : <Navbar />}
             <main>
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -29,9 +33,18 @@ function Routing() {
                     <Route path="/terminos" element={<Terminos />} />
                     <Route path="/registro" element={<RegistroUser />} />
                     <Route path="/login" element={<InicioUser />} />
-                    <Route path="/buscador" element={<Buscador />} />
+                    <Route path="/registerOrg" element={<Buscador />} />
                 </Routes>
             </main>
+        </>
+    );
+}
+
+function Routing() {
+    return (
+        <Router>
+            <ScrollToTop />
+            <MainLayout />
             <Footer />
         </Router>
     );

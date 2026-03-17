@@ -25,11 +25,32 @@ function Formregistro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { nombre, apellido, tel, email, password, confirmPassword } = formData;
+    if (!nombre.trim() || !apellido.trim() || !tel.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Formulario incompleto',
+        text: 'Todos los campos son obligatorios. Por favor, revísalos.',
+        confirmButtonColor: '#EF8514'
+      });
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Contraseña débil',
+        text: 'La contraseña debe tener al menos 6 caracteres.',
+        confirmButtonColor: '#EF8514'
+      });
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       Swal.fire({
-        icon: 'warning',
-        title: 'Contraseñas no coinciden',
-        text: 'Por favor verifica que ambas contraseñas sean iguales.',
+        icon: 'error',
+        title: 'Error de coincidencia',
+        text: 'Las contraseñas ingresadas no coinciden.',
         confirmButtonColor: '#EF8514'
       });
       return;
@@ -96,7 +117,7 @@ function Formregistro() {
           </div>
           <div
             className={`${styles.opcion} ${tipo === "org" ? styles.activo : ""}`}
-            onClick={() => setTipo("org")}
+            onClick={() => navigate("/registerOrg")}
           >
             <h4>Organización</h4>
           </div>
@@ -108,7 +129,6 @@ function Formregistro() {
               name="nombre" 
               type="text" 
               placeholder="Nombre" 
-              required 
               value={formData.nombre}
               onChange={handleChange}
             />
@@ -116,7 +136,6 @@ function Formregistro() {
               name="apellido" 
               type="text" 
               placeholder="Apellido" 
-              required 
               value={formData.apellido}
               onChange={handleChange}
             />
@@ -125,7 +144,6 @@ function Formregistro() {
             name="tel" 
             type="tel" 
             placeholder="Número de teléfono" 
-            required 
             value={formData.tel}
             onChange={handleChange}
           />
@@ -133,7 +151,6 @@ function Formregistro() {
             name="email" 
             type="email" 
             placeholder="Correo electrónico" 
-            required 
             value={formData.email}
             onChange={handleChange}
           />
@@ -142,7 +159,6 @@ function Formregistro() {
               name="password" 
               type="password" 
               placeholder="Contraseña" 
-              required 
               value={formData.password}
               onChange={handleChange}
             />
@@ -150,7 +166,6 @@ function Formregistro() {
               name="confirmPassword" 
               type="password" 
               placeholder="Confirmar contraseña" 
-              required 
               value={formData.confirmPassword}
               onChange={handleChange}
             />

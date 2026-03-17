@@ -12,6 +12,27 @@ export default function FormInicio() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!email.trim() || !password.trim()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos vacíos',
+        text: 'Por favor, completa todos los campos para continuar.',
+        confirmButtonColor: '#EF8514'
+      });
+      return;
+    }
+
+    if (password.length < 6) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Contraseña corta',
+        text: 'La contraseña debe tener al menos 6 caracteres.',
+        confirmButtonColor: '#EF8514'
+      });
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -59,18 +80,18 @@ export default function FormInicio() {
           <label>Correo electrónico</label>
           <input
             type="email"
+            placeholder="Introduce tu correo"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
             disabled={loading}
           />
 
           <label>Contraseña</label>
           <input
             type="password"
+            placeholder="********"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
             disabled={loading}
           />
 
