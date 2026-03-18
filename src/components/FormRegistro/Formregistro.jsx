@@ -183,4 +183,4 @@ function Formregistro() {
   );
 }
 
-export default Formregistro;
+export default Formregistro;
