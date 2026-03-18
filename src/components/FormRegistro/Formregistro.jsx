@@ -78,7 +78,7 @@ function Formregistro() {
           text: 'Se ha registrado con éxito. Ahora puede iniciar sesión.',
           confirmButtonColor: '#078A87'
         }).then(() => {
-          navigate("/login");
+          navigate("/inicio");
         });
       } else {
         Swal.fire({
