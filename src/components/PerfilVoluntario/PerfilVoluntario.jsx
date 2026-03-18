@@ -4,111 +4,92 @@ import ServiceOrganizaciones from '../../services/ServiceOrganizaciones'
 
 function PerfilVoluntario() {
 
-    const [voluntario, setVoluntario] = useState(null)
+    const [usuario, setUsuario] = useState(null)
     const [organizaciones, setOrganizaciones] = useState([])
-    const [horasDelVoluntario, setHorasDelVoluntario] = useState([])
-    const [orgsDelVoluntario, setOrgsDelVoluntario] = useState([])
-
-    const nombre = localStorage.getItem("nombre")
+    const [aplicacionesDelUsuario, setAplicacionesDelUsuario] = useState([])
+    const [orgsDelUsuario, setOrgsDelUsuario] = useState([])
 
     useEffect(() => {
         async function cargarDatos() {
 
-            // 1. Traer todos los voluntarios y encontrar el actual
-            const todosLosVoluntarios = await ServiceVoluntario.getVoluntarios()
-            const voluntarioEncontrado = todosLosVoluntarios.find(
-                (v) => v.nombre === nombre
-            )
-            setVoluntario(voluntarioEncontrado)
+            // 1. Leer el usuario directo del localStorage
+            const user = JSON.parse(localStorage.getItem("user"))
+            setUsuario(user)
 
-            // 2. Traer todas las horas y filtrar las del voluntario
-            const todasLasHoras = await ServiceHoras.getHoras()
-            const horasFiltradas = todasLasHoras.filter(
-                (h) => h.voluntarioId === voluntarioEncontrado.id
+            // 2. Traer aplicaciones y filtrar las del usuario
+            const todasLasAplicaciones = await ServiceVoluntariado.getVoluntariado()
+            const aplicacionesFiltradas = todasLasAplicaciones.filter(
+                (a) => String(a.idUsuario) === String(user.id)
             )
-            setHorasDelVoluntario(horasFiltradas)
+            setAplicacionesDelUsuario(aplicacionesFiltradas)
 
             // 3. Traer todas las organizaciones
             const todasLasOrgs = await ServiceOrganizaciones.getOrganizaciones()
             setOrganizaciones(todasLasOrgs)
 
-            // 4. Obtener solo las organizaciones donde el voluntario participó
-            const idsOrgs = [...new Set(horasFiltradas.map((h) => h.organizacionId))]
+            // 4. Filtrar solo las orgs donde el usuario aplicó
+            const idsOrgs = [...new Set(aplicacionesFiltradas.map((a) => String(a.idOrganizacion)))]
             const orgsFiltradas = todasLasOrgs.filter(
-                (org) => idsOrgs.includes(org.id)
+                (org) => idsOrgs.includes(String(org.id))
             )
-            setOrgsDelVoluntario(orgsFiltradas)
+            setOrgsDelUsuario(orgsFiltradas)
         }
 
         cargarDatos()
     }, [])
 
-    // Función helper para encontrar el nombre de una organización por su id
-    function getNombreOrg(organizacionId) {
-        const org = organizaciones.find((o) => o.id === organizacionId)
-        return org ? org.nombre : "Organización desconocida"
-    }
-
-    // Función para calcular el total de horas
-    function calcularTotalHoras() {
-        return horasDelVoluntario.reduce((total, h) => total + h.horas, 0)
+    function getNombreOrg(idOrganizacion) {
+        const org = organizaciones.find((o) => String(o.id) === String(idOrganizacion))
+        return org ? org.NombreOrganizacion : "Organización desconocida"
     }
 
     return (
         <div>
             <h2>Mi Perfil</h2>
 
-            {voluntario ? (
+            {usuario ? (
                 <div>
 
-                    {/* ── Información personal ── */}
+                    {/* Información personal */}
                     <div>
                         <h3>Información personal</h3>
-                        <p><strong>Nombre completo:</strong> {voluntario.nombre}</p>
-                        <p><strong>Correo:</strong> {voluntario.correo}</p>
-                        <p><strong>Provincia:</strong> {voluntario.provincia}</p>
-                        <p><strong>Total de horas donadas:</strong> {calcularTotalHoras()} h</p>
+                        <p><strong>Nombre completo:</strong> {usuario.Nombre}</p>
+                        <p><strong>Correo:</strong> {usuario.Correo}</p>
                     </div>
 
-                    {/* ── Historial de horas ── */}
+                    {/* Historial de aplicaciones */}
                     <div>
-                        <h3>Historial de horas de voluntariado</h3>
-
-                        {horasDelVoluntario.length > 0 ? (
+                        <h3>Historial de voluntariado</h3>
+                        {aplicacionesDelUsuario.length > 0 ? (
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Actividad</th>
                                         <th>Organización</th>
-                                        <th>Fecha</th>
-                                        <th>Horas</th>
+                                        <th>Fecha de aplicación</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {horasDelVoluntario.map((registro) => (
-                                        <tr key={registro.id}>
-                                            <td>{registro.actividad}</td>
-                                            <td>{getNombreOrg(registro.organizacionId)}</td>
-                                            <td>{registro.fecha}</td>
-                                            <td>{registro.horas} h</td>
+                                    {aplicacionesDelUsuario.map((a) => (
+                                        <tr key={a.id}>
+                                            <td>{getNombreOrg(a.idOrganizacion)}</td>
+                                            <td>{a.FechaAplicacion}</td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
                         ) : (
-                            <p>Aún no tenés horas registradas.</p>
+                            <p>Aún no tenés voluntariados registrados.</p>
                         )}
                     </div>
 
-                    {/* ── Organizaciones ── */}
+                    {/* Organizaciones */}
                     <div>
                         <h3>Organizaciones donde colaboré</h3>
-
-                        {orgsDelVoluntario.length > 0 ? (
+                        {orgsDelUsuario.length > 0 ? (
                             <ul>
-                                {orgsDelVoluntario.map((org) => (
+                                {orgsDelUsuario.map((org) => (
                                     <li key={org.id}>
-                                        <strong>{org.nombre}</strong> — {org.categoria}
+                                        <strong>{org.NombreOrganizacion}</strong> — {org.Descripcion}
                                     </li>
                                 ))}
                             </ul>

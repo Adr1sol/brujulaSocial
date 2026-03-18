@@ -1,3 +1,33 @@
+<<<<<<< HEAD
 body {
   font-family: 'Poppins', sans-serif;
+=======
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background: #f8fafc;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+>>>>>>> 305c8452073cff6fc2603a5dfb34392488027f05
 }
