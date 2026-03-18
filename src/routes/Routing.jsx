@@ -1,53 +1,25 @@
-import { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
-import Home from "../pages/Home/Home";
-import Privacidad from "../pages/Privacidad";
-import Terminos from "../pages/Terminos";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import InicioUser from "../pages/InicioUser";
 import RegistroUser from "../pages/RegistroUser";
 import Buscador from "../pages/Buscador";
-
-import NavbarOrg from "../components/NavbarOrg/NavbarOrg";
-
-function ScrollToTop() {
-    const { pathname } = useLocation();
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
-    return null;
-}
-
-function MainLayout() {
-    const location = useLocation();
-    const isOrgPage = location.pathname === "/registerOrg";
-
-    return (
-        <>
-            {isOrgPage ? <NavbarOrg /> : <Navbar />}
-            <main>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/privacidad" element={<Privacidad />} />
-                    <Route path="/terminos" element={<Terminos />} />
-                    <Route path="/registro" element={<RegistroUser />} />
-                    <Route path="/login" element={<InicioUser />} />
-                    <Route path="/registerOrg" element={<Buscador />} />
-                </Routes>
-            </main>
-        </>
-    );
-}
+import RegisterOrganizacion from "../pages/RegisterOrganizacion";
+import PerfilPage from "../pages/PerfilPage";
+import PerfilOrganizacion from '../pages/PerfilOrganizacion'
 
 function Routing() {
-    return (
-        <Router>
-            <ScrollToTop />
-            <MainLayout />
-            <Footer />
-        </Router>
-    );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<InicioUser />} />
+           <Route path="/inicio" element={<InicioUser />} />
+        <Route path="/registro" element={<RegistroUser />} />
+        <Route path="/buscador" element={<Buscador />} />
+          <Route path="/register" element={<RegisterOrganizacion />}/>
+           <Route path="/perfil" element={<PerfilPage />} />
+          <Route path="/miOrganizacion" element={<PerfilOrganizacion />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default Routing;
+export default Routing;

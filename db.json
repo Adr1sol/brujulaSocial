@@ -72,27 +72,75 @@
   "organizaciones": [
     {
       "id": "1",
-      "idCategoria": 1,
       "NombreOrganizacion": "EcoVoluntarios CR",
-      "idDisponibilidad": 1,
+      "idCategoria": 1,
       "IdProvincia": 1,
+      "idDisponibilidad": 1,
       "Descripcion": "Organización dedicada a la limpieza y conservación de espacios naturales."
     },
     {
       "id": "2",
-      "idCategoria": 2,
       "NombreOrganizacion": "Fundación Aprende",
-      "idDisponibilidad": 4,
+      "idCategoria": 2,
       "IdProvincia": 2,
+      "idDisponibilidad": 4,
       "Descripcion": "Apoyo educativo a niños y jóvenes en zonas vulnerables."
     },
     {
       "id": "3",
-      "idCategoria": 4,
       "NombreOrganizacion": "Rescate Animal",
-      "idDisponibilidad": 2,
+      "idCategoria": 4,
       "IdProvincia": 3,
+      "idDisponibilidad": 2,
       "Descripcion": "Organización de bienestar animal."
+    },
+    {
+      "id": "b632",
+      "NombreOrganizacion": "Luz",
+      "idCategoria": 2,
+      "IdProvincia": 1,
+      "idDisponibilidad": 4,
+      "Descripcion": "Educar"
+    },
+    {
+      "id": "a992",
+      "NombreOrganizacion": "Luz dos",
+      "idCategoria": 1,
+      "IdProvincia": 7,
+      "idDisponibilidad": 2,
+      "Descripcion": "sembrar"
+    },
+    {
+      "id": "5efb",
+      "NombreOrganizacion": "Casa dos",
+      "idCategoria": 5,
+      "IdProvincia": 1,
+      "idDisponibilidad": 4,
+      "Descripcion": "educar"
+    },
+    {
+      "id": "1246",
+      "NombreOrganizacion": "casa tres",
+      "idCategoria": 5,
+      "IdProvincia": 3,
+      "idDisponibilidad": 3,
+      "Descripcion": "educación"
+    },
+    {
+      "id": "ac94",
+      "NombreOrganizacion": "casita",
+      "idCategoria": 1,
+      "IdProvincia": 1,
+      "idDisponibilidad": 1,
+      "Descripcion": "casa"
+    },
+    {
+      "NombreOrganizacion": "flores",
+      "idCategoria": 1,
+      "IdProvincia": 4,
+      "idDisponibilidad": 1,
+      "Descripcion": "educar",
+      "id": "9f57"
     }
   ],
   "usuarios": [
@@ -105,44 +153,24 @@
       "FechaRegistro": "2025-01-10"
     },
     {
-      "id": "4f4f",
-      "Nombre": "camil rivera",
-      "Correo": "a@gmail.com",
-      "Contrasena": "a",
-      "Telefono": "71328432",
-      "Tipo": "org",
-      "IdProvincia": 1,
-      "FechaRegistro": "2026-03-17"
-    },
-    {
-      "id": "088e",
-      "Nombre": "andy obando",
-      "Correo": "andy@gmail.com",
-      "Contrasena": "a",
-      "Telefono": "71717171",
+      "id": "7d30",
+      "Nombre": "Fer Rojas",
+      "Correo": "fer@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "1212121",
       "Tipo": "voluntario",
       "IdProvincia": 1,
-      "FechaRegistro": "2026-03-17"
+      "FechaRegistro": "2026-03-18"
     },
     {
-      "id": "af64",
-      "Nombre": "Ana rivera",
-      "Correo": "adlf@gmail.com",
-      "Contrasena": "1",
-      "Telefono": "81818181",
-      "Tipo": "org",
+      "id": "3b51",
+      "Nombre": "Ana Sol",
+      "Correo": "ana@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "2222",
+      "Tipo": "voluntario",
       "IdProvincia": 1,
-      "FechaRegistro": "2026-03-17"
-    },
-    {
-      "id": "e8df",
-      "Nombre": "andy a",
-      "Correo": "a@gmail.com",
-      "Contrasena": "a",
-      "Telefono": "a",
-      "Tipo": "org",
-      "IdProvincia": 1,
-      "FechaRegistro": "2026-03-17"
+      "FechaRegistro": "2026-03-18"
     }
   ],
   "aplicaciones": [
@@ -151,6 +179,18 @@
       "idUsuario": 1,
       "idOrganizacion": 1,
       "FechaAplicacion": "2025-03-01"
+    },
+    {
+      "id": "dcc1",
+      "idUsuario": "7d30",
+      "idOrganizacion": "a992",
+      "FechaAplicacion": "2026-03-18"
+    },
+    {
+      "id": "cf2c",
+      "idUsuario": "7d30",
+      "idOrganizacion": "9f57",
+      "FechaAplicacion": "2026-03-18"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
