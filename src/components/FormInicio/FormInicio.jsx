@@ -48,7 +48,7 @@ export default function FormInicio() {
           showConfirmButton: false
         });
         localStorage.setItem("user", JSON.stringify(user));
-        navigate("/"); 
+        navigate("/buscador"); 
       } else {
         Swal.fire({
           icon: 'error',
