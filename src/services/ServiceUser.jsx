@@ -55,7 +55,7 @@ const Services = () => {
               <p>{proj.desc}</p>
               <button className="btn-outline" 
                 onClick={()=>{
-                  navigate("/ruta")
+                  navigate("/buscador")
                 }}
               >Saber más</button>
             </div>

@@ -17,18 +17,19 @@
   gap: 0.5rem;
   font-weight: bold;
   font-size: 1.2rem;
-  color: #ef8514;
 }
 
-.logo-icon {
-  background-color: #078a87;
-  color: white;
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
+.logo-image {
+  height: 40px;
 }
 
-.logo-text {
-  color: #333;
+.logo-text-gradient {
+  background: linear-gradient(to right, #078a87, #2e5c8c, #ef8514);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .navbar-links {

@@ -2,15 +2,18 @@
 import React from 'react';
 import { Link } from "react-router-dom"
 import "../Navbar/NavBar.css"
+import logo from '../../assets/logo.png';
  
 function Navbar() {
     return (
       <>
         <header className="navbar">
           <div className="navbar-logo">
-            <div className="logo-icon">N</div>
             <a href="/">
-            <span className="logo-text">BRÚJULA SOCIAL</span>
+              <img src={logo} alt="Brújula Social Logo" className="logo-image" />
+            </a>
+            <a href="/">
+              <span className="logo-text-gradient">BRÚJULA SOCIAL</span>
             </a>
           </div>
           <nav className="navbar-links">
