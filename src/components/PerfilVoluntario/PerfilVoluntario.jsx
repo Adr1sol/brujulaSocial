@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import ServiceUsuario from '../../services/ServiceUsuario'
 import ServiceVoluntariado from '../../services/ServiceVoluntariado'
 import ServiceOrganizaciones from '../../services/ServiceOrganizaciones'
 
@@ -10,22 +9,17 @@ function PerfilVoluntario() {
     const [aplicacionesDelUsuario, setAplicacionesDelUsuario] = useState([])
     const [orgsDelUsuario, setOrgsDelUsuario] = useState([])
 
-    const nombre = localStorage.getItem("nombre")
-
     useEffect(() => {
         async function cargarDatos() {
 
-            // 1. Encontrar el usuario por nombre
-            const todosLosUsuarios = await ServiceUsuario.getUsuarios()
-            const usuarioEncontrado = todosLosUsuarios.find(
-                (u) => u.Nombre === nombre
-            )
-            setUsuario(usuarioEncontrado)
+            // 1. Leer el usuario directo del localStorage
+            const user = JSON.parse(localStorage.getItem("user"))
+            setUsuario(user)
 
             // 2. Traer aplicaciones y filtrar las del usuario
             const todasLasAplicaciones = await ServiceVoluntariado.getVoluntariado()
             const aplicacionesFiltradas = todasLasAplicaciones.filter(
-                (a) => String(a.idUsuario) === String(usuarioEncontrado.id)
+                (a) => String(a.idUsuario) === String(user.id)
             )
             setAplicacionesDelUsuario(aplicacionesFiltradas)
 

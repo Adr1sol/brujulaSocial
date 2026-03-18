@@ -117,7 +117,7 @@ function Formregistro() {
           </div>
           <div
             className={`${styles.opcion} ${tipo === "org" ? styles.activo : ""}`}
-            onClick={() => navigate("/registerOrg")}
+            onClick={() => navigate("/register")}
           >
             <h4>Organización</h4>
           </div>
@@ -183,4 +183,4 @@ function Formregistro() {
   );
 }
 
-export default Formregistro;
+export default Formregistro;
