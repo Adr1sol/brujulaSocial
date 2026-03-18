@@ -203,5 +203,6 @@
       "FechaAplicacion": "2026-03-18"
     }
   ],
-  "$schema": "./node_modules/json-server/schema.json"
+ "horas": []
+
 }
