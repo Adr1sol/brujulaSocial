@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import ServiceUsuario from "../../services/ServiceUsuario";
 
 export default function FormInicio() {
+  const [tipo, setTipo] = useState("voluntario");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,7 +17,7 @@ export default function FormInicio() {
 
     try {
       const users = await ServiceUsuario.getUsuarios();
-      const user = users.find(u => u.Correo === email && u.Contrasena === password);
+      const user = users.find(u => u.Correo === email && u.Contrasena === password && u.Tipo === tipo);
 
       if (user) {
         Swal.fire({
@@ -54,6 +55,22 @@ export default function FormInicio() {
       <div className={styles.card}>
         <h2>Iniciar sesión</h2>
         <p className={styles.sub}>Bienvenido de nuevo</p>
+
+        <p className={styles.tipo}>Tipo de cuenta</p>
+        <div className={styles.selector}>
+          <div
+            className={`${styles.opcion} ${tipo === "voluntario" ? styles.activo : ""}`}
+            onClick={() => setTipo("voluntario")}
+          >
+            <h4>Voluntario</h4>
+          </div>
+          <div
+            className={`${styles.opcion} ${tipo === "org" ? styles.activo : ""}`}
+            onClick={() => setTipo("org")}
+          >
+            <h4>Organización</h4>
+          </div>
+        </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <label>Correo electrónico</label>

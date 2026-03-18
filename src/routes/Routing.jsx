@@ -9,6 +9,8 @@ import InicioUser from "../pages/InicioUser";
 import RegistroUser from "../pages/RegistroUser";
 import Buscador from "../pages/Buscador";
 
+import Consultas from "../pages/Consultas/Consultas";
+
 function ScrollToTop() {
     const { pathname } = useLocation();
     useEffect(() => {
@@ -30,6 +32,7 @@ function Routing() {
                     <Route path="/registro" element={<RegistroUser />} />
                     <Route path="/login" element={<InicioUser />} />
                     <Route path="/buscador" element={<Buscador />} />
+                    <Route path="/consultas" element={<Consultas />} />
                 </Routes>
             </main>
             <Footer />
