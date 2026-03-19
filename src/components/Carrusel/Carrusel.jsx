@@ -1,36 +1,42 @@
 import Carousel from 'react-bootstrap/Carousel';
+import './Carrusel.css';
 
 function Carrusel() {
+    const images = [
+        {
+            src: "../src/images/basura playa.jpg",
+            alt: "First slide",
+            title: "First slide label",
+            description: "Nulla vitae elit libero, a pharetra augue mollis interdum."
+        },
+        {
+            src: "/fondoinicio.png",
+            alt: "Second slide",
+            title: "Second slide label",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        {
+            src: "/fondoparaweb.png",
+            alt: "Third slide",
+            title: "Third slide label",
+            description: "Praesent commodo cursus magna, vel scelerisque nisl consectetur."
+        }
+    ];
     return (
         <Carousel>
-            <Carousel.Item>
-                <img src="../src/img/escuela.jpg" alt="" />
-                <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img src="../src/img/escuela.jpg" alt="" />
-
-                <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img src="../src/img/basura playa.jpg" alt="playa" />
-                <img src="../src/img/escuela.jpg" alt="Escuela" />
-                <img src="../src/img/Puente.jpg" alt="Puente" />
-                <img src="../src/img/Refugio.jpg" alt="Refugio" />
-                <img src="../src/img/voluntariado.jpg" alt="Voluntariado" />
-                <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>
-                        Praesent commodo cu
-                    </p>
-                </Carousel.Caption>
-            </Carousel.Item>
+            {images.map((image, index) => (
+                <Carousel.Item key={index}>
+                    <img
+                        className="d-block w-100"
+                        src={image.src}
+                        alt={image.alt}
+                    />
+                    <Carousel.Caption>
+                        <h3>{image.title}</h3>
+                        <p>{image.description}</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            ))}
         </Carousel>
     );
 }

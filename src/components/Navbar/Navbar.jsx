@@ -12,7 +12,7 @@ const Navbar = () => {
       </Link>
       <ul className={styles['nav-links']}>
         <li><Link to="/">Inicio</Link></li>
-        <li><Link to="/login">Iniciar Sesión</Link></li>
+        <li><Link to="/inicio">Iniciar Sesión</Link></li>
         <li><Link to="/registro">Registro</Link></li>
         <li><Link to="/registro">Contacto</Link></li>
       </ul>

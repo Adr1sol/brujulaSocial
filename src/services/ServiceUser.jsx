@@ -11,28 +11,35 @@ const Services = () => {
       location: "San José, Central",
       title: "Refuerzo Escolar en Comunidades",
       desc: "Apoya a niños y jóvenes en riesgo social con tutorías académicas y talleres recreativos los sábados.",
-      color: "#078A87"
+      color: "#078A87",
+      img: "../src/images/basura playa.jpg"
     },
     {
       category: "AMBIENTE",
       location: "Guanacaste, Tamarindo",
       title: "Limpieza de Playas y Manglares",
       desc: "Únete a la brigada ecológica para proteger nuestras costas y biodiversidad marina este fin de semana.",
-      color: "#EF8514"
+      color: "#EF8514",
+           img: "/fondoinicio.png"
+
+
     },
     {
       category: "ADULTO MAYOR",
       location: "Alajuela, Central",
       title: "Acompañamiento Generacional",
       desc: "Brinda compañía y alegría a adultos mayores en hogares locales mediante charlas y actividades lúdicas.",
-      color: "#50A15A"
+      color: "#50A15A",
+      img: "/fondoparaweb.png"
+
     },
     {
       category: "RESCATE ANIMAL",
       location: "Cartago, Paraíso",
       title: "Cuidado en Refugios de Fauna",
       desc: "Ayuda en el mantenimiento, alimentación y socialización de animales rescatados esperando un hogar.",
-      color: "#EF8514"
+      color: "#EF8514",
+      img: "/beach-bg.png"
     }
   ];
 
@@ -47,6 +54,7 @@ const Services = () => {
         {projects.map((proj, idx) => (
           <div className="project-card" key={idx}>
             <div className="project-image-placeholder">
+              <img src={proj.img} alt={proj.title} />
               <span className="category-tag" style={{backgroundColor: proj.color}}>{proj.category}</span>
             </div>
             <div className="project-content">
