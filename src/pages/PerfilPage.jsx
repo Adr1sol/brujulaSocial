@@ -2,6 +2,7 @@ import React from 'react'
 import PerfilVoluntario from '../components/PerfilVoluntario/PerfilVoluntario'
 
 function PerfilPage() {
+
     return (
         <div>
             <PerfilVoluntario />
