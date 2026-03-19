@@ -1,0 +1,386 @@
+/* ===== BASE ===== */
+.pagina {
+    min-height: 100vh;
+    background: #F1EFE8;
+    font-family: inherit;
+    padding: 24px;
+}
+
+/* ===== HEADER PERFIL ===== */
+.perfilHeader {
+    background: linear-gradient(135deg, #0a5040 0%, #0F6E56 55%, #1D9E75 100%);
+    border-radius: 16px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+.perfilHeaderDeco {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: .08;
+    pointer-events: none;
+}
+.perfilInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.perfilNombre {
+    font-size: 22px;
+    font-weight: 500;
+    color: #fff;
+}
+.perfilMeta {
+    font-size: 13px;
+    color: #9FE1CB;
+}
+.perfilTags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+.perfilTag {
+    background: rgba(255,255,255,.18);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+.perfilAcciones {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+.btnEditar {
+    padding: 8px 20px;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 20px;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .15s;
+}
+.btnEditar:hover {
+    background: rgba(255,255,255,.25);
+}
+.btnEliminar {
+    padding: 8px 20px;
+    background: rgba(211,51,51,.25);
+    border: 1px solid rgba(211,51,51,.4);
+    border-radius: 20px;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .15s;
+}
+.btnEliminar:hover {
+    background: rgba(211,51,51,.4);
+}
+
+/* ===== DATOS DEL PERFIL ===== */
+.datosGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.datoCard {
+    background: #fff;
+    border: 0.5px solid #D3D1C7;
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+.datoLabel {
+    font-size: 11px;
+    color: #888780;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    margin-bottom: 5px;
+}
+.datoValue {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2C2C2A;
+}
+.descripcionCard {
+    background: #fff;
+    border: 0.5px solid #D3D1C7;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+}
+.descripcionLabel {
+    font-size: 11px;
+    color: #888780;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    margin-bottom: 8px;
+}
+.descripcionTexto {
+    font-size: 14px;
+    color: #2C2C2A;
+    line-height: 1.65;
+}
+
+/* ===== FORMULARIO EDITAR ===== */
+.formCard {
+    background: #fff;
+    border: 0.5px solid #D3D1C7;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+.formTitulo {
+    font-size: 18px;
+    font-weight: 500;
+    color: #2C2C2A;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 0.5px solid #D3D1C7;
+}
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.formGroup label {
+    font-size: 12px;
+    color: #5F5E5A;
+    font-weight: 500;
+}
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+    padding: 9px 12px;
+    border: 0.5px solid #D3D1C7;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #2C2C2A;
+    background: #fff;
+    transition: border-color .15s;
+    font-family: inherit;
+}
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+    outline: none;
+    border-color: #1D9E75;
+}
+.formGroup textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+.formGroupFull {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.formGroupFull label {
+    font-size: 12px;
+    color: #5F5E5A;
+    font-weight: 500;
+}
+.formGroupFull textarea {
+    padding: 9px 12px;
+    border: 0.5px solid #D3D1C7;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #2C2C2A;
+    background: #fff;
+    resize: vertical;
+    min-height: 90px;
+    font-family: inherit;
+    transition: border-color .15s;
+}
+.formGroupFull textarea:focus {
+    outline: none;
+    border-color: #1D9E75;
+}
+.formBotones {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 6px;
+}
+.btnGuardar {
+    padding: 9px 24px;
+    background: #1D9E75;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .15s;
+}
+.btnGuardar:hover {
+    background: #0F6E56;
+}
+.btnCancelar {
+    padding: 9px 20px;
+    background: #F1EFE8;
+    border: 0.5px solid #D3D1C7;
+    border-radius: 8px;
+    color: #5F5E5A;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .15s;
+}
+.btnCancelar:hover {
+    background: #D3D1C7;
+}
+
+/* ===== TABLA VOLUNTARIOS ===== */
+.seccionTitulo {
+    font-size: 16px;
+    font-weight: 500;
+    color: #2C2C2A;
+    margin-bottom: 4px;
+}
+.seccionSub {
+    font-size: 12px;
+    color: #888780;
+    margin-bottom: 14px;
+}
+.tablaWrap {
+    background: #fff;
+    border: 0.5px solid #D3D1C7;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+.tabla th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 11px;
+    color: #888780;
+    border-bottom: 0.5px solid #D3D1C7;
+    font-weight: 400;
+    background: #F1EFE8;
+}
+.tabla td {
+    padding: 11px 14px;
+    border-bottom: 0.5px solid #D3D1C7;
+    color: #2C2C2A;
+    vertical-align: middle;
+}
+.tabla tr:last-child td {
+    border: none;
+}
+.tabla tr:hover td {
+    background: #F1EFE8;
+}
+.tdUser {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.avatarSm {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #1D9E75;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+    flex-shrink: 0;
+}
+.accionesBtns {
+    display: flex;
+    gap: 6px;
+}
+.btnVerPerfil {
+    padding: 5px 12px;
+    background: #E1F5EE;
+    border: none;
+    border-radius: 6px;
+    color: #085041;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .15s;
+    white-space: nowrap;
+}
+.btnVerPerfil:hover {
+    background: #9FE1CB;
+}
+.btnRegistrarHoras {
+    padding: 5px 12px;
+    background: #E6F1FB;
+    border: none;
+    border-radius: 6px;
+    color: #0C447C;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .15s;
+    white-space: nowrap;
+}
+.btnRegistrarHoras:hover {
+    background: #B5D4F4;
+}
+
+/* ===== EMPTY STATE ===== */
+.emptyState {
+    text-align: center;
+    padding: 32px;
+    color: #888780;
+    font-size: 13px;
+}
+
+/* ===== NO ORG ===== */
+.noOrg {
+    text-align: center;
+    padding: 48px 24px;
+    background: #fff;
+    border-radius: 14px;
+    border: 0.5px solid #D3D1C7;
+}
+.noOrgTitulo {
+    font-size: 18px;
+    font-weight: 500;
+    color: #2C2C2A;
+    margin-bottom: 8px;
+}
+.noOrgSub {
+    font-size: 13px;
+    color: #888780;
+    margin-bottom: 20px;
+}
+.btnIrRegistro {
+    padding: 10px 24px;
+    background: #1D9E75;
+    border: none;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background .15s;
+}
+.btnIrRegistro:hover {
+    background: #0F6E56;
+}
