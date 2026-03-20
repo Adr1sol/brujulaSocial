@@ -42,7 +42,7 @@ export default function FormInicio() {
       if (user) {
         Swal.fire({
           icon: 'success',
-          title: `¡Bienvenido, ${user.Nombre}!`,
+          title: `¡Hola, ${user.Nombre}!`,
           text: 'Inicio de sesión exitoso',
           timer: 2000,
           showConfirmButton: false
@@ -74,7 +74,7 @@ export default function FormInicio() {
     <div className={styles.container}>
       <div className={styles.card}>
         <h2>Iniciar sesión</h2>
-        <p className={styles.sub}>Bienvenido de nuevo</p>
+        <p className={styles.sub}>Hola de nuevo</p>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <label>Correo electrónico</label>

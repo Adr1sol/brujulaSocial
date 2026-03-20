@@ -27,14 +27,15 @@ function Buscador() {
         <div>
             <NavbarGlobal links={linksBuscador} usuario={usuario} />
 
-            <FiltrosOrganizaciones
-                filtros={filtros}
-                onFiltroChange={manejoCambioFiltro}
-            />
-
-            <BuscadorOrganizaciones
-                filtros={filtros}
-            />
+            <div style={{ padding: '24px', background: '#F1EFE8', minHeight: '100vh' }}>
+                <FiltrosOrganizaciones
+                    filtros={filtros}
+                    onFiltroChange={manejoCambioFiltro}
+                />
+                <BuscadorOrganizaciones
+                    filtros={filtros}
+                />
+            </div>
         </div>
     )
 }
