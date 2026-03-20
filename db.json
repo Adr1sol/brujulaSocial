@@ -141,6 +141,14 @@
       "idDisponibilidad": 1,
       "Descripcion": "educar",
       "id": "9f57"
+    },
+    {
+      "NombreOrganizacion": "Educación a distancia",
+      "idCategoria": 2,
+      "IdProvincia": 2,
+      "idDisponibilidad": 1,
+      "Descripcion": "Educación para todos",
+      "id": "f368"
     }
   ],
   "usuarios": [
@@ -163,16 +171,6 @@
       "FechaRegistro": "2026-03-18"
     },
     {
-      "id": "3b51",
-      "Nombre": "Ana Sol",
-      "Correo": "ana@gmail.com",
-      "Contrasena": "123456",
-      "Telefono": "2222",
-      "Tipo": "voluntario",
-      "IdProvincia": 1,
-      "FechaRegistro": "2026-03-18"
-    },
-    {
       "id": "268b",
       "Nombre": "Diego Soto",
       "Correo": "diego@gmail.com",
@@ -181,6 +179,26 @@
       "Tipo": "voluntario",
       "IdProvincia": 1,
       "FechaRegistro": "2026-03-18"
+    },
+    {
+      "id": "0001",
+      "Nombre": "Ana Fran",
+      "Correo": "ana@gmial.com",
+      "Contrasena": "123456",
+      "Telefono": "2323232",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-19"
+    },
+    {
+      "id": "606b",
+      "Nombre": "Ana Sol",
+      "Correo": "ana@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "10",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-19"
     }
   ],
   "aplicaciones": [
@@ -201,8 +219,104 @@
       "idUsuario": "7d30",
       "idOrganizacion": "9f57",
       "FechaAplicacion": "2026-03-18"
+    },
+    {
+      "id": "43e3",
+      "idUsuario": "7d30",
+      "idOrganizacion": "1",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "e029",
+      "idUsuario": "3b51",
+      "idOrganizacion": "1",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "8449",
+      "idUsuario": "a416",
+      "idOrganizacion": "1",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "306a",
+      "idUsuario": "a416",
+      "idOrganizacion": "2",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "0496",
+      "idUsuario": "a416",
+      "idOrganizacion": "3",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "de69",
+      "idUsuario": "a416",
+      "idOrganizacion": "b632",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "e24c",
+      "idUsuario": "a416",
+      "idOrganizacion": "9f57",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "5e6e",
+      "idUsuario": "606b",
+      "idOrganizacion": "1",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "ab0f",
+      "idUsuario": "606b",
+      "idOrganizacion": "2",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "dd41",
+      "idUsuario": "606b",
+      "idOrganizacion": "3",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "0d92",
+      "idUsuario": "606b",
+      "idOrganizacion": "b632",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "5d54",
+      "idUsuario": "606b",
+      "idOrganizacion": "a992",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "e3be",
+      "idUsuario": "606b",
+      "idOrganizacion": "1246",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "3ed9",
+      "idUsuario": "606b",
+      "idOrganizacion": "ac94",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "bab5",
+      "idUsuario": "606b",
+      "idOrganizacion": "9f57",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "0f05",
+      "idUsuario": "606b",
+      "idOrganizacion": "f368",
+      "FechaAplicacion": "2026-03-19"
     }
   ],
- "horas": []
-
+  "horas": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }

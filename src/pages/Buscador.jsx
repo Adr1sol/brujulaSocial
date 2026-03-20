@@ -1,8 +1,17 @@
 import React, { useState } from 'react'
 import BuscadorOrganizaciones from '../components/Buscador/BuscadorOrganizaciones'
 import FiltrosOrganizaciones from '../components/Filtros/FiltrosOrganizaciones'
+import NavbarGlobal from '../components/NavbarGlobal/NavbarGlobal'
 
 function Buscador() {
+
+    const usuario = JSON.parse(localStorage.getItem("user"))
+
+    const linksBuscador = [
+        { label: 'Home', path: '/' },
+        { label: 'Mi Perfil', path: '/perfil' },
+        { label: 'Contacto', path: '/' }
+    ]
 
     const [filtros, setFiltros] = useState({
         idCategoria: '',
@@ -16,6 +25,8 @@ function Buscador() {
 
     return (
         <div>
+            <NavbarGlobal links={linksBuscador} usuario={usuario} />
+
             <FiltrosOrganizaciones
                 filtros={filtros}
                 onFiltroChange={manejoCambioFiltro}
