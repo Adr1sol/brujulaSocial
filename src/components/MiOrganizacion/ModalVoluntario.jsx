@@ -48,7 +48,8 @@ function ModalVoluntario({ voluntario, onCerrar }) {
                 borderRadius: '14px',
                 width: '100%',
                 maxWidth: '480px',
-                overflow: 'hidden'
+                maxHeight: '90vh',
+                overflow: 'auto'
             }}>
 
                 {/* Header */}
@@ -69,7 +70,7 @@ function ModalVoluntario({ voluntario, onCerrar }) {
                         width: '28px',
                         height: '28px',
                         borderRadius: '50%',
-                        cursor: 'pointer',
+                        cursor: 'pointer', background: 'white',
                         fontSize: '14px'
                     }}>✕</button>
                 </div>

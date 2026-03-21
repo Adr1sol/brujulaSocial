@@ -1,0 +1,94 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 5%;
+    background-color: #ffffff;
+    border-bottom: 2px solid #1D9E75; /* Línea verde inferior como en tu captura */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo a {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0d4d38;
+    text-decoration: none;
+}
+
+.navLinks {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 2rem;
+    margin: 0;
+}
+
+.link {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 10px 0;
+    transition: color 0.3s;
+    position: relative;
+}
+
+/* Efecto de línea activa */
+.linkActivo {
+    color: #1D9E75;
+    font-weight: bold;
+}
+
+.linkActivo::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #1D9E75;
+    border-radius: 5px 5px 0 0;
+}
+
+.userBadge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0f7f4;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.avatarMini {
+    width: 24px;
+    height: 24px;
+    background: #1D9E75;
+    color: white;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.userName {
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.btnLogout {
+    background: none;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btnLogout:hover {
+    background: #e74c3c;
+    color: white;
+}

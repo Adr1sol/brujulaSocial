@@ -1,0 +1,286 @@
+/* ===== BASE ===== */
+.pagina {
+    min-height: 100vh;
+    background: #F1EFE8;
+    font-family: inherit;
+    padding: 24px;
+}
+
+/* ===== HEADER PERFIL ===== */
+.perfilHeader {
+    background: linear-gradient(135deg, #0a5040 0%, #0F6E56 55%, #1D9E75 100%);
+    border-radius: 16px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.perfilAvatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 500;
+    color: #fff;
+    flex-shrink: 0;
+}
+.perfilInfo {
+    flex: 1;
+}
+.perfilNombre {
+    font-size: 22px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 4px;
+}
+.perfilCorreo {
+    font-size: 13px;
+    color: #9FE1CB;
+    margin-bottom: 8px;
+}
+.perfilHorasBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.25);
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* ===== STATS GRID ===== */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.statCard {
+    background: #fff;
+    border: 0.5px solid #D3D1C7;
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: box-shadow .15s;
+}
+.statCard:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.statIconWrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 20px;
+}
+.statNum {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+.statLbl {
+    font-size: 12px;
+    color: #888780;
+}
+
+/* ===== SECCIÓN GENÉRICA ===== */
+.seccion {
+    background: #fff;
+    border: 0.5px solid #D3D1C7;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+}
+.seccionTitulo {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2C2C2A;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #D3D1C7;
+}
+
+/* ===== NIVEL ===== */
+.nivelRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.nivelNombre {
+    font-size: 14px;
+    font-weight: 500;
+}
+.nivelHoras {
+    font-size: 12px;
+    color: #888780;
+}
+.nivelBarra {
+    background: #F1EFE8;
+    border-radius: 8px;
+    height: 10px;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+.nivelBarraFill {
+    height: 100%;
+    border-radius: 8px;
+    transition: width .5s ease;
+}
+.nivelHint {
+    font-size: 11px;
+    color: #888780;
+}
+
+/* ===== INSIGNIAS ===== */
+.insigniasGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+.insigniaCard {
+    border-radius: 10px;
+    padding: 14px 12px;
+    text-align: center;
+    transition: transform .15s;
+}
+.insigniaCard:hover {
+    transform: translateY(-2px);
+}
+.insigniaDesbloqueada {
+    background: #E1F5EE;
+    border: 0.5px solid #1D9E75;
+}
+.insigniaBloqueada {
+    background: #F1EFE8;
+    border: 0.5px solid #D3D1C7;
+    opacity: 0.5;
+}
+.insigniaEmoji {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+.insigniaNombre {
+    font-size: 12px;
+    font-weight: 500;
+    color: #2C2C2A;
+    margin-bottom: 3px;
+}
+.insigniaDesc {
+    font-size: 11px;
+    color: #888780;
+    line-height: 1.4;
+}
+.insigniaLock {
+    font-size: 10px;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+/* ===== GRAFICAS ===== */
+.graficaWrap {
+    width: 100%;
+    height: 220px;
+}
+
+/* ===== TABLA ===== */
+.tablaWrap {
+    overflow: hidden;
+    border-radius: 8px;
+    border: 0.5px solid #D3D1C7;
+}
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+.tabla th {
+    text-align: left;
+    padding: 9px 14px;
+    font-size: 11px;
+    color: #888780;
+    border-bottom: 0.5px solid #D3D1C7;
+    font-weight: 400;
+    background: #F1EFE8;
+}
+.tabla td {
+    padding: 10px 14px;
+    border-bottom: 0.5px solid #D3D1C7;
+    color: #2C2C2A;
+}
+.tabla tr:last-child td {
+    border: none;
+}
+.tabla tr:hover td {
+    background: #F1EFE8;
+}
+.horasBadge {
+    background: #E1F5EE;
+    color: #085041;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* ===== ORGS LIST ===== */
+.orgRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background: #F1EFE8;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+.orgAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #1D9E75;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    flex-shrink: 0;
+}
+.orgNombre {
+    font-size: 13px;
+    font-weight: 500;
+    color: #2C2C2A;
+}
+.orgDesc {
+    font-size: 11px;
+    color: #888780;
+}
+
+/* ===== EMPTY STATE ===== */
+.emptyState {
+    text-align: center;
+    padding: 24px;
+    color: #888780;
+    font-size: 13px;
+}
+
+/* ===== CARGANDO ===== */
+.cargando {
+    text-align: center;
+    padding: 48px;
+    color: #888780;
+    font-size: 14px;
+}
