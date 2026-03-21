@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import BuscadorOrganizaciones from '../components/Buscador/BuscadorOrganizaciones'
 import FiltrosOrganizaciones from '../components/Filtros/FiltrosOrganizaciones'
+import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer/Footer";
 
 function Buscador() {
 
@@ -16,6 +18,7 @@ function Buscador() {
 
     return (
         <div>
+            <Navbar/>
             <FiltrosOrganizaciones
                 filtros={filtros}
                 onFiltroChange={manejoCambioFiltro}
@@ -24,6 +27,7 @@ function Buscador() {
             <BuscadorOrganizaciones
                 filtros={filtros}
             />
+            <Footer />
         </div>
     )
 }

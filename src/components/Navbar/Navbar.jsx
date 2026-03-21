@@ -14,6 +14,7 @@ const Navbar = () => {
         <li><Link to="/">Inicio</Link></li>
         <li><Link to="/login">Iniciar Sesión</Link></li>
         <li><Link to="/registro">Registro</Link></li>
+        <li><Link to="/registro">Contacto</Link></li>
       </ul>
     </nav>
   );

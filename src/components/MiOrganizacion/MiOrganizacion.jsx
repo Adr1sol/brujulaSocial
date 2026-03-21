@@ -29,10 +29,6 @@ function PerfilOrganizacion() {
 
     const navigate = useNavigate()
 
-    useEffect(() => {
-        cargarDatos()
-    }, [])
-
     async function cargarDatos() {
 
         const miOrg = JSON.parse(localStorage.getItem("miOrganizacion"))
@@ -69,6 +65,11 @@ function PerfilOrganizacion() {
 
         setVoluntarios(voluntariosDeLaOrg)
     }
+
+    useEffect(() => {
+        cargarDatos()
+    }, [])
+
 
     function handleEditar() {
         setNombreOrganizacion(organizacion.NombreOrganizacion)
