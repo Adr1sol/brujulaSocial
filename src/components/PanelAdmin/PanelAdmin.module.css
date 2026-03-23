@@ -390,8 +390,8 @@
     width: 30px;
     height: 30px;
     border-radius: 6px;
-    border: 0.5px solid #D3D1C7;
-    background: #fff;
+    border: 0.5px solid #1b0202;
+    background: #690303;
     cursor: pointer;
     font-size: 13px;
     display: flex;
@@ -400,7 +400,7 @@
     transition: background .15s;
 }
 .btnEliminar:hover {
-    background: #FAEEDA;
+    background: #442c02;
     border-color: #E8841A;
 }
 

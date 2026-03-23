@@ -40,15 +40,25 @@ export default function FormInicio() {
       const user = users.find(u => u.Correo === email && u.Contrasena === password);
 
       if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+
         Swal.fire({
           icon: 'success',
           title: `¡Hola, ${user.Nombre}!`,
           text: 'Inicio de sesión exitoso',
           timer: 2000,
           showConfirmButton: false
+        }).then(() => {
+          // ── Redirigir según el tipo ──
+          if (user.Tipo === "admin") {
+            navigate("/panel")
+          } else if (localStorage.getItem("miOrganizacion")) {
+            navigate("/miOrganizacion")
+          } else {
+            navigate("/buscador")
+          }
         });
-        localStorage.setItem("user", JSON.stringify(user));
-        navigate("/buscador"); 
+
       } else {
         Swal.fire({
           icon: 'error',

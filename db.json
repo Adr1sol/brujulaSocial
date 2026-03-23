@@ -74,7 +74,7 @@
       "id": "1",
       "NombreOrganizacion": "EcoVoluntarios CR",
       "idCategoria": 1,
-      "IdProvincia": 1,
+      "IdProvincia": 2,
       "idDisponibilidad": 1,
       "Descripcion": "Organización dedicada a la limpieza y conservación de espacios naturales."
     },
@@ -160,6 +160,15 @@
     }
   ],
   "usuarios": [
+{
+      "id": "admin-01",
+      "Nombre": "Administrador",
+      "Correo": "admin@brujulasocial.com",
+      "Contrasena": "admin123",
+      "Tipo": "admin",
+      "FechaRegistro": "2026-01-01"
+    },
+
     {
       "id": "1",
       "Nombre": "María González",

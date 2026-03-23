@@ -19,6 +19,21 @@ function PanelAdmin() {
     const [provincias, setProvincias] = useState([])
     const [busqueda, setBusqueda] = useState("")
 
+    // Estados para modal editar usuario
+    const [modalUsuario, setModalUsuario] = useState(false)
+    const [usuarioEditando, setUsuarioEditando] = useState(null)
+    const [editNombre, setEditNombre] = useState("")
+    const [editCorreo, setEditCorreo] = useState("")
+    const [editTelefono, setEditTelefono] = useState("")
+
+    // Estados para modal editar organización
+    const [modalOrg, setModalOrg] = useState(false)
+    const [orgEditando, setOrgEditando] = useState(null)
+    const [editNombreOrg, setEditNombreOrg] = useState("")
+    const [editDescripcion, setEditDescripcion] = useState("")
+    const [editIdCategoria, setEditIdCategoria] = useState("")
+    const [editIdProvincia, setEditIdProvincia] = useState("")
+
     useEffect(() => {
         cargarDatos()
     }, [])
@@ -74,10 +89,8 @@ function PanelAdmin() {
         return colores[i % colores.length]
     }
 
-    // ── Actividad reciente ──
     function actividadReciente() {
         const actividades = []
-
         aplicaciones.slice(-3).reverse().forEach(a => {
             actividades.push({
                 tipo: "aplicacion",
@@ -86,7 +99,6 @@ function PanelAdmin() {
                 color: "#1D9E75"
             })
         })
-
         horas.slice(-2).reverse().forEach(h => {
             actividades.push({
                 tipo: "horas",
@@ -95,11 +107,9 @@ function PanelAdmin() {
                 color: "#E8841A"
             })
         })
-
         return actividades.slice(0, 5)
     }
 
-    // ── Categorías activas ──
     function categoriasActivas() {
         const resultado = {}
         organizaciones.forEach(org => {
@@ -111,6 +121,18 @@ function PanelAdmin() {
             .sort((a, b) => b[1] - a[1])
             .slice(0, 5)
             .map(([nombre, count]) => ({ nombre, count, porcentaje: Math.round((count / max) * 100) }))
+    }
+
+    // ── Búsqueda corregida ──
+    function filtrar(lista, campos) {
+        if (!busqueda.trim()) return lista
+        const q = busqueda.toLowerCase()
+        return lista.filter(item =>
+            campos.some(campo => {
+                const valor = String(item[campo] || "").toLowerCase()
+                return valor.includes(q)
+            })
+        )
     }
 
     // ── Eliminar usuario ──
@@ -133,6 +155,29 @@ function PanelAdmin() {
         })
     }
 
+    // ── Editar usuario ──
+    function abrirModalUsuario(u) {
+        setUsuarioEditando(u)
+        setEditNombre(u.Nombre || "")
+        setEditCorreo(u.Correo || "")
+        setEditTelefono(u.Telefono || "")
+        setModalUsuario(true)
+    }
+
+    async function guardarUsuario() {
+        if (!editNombre || !editCorreo) {
+            Swal.fire({ icon: 'error', title: 'Campos incompletos', text: 'Nombre y correo son obligatorios.', confirmButtonColor: '#EF8514' })
+            return
+        }
+        const objUsuario = { ...usuarioEditando, Nombre: editNombre, Correo: editCorreo, Telefono: editTelefono }
+        const actualizado = await ServiceUsuario.putUsuario(objUsuario, usuarioEditando.id)
+        if (actualizado) {
+            Swal.fire({ icon: 'success', title: '¡Actualizado!', timer: 1500, showConfirmButton: false })
+            setModalUsuario(false)
+            cargarDatos()
+        }
+    }
+
     // ── Eliminar organización ──
     async function eliminarOrganizacion(id) {
         Swal.fire({
@@ -151,6 +196,30 @@ function PanelAdmin() {
                 cargarDatos()
             }
         })
+    }
+
+    // ── Editar organización ──
+    function abrirModalOrg(org) {
+        setOrgEditando(org)
+        setEditNombreOrg(org.NombreOrganizacion || "")
+        setEditDescripcion(org.Descripcion || "")
+        setEditIdCategoria(org.idCategoria || "")
+        setEditIdProvincia(org.IdProvincia || "")
+        setModalOrg(true)
+    }
+
+    async function guardarOrg() {
+        if (!editNombreOrg) {
+            Swal.fire({ icon: 'error', title: 'Nombre requerido', confirmButtonColor: '#EF8514' })
+            return
+        }
+        const objOrg = { ...orgEditando, NombreOrganizacion: editNombreOrg, Descripcion: editDescripcion, idCategoria: parseInt(editIdCategoria), IdProvincia: parseInt(editIdProvincia) }
+        const actualizada = await ServiceOrganizaciones.putOrganizaciones(objOrg, orgEditando.id)
+        if (actualizada) {
+            Swal.fire({ icon: 'success', title: '¡Actualizado!', timer: 1500, showConfirmButton: false })
+            setModalOrg(false)
+            cargarDatos()
+        }
     }
 
     // ── Eliminar horas ──
@@ -172,16 +241,6 @@ function PanelAdmin() {
         })
     }
 
-    // ── Filtro de búsqueda ──
-    function filtrar(lista, campos) {
-        if (!busqueda) return lista
-        return lista.filter(item =>
-            campos.some(campo =>
-                String(item[campo] || "").toLowerCase().includes(busqueda.toLowerCase())
-            )
-        )
-    }
-
     return (
         <div className={styles.layout}>
 
@@ -199,46 +258,26 @@ function PanelAdmin() {
 
                 <div className={styles.sidebarSection}>
                     <div className={styles.sidebarSectionLabel}>GENERAL</div>
-                    <button
-                        className={`${styles.sidebarItem} ${seccionActiva === "resumen" ? styles.sidebarItemActivo : ""}`}
-                        onClick={() => setSeccionActiva("resumen")}
-                    >
-                        <span className={styles.sidebarIcon}>▦</span>
-                        Resumen
+                    <button className={`${styles.sidebarItem} ${seccionActiva === "resumen" ? styles.sidebarItemActivo : ""}`} onClick={() => setSeccionActiva("resumen")}>
+                        <span className={styles.sidebarIcon}>▦</span> Resumen
                     </button>
-                    <button
-                        className={`${styles.sidebarItem} ${seccionActiva === "organizaciones" ? styles.sidebarItemActivo : ""}`}
-                        onClick={() => setSeccionActiva("organizaciones")}
-                    >
-                        <span className={styles.sidebarIcon}>🏢</span>
-                        Organizaciones
+                    <button className={`${styles.sidebarItem} ${seccionActiva === "organizaciones" ? styles.sidebarItemActivo : ""}`} onClick={() => setSeccionActiva("organizaciones")}>
+                        <span className={styles.sidebarIcon}>🏢</span> Organizaciones
                         <span className={styles.sidebarBadge}>{organizaciones.length}</span>
                     </button>
-                    <button
-                        className={`${styles.sidebarItem} ${seccionActiva === "voluntarios" ? styles.sidebarItemActivo : ""}`}
-                        onClick={() => setSeccionActiva("voluntarios")}
-                    >
-                        <span className={styles.sidebarIcon}>👥</span>
-                        Voluntarios
+                    <button className={`${styles.sidebarItem} ${seccionActiva === "voluntarios" ? styles.sidebarItemActivo : ""}`} onClick={() => setSeccionActiva("voluntarios")}>
+                        <span className={styles.sidebarIcon}>👥</span> Voluntarios
                         <span className={styles.sidebarBadge}>{usuarios.length}</span>
                     </button>
-                    <button
-                        className={`${styles.sidebarItem} ${seccionActiva === "horas" ? styles.sidebarItemActivo : ""}`}
-                        onClick={() => setSeccionActiva("horas")}
-                    >
-                        <span className={styles.sidebarIcon}>⏱️</span>
-                        Horas Registradas
+                    <button className={`${styles.sidebarItem} ${seccionActiva === "horas" ? styles.sidebarItemActivo : ""}`} onClick={() => setSeccionActiva("horas")}>
+                        <span className={styles.sidebarIcon}>⏱️</span> Horas Registradas
                     </button>
                 </div>
 
                 <div className={styles.sidebarSection}>
                     <div className={styles.sidebarSectionLabel}>PLATAFORMA</div>
-                    <button
-                        className={`${styles.sidebarItem} ${seccionActiva === "aplicaciones" ? styles.sidebarItemActivo : ""}`}
-                        onClick={() => setSeccionActiva("aplicaciones")}
-                    >
-                        <span className={styles.sidebarIcon}>📋</span>
-                        Solicitudes
+                    <button className={`${styles.sidebarItem} ${seccionActiva === "aplicaciones" ? styles.sidebarItemActivo : ""}`} onClick={() => setSeccionActiva("aplicaciones")}>
+                        <span className={styles.sidebarIcon}>📋</span> Solicitudes
                         <span className={styles.sidebarBadge}>{aplicaciones.length}</span>
                     </button>
                 </div>
@@ -273,42 +312,33 @@ function PanelAdmin() {
 
                 <div className={styles.contenidoInner}>
 
-                    {/* ══════ RESUMEN ══════ */}
+                    {/* ══ RESUMEN ══ */}
                     {seccionActiva === "resumen" && (
                         <div>
-                            {/* Stats */}
                             <div className={styles.statsGrid}>
                                 <div className={styles.statCard}>
-                                    <div className={styles.statIconWrap} style={{background:"#E1F5EE"}}>
-                                        <span style={{fontSize:20}}>🏢</span>
-                                    </div>
+                                    <div className={styles.statIconWrap} style={{background:"#E1F5EE"}}><span style={{fontSize:20}}>🏢</span></div>
                                     <div className={styles.statInfo}>
                                         <div className={styles.statLabel}>ORGANIZACIONES</div>
                                         <div className={styles.statNum}>{organizaciones.length}</div>
                                     </div>
                                 </div>
                                 <div className={styles.statCard}>
-                                    <div className={styles.statIconWrap} style={{background:"#E6F1FB"}}>
-                                        <span style={{fontSize:20}}>👥</span>
-                                    </div>
+                                    <div className={styles.statIconWrap} style={{background:"#E6F1FB"}}><span style={{fontSize:20}}>👥</span></div>
                                     <div className={styles.statInfo}>
                                         <div className={styles.statLabel}>VOLUNTARIOS</div>
                                         <div className={styles.statNum}>{usuarios.length}</div>
                                     </div>
                                 </div>
                                 <div className={styles.statCard}>
-                                    <div className={styles.statIconWrap} style={{background:"#FAEEDA"}}>
-                                        <span style={{fontSize:20}}>⏱️</span>
-                                    </div>
+                                    <div className={styles.statIconWrap} style={{background:"#FAEEDA"}}><span style={{fontSize:20}}>⏱️</span></div>
                                     <div className={styles.statInfo}>
                                         <div className={styles.statLabel}>HORAS TOTALES</div>
                                         <div className={styles.statNum}>{totalHoras()}</div>
                                     </div>
                                 </div>
                                 <div className={styles.statCard}>
-                                    <div className={styles.statIconWrap} style={{background:"#EAF3DE"}}>
-                                        <span style={{fontSize:20}}>📋</span>
-                                    </div>
+                                    <div className={styles.statIconWrap} style={{background:"#EAF3DE"}}><span style={{fontSize:20}}>📋</span></div>
                                     <div className={styles.statInfo}>
                                         <div className={styles.statLabel}>SOLICITUDES</div>
                                         <div className={styles.statNum}>{aplicaciones.length}</div>
@@ -316,7 +346,6 @@ function PanelAdmin() {
                                 </div>
                             </div>
 
-                            {/* Actividad + Categorías */}
                             <div className={styles.dosCols}>
                                 <div className={styles.card}>
                                     <div className={styles.cardTitulo}>Actividad reciente</div>
@@ -330,17 +359,13 @@ function PanelAdmin() {
                                         </div>
                                     )) : <p className={styles.sinDatos}>Sin actividad reciente</p>}
                                 </div>
-
                                 <div className={styles.card}>
                                     <div className={styles.cardTitulo}>Categorías activas</div>
                                     {categoriasActivas().map((cat, i) => (
                                         <div key={i} className={styles.categoriaRow}>
                                             <div className={styles.categoriaLabel}>{cat.nombre}</div>
                                             <div className={styles.categoriaBarra}>
-                                                <div
-                                                    className={styles.categoriaBarraFill}
-                                                    style={{width: `${cat.porcentaje}%`}}
-                                                />
+                                                <div className={styles.categoriaBarraFill} style={{width: `${cat.porcentaje}%`}} />
                                             </div>
                                             <div className={styles.categoriaCount}>{cat.count} orgs</div>
                                         </div>
@@ -350,12 +375,10 @@ function PanelAdmin() {
                         </div>
                     )}
 
-                    {/* ══════ ORGANIZACIONES ══════ */}
+                    {/* ══ ORGANIZACIONES ══ */}
                     {seccionActiva === "organizaciones" && (
                         <div className={styles.card}>
-                            <div className={styles.cardHeader}>
-                                <div className={styles.cardTitulo}>Organizaciones registradas</div>
-                            </div>
+                            <div className={styles.cardTitulo}>Organizaciones registradas</div>
                             <div className={styles.tablaWrap}>
                                 <table className={styles.tabla}>
                                     <thead>
@@ -372,29 +395,20 @@ function PanelAdmin() {
                                             <tr key={org.id}>
                                                 <td>
                                                     <div className={styles.tdUser}>
-                                                        <div className={styles.avatar} style={{background: getColorAvatar(i)}}>
-                                                            {getIniciales(org.NombreOrganizacion)}
-                                                        </div>
+                                                        <div className={styles.avatar} style={{background: getColorAvatar(i)}}>{getIniciales(org.NombreOrganizacion)}</div>
                                                         <div>
                                                             <div className={styles.tdNombre}>{org.NombreOrganizacion}</div>
                                                             <div className={styles.tdSub}>{org.Descripcion}</div>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    <span className={styles.badge}>{getNombreCategoria(org.idCategoria)}</span>
-                                                </td>
+                                                <td><span className={styles.badge}>{getNombreCategoria(org.idCategoria)}</span></td>
                                                 <td>{getNombreProvincia(org.IdProvincia)}</td>
-                                                <td>
-                                                    {aplicaciones.filter(a => String(a.idOrganizacion) === String(org.id)).length}
-                                                </td>
+                                                <td>{aplicaciones.filter(a => String(a.idOrganizacion) === String(org.id)).length}</td>
                                                 <td>
                                                     <div className={styles.accionesBtns}>
-                                                        <button
-                                                            className={styles.btnEliminar}
-                                                            onClick={() => eliminarOrganizacion(org.id)}
-                                                            title="Eliminar"
-                                                        >🗑</button>
+                                                        <button className={styles.btnEditar} onClick={() => abrirModalOrg(org)} title="Editar">✏️</button>
+                                                        <button className={styles.btnEliminar} onClick={() => eliminarOrganizacion(org.id)} title="Eliminar">🗑</button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -405,12 +419,10 @@ function PanelAdmin() {
                         </div>
                     )}
 
-                    {/* ══════ VOLUNTARIOS ══════ */}
+                    {/* ══ VOLUNTARIOS ══ */}
                     {seccionActiva === "voluntarios" && (
                         <div className={styles.card}>
-                            <div className={styles.cardHeader}>
-                                <div className={styles.cardTitulo}>Voluntarios registrados</div>
-                            </div>
+                            <div className={styles.cardTitulo}>Voluntarios registrados</div>
                             <div className={styles.tablaWrap}>
                                 <table className={styles.tabla}>
                                     <thead>
@@ -428,9 +440,7 @@ function PanelAdmin() {
                                             <tr key={u.id}>
                                                 <td>
                                                     <div className={styles.tdUser}>
-                                                        <div className={styles.avatar} style={{background: getColorAvatar(i)}}>
-                                                            {getIniciales(u.Nombre)}
-                                                        </div>
+                                                        <div className={styles.avatar} style={{background: getColorAvatar(i)}}>{getIniciales(u.Nombre)}</div>
                                                         <div>
                                                             <div className={styles.tdNombre}>{u.Nombre}</div>
                                                             <div className={styles.tdSub}>{u.Correo}</div>
@@ -438,23 +448,13 @@ function PanelAdmin() {
                                                     </div>
                                                 </td>
                                                 <td>{getNombreProvincia(u.IdProvincia)}</td>
-                                                <td>
-                                                    <strong>
-                                                        {horas.filter(h => String(h.idUsuario) === String(u.id))
-                                                            .reduce((sum, h) => sum + parseInt(h.horas || 0), 0)}h
-                                                    </strong>
-                                                </td>
-                                                <td>
-                                                    {aplicaciones.filter(a => String(a.idUsuario) === String(u.id)).length}
-                                                </td>
+                                                <td><strong>{horas.filter(h => String(h.idUsuario) === String(u.id)).reduce((sum, h) => sum + parseInt(h.horas || 0), 0)}h</strong></td>
+                                                <td>{aplicaciones.filter(a => String(a.idUsuario) === String(u.id)).length}</td>
                                                 <td>{u.FechaRegistro}</td>
                                                 <td>
                                                     <div className={styles.accionesBtns}>
-                                                        <button
-                                                            className={styles.btnEliminar}
-                                                            onClick={() => eliminarUsuario(u.id)}
-                                                            title="Eliminar"
-                                                        >🗑</button>
+                                                        <button className={styles.btnEditar} onClick={() => abrirModalUsuario(u)} title="Editar">✏️</button>
+                                                        <button className={styles.btnEliminar} onClick={() => eliminarUsuario(u.id)} title="Eliminar">🗑</button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -465,12 +465,10 @@ function PanelAdmin() {
                         </div>
                     )}
 
-                    {/* ══════ HORAS ══════ */}
+                    {/* ══ HORAS ══ */}
                     {seccionActiva === "horas" && (
                         <div className={styles.card}>
-                            <div className={styles.cardHeader}>
-                                <div className={styles.cardTitulo}>Registro de horas</div>
-                            </div>
+                            <div className={styles.cardTitulo}>Registro de horas</div>
                             <div className={styles.tablaWrap}>
                                 <table className={styles.tabla}>
                                     <thead>
@@ -484,7 +482,7 @@ function PanelAdmin() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {filtrar(horas, ["actividad"]).map((h, i) => (
+                                        {filtrar(horas, ["actividad"]).map((h) => (
                                             <tr key={h.id}>
                                                 <td>{getNombreUsuario(h.idUsuario)}</td>
                                                 <td>{getNombreOrg(h.idOrganizacion)}</td>
@@ -493,11 +491,7 @@ function PanelAdmin() {
                                                 <td><strong>{h.horas}h</strong></td>
                                                 <td>
                                                     <div className={styles.accionesBtns}>
-                                                        <button
-                                                            className={styles.btnEliminar}
-                                                            onClick={() => eliminarHoras(h.id)}
-                                                            title="Eliminar"
-                                                        >🗑</button>
+                                                        <button className={styles.btnEliminar} onClick={() => eliminarHoras(h.id)} title="Eliminar">🗑</button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -508,12 +502,10 @@ function PanelAdmin() {
                         </div>
                     )}
 
-                    {/* ══════ APLICACIONES ══════ */}
+                    {/* ══ APLICACIONES ══ */}
                     {seccionActiva === "aplicaciones" && (
                         <div className={styles.card}>
-                            <div className={styles.cardHeader}>
-                                <div className={styles.cardTitulo}>Solicitudes de voluntariado</div>
-                            </div>
+                            <div className={styles.cardTitulo}>Solicitudes de voluntariado</div>
                             <div className={styles.tablaWrap}>
                                 <table className={styles.tabla}>
                                     <thead>
@@ -525,21 +517,17 @@ function PanelAdmin() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {aplicaciones.map((a, i) => (
+                                        {filtrar(aplicaciones, []).map((a, i) => (
                                             <tr key={a.id}>
                                                 <td>
                                                     <div className={styles.tdUser}>
-                                                        <div className={styles.avatar} style={{background: getColorAvatar(i)}}>
-                                                            {getIniciales(getNombreUsuario(a.idUsuario))}
-                                                        </div>
+                                                        <div className={styles.avatar} style={{background: getColorAvatar(i)}}>{getIniciales(getNombreUsuario(a.idUsuario))}</div>
                                                         <div className={styles.tdNombre}>{getNombreUsuario(a.idUsuario)}</div>
                                                     </div>
                                                 </td>
                                                 <td>{getNombreOrg(a.idOrganizacion)}</td>
                                                 <td>{a.FechaAplicacion}</td>
-                                                <td>
-                                                    <span className={styles.badgeActivo}>Activo</span>
-                                                </td>
+                                                <td><span className={styles.badgeActivo}>Activo</span></td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -550,6 +538,81 @@ function PanelAdmin() {
 
                 </div>
             </div>
+
+            {/* ══ MODAL EDITAR USUARIO ══ */}
+            {modalUsuario && (
+                <div className={styles.modalOverlay} onClick={() => setModalUsuario(false)}>
+                    <div className={styles.modal} onClick={e => e.stopPropagation()}>
+                        <div className={styles.modalHeader}>
+                            <h3>Editar voluntario</h3>
+                            <button className={styles.modalClose} onClick={() => setModalUsuario(false)}>✕</button>
+                        </div>
+                        <div className={styles.modalBody}>
+                            <div className={styles.modalGrid}>
+                                <div className={styles.modalGroup}>
+                                    <label>Nombre completo</label>
+                                    <input type="text" value={editNombre} onChange={e => setEditNombre(e.target.value)} className={styles.modalInput} />
+                                </div>
+                                <div className={styles.modalGroup}>
+                                    <label>Correo electrónico</label>
+                                    <input type="email" value={editCorreo} onChange={e => setEditCorreo(e.target.value)} className={styles.modalInput} />
+                                </div>
+                                <div className={styles.modalGroup}>
+                                    <label>Teléfono</label>
+                                    <input type="text" value={editTelefono} onChange={e => setEditTelefono(e.target.value)} className={styles.modalInput} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.modalFooter}>
+                            <button className={styles.btnCancelarModal} onClick={() => setModalUsuario(false)}>Cancelar</button>
+                            <button className={styles.btnGuardarModal} onClick={guardarUsuario}>Guardar cambios</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* ══ MODAL EDITAR ORGANIZACIÓN ══ */}
+            {modalOrg && (
+                <div className={styles.modalOverlay} onClick={() => setModalOrg(false)}>
+                    <div className={styles.modal} onClick={e => e.stopPropagation()}>
+                        <div className={styles.modalHeader}>
+                            <h3>Editar organización</h3>
+                            <button className={styles.modalClose} onClick={() => setModalOrg(false)}>✕</button>
+                        </div>
+                        <div className={styles.modalBody}>
+                            <div className={styles.modalGrid}>
+                                <div className={styles.modalGroup}>
+                                    <label>Nombre</label>
+                                    <input type="text" value={editNombreOrg} onChange={e => setEditNombreOrg(e.target.value)} className={styles.modalInput} />
+                                </div>
+                                <div className={styles.modalGroup}>
+                                    <label>Categoría</label>
+                                    <select value={editIdCategoria} onChange={e => setEditIdCategoria(e.target.value)} className={styles.modalInput}>
+                                        <option value="">Seleccionar</option>
+                                        {categorias.map(c => <option key={c.id} value={c.id}>{c.NombreCategoria}</option>)}
+                                    </select>
+                                </div>
+                                <div className={styles.modalGroup}>
+                                    <label>Provincia</label>
+                                    <select value={editIdProvincia} onChange={e => setEditIdProvincia(e.target.value)} className={styles.modalInput}>
+                                        <option value="">Seleccionar</option>
+                                        {provincias.map(p => <option key={p.id} value={p.id}>{p.NombreProvincia}</option>)}
+                                    </select>
+                                </div>
+                                <div className={styles.modalGroup} style={{gridColumn:'1/-1'}}>
+                                    <label>Descripción</label>
+                                    <textarea value={editDescripcion} onChange={e => setEditDescripcion(e.target.value)} className={styles.modalInput} style={{minHeight:'80px', resize:'vertical'}} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.modalFooter}>
+                            <button className={styles.btnCancelarModal} onClick={() => setModalOrg(false)}>Cancelar</button>
+                            <button className={styles.btnGuardarModal} onClick={guardarOrg}>Guardar cambios</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     )
 }
