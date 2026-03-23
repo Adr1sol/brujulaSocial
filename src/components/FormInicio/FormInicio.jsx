@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import ServiceUsuario from "../../services/ServiceUsuario";
 
 export default function FormInicio() {
+  const [tipo, setTipo] = useState("voluntario");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -37,7 +38,7 @@ export default function FormInicio() {
 
     try {
       const users = await ServiceUsuario.getUsuarios();
-      const user = users.find(u => u.Correo === email && u.Contrasena === password);
+      const user = users.find(u => u.Correo === email && u.Contrasena === password && u.Tipo === tipo);
 
       if (user) {
         localStorage.setItem("user", JSON.stringify(user));
@@ -81,38 +82,72 @@ export default function FormInicio() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <h2>Iniciar sesión</h2>
-        <p className={styles.sub}>Hola de nuevo</p>
+    <div className={styles.wrapper}>
+      <div className={styles.visualSide}>
+        <div className={styles.overlay}></div>
+        <div className={styles.branding}>
+          <h1>Brújula Social</h1>
+          <p>Conectando voluntarios con oportunidades que importan.</p>
+        </div>
+      </div>
+      <div className={styles.formSide}>
+        <div className={styles.card}>
+          <div className={styles.header}>
+            <h2>Iniciar sesión</h2>
+            <p className={styles.sub}>Bienvenido de nuevo. Por favor, introduce tus datos.</p>
+          </div>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <label>Correo electrónico</label>
-          <input
-            type="email"
-            placeholder="Introduce tu correo"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={loading}
-          />
+          <div className={styles.accountTypeHeader}>
+            <p className={styles.tipo}>Tipo de cuenta</p>
+          </div>
+          
+          <div className={styles.selector}>
+            <div
+              className={`${styles.opcion} ${tipo === "voluntario" ? styles.activo : ""}`}
+              onClick={() => setTipo("voluntario")}
+            >
+              <h4>Voluntario</h4>
+            </div>
+            <div
+              className={`${styles.opcion} ${tipo === "org" ? styles.activo : ""}`}
+              onClick={() => setTipo("org")}
+            >
+              <h4>Organización</h4>
+            </div>
+          </div>
 
-          <label>Contraseña</label>
-          <input
-            type="password"
-            placeholder="********"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={loading}
-          />
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <div className={styles.inputGroup}>
+              <label>Correo electrónico</label>
+              <input
+                type="email"
+                placeholder="ejemplo@correo.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={loading}
+              />
+            </div>
 
-          <button type="submit" disabled={loading}>
-            {loading ? "Cargando..." : "Iniciar sesión →"}
-          </button>
-        </form>
+            <div className={styles.inputGroup}>
+              <label>Contraseña</label>
+              <input
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={loading}
+              />
+            </div>
 
-        <p className={styles.register}>
-          ¿No tiene una cuenta? <Link to="/registro"><span>Regístrese</span></Link>
-        </p>
+            <button type="submit" className={styles.submitBtn} disabled={loading}>
+              {loading ? "Iniciando sesión..." : "Iniciar sesión"}
+            </button>
+          </form>
+
+          <p className={styles.register}>
+            ¿No tienes una cuenta? <Link to="/registro"><span>Regístrate aquí</span></Link>
+          </p>
+        </div>
       </div>
     </div>
   );
