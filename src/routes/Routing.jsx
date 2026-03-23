@@ -30,6 +30,7 @@ function Routing() {
         <Route path="/miOrganizacion" element={<PerfilOrganizacion />} />
         <Route path="/impacto" element={<DashImpacto />} />
         <Route path="/panel" element={<Admin />} />
+        <Route path="/home" element={<HomePage/>}/>
       </Routes>
     </BrowserRouter>
   );
