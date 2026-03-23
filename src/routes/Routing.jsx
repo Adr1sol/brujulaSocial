@@ -6,6 +6,7 @@ import RegisterOrganizacion from "../pages/RegisterOrganizacion";
 import PerfilPage from "../pages/PerfilPage";
 import PerfilOrganizacion from '../pages/PerfilOrganizacion'
 import DashImpacto from "../pages/DashImpacto"
+import Admin from "../pages/Admin"
 
 function Routing() {
   return (
@@ -19,7 +20,7 @@ function Routing() {
         <Route path="/perfil" element={<PerfilPage />} />
         <Route path="/miOrganizacion" element={<PerfilOrganizacion />} />
         <Route path="/impacto" element={<DashImpacto />} />
-
+        <Route path="/panel" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );

@@ -149,6 +149,14 @@
       "idDisponibilidad": 1,
       "Descripcion": "Educación para todos",
       "id": "f368"
+    },
+    {
+      "id": "9815",
+      "NombreOrganizacion": "Animalitos CR",
+      "idCategoria": 4,
+      "IdProvincia": 1,
+      "idDisponibilidad": 1,
+      "Descripcion": "Organización de cuido para el bienestar social de todos los animalitos"
     }
   ],
   "usuarios": [
