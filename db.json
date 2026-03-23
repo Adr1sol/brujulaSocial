@@ -157,10 +157,27 @@
       "IdProvincia": 1,
       "idDisponibilidad": 1,
       "Descripcion": "Organización de cuido para el bienestar social de todos los animalitos"
+    },
+    {
+      "id": "2567",
+      "NombreOrganizacion": "Fundación manos juntas",
+      "idCategoria": 5,
+      "IdProvincia": 6,
+      "idDisponibilidad": 2,
+      "Descripcion": "Fundación para fomentar la cultura"
+    },
+    {
+      "id": "a4f8",
+      "NombreOrganizacion": "Océanos Limpios",
+      "CorreoContacto": "oceano@gmail.com",
+      "idCategoria": 1,
+      "IdProvincia": 2,
+      "idDisponibilidad": 1,
+      "Descripcion": "Limpieza de playas"
     }
   ],
   "usuarios": [
-{
+    {
       "id": "admin-01",
       "Nombre": "Administrador",
       "Correo": "admin@brujulasocial.com",
@@ -168,7 +185,6 @@
       "Tipo": "admin",
       "FechaRegistro": "2026-01-01"
     },
-
     {
       "id": "1",
       "Nombre": "María González",
@@ -226,6 +242,26 @@
       "Tipo": "voluntario",
       "IdProvincia": 1,
       "FechaRegistro": "2026-03-20"
+    },
+    {
+      "id": "3aae",
+      "Nombre": "Robert Soto",
+      "Correo": "robert@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "121212121",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-23"
+    },
+    {
+      "id": "275e",
+      "Nombre": "Dennis Solís",
+      "Correo": "dennsi@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "1212121",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-23"
     }
   ],
   "aplicaciones": [

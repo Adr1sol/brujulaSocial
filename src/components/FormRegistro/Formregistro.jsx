@@ -26,6 +26,7 @@ function Formregistro() {
     e.preventDefault();
 
     const { nombre, apellido, tel, email, password, confirmPassword } = formData;
+
     if (!nombre.trim() || !apellido.trim() || !tel.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) {
       Swal.fire({
         icon: 'error',
@@ -36,7 +37,7 @@ function Formregistro() {
       return;
     }
 
-    if (formData.password.length < 6) {
+    if (password.length < 6) {
       Swal.fire({
         icon: 'error',
         title: 'Contraseña débil',
@@ -46,7 +47,7 @@ function Formregistro() {
       return;
     }
 
-    if (formData.password !== formData.confirmPassword) {
+    if (password !== confirmPassword) {
       Swal.fire({
         icon: 'error',
         title: 'Error de coincidencia',
@@ -72,14 +73,19 @@ function Formregistro() {
       const response = await ServiceUsuario.postUsuario(newUser);
 
       if (response) {
+        // ── Guardar en localStorage y redirigir ──
+        localStorage.setItem("user", JSON.stringify(response));
+
         Swal.fire({
           icon: 'success',
           title: '¡Cuenta creada!',
-          text: 'Se ha registrado con éxito. Ahora puede iniciar sesión.',
-          confirmButtonColor: '#078A87'
+          text: 'Se ha registrado con éxito.',
+          timer: 2000,
+          showConfirmButton: false
         }).then(() => {
-          navigate("/inicio");
+          navigate("/buscador")
         });
+
       } else {
         Swal.fire({
           icon: 'error',
@@ -125,47 +131,47 @@ function Formregistro() {
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.row}>
-            <input 
-              name="nombre" 
-              type="text" 
-              placeholder="Nombre" 
+            <input
+              name="nombre"
+              type="text"
+              placeholder="Nombre"
               value={formData.nombre}
               onChange={handleChange}
             />
-            <input 
-              name="apellido" 
-              type="text" 
-              placeholder="Apellido" 
+            <input
+              name="apellido"
+              type="text"
+              placeholder="Apellido"
               value={formData.apellido}
               onChange={handleChange}
             />
           </div>
-          <input 
-            name="tel" 
-            type="tel" 
-            placeholder="Número de teléfono" 
+          <input
+            name="tel"
+            type="tel"
+            placeholder="Número de teléfono"
             value={formData.tel}
             onChange={handleChange}
           />
-          <input 
-            name="email" 
-            type="email" 
-            placeholder="Correo electrónico" 
+          <input
+            name="email"
+            type="email"
+            placeholder="Correo electrónico"
             value={formData.email}
             onChange={handleChange}
           />
           <div className={styles.row}>
-            <input 
-              name="password" 
-              type="password" 
-              placeholder="Contraseña" 
+            <input
+              name="password"
+              type="password"
+              placeholder="Contraseña"
               value={formData.password}
               onChange={handleChange}
             />
-            <input 
-              name="confirmPassword" 
-              type="password" 
-              placeholder="Confirmar contraseña" 
+            <input
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirmar contraseña"
               value={formData.confirmPassword}
               onChange={handleChange}
             />
@@ -176,7 +182,7 @@ function Formregistro() {
         </form>
 
         <p className={styles.login}>
-          ¿Ya tiene una cuenta? <Link to="/login"><span>Inicie sesión aquí</span></Link>
+          ¿Ya tiene una cuenta? <Link to="/inicio"><span>Inicie sesión aquí</span></Link>
         </p>
       </div>
     </div>

@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 function RegistroOrganizacion() {
 
     const [nombreOrganizacion, setNombreOrganizacion] = useState("")
+    const [correoOrganizacion, setCorreoOrganizacion] = useState("") // <--- Nuevo estado
     const [idCategoria, setIdCategoria] = useState("")
     const [idProvincia, setIdProvincia] = useState("")
     const [idDisponibilidad, setIdDisponibilidad] = useState("")
@@ -15,6 +16,7 @@ function RegistroOrganizacion() {
 
     function limpiarFormulario() {
         setNombreOrganizacion("")
+        setCorreoOrganizacion("") // <--- Limpiar correo
         setIdCategoria("")
         setIdProvincia("")
         setIdDisponibilidad("")
@@ -22,8 +24,8 @@ function RegistroOrganizacion() {
     }
 
     async function guardarOrganizacion() {
-
-        if (!nombreOrganizacion || !idCategoria || !idProvincia || !idDisponibilidad || !descripcion) {
+        // Validamos que el correo también esté lleno
+        if (!nombreOrganizacion || !correoOrganizacion || !idCategoria || !idProvincia || !idDisponibilidad || !descripcion) {
             Swal.fire({
                 icon: 'error',
                 title: 'Formulario incompleto',
@@ -35,6 +37,7 @@ function RegistroOrganizacion() {
 
         const objOrganizacion = {
             NombreOrganizacion: nombreOrganizacion,
+            CorreoContacto: correoOrganizacion, // <--- Enviamos el correo al servicio
             idCategoria: parseInt(idCategoria),
             IdProvincia: parseInt(idProvincia),
             idDisponibilidad: parseInt(idDisponibilidad),
@@ -78,6 +81,15 @@ function RegistroOrganizacion() {
                 value={nombreOrganizacion}
                 onChange={(e) => setNombreOrganizacion(e.target.value)}
                 placeholder="Nombre de la organización"
+            />
+
+            {/* --- Nuevo campo de Correo --- */}
+            <p>Correo de contacto</p>
+            <input
+                type="email"
+                value={correoOrganizacion}
+                onChange={(e) => setCorreoOrganizacion(e.target.value)}
+                placeholder="ejemplo@organizacion.org"
             />
 
             <p>Categoría</p>
