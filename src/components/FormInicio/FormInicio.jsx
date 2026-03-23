@@ -40,15 +40,25 @@ export default function FormInicio() {
       const user = users.find(u => u.Correo === email && u.Contrasena === password);
 
       if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+
         Swal.fire({
           icon: 'success',
-          title: `¡Bienvenido, ${user.Nombre}!`,
+          title: `¡Hola, ${user.Nombre}!`,
           text: 'Inicio de sesión exitoso',
           timer: 2000,
           showConfirmButton: false
+        }).then(() => {
+          // ── Redirigir según el tipo ──
+          if (user.Tipo === "admin") {
+            navigate("/panel")
+          } else if (localStorage.getItem("miOrganizacion")) {
+            navigate("/miOrganizacion")
+          } else {
+            navigate("/buscador")
+          }
         });
-        localStorage.setItem("user", JSON.stringify(user));
-        navigate("/buscador"); 
+
       } else {
         Swal.fire({
           icon: 'error',
@@ -74,7 +84,7 @@ export default function FormInicio() {
     <div className={styles.container}>
       <div className={styles.card}>
         <h2>Iniciar sesión</h2>
-        <p className={styles.sub}>Bienvenido de nuevo</p>
+        <p className={styles.sub}>Hola de nuevo</p>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <label>Correo electrónico</label>

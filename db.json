@@ -74,7 +74,7 @@
       "id": "1",
       "NombreOrganizacion": "EcoVoluntarios CR",
       "idCategoria": 1,
-      "IdProvincia": 1,
+      "IdProvincia": 2,
       "idDisponibilidad": 1,
       "Descripcion": "Organización dedicada a la limpieza y conservación de espacios naturales."
     },
@@ -141,9 +141,34 @@
       "idDisponibilidad": 1,
       "Descripcion": "educar",
       "id": "9f57"
+    },
+    {
+      "NombreOrganizacion": "Educa Sin Fronteras",
+      "idCategoria": 2,
+      "IdProvincia": 2,
+      "idDisponibilidad": 1,
+      "Descripcion": "Educación para todos",
+      "id": "f368"
+    },
+    {
+      "id": "9815",
+      "NombreOrganizacion": "Animalitos CR",
+      "idCategoria": 4,
+      "IdProvincia": 1,
+      "idDisponibilidad": 1,
+      "Descripcion": "Organización de cuido para el bienestar social de todos los animalitos"
     }
   ],
   "usuarios": [
+{
+      "id": "admin-01",
+      "Nombre": "Administrador",
+      "Correo": "admin@brujulasocial.com",
+      "Contrasena": "admin123",
+      "Tipo": "admin",
+      "FechaRegistro": "2026-01-01"
+    },
+
     {
       "id": "1",
       "Nombre": "María González",
@@ -163,16 +188,6 @@
       "FechaRegistro": "2026-03-18"
     },
     {
-      "id": "3b51",
-      "Nombre": "Ana Sol",
-      "Correo": "ana@gmail.com",
-      "Contrasena": "123456",
-      "Telefono": "2222",
-      "Tipo": "voluntario",
-      "IdProvincia": 1,
-      "FechaRegistro": "2026-03-18"
-    },
-    {
       "id": "268b",
       "Nombre": "Diego Soto",
       "Correo": "diego@gmail.com",
@@ -181,6 +196,36 @@
       "Tipo": "voluntario",
       "IdProvincia": 1,
       "FechaRegistro": "2026-03-18"
+    },
+    {
+      "id": "0001",
+      "Nombre": "Ana Fran",
+      "Correo": "ana@gmial.com",
+      "Contrasena": "123456",
+      "Telefono": "2323232",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-19"
+    },
+    {
+      "id": "606b",
+      "Nombre": "Ana Sol",
+      "Correo": "ana@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "10",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-19"
+    },
+    {
+      "id": "245e",
+      "Nombre": "Julia Torres",
+      "Correo": "julia@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "12121212",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-20"
     }
   ],
   "aplicaciones": [
@@ -201,8 +246,155 @@
       "idUsuario": "7d30",
       "idOrganizacion": "9f57",
       "FechaAplicacion": "2026-03-18"
+    },
+    {
+      "id": "43e3",
+      "idUsuario": "7d30",
+      "idOrganizacion": "1",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "e029",
+      "idUsuario": "3b51",
+      "idOrganizacion": "1",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "8449",
+      "idUsuario": "a416",
+      "idOrganizacion": "1",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "306a",
+      "idUsuario": "a416",
+      "idOrganizacion": "2",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "0496",
+      "idUsuario": "a416",
+      "idOrganizacion": "3",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "de69",
+      "idUsuario": "a416",
+      "idOrganizacion": "b632",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "e24c",
+      "idUsuario": "a416",
+      "idOrganizacion": "9f57",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "5e6e",
+      "idUsuario": "606b",
+      "idOrganizacion": "1",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "ab0f",
+      "idUsuario": "606b",
+      "idOrganizacion": "2",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "dd41",
+      "idUsuario": "606b",
+      "idOrganizacion": "3",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "0d92",
+      "idUsuario": "606b",
+      "idOrganizacion": "b632",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "5d54",
+      "idUsuario": "606b",
+      "idOrganizacion": "a992",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "e3be",
+      "idUsuario": "606b",
+      "idOrganizacion": "1246",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "3ed9",
+      "idUsuario": "606b",
+      "idOrganizacion": "ac94",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "bab5",
+      "idUsuario": "606b",
+      "idOrganizacion": "9f57",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "0f05",
+      "idUsuario": "606b",
+      "idOrganizacion": "f368",
+      "FechaAplicacion": "2026-03-19"
+    },
+    {
+      "id": "2e41",
+      "idUsuario": "245e",
+      "idOrganizacion": "1",
+      "FechaAplicacion": "2026-03-20"
+    },
+    {
+      "id": "0585",
+      "idUsuario": "245e",
+      "idOrganizacion": "2",
+      "FechaAplicacion": "2026-03-20"
+    },
+    {
+      "id": "1bd1",
+      "idUsuario": "245e",
+      "idOrganizacion": "3",
+      "FechaAplicacion": "2026-03-20"
+    },
+    {
+      "id": "9372",
+      "idUsuario": "245e",
+      "idOrganizacion": "b632",
+      "FechaAplicacion": "2026-03-20"
+    },
+    {
+      "id": "8850",
+      "idUsuario": "245e",
+      "idOrganizacion": "a992",
+      "FechaAplicacion": "2026-03-20"
+    },
+    {
+      "id": "c5a6",
+      "idUsuario": "245e",
+      "idOrganizacion": "f368",
+      "FechaAplicacion": "2026-03-20"
+    },
+    {
+      "id": "9d27",
+      "idUsuario": "245e",
+      "idOrganizacion": "9f57",
+      "FechaAplicacion": "2026-03-20"
     }
   ],
- "horas": []
-
+  "horas": [
+    {
+      "id": "98a1",
+      "idUsuario": "606b",
+      "idOrganizacion": "f368",
+      "actividad": "Voluntaria en la enseñanza del idioma inglés y portugués para niños y adolescentes",
+      "fecha": "2026-03-16",
+      "horas": 15
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
