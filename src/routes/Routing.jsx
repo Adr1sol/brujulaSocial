@@ -18,10 +18,7 @@ function Routing() {
       <Routes>
         <Route path="/terminos" element={<TerminosCondiciones />} />
         <Route path="/register" element={<RegisterOrganizacion />} />
-        <Route path="/impacto" element={<DashImpacto />} />
         <Route path="/Donacion" element={<Donaciones />} />
-        {/* <Route path="/" element={<DashImpacto />} /> */}
-        <Route path="/" element={<InicioUser />} />
         <Route path="/inicio" element={<InicioUser />} />
         <Route path="/registro" element={<RegistroUser />} />
         <Route path="/buscador" element={<Buscador />} />
