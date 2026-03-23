@@ -87,8 +87,9 @@
 }
 
 .btn-outline {
-  background: transparent;
-  border: 1px solid #ccc;
+  background-color: #078a87; /* Teal background */
+  color: white; /* White text */
+  border: 1px solid #078a87; /* Matching border */
   padding: 0.6rem;
   border-radius: 4px;
   cursor: pointer;
@@ -97,6 +98,7 @@
 }
 
 .btn-outline:hover {
-  border-color: #078a87;
-  color: #078a87;
+  background-color: #ef8514; /* Orange background on hover */
+  border-color: #ef8514; /* Matching border on hover */
+  color: white; /* White text on hover */
 }

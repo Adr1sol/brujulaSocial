@@ -8,6 +8,8 @@ import ServiceDisponibilidades from '../../services/ServiceDisponibilidades'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import ModalVoluntario from './ModalVoluntario'
+import ModalRegistroHoras from './ModalRegistroHoras'
+import styles from "./MiOrganizacion.module.css"
 
 function PerfilOrganizacion() {
 
@@ -24,8 +26,8 @@ function PerfilOrganizacion() {
     const [idDisponibilidad, setIdDisponibilidad] = useState("")
     const [descripcion, setDescripcion] = useState("")
 
-    // Estado para controlar el modal
     const [voluntarioSeleccionado, setVoluntarioSeleccionado] = useState(null)
+    const [voluntarioParaHoras, setVoluntarioParaHoras] = useState(null)
 
     const navigate = useNavigate()
 
@@ -262,6 +264,9 @@ function PerfilOrganizacion() {
                                                     <button onClick={() => setVoluntarioSeleccionado(vol)}>
                                                         Ver perfil
                                                     </button>
+                                                    <button onClick={() => setVoluntarioParaHoras(vol)}>
+                                                        Registrar horas
+                                                    </button>
                                                 </td>
                                             </tr>
                                         ))}
@@ -278,11 +283,20 @@ function PerfilOrganizacion() {
                 <p>No hay organización registrada. <a href="/register">Registrá tu organización aquí.</a></p>
             )}
 
-            {/* Modal del voluntario */}
+            {/* Modal ver perfil del voluntario */}
             {voluntarioSeleccionado && (
                 <ModalVoluntario
                     voluntario={voluntarioSeleccionado}
                     onCerrar={() => setVoluntarioSeleccionado(null)}
+                />
+            )}
+
+            {/* Modal registrar horas */}
+            {voluntarioParaHoras && (
+                <ModalRegistroHoras
+                    voluntario={voluntarioParaHoras}
+                    idOrganizacion={organizacion.id}
+                    onCerrar={() => setVoluntarioParaHoras(null)}
                 />
             )}
 

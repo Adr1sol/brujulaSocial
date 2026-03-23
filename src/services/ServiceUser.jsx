@@ -12,7 +12,7 @@ const Services = () => {
       title: "Refuerzo Escolar en Comunidades",
       desc: "Apoya a niños y jóvenes en riesgo social con tutorías académicas y talleres recreativos los sábados.",
       color: "#078A87",
-      img: "../src/images/basura playa.jpg"
+      img: "../src/images/escuela.jpg"
     },
     {
       category: "AMBIENTE",
@@ -20,7 +20,7 @@ const Services = () => {
       title: "Limpieza de Playas y Manglares",
       desc: "Únete a la brigada ecológica para proteger nuestras costas y biodiversidad marina este fin de semana.",
       color: "#EF8514",
-           img: "/fondoinicio.png"
+           img: "src/images/basura playa.jpg"
 
 
     },
@@ -30,7 +30,7 @@ const Services = () => {
       title: "Acompañamiento Generacional",
       desc: "Brinda compañía y alegría a adultos mayores en hogares locales mediante charlas y actividades lúdicas.",
       color: "#50A15A",
-      img: "/fondoparaweb.png"
+      img: "src/images/adulto mayor.png"
 
     },
     {
@@ -39,7 +39,7 @@ const Services = () => {
       title: "Cuidado en Refugios de Fauna",
       desc: "Ayuda en el mantenimiento, alimentación y socialización de animales rescatados esperando un hogar.",
       color: "#EF8514",
-      img: "/beach-bg.png"
+      img: "src/images/Refugio.jpg"
     }
   ];
 

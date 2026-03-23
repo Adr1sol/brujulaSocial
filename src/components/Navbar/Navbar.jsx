@@ -2,8 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logoSinNombre from '../../images/logoSinNombre.png';
 import styles from './Navbar.module.css';
+import { useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+
+const Navbar = ({redirigir}) => {
+  const navigate =useNavigate()
   return (
     <nav className={styles.navbar}>
       <Link to="/" className={styles['nav-logo-container']}>
@@ -14,7 +17,8 @@ const Navbar = () => {
         <li><Link to="/">Inicio</Link></li>
         <li><Link to="/inicio">Iniciar Sesión</Link></li>
         <li><Link to="/registro">Registro</Link></li>
-        <li><Link to="/registro">Contacto</Link></li>
+        <li onClick={redirigir}><Link>Contacto</Link></li>
+        <li><button onClick={()=> navigate ("/donacion")} className={styles['btn-donate']}>❤️ Donación</button></li>
       </ul>
     </nav>
   );

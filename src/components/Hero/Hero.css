@@ -69,20 +69,24 @@
 }
 
 .btn-primary {
-  background-color: #ef8514;
+  background-image: linear-gradient(to right, #078a87, #00c2a8);
   color: white;
   border: none;
   padding: 0.8rem 2rem;
   font-size: 1.1rem;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 50px; /* Rounded corners */
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.4s ease; /* Smooth transition for all properties */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Softer shadow */
   z-index: 3;
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 1.5px; /* Spacing between letters */
 }
 
 .btn-primary:hover {
-  background-color: #d67612;
+  transform: scale(1.05); /* Slightly enlarges the button */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
 }
 
 .search-bar {

@@ -171,6 +171,16 @@
       "Tipo": "voluntario",
       "IdProvincia": 1,
       "FechaRegistro": "2026-03-18"
+    },
+    {
+      "id": "268b",
+      "Nombre": "Diego Soto",
+      "Correo": "diego@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "2121212",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-18"
     }
   ],
   "aplicaciones": [
@@ -193,5 +203,6 @@
       "FechaAplicacion": "2026-03-18"
     }
   ],
-  "$schema": "./node_modules/json-server/schema.json"
+ "horas": []
+
 }
