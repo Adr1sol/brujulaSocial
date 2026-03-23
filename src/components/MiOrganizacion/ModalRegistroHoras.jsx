@@ -91,7 +91,7 @@ function ModalRegistroHoras({ voluntario, idOrganizacion, onCerrar }) {
                         borderRadius: '50%',
                         cursor: 'pointer',
                         fontSize: '14px'
-                    }}>✕</button>
+                    }}>X</button>
                 </div>
 
                 {/* Body */}

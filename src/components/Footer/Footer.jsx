@@ -26,14 +26,14 @@ const Footer = () => {
 
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
               <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07..." />
+                <path d="M7 2h10c2.76 0 5 2.24 5 5v10c0 2.76-2.24 5-5 5H7c-2.76 0-5-2.24-5-5V7c0-2.76 2.24-5 5-5zm0 2c-1.66 0-3 1.34-3 3v10c0 1.66 1.34 3 3 3h10c1.66 0 3-1.34 3-3V7c0-1.66-1.34-3-3-3H7zm11 1.5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM12 7c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5zm0 2c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
               </svg>
               <span>Instagram</span>
             </a>
 
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
               <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569..." />
+                <path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a2.7 2.7 0 00-2.7-2.7c-1.2 0-2.2.8-2.5 1.7v-1.4h-2.5v7.7h2.5v-4.1a1.2 1.2 0 011.2-1.2h.3c.7 0 1 .5 1 1.2v4.1h2.5M8.1 18.5v-7.7H5.6v7.7h2.5M7 9a1.4 1.4 0 100-2.8A1.4 1.4 0 007 9"/>
               </svg>
               <span>LinkedIn</span>
             </a>

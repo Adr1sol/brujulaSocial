@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import ModalVoluntario from './ModalVoluntario'
 import ModalRegistroHoras from './ModalRegistroHoras'
-import styles from "./MiOrganizacion.module.css"
 
 function PerfilOrganizacion() {
 
@@ -68,7 +67,7 @@ function PerfilOrganizacion() {
     }
 
     useEffect(() => {
-        cargarDatos()
+        Promise.resolve().then(() => cargarDatos())
     }, [])
 
 

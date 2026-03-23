@@ -70,9 +70,9 @@ function ModalVoluntario({ voluntario, onCerrar }) {
                         width: '28px',
                         height: '28px',
                         borderRadius: '50%',
-                        cursor: 'pointer', background: 'white',
+                        cursor: 'pointer',
                         fontSize: '14px'
-                    }}>✕</button>
+                    }}>X</button>
                 </div>
 
                 {/* Body */}

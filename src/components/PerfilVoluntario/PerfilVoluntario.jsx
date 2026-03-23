@@ -36,10 +36,6 @@ function PerfilVoluntario() {
         { label: 'Contacto', path: '/' }
     ];
 
-    useEffect(() => {
-        cargarDatos();
-    }, []);
-
     async function cargarDatos() {
         const user = JSON.parse(localStorage.getItem("user"));
         if (!user) return;
@@ -69,6 +65,10 @@ function PerfilVoluntario() {
         const todasLasCategorias = await ServiceCategorias.getCategorias();
         setCategorias(todasLasCategorias);
     }
+
+    useEffect(() => {
+        Promise.resolve().then(() => cargarDatos())
+    }, []);
 
     // ── Editar perfil ──
     function handleEditar() {

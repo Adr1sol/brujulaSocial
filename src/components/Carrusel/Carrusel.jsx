@@ -1,34 +1,32 @@
 import Carousel from 'react-bootstrap/Carousel';
+import escuela from '../../img/escuela.jpg';
+import basuraPlaya from '../../img/basura playa.jpg';
+import puente from '../../img/Puente.jpg';
+import refugio from '../../img/Refugio.jpg';
+import voluntariado from '../../img/voluntariado.png';
 
 function Carrusel() {
     return (
         <Carousel>
             <Carousel.Item>
-                <img src="../src/img/escuela.jpg" alt="" />
+                <img className="d-block w-100" src={escuela} alt="Escuela" style={{ height: '100vh', objectFit: 'cover' }} />
                 <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <h3>Educación que transforma</h3>
+                    <p>Apoya el futuro de nuestros niños en comunidades locales.</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img src="../src/img/escuela.jpg" alt="" />
-
+                <img className="d-block w-100" src={basuraPlaya} alt="Playa" style={{ height: '100vh', objectFit: 'cover' }} />
                 <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h3>Costas limpias, vida sana</h3>
+                    <p>Únete a las jornadas de limpieza y conservación en nuestras playas.</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-                <img src="../src/img/basura playa.jpg" alt="playa" />
-                <img src="../src/img/escuela.jpg" alt="Escuela" />
-                <img src="../src/img/Puente.jpg" alt="Puente" />
-                <img src="../src/img/Refugio.jpg" alt="Refugio" />
-                <img src="../src/img/voluntariado.jpg" alt="Voluntariado" />
+                <img className="d-block w-100" src={voluntariado} alt="Voluntariado" style={{ height: '100vh', objectFit: 'cover' }} />
                 <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>
-                        Praesent commodo cu
-                    </p>
+                    <h3>Impacto Real</h3>
+                    <p>Cientos de voluntarios ya están haciendo la diferencia en Costa Rica.</p>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>

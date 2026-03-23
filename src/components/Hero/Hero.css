@@ -137,7 +137,22 @@
   background-color: #066d6b;
 }
 
-/* Hide carousel captions if they exist */
+/* Estilos para las leyendas del carrusel */
 .carousel-caption {
-    display: none;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    padding: 1rem;
+    bottom: 20%;
+    z-index: 10;
+}
+
+.carousel-caption h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.carousel-caption p {
+    font-size: 1rem;
+    color: #eee;
 }

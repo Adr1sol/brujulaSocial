@@ -19,10 +19,6 @@ function DashboardImpactoSocial() {
     const [voluntarioSeleccionado, setVoluntarioSeleccionado] = useState(null)
     const [tabActiva, setTabActiva] = useState("dashboard")
 
-    useEffect(() => {
-        cargarDatos()
-    }, [])
-
     async function cargarDatos() {
         const u = await ServiceUsuario.getUsuarios()
         const o = await ServiceOrganizaciones.getOrganizaciones()
@@ -31,12 +27,12 @@ function DashboardImpactoSocial() {
         const c = await ServiceCategorias.getCategorias()
         const p = await ServiceProvincias.getProvincias()
 
-        setUsuarios(u)
-        setOrganizaciones(o)
-        setAplicaciones(a)
-        setHoras(h)
-        setCategorias(c)
-        setProvincias(p)
+        setUsuarios(u || [])
+        setOrganizaciones(o || [])
+        setAplicaciones(a || [])
+        setHoras(h || [])
+        setCategorias(c || [])
+        setProvincias(p || [])
     }
 
     // ... (tus funciones de lógica se mantienen exactamente igual)
@@ -103,6 +99,10 @@ function DashboardImpactoSocial() {
     const coloresAvatar = ["#1D9E75", "#E8841A", "#185FA5", "#534AB7", "#3B6D11", "#D4537E"]
     function getColorAvatar(index) { return coloresAvatar[index % coloresAvatar.length] }
     function getMaximo(arr) { return Math.max(...arr.map(([, v]) => v), 1) }
+
+    useEffect(() => {
+        Promise.resolve().then(() => cargarDatos())
+    }, [])
 
     return (
         <div className={styles.pagina}>
@@ -374,7 +374,7 @@ function DashboardImpactoSocial() {
                     <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                         <div className={styles.modalHeader}>
                             <h3>Perfil del voluntario</h3>
-                            <button className={styles.modalClose} onClick={() => setVoluntarioSeleccionado(null)}>✕</button>
+                            <button className={styles.modalClose} onClick={() => setVoluntarioSeleccionado(null)}>X</button>
                         </div>
                         <div className={styles.modalBody}>
                             <div className={styles.modalAvatarWrap}>
