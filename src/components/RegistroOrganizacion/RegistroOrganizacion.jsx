@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import styles from './RegistroOrganizacion.module.css'
 import ServiceOrganizaciones from '../../services/ServiceOrganizaciones'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import logo from '../../images/LogoEntero.png'
 
 function RegistroOrganizacion() {
 
@@ -69,56 +71,112 @@ function RegistroOrganizacion() {
     }
 
     return (
-        <div>
-            <h2>Registrar Organización</h2>
+        <div className={styles.page}>
 
-            <p>Nombre de la organización</p>
-            <input
-                type="text"
-                value={nombreOrganizacion}
-                onChange={(e) => setNombreOrganizacion(e.target.value)}
-                placeholder="Nombre de la organización"
-            />
+            {/* ── Barra superior ── */}
+            <header className={styles.topbar}>
+                <img src={logo} alt="Brújula Social" className={styles.logo} />
+                <Link to="/" className={styles.homeBtn}>
+                    <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                    Inicio
+                </Link>
+            </header>
 
-            <p>Categoría</p>
-            <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
-                <option value="">Seleccionar categoría</option>
-                <option value="1">Medio Ambiente</option>
-                <option value="2">Educación</option>
-                <option value="3">Salud</option>
-                <option value="4">Bienestar Animal</option>
-                <option value="5">Cultura</option>
-            </select>
+            {/* ── Encabezado ── */}
+            <div className={styles.banner}>
+                <div className={styles.iconCircle}>
+                    {/* Ícono de edificio/organización */}
+                    <svg viewBox="0 0 24 24" strokeWidth="1.8">
+                        <rect x="3" y="9" width="18" height="13" rx="1" />
+                        <path d="M9 22V12h6v10" />
+                        <path d="M3 9l9-7 9 7" />
+                    </svg>
+                </div>
+                <h1>Registrar Organización</h1>
+                <p>Completá el formulario para dar de alta tu organización en la plataforma.</p>
+            </div>
 
-            <p>Provincia</p>
-            <select value={idProvincia} onChange={(e) => setIdProvincia(e.target.value)}>
-                <option value="">Seleccionar provincia</option>
-                <option value="1">San José</option>
-                <option value="2">Alajuela</option>
-                <option value="3">Cartago</option>
-                <option value="4">Heredia</option>
-                <option value="5">Guanacaste</option>
-                <option value="6">Puntarenas</option>
-                <option value="7">Limón</option>
-            </select>
+            {/* ── Tarjeta ── */}
+            <div className={styles.card}>
+                <div className={styles.form}>
 
-            <p>Disponibilidad</p>
-            <select value={idDisponibilidad} onChange={(e) => setIdDisponibilidad(e.target.value)}>
-                <option value="">Seleccionar disponibilidad</option>
-                <option value="1">Fines de semana</option>
-                <option value="2">Por horas</option>
-                <option value="3">Remoto</option>
-                <option value="4">Entre semana</option>
-            </select>
+                    {/* Nombre */}
+                    <div className={styles.inputGroup}>
+                        <label>Nombre de la organización</label>
+                        <input
+                            type="text"
+                            value={nombreOrganizacion}
+                            onChange={(e) => setNombreOrganizacion(e.target.value)}
+                            placeholder="Ej: Fundación Verde"
+                        />
+                    </div>
 
-            <p>Descripción</p>
-            <textarea
-                value={descripcion}
-                onChange={(e) => setDescripcion(e.target.value)}
-                placeholder="Breve descripción de la organización"
-            />
+                    <div className={styles.divider} />
 
-            <button onClick={guardarOrganizacion}>Agregar</button>
+                    {/* Categoría + Provincia en la misma fila */}
+                    <div className={styles.row}>
+                        <div className={styles.inputGroup}>
+                            <label>Categoría</label>
+                            <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
+                                <option value="">Seleccionar</option>
+                                <option value="1">Medio Ambiente</option>
+                                <option value="2">Educación</option>
+                                <option value="3">Salud</option>
+                                <option value="4">Bienestar Animal</option>
+                                <option value="5">Cultura</option>
+                            </select>
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label>Provincia</label>
+                            <select value={idProvincia} onChange={(e) => setIdProvincia(e.target.value)}>
+                                <option value="">Seleccionar</option>
+                                <option value="1">San José</option>
+                                <option value="2">Alajuela</option>
+                                <option value="3">Cartago</option>
+                                <option value="4">Heredia</option>
+                                <option value="5">Guanacaste</option>
+                                <option value="6">Puntarenas</option>
+                                <option value="7">Limón</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    {/* Disponibilidad */}
+                    <div className={styles.inputGroup}>
+                        <label>Disponibilidad requerida</label>
+                        <select value={idDisponibilidad} onChange={(e) => setIdDisponibilidad(e.target.value)}>
+                            <option value="">Seleccionar disponibilidad</option>
+                            <option value="1">Fines de semana</option>
+                            <option value="2">Por horas</option>
+                            <option value="3">Remoto</option>
+                            <option value="4">Entre semana</option>
+                        </select>
+                    </div>
+
+                    <div className={styles.divider} />
+
+                    {/* Descripción */}
+                    <div className={styles.inputGroup}>
+                        <label>Descripción</label>
+                        <textarea
+                            value={descripcion}
+                            onChange={(e) => setDescripcion(e.target.value)}
+                            placeholder="Describí brevemente la misión y actividades de tu organización..."
+                        />
+                    </div>
+
+                    {/* Botón */}
+                    <button className={styles.submitBtn} onClick={guardarOrganizacion}>
+                        Registrar organización
+                    </button>
+
+                </div>
+            </div>
+
         </div>
     )
 }

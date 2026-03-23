@@ -102,82 +102,117 @@ function Formregistro() {
   };
 
   return (
-    <div className={styles.fondo}>
-      <div className={styles.card}>
-        <h2>Únete a Brújula Social</h2>
-        <p className={styles.sub}>Crea tu cuenta para empezar a mejorar el mundo</p>
-
-        <p className={styles.tipo}>Tipo de cuenta</p>
-        <div className={styles.selector}>
-          <div
-            className={`${styles.opcion} ${tipo === "voluntario" ? styles.activo : ""}`}
-            onClick={() => setTipo("voluntario")}
-          >
-            <h4>Voluntario</h4>
-          </div>
-          <div
-            className={`${styles.opcion} ${tipo === "org" ? styles.activo : ""}`}
-            onClick={() => navigate("/register")}
-          >
-            <h4>Organización</h4>
-          </div>
+    <div className={styles.wrapper}>
+      <div className={styles.visualSide}>
+        <div className={styles.overlay}></div>
+        <div className={styles.branding}>
+          <h1>Únete a nosotros</h1>
+          <p>Crea tu cuenta para empezar a mejorar el mundo a través del voluntariado.</p>
         </div>
-
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <div className={styles.row}>
-            <input 
-              name="nombre" 
-              type="text" 
-              placeholder="Nombre" 
-              value={formData.nombre}
-              onChange={handleChange}
-            />
-            <input 
-              name="apellido" 
-              type="text" 
-              placeholder="Apellido" 
-              value={formData.apellido}
-              onChange={handleChange}
-            />
+      </div>
+      <div className={styles.formSide}>
+        <div className={styles.card}>
+          <div className={styles.header}>
+            <h2>Crear cuenta</h2>
+            <p className={styles.sub}>Completa tus datos para formar parte de la comunidad.</p>
           </div>
-          <input 
-            name="tel" 
-            type="tel" 
-            placeholder="Número de teléfono" 
-            value={formData.tel}
-            onChange={handleChange}
-          />
-          <input 
-            name="email" 
-            type="email" 
-            placeholder="Correo electrónico" 
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <div className={styles.row}>
-            <input 
-              name="password" 
-              type="password" 
-              placeholder="Contraseña" 
-              value={formData.password}
-              onChange={handleChange}
-            />
-            <input 
-              name="confirmPassword" 
-              type="password" 
-              placeholder="Confirmar contraseña" 
-              value={formData.confirmPassword}
-              onChange={handleChange}
-            />
-          </div>
-          <button type="submit" disabled={loading}>
-            {loading ? "Registrando..." : "Registrarse"}
-          </button>
-        </form>
 
-        <p className={styles.login}>
-          ¿Ya tiene una cuenta? <Link to="/login"><span>Inicie sesión aquí</span></Link>
-        </p>
+          <div className={styles.accountTypeHeader}>
+            <p className={styles.tipo}>Tipo de cuenta</p>
+          </div>
+          <div className={styles.selector}>
+            <div
+              className={`${styles.opcion} ${tipo === "voluntario" ? styles.activo : ""}`}
+              onClick={() => setTipo("voluntario")}
+            >
+              <h4>Voluntario</h4>
+            </div>
+            <div
+              className={`${styles.opcion} ${tipo === "org" ? styles.activo : ""}`}
+              onClick={() => navigate("/register")}
+            >
+              <h4>Organización</h4>
+            </div>
+          </div>
+
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <div className={styles.row}>
+              <div className={styles.inputGroup}>
+                <label>Nombre</label>
+                <input 
+                  name="nombre" 
+                  type="text" 
+                  placeholder="Nombre" 
+                  value={formData.nombre}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className={styles.inputGroup}>
+                <label>Apellido</label>
+                <input 
+                  name="apellido" 
+                  type="text" 
+                  placeholder="Apellido" 
+                  value={formData.apellido}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>Teléfono</label>
+              <input 
+                name="tel" 
+                type="tel" 
+                placeholder="+506 0000-0000" 
+                value={formData.tel}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>Correo electrónico</label>
+              <input 
+                name="email" 
+                type="email" 
+                placeholder="ejemplo@correo.com" 
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className={styles.row}>
+              <div className={styles.inputGroup}>
+                <label>Contraseña</label>
+                <input 
+                  name="password" 
+                  type="password" 
+                  placeholder="••••••••" 
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className={styles.inputGroup}>
+                <label>Confirmar</label>
+                <input 
+                  name="confirmPassword" 
+                  type="password" 
+                  placeholder="••••••••" 
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <button type="submit" className={styles.submitBtn} disabled={loading}>
+              {loading ? "Creando cuenta..." : "Registrarse"}
+            </button>
+          </form>
+
+          <p className={styles.login}>
+            ¿Ya tienes una cuenta? <Link to="/inicio"><span>Inicia sesión aquí</span></Link>
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -16,17 +16,14 @@ const Navbar = () => {
       <ul className={styles['nav-links']}>
         <li>
           <Link to="/" className={isOnAuthPage ? styles.navItemWithIcon : ''}>
-            {isOnAuthPage && (
-              <div className={styles.iconWrapper}>
-                <i className={styles['gg-log-out']}></i>
-              </div>
-            )}
-            Inicio
+            <div className={styles.iconWrapper}>
+              <i className={styles['gg-home']}></i>
+            </div>
           </Link>
         </li>
-        <li><Link to="/login">Iniciar Sesión</Link></li>
+        <li><Link to="/inicio">Iniciar Sesión</Link></li>
         <li><Link to="/registro">Registro</Link></li>
-        <li><Link to="/consultas">Ayuda</Link></li>
+        <li><Link to="/registro">Contacto</Link></li>
       </ul>
     </nav>
   );

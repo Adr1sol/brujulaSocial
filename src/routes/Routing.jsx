@@ -6,26 +6,22 @@ import HomePage from "../pages/HomePage";
 import RegisterOrganizacion from "../pages/RegisterOrganizacion";
 import PerfilPage from "../pages/PerfilPage";
 import PerfilOrganizacion from '../pages/PerfilOrganizacion'
-import TerminosCondiciones from "../pages/Terminos";
-import DashImpacto from "../pages/DashImpacto"
+
 
 function Routing() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/inicio" element={<InicioUser />} />
-                <Route path="/registro" element={<RegistroUser />} />
-                <Route path="/buscador" element={<Buscador />} />
-                <Route path="/perfil" element={<PerfilPage />} />
-                <Route path="/miOrganizacion" element={<PerfilOrganizacion />} />
-                <Route path="/terminos" element={<TerminosCondiciones />} />
-                <Route path="/register" element={<RegisterOrganizacion />} />
-                <Route path="/impacto" element={<DashImpacto />} />
-
-            </Routes>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/inicio" element={<InicioUser />} />
+        <Route path="/registro" element={<RegistroUser />} />
+        <Route path="/buscador" element={<Buscador />} />
+        <Route path="/register" element={<RegisterOrganizacion />} />
+        <Route path="/perfil" element={<PerfilPage />} />
+        <Route path="/miOrganizacion" element={<PerfilOrganizacion />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default Routing;

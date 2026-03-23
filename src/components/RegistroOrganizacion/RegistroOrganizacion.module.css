@@ -1,0 +1,247 @@
+/* RegistroOrganizacion.module.css */
+
+/* ── Barra superior ── */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    box-shadow: 0 2px 12px rgba(7, 138, 135, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    z-index: 100;
+}
+
+.logo {
+    height: 38px;
+    object-fit: contain;
+}
+
+.homeBtn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: linear-gradient(135deg, #078A87, #50A154);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(7, 138, 135, 0.25);
+    font-family: inherit;
+}
+
+.homeBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(7, 138, 135, 0.3);
+}
+
+.homeBtn svg {
+    width: 16px;
+    height: 16px;
+    stroke: white;
+    fill: none;
+    flex-shrink: 0;
+}
+
+.page {
+    min-height: 100vh;
+    background: #f0f7f7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    padding: 96px 16px 64px;
+}
+
+/* ── Encabezado ── */
+.banner {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.iconCircle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #078A87, #50A154);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    box-shadow: 0 8px 20px rgba(7, 138, 135, 0.3);
+}
+
+.iconCircle svg {
+    width: 30px;
+    height: 30px;
+    stroke: white;
+    fill: none;
+}
+
+.banner h1 {
+    font-size: 1.9rem;
+    font-weight: 800;
+    margin: 0 0 8px;
+    background: linear-gradient(135deg, #078A87, #EF8514);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.banner p {
+    color: #64748b;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* ── Tarjeta ── */
+.card {
+    width: 100%;
+    max-width: 640px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(7, 138, 135, 0.08), 0 1px 4px rgba(0,0,0,0.05);
+    padding: 36px 40px;
+    border-top: 4px solid transparent;
+    border-image: linear-gradient(90deg, #078A87, #EF8514, #50A154) 1;
+    border-image-slice: 1;
+    border-radius: 20px;
+    /* fallback - border-image overrides border-radius in most browsers */
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #078A87, #EF8514, #50A154);
+}
+
+/* ── Grupos de campos ── */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.inputGroup label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.inputGroup input,
+.inputGroup select,
+.inputGroup textarea {
+    padding: 11px 14px;
+    border-radius: 10px;
+    border: 2px solid #e8f1f1;
+    background-color: #f8fcfc;
+    font-size: 0.93rem;
+    font-family: inherit;
+    color: #1e293b;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.inputGroup select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23078A87' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 38px;
+    cursor: pointer;
+}
+
+.inputGroup textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.55;
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus,
+.inputGroup textarea:focus {
+    outline: none;
+    border-color: #078A87;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(7, 138, 135, 0.12);
+}
+
+/* ── Separador ── */
+.divider {
+    height: 1px;
+    background: #f1f5f9;
+    margin: 4px 0;
+}
+
+/* ── Botón ── */
+.submitBtn {
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #078A87, #50A154);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    box-shadow: 0 6px 16px rgba(7, 138, 135, 0.25);
+    letter-spacing: 0.02em;
+    margin-top: 4px;
+}
+
+.submitBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(7, 138, 135, 0.3);
+    filter: brightness(1.07);
+}
+
+.submitBtn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(7, 138, 135, 0.2);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .card {
+        padding: 28px 20px;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+    }
+
+    .banner h1 {
+        font-size: 1.6rem;
+    }
+}
