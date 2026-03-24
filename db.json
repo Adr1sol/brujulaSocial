@@ -135,20 +135,20 @@
       "Descripcion": "casa"
     },
     {
+      "id": "9f57",
       "NombreOrganizacion": "flores",
       "idCategoria": 1,
       "IdProvincia": 4,
       "idDisponibilidad": 1,
-      "Descripcion": "educar",
-      "id": "9f57"
+      "Descripcion": "educar"
     },
     {
+      "id": "f368",
       "NombreOrganizacion": "Educa Sin Fronteras",
       "idCategoria": 2,
       "IdProvincia": 2,
       "idDisponibilidad": 1,
-      "Descripcion": "Educación para todos",
-      "id": "f368"
+      "Descripcion": "Educación para todos"
     },
     {
       "id": "9815",
@@ -174,6 +174,24 @@
       "IdProvincia": 2,
       "idDisponibilidad": 1,
       "Descripcion": "Limpieza de playas"
+    },
+    {
+      "id": "a229",
+      "NombreOrganizacion": "Semilla verde",
+      "CorreoContacto": "semilla@gmail.com",
+      "idCategoria": 1,
+      "IdProvincia": 7,
+      "idDisponibilidad": 1,
+      "Descripcion": "Siembra de árboles"
+    },
+    {
+      "id": "-BEOLgMzg8Y",
+      "NombreOrganizacion": "Huellitas",
+      "CorreoContacto": "huellitas@gmail.com",
+      "idCategoria": 4,
+      "IdProvincia": 5,
+      "idDisponibilidad": 1,
+      "Descripcion": "Organización encargada del cuido y bienestar animal"
     }
   ],
   "usuarios": [
@@ -190,6 +208,7 @@
       "Nombre": "María González",
       "Correo": "maria@correo.com",
       "Contrasena": "hashed_password",
+      "Tipo": "voluntario",
       "IdProvincia": 1,
       "FechaRegistro": "2025-01-10"
     },
@@ -262,6 +281,73 @@
       "Tipo": "voluntario",
       "IdProvincia": 1,
       "FechaRegistro": "2026-03-23"
+    },
+    {
+      "id": "ed5d",
+      "Nombre": "Sofi Castro",
+      "Correo": "sofi@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "12121212",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-24"
+    },
+    {
+      "id": "c1cb",
+      "Nombre": "Mario Soto",
+      "Correo": "mario@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "21212",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-24"
+    },
+    {
+      "id": "NoE_fSUEHns",
+      "Nombre": "Rubén López",
+      "Correo": "ruben@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "12121212",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-24"
+    },
+    {
+      "id": "org-01",
+      "Nombre": "EcoVoluntarios CR",
+      "Correo": "eco@gmail.com",
+      "Contrasena": "123456",
+      "Tipo": "organizacion",
+      "idOrganizacion": "1",
+      "FechaRegistro": "2026-01-01"
+    },
+    {
+      "id": "org-02",
+      "Nombre": "Fundación Aprende",
+      "Correo": "aprende@gmail.com",
+      "Contrasena": "123456",
+      "Tipo": "organizacion",
+      "idOrganizacion": "2",
+      "FechaRegistro": "2026-01-01"
+    },
+    {
+      "id": "org-03",
+      "Nombre": "Rescate Animal",
+      "Correo": "rescate@gmail.com",
+      "Contrasena": "123456",
+      "Tipo": "organizacion",
+      "idOrganizacion": "3",
+      "FechaRegistro": "2026-01-01"
+    },
+    {
+      "Nombre": "Alfonso López",
+      "Correo": "alfonso@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "12121212",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-24",
+      "id": "PlKjF0Jxs6o"
     }
   ],
   "aplicaciones": [
@@ -420,6 +506,120 @@
       "idUsuario": "245e",
       "idOrganizacion": "9f57",
       "FechaAplicacion": "2026-03-20"
+    },
+    {
+      "id": "f242",
+      "idUsuario": "c1cb",
+      "idOrganizacion": "a229",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "777a",
+      "idUsuario": "c1cb",
+      "idOrganizacion": "a4f8",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "b569",
+      "idUsuario": "c1cb",
+      "idOrganizacion": "2567",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "59cc",
+      "idUsuario": "c1cb",
+      "idOrganizacion": "9815",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "578f",
+      "idUsuario": "c1cb",
+      "idOrganizacion": "2",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "27f1",
+      "idUsuario": "c1cb",
+      "idOrganizacion": "3",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "sfIQ-0WuaOI",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "1",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "47TCkYgj0LI",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "2",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "YH4miTzMUYQ",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "3",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "_eBhjJeegRE",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "b632",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "-ecFKCgNfgE",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "a992",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "4VOJFkkpTCU",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "5efb",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "v7TU95LQUSM",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "1246",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "M936q8p2JmA",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "ac94",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "HY3e8vdoOB4",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "9f57",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "ghFs-OofDIA",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "f368",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "D1984X9lfe0",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "9815",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "X8sawR8-S_w",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "2567",
+      "FechaAplicacion": "2026-03-24"
+    },
+    {
+      "id": "6bnZ6NbSfIs",
+      "idUsuario": "NoE_fSUEHns",
+      "idOrganizacion": "a229",
+      "FechaAplicacion": "2026-03-24"
     }
   ],
   "horas": [
@@ -429,6 +629,14 @@
       "idOrganizacion": "f368",
       "actividad": "Voluntaria en la enseñanza del idioma inglés y portugués para niños y adolescentes",
       "fecha": "2026-03-16",
+      "horas": 15
+    },
+    {
+      "id": "04d4",
+      "idUsuario": "c1cb",
+      "idOrganizacion": "a229",
+      "actividad": "Siembra de árbolitos",
+      "fecha": "2026-03-23",
       "horas": 15
     }
   ],

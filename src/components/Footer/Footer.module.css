@@ -1,60 +1,11 @@
-.footer {
-  background-color: #1a202c;
-  color: #a0aec0;
-  padding: 4rem 5% 1rem;
-}
-
-.footerContent {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
-  border-bottom: 1px solid #2d3748;
-  padding-bottom: 2rem;
-  margin-bottom: 1rem;
-}
-
-.footerSection h3 {
-  color: white;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
-
-.footerSection p {
-  font-size: 0.9rem;
-}
-
-.socialLinks a {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #a0aec0;
-  text-decoration: none;
-  margin-bottom: 0.5rem;
-  transition: color 0.3s;
-}
-
-.socialLinks a:hover {
-  color: #078a87;
-}
-
-.socialLinks svg {
-  transition: fill 0.3s;
-}
-
-.socialLinks a:hover svg {
-  fill: #078a87;
-}
-
-.footerSection ul {
 :root {
   --primary-gradient: linear-gradient(135deg, #078A87 0%, #EF8514 50%, #50A15A 100%);
 }
-}
+
 .footer {
   background: #111827;
   color: white;
-  padding: 3rem 2rem;
+  padding: 1.5rem 2rem;
   margin-top: auto;
 }
 
@@ -63,12 +14,13 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
+  gap: 1rem;
 }
 
-.footer-section h3 {
-  margin-bottom: 1.2rem;
-  font-size: 1.1rem;
+.footer-section h3,
+.title {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
   background: var(--primary-gradient);
   -webkit-background-clip: text;
   background-clip: text;
@@ -76,9 +28,10 @@
   font-weight: 700;
 }
 
-.footer-section p, .footer-section ul {
-  color: #9ca3af;
-  font-size: 0.9rem;
+.footer-section p,
+.footer-section ul {
+  color: #9CA3AF;
+  font-size: 0.8rem;
   line-height: 1.6;
 }
 
@@ -87,28 +40,21 @@
   padding: 0;
 }
 
-.footerSection li {
+.footer-section li {
   margin-bottom: 0.5rem;
 }
 
-.footerSection a {
-  color: #a0aec0;
+.footer-section a {
+  color: #A0AEC0;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   transition: color 0.3s;
 }
 
-.footerSection a:hover {
-  color: #078a87;
+.footer-section a:hover {
+  color: #078A87;
 }
 
-.footerBottom {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
 .footer-section ul li {
   margin-bottom: 0.8rem;
 }
@@ -133,7 +79,7 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  color: #9ca3af;
+  color: #9CA3AF;
   text-decoration: none;
   transition: all 0.3s ease;
 }
@@ -149,9 +95,150 @@
 
 .footer-bottom {
   border-top: 1px solid #374151;
-  margin-top: 2rem;
-  padding-top: 2rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
   text-align: center;
+  font-size: 0.7rem;
+  color: #6B7280;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Form Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  right: 80px;
+}
+
+.inputField {
+  background-color: #1F2937;
+  border: 1px solid #374151;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
   font-size: 0.8rem;
-  color: #6b7280;
+}
+
+.inputField::placeholder {
+  color: #6B7280;
+}
+
+.submitBtn {
+  background-color: #078A87;
+  color: white;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.submitBtn:hover {
+  background-color: #056A67;
+}
+
+.submitBtn:disabled {
+  background-color: #374151;
+  cursor: not-allowed;
+}
+
+.statusMsg {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.statusMsg.success {
+  color: #10B981;
+}
+
+.statusMsg.error {
+  color: #EF4444;
+}
+
+
+
+/* Contenedor de la columna de ubicación */
+.mapCol {
+  display: flex;
+  flex-direction: column;
+}
+
+/* El título con el gradiente que definimos */
+.title {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+/* Contenedor principal del mapa con efecto Glassmorphism */
+.mapWrapper {
+  position: relative;
+  border-radius: 1rem;
+  /* rounded-2xl */
+  overflow: hidden;
+  height: 10rem;
+  /* h-40 */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.7s ease;
+}
+
+/* La imagen del mapa con filtro inicial */
+.mapImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: all 0.7s duration;
+}
+
+/* Al hacer hover, la imagen recupera color y el borde brilla */
+.mapWrapper:hover .mapImg {
+  filter: grayscale(0%);
+}
+
+.mapWrapper:hover {
+  border-color: #078A87;
+  /* Color primario del gradiente */
+}
+
+/* Capa oscura sobre la imagen */
+.mapOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Botón blanco minimalista sobre el mapa */
+.mapBtn {
+  background-color: #FFFFFF;
+  color: #000000;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  /* rounded-lg */
+  font-size: 0.625rem;
+  /* text-[10px] */
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.mapBtn:hover {
+  transform: scale(1.05);
 }

@@ -4,7 +4,7 @@ import ServiceOrganizaciones from '../../services/ServiceOrganizaciones';
 import ServiceHoras from '../../services/ServiceHoras';
 import ServiceCategorias from '../../services/ServiceCategorias';
 import ServiceUsuario from '../../services/ServiceUsuario';
-import NavbarGlobal from '../NavbarGlobal/NavbarGlobal';
+// ✅ NavbarGlobal eliminado — ya vive en Routing.jsx
 import styles from './PerfilVoluntario.module.css';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
@@ -21,20 +21,12 @@ function PerfilVoluntario() {
     const [orgsDelUsuario, setOrgsDelUsuario] = useState([]);
     const [horasDelUsuario, setHorasDelUsuario] = useState([]);
 
-    // Estados para editar perfil
     const [editando, setEditando] = useState(false);
     const [nombre, setNombre] = useState("");
     const [correo, setCorreo] = useState("");
     const [telefono, setTelefono] = useState("");
 
     const navigate = useNavigate();
-
-    const linksVoluntario = [
-        { label: 'Home', path: '/' },
-        { label: 'Explorar Causas', path: '/buscador' },
-        { label: 'Mi Perfil', path: '/perfil' },
-        { label: 'Contacto', path: '/' }
-    ];
 
     useEffect(() => {
         cargarDatos();
@@ -70,7 +62,6 @@ function PerfilVoluntario() {
         setCategorias(todasLasCategorias);
     }
 
-    // ── Editar perfil ──
     function handleEditar() {
         setNombre(usuario.Nombre)
         setCorreo(usuario.Correo)
@@ -128,7 +119,6 @@ function PerfilVoluntario() {
         }
     }
 
-    // ── Eliminar cuenta ──
     async function handleEliminar() {
         Swal.fire({
             icon: 'warning',
@@ -227,288 +217,285 @@ function PerfilVoluntario() {
     const insignias = getInsignias();
 
     return (
-        <>
-            <NavbarGlobal links={linksVoluntario} usuario={usuario} />
+        // ✅ Se eliminó el <> fragment con NavbarGlobal — ahora es solo el div
+        <div className={styles.pagina}>
+            {usuario ? (
+                <div>
 
-            <div className={styles.pagina}>
-                {usuario ? (
-                    <div>
-
-                        {/* ── Header ── */}
-                        <div className={styles.perfilHeader}>
-                            <div className={styles.perfilAvatar}>
-                                {getIniciales(usuario.Nombre)}
-                            </div>
-                            <div className={styles.perfilInfo}>
-                                <div className={styles.perfilNombre}>{usuario.Nombre}</div>
-                                <div className={styles.perfilCorreo}>{usuario.Correo}</div>
-                                <div className={styles.perfilHorasBadge}>
-                                    ⏱️ {calcularTotalHoras()} horas donadas
-                                </div>
-                            </div>
-                            <div style={{display:'flex', gap:'8px', flexShrink:0}}>
-                                <button onClick={handleEditar} style={{
-                                    padding:'8px 16px',
-                                    background:'rgba(255,255,255,.15)',
-                                    border:'1px solid rgba(255,255,255,.35)',
-                                    borderRadius:'20px',
-                                    color:'#fff',
-                                    fontSize:'12px',
-                                    cursor:'pointer'
-                                }}>✏️ Editar perfil</button>
-                                <button onClick={handleEliminar} style={{
-                                    padding:'8px 16px',
-                                    background:'rgba(211,51,51,.2)',
-                                    border:'1px solid rgba(211,51,51,.35)',
-                                    borderRadius:'20px',
-                                    color:'#fff',
-                                    fontSize:'12px',
-                                    cursor:'pointer'
-                                }}>🗑️ Eliminar cuenta</button>
+                    {/* ── Header ── */}
+                    <div className={styles.perfilHeader}>
+                        <div className={styles.perfilAvatar}>
+                            {getIniciales(usuario.Nombre)}
+                        </div>
+                        <div className={styles.perfilInfo}>
+                            <div className={styles.perfilNombre}>{usuario.Nombre}</div>
+                            <div className={styles.perfilCorreo}>{usuario.Correo}</div>
+                            <div className={styles.perfilHorasBadge}>
+                                ⏱️ {calcularTotalHoras()} horas donadas
                             </div>
                         </div>
-
-                        {/* ── Formulario editar ── */}
-                        {editando && (
-                            <div className={styles.seccion}>
-                                <div className={styles.seccionTitulo}>Editar perfil</div>
-                                <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'14px', marginBottom:'14px'}}>
-                                    <div style={{display:'flex', flexDirection:'column', gap:'5px'}}>
-                                        <label style={{fontSize:'12px', color:'#5F5E5A', fontWeight:'500'}}>Nombre completo</label>
-                                        <input
-                                            type="text"
-                                            value={nombre}
-                                            onChange={(e) => setNombre(e.target.value)}
-                                            placeholder="Tu nombre completo"
-                                            style={{padding:'9px 12px', border:'0.5px solid #D3D1C7', borderRadius:'8px', fontSize:'13px', fontFamily:'inherit'}}
-                                        />
-                                    </div>
-                                    <div style={{display:'flex', flexDirection:'column', gap:'5px'}}>
-                                        <label style={{fontSize:'12px', color:'#5F5E5A', fontWeight:'500'}}>Correo electrónico</label>
-                                        <input
-                                            type="email"
-                                            value={correo}
-                                            onChange={(e) => setCorreo(e.target.value)}
-                                            placeholder="Tu correo"
-                                            style={{padding:'9px 12px', border:'0.5px solid #D3D1C7', borderRadius:'8px', fontSize:'13px', fontFamily:'inherit'}}
-                                        />
-                                    </div>
-                                    <div style={{display:'flex', flexDirection:'column', gap:'5px'}}>
-                                        <label style={{fontSize:'12px', color:'#5F5E5A', fontWeight:'500'}}>Teléfono</label>
-                                        <input
-                                            type="text"
-                                            value={telefono}
-                                            onChange={(e) => setTelefono(e.target.value)}
-                                            placeholder="Tu teléfono"
-                                            style={{padding:'9px 12px', border:'0.5px solid #D3D1C7', borderRadius:'8px', fontSize:'13px', fontFamily:'inherit'}}
-                                        />
-                                    </div>
-                                </div>
-                                <div style={{display:'flex', gap:'10px', justifyContent:'flex-end'}}>
-                                    <button onClick={handleCancelar} style={{
-                                        padding:'9px 20px', background:'#F1EFE8',
-                                        border:'0.5px solid #D3D1C7', borderRadius:'8px',
-                                        fontSize:'13px', cursor:'pointer', color:'#5F5E5A'
-                                    }}>Cancelar</button>
-                                    <button onClick={handleGuardarCambios} style={{
-                                        padding:'9px 24px', background:'#1D9E75',
-                                        border:'none', borderRadius:'8px',
-                                        color:'#fff', fontSize:'13px', cursor:'pointer', fontWeight:'500'
-                                    }}>Guardar cambios</button>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* ── Stats ── */}
-                        <div className={styles.statsGrid}>
-                            <div className={styles.statCard}>
-                                <div className={styles.statIconWrap} style={{background:"#E1F5EE"}}>🌿</div>
-                                <div>
-                                    <div className={styles.statNum} style={{color:"#1D9E75"}}>{calcularTotalHoras()}</div>
-                                    <div className={styles.statLbl}>Horas donadas</div>
-                                </div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statIconWrap} style={{background:"#FAEEDA"}}>🏢</div>
-                                <div>
-                                    <div className={styles.statNum} style={{color:"#E8841A"}}>{orgsDelUsuario.length}</div>
-                                    <div className={styles.statLbl}>Organizaciones</div>
-                                </div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statIconWrap} style={{background:"#E6F1FB"}}>📋</div>
-                                <div>
-                                    <div className={styles.statNum} style={{color:"#185FA5"}}>{aplicacionesDelUsuario.length}</div>
-                                    <div className={styles.statLbl}>Aplicaciones</div>
-                                </div>
-                            </div>
+                        <div style={{display:'flex', gap:'8px', flexShrink:0}}>
+                            <button onClick={handleEditar} style={{
+                                padding:'8px 16px',
+                                background:'rgba(255,255,255,.15)',
+                                border:'1px solid rgba(255,255,255,.35)',
+                                borderRadius:'20px',
+                                color:'#fff',
+                                fontSize:'12px',
+                                cursor:'pointer'
+                            }}>✏️ Editar perfil</button>
+                            <button onClick={handleEliminar} style={{
+                                padding:'8px 16px',
+                                background:'rgba(211,51,51,.2)',
+                                border:'1px solid rgba(211,51,51,.35)',
+                                borderRadius:'20px',
+                                color:'#fff',
+                                fontSize:'12px',
+                                cursor:'pointer'
+                            }}>🗑️ Eliminar cuenta</button>
                         </div>
-
-                        {/* ── Nivel ── */}
-                        <div className={styles.seccion}>
-                            <div className={styles.seccionTitulo}>Nivel de voluntario</div>
-                            <div className={styles.nivelRow}>
-                                <span className={styles.nivelNombre} style={{color: nivel.color}}>{nivel.nivel}</span>
-                                <span className={styles.nivelHoras}>
-                                    {calcularTotalHoras()} {nivel.siguiente ? `/ ${nivel.siguiente} h` : 'h — Nivel máximo'}
-                                </span>
-                            </div>
-                            <div className={styles.nivelBarra}>
-                                <div
-                                    className={styles.nivelBarraFill}
-                                    style={{
-                                        width: `${Math.min(nivel.progreso, 100)}%`,
-                                        background: nivel.color
-                                    }}
-                                />
-                            </div>
-                            {nivel.siguiente && (
-                                <div className={styles.nivelHint}>
-                                    Te faltan {nivel.siguiente - calcularTotalHoras()} horas para el siguiente nivel
-                                </div>
-                            )}
-                        </div>
-
-                        {/* ── Insignias ── */}
-                        <div className={styles.seccion}>
-                            <div className={styles.seccionTitulo}>Insignias</div>
-                            <div className={styles.insigniasGrid}>
-                                {insignias.map((ins) => (
-                                    <div key={ins.id} className={`${styles.insigniaCard} ${ins.desbloqueada ? styles.insigniaDesbloqueada : styles.insigniaBloqueada}`}>
-                                        <div className={styles.insigniaEmoji}>{ins.emoji}</div>
-                                        <div className={styles.insigniaNombre}>{ins.nombre}</div>
-                                        <div className={styles.insigniaDesc}>{ins.descripcion}</div>
-                                        {!ins.desbloqueada && <div className={styles.insigniaLock}>🔒 Bloqueada</div>}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* ── Gráfica horas por mes ── */}
-                        {getHorasPorMes().length > 0 && (
-                            <div className={styles.seccion}>
-                                <div className={styles.seccionTitulo}>Horas donadas por mes</div>
-                                <div className={styles.graficaWrap}>
-                                    <ResponsiveContainer width="100%" height={200}>
-                                        <BarChart data={getHorasPorMes()}>
-                                            <XAxis dataKey="mes" tick={{ fontSize: 12 }} />
-                                            <YAxis tick={{ fontSize: 12 }} />
-                                            <Tooltip />
-                                            <Bar dataKey="horas" fill="#1D9E75" radius={[4, 4, 0, 0]} name="Horas" />
-                                        </BarChart>
-                                    </ResponsiveContainer>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* ── Impacto por categoría ── */}
-                        {getImpactoPorCategoria().length > 0 && (
-                            <div className={styles.seccion}>
-                                <div className={styles.seccionTitulo}>Impacto por categoría</div>
-                                <div className={styles.graficaWrap}>
-                                    <ResponsiveContainer width="100%" height={200}>
-                                        <PieChart>
-                                            <Pie
-                                                data={getImpactoPorCategoria()}
-                                                dataKey="valor"
-                                                nameKey="nombre"
-                                                cx="50%"
-                                                cy="50%"
-                                                outerRadius={80}
-                                                label={({ nombre, percent }) =>
-                                                    `${nombre} ${Math.round(percent * 100)}%`
-                                                }
-                                            >
-                                                {getImpactoPorCategoria().map((_, i) => (
-                                                    <Cell key={i} fill={COLORES[i % COLORES.length]} />
-                                                ))}
-                                            </Pie>
-                                            <Legend />
-                                            <Tooltip />
-                                        </PieChart>
-                                    </ResponsiveContainer>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* ── Historial de horas ── */}
-                        <div className={styles.seccion}>
-                            <div className={styles.seccionTitulo}>Historial de horas</div>
-                            {horasDelUsuario.length > 0 ? (
-                                <div className={styles.tablaWrap}>
-                                    <table className={styles.tabla}>
-                                        <thead>
-                                            <tr>
-                                                <th>Actividad</th>
-                                                <th>Organización</th>
-                                                <th>Fecha</th>
-                                                <th>Horas</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {horasDelUsuario.map((h) => (
-                                                <tr key={h.id}>
-                                                    <td>{h.actividad}</td>
-                                                    <td>{getNombreOrg(h.idOrganizacion)}</td>
-                                                    <td>{h.fecha}</td>
-                                                    <td><span className={styles.horasBadge}>{h.horas} h</span></td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            ) : <p className={styles.emptyState}>Aún no tenés horas registradas.</p>}
-                        </div>
-
-                        {/* ── Historial de aplicaciones ── */}
-                        <div className={styles.seccion}>
-                            <div className={styles.seccionTitulo}>Historial de voluntariado</div>
-                            {aplicacionesDelUsuario.length > 0 ? (
-                                <div className={styles.tablaWrap}>
-                                    <table className={styles.tabla}>
-                                        <thead>
-                                            <tr>
-                                                <th>Organización</th>
-                                                <th>Fecha de aplicación</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {aplicacionesDelUsuario.map((a) => (
-                                                <tr key={a.id}>
-                                                    <td>{getNombreOrg(a.idOrganizacion)}</td>
-                                                    <td>{a.FechaAplicacion}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            ) : <p className={styles.emptyState}>Aún no tenés voluntariados registrados.</p>}
-                        </div>
-
-                        {/* ── Organizaciones ── */}
-                        <div className={styles.seccion}>
-                            <div className={styles.seccionTitulo}>Organizaciones donde colaboré</div>
-                            {orgsDelUsuario.length > 0 ? (
-                                orgsDelUsuario.map((org, i) => (
-                                    <div key={org.id} className={styles.orgRow}>
-                                        <div className={styles.orgAvatar} style={{background: COLORES[i % COLORES.length]}}>
-                                            {getIniciales(org.NombreOrganizacion)}
-                                        </div>
-                                        <div>
-                                            <div className={styles.orgNombre}>{org.NombreOrganizacion}</div>
-                                            <div className={styles.orgDesc}>{org.Descripcion}</div>
-                                        </div>
-                                    </div>
-                                ))
-                            ) : <p className={styles.emptyState}>Aún no has colaborado con ninguna organización.</p>}
-                        </div>
-
                     </div>
-                ) : (
-                    <p className={styles.cargando}>Cargando información del perfil...</p>
-                )}
-            </div>
-        </>
+
+                    {/* ── Formulario editar ── */}
+                    {editando && (
+                        <div className={styles.seccion}>
+                            <div className={styles.seccionTitulo}>Editar perfil</div>
+                            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'14px', marginBottom:'14px'}}>
+                                <div style={{display:'flex', flexDirection:'column', gap:'5px'}}>
+                                    <label style={{fontSize:'12px', color:'#5F5E5A', fontWeight:'500'}}>Nombre completo</label>
+                                    <input
+                                        type="text"
+                                        value={nombre}
+                                        onChange={(e) => setNombre(e.target.value)}
+                                        placeholder="Tu nombre completo"
+                                        style={{padding:'9px 12px', border:'0.5px solid #D3D1C7', borderRadius:'8px', fontSize:'13px', fontFamily:'inherit'}}
+                                    />
+                                </div>
+                                <div style={{display:'flex', flexDirection:'column', gap:'5px'}}>
+                                    <label style={{fontSize:'12px', color:'#5F5E5A', fontWeight:'500'}}>Correo electrónico</label>
+                                    <input
+                                        type="email"
+                                        value={correo}
+                                        onChange={(e) => setCorreo(e.target.value)}
+                                        placeholder="Tu correo"
+                                        style={{padding:'9px 12px', border:'0.5px solid #D3D1C7', borderRadius:'8px', fontSize:'13px', fontFamily:'inherit'}}
+                                    />
+                                </div>
+                                <div style={{display:'flex', flexDirection:'column', gap:'5px'}}>
+                                    <label style={{fontSize:'12px', color:'#5F5E5A', fontWeight:'500'}}>Teléfono</label>
+                                    <input
+                                        type="text"
+                                        value={telefono}
+                                        onChange={(e) => setTelefono(e.target.value)}
+                                        placeholder="Tu teléfono"
+                                        style={{padding:'9px 12px', border:'0.5px solid #D3D1C7', borderRadius:'8px', fontSize:'13px', fontFamily:'inherit'}}
+                                    />
+                                </div>
+                            </div>
+                            <div style={{display:'flex', gap:'10px', justifyContent:'flex-end'}}>
+                                <button onClick={handleCancelar} style={{
+                                    padding:'9px 20px', background:'#F1EFE8',
+                                    border:'0.5px solid #D3D1C7', borderRadius:'8px',
+                                    fontSize:'13px', cursor:'pointer', color:'#5F5E5A'
+                                }}>Cancelar</button>
+                                <button onClick={handleGuardarCambios} style={{
+                                    padding:'9px 24px', background:'#1D9E75',
+                                    border:'none', borderRadius:'8px',
+                                    color:'#fff', fontSize:'13px', cursor:'pointer', fontWeight:'500'
+                                }}>Guardar cambios</button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* ── Stats ── */}
+                    <div className={styles.statsGrid}>
+                        <div className={styles.statCard}>
+                            <div className={styles.statIconWrap} style={{background:"#E1F5EE"}}>🌿</div>
+                            <div>
+                                <div className={styles.statNum} style={{color:"#1D9E75"}}>{calcularTotalHoras()}</div>
+                                <div className={styles.statLbl}>Horas donadas</div>
+                            </div>
+                        </div>
+                        <div className={styles.statCard}>
+                            <div className={styles.statIconWrap} style={{background:"#FAEEDA"}}>🏢</div>
+                            <div>
+                                <div className={styles.statNum} style={{color:"#E8841A"}}>{orgsDelUsuario.length}</div>
+                                <div className={styles.statLbl}>Organizaciones</div>
+                            </div>
+                        </div>
+                        <div className={styles.statCard}>
+                            <div className={styles.statIconWrap} style={{background:"#E6F1FB"}}>📋</div>
+                            <div>
+                                <div className={styles.statNum} style={{color:"#185FA5"}}>{aplicacionesDelUsuario.length}</div>
+                                <div className={styles.statLbl}>Aplicaciones</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ── Nivel ── */}
+                    <div className={styles.seccion}>
+                        <div className={styles.seccionTitulo}>Nivel de voluntario</div>
+                        <div className={styles.nivelRow}>
+                            <span className={styles.nivelNombre} style={{color: nivel.color}}>{nivel.nivel}</span>
+                            <span className={styles.nivelHoras}>
+                                {calcularTotalHoras()} {nivel.siguiente ? `/ ${nivel.siguiente} h` : 'h — Nivel máximo'}
+                            </span>
+                        </div>
+                        <div className={styles.nivelBarra}>
+                            <div
+                                className={styles.nivelBarraFill}
+                                style={{
+                                    width: `${Math.min(nivel.progreso, 100)}%`,
+                                    background: nivel.color
+                                }}
+                            />
+                        </div>
+                        {nivel.siguiente && (
+                            <div className={styles.nivelHint}>
+                                Te faltan {nivel.siguiente - calcularTotalHoras()} horas para el siguiente nivel
+                            </div>
+                        )}
+                    </div>
+
+                    {/* ── Insignias ── */}
+                    <div className={styles.seccion}>
+                        <div className={styles.seccionTitulo}>Insignias</div>
+                        <div className={styles.insigniasGrid}>
+                            {insignias.map((ins) => (
+                                <div key={ins.id} className={`${styles.insigniaCard} ${ins.desbloqueada ? styles.insigniaDesbloqueada : styles.insigniaBloqueada}`}>
+                                    <div className={styles.insigniaEmoji}>{ins.emoji}</div>
+                                    <div className={styles.insigniaNombre}>{ins.nombre}</div>
+                                    <div className={styles.insigniaDesc}>{ins.descripcion}</div>
+                                    {!ins.desbloqueada && <div className={styles.insigniaLock}>🔒 Bloqueada</div>}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* ── Gráfica horas por mes ── */}
+                    {getHorasPorMes().length > 0 && (
+                        <div className={styles.seccion}>
+                            <div className={styles.seccionTitulo}>Horas donadas por mes</div>
+                            <div className={styles.graficaWrap}>
+                                <ResponsiveContainer width="100%" height={200}>
+                                    <BarChart data={getHorasPorMes()}>
+                                        <XAxis dataKey="mes" tick={{ fontSize: 12 }} />
+                                        <YAxis tick={{ fontSize: 12 }} />
+                                        <Tooltip />
+                                        <Bar dataKey="horas" fill="#1D9E75" radius={[4, 4, 0, 0]} name="Horas" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* ── Impacto por categoría ── */}
+                    {getImpactoPorCategoria().length > 0 && (
+                        <div className={styles.seccion}>
+                            <div className={styles.seccionTitulo}>Impacto por categoría</div>
+                            <div className={styles.graficaWrap}>
+                                <ResponsiveContainer width="100%" height={200}>
+                                    <PieChart>
+                                        <Pie
+                                            data={getImpactoPorCategoria()}
+                                            dataKey="valor"
+                                            nameKey="nombre"
+                                            cx="50%"
+                                            cy="50%"
+                                            outerRadius={80}
+                                            label={({ nombre, percent }) =>
+                                                `${nombre} ${Math.round(percent * 100)}%`
+                                            }
+                                        >
+                                            {getImpactoPorCategoria().map((_, i) => (
+                                                <Cell key={i} fill={COLORES[i % COLORES.length]} />
+                                            ))}
+                                        </Pie>
+                                        <Legend />
+                                        <Tooltip />
+                                    </PieChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* ── Historial de horas ── */}
+                    <div className={styles.seccion}>
+                        <div className={styles.seccionTitulo}>Historial de horas</div>
+                        {horasDelUsuario.length > 0 ? (
+                            <div className={styles.tablaWrap}>
+                                <table className={styles.tabla}>
+                                    <thead>
+                                        <tr>
+                                            <th>Actividad</th>
+                                            <th>Organización</th>
+                                            <th>Fecha</th>
+                                            <th>Horas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {horasDelUsuario.map((h) => (
+                                            <tr key={h.id}>
+                                                <td>{h.actividad}</td>
+                                                <td>{getNombreOrg(h.idOrganizacion)}</td>
+                                                <td>{h.fecha}</td>
+                                                <td><span className={styles.horasBadge}>{h.horas} h</span></td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        ) : <p className={styles.emptyState}>Aún no tenés horas registradas.</p>}
+                    </div>
+
+                    {/* ── Historial de aplicaciones ── */}
+                    <div className={styles.seccion}>
+                        <div className={styles.seccionTitulo}>Historial de voluntariado</div>
+                        {aplicacionesDelUsuario.length > 0 ? (
+                            <div className={styles.tablaWrap}>
+                                <table className={styles.tabla}>
+                                    <thead>
+                                        <tr>
+                                            <th>Organización</th>
+                                            <th>Fecha de aplicación</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {aplicacionesDelUsuario.map((a) => (
+                                            <tr key={a.id}>
+                                                <td>{getNombreOrg(a.idOrganizacion)}</td>
+                                                <td>{a.FechaAplicacion}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        ) : <p className={styles.emptyState}>Aún no tenés voluntariados registrados.</p>}
+                    </div>
+
+                    {/* ── Organizaciones ── */}
+                    <div className={styles.seccion}>
+                        <div className={styles.seccionTitulo}>Organizaciones donde colaboré</div>
+                        {orgsDelUsuario.length > 0 ? (
+                            orgsDelUsuario.map((org, i) => (
+                                <div key={org.id} className={styles.orgRow}>
+                                    <div className={styles.orgAvatar} style={{background: COLORES[i % COLORES.length]}}>
+                                        {getIniciales(org.NombreOrganizacion)}
+                                    </div>
+                                    <div>
+                                        <div className={styles.orgNombre}>{org.NombreOrganizacion}</div>
+                                        <div className={styles.orgDesc}>{org.Descripcion}</div>
+                                    </div>
+                                </div>
+                            ))
+                        ) : <p className={styles.emptyState}>Aún no has colaborado con ninguna organización.</p>}
+                    </div>
+
+                </div>
+            ) : (
+                <p className={styles.cargando}>Cargando información del perfil...</p>
+            )}
+        </div>
     );
 }
 

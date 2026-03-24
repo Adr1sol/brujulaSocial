@@ -1,29 +1,57 @@
 import Carousel from 'react-bootstrap/Carousel';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './Carrusel.css';
+
+// ✅ Todas las imágenes temáticas de src/images/
+import basuraPlaya   from '../../images/basura playa.jpg';
+import escuela       from '../../images/escuela.jpg';
+import adultoMayor   from '../../images/adulto mayor.png';
+import puente        from '../../images/Puente.jpg';
+import refugio       from '../../images/Refugio.jpg';
+import voluntariado  from '../../images/voluntariado.png';
 
 function Carrusel() {
     const images = [
         {
-            src: "../src/images/basura playa.jpg",
-            alt: "First slide",
-            title: "First slide label",
-            description: "Nulla vitae elit libero, a pharetra augue mollis interdum."
+            src: basuraPlaya,
+            alt: "Limpieza de playa",
+            title: "Cuida el planeta",
+            description: "Únete a nuestros voluntarios en la limpieza y conservación de espacios naturales."
         },
         {
-            src: "/fondoinicio.png",
-            alt: "Second slide",
-            title: "Second slide label",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            src: escuela,
+            alt: "Educación",
+            title: "Educación para todos",
+            description: "Apoya a niños y jóvenes en zonas vulnerables de Costa Rica."
         },
         {
-            src: "/fondoparaweb.png",
-            alt: "Third slide",
-            title: "Third slide label",
-            description: "Praesent commodo cursus magna, vel scelerisque nisl consectetur."
+            src: adultoMayor,
+            alt: "Adulto mayor",
+            title: "Cuida a quienes más lo necesitan",
+            description: "Brinda compañía y apoyo a adultos mayores en tu comunidad."
+        },
+        {
+            src: puente,
+            alt: "Comunidad",
+            title: "Construyamos juntos",
+            description: "Conectamos el talento y el corazón de los costarricenses con las causas que lo necesitan."
+        },
+        {
+            src: refugio,
+            alt: "Refugio animal",
+            title: "Bienestar animal",
+            description: "Ayuda a rescatar y proteger animales en situación de vulnerabilidad."
+        },
+        {
+            src: voluntariado,
+            alt: "Voluntariado",
+            title: "Impacta tu mundo",
+            description: "Juntos construimos una Costa Rica más solidaria y comprometida."
         }
     ];
+
     return (
-        <Carousel>
+        <Carousel interval={4000} fade>
             {images.map((image, index) => (
                 <Carousel.Item key={index}>
                     <img
