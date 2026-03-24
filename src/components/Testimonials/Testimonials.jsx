@@ -1,7 +1,6 @@
 // components/Testimonials/Testimonials.jsx
 import React from 'react';
-import './Testimonials.css';
-import videoVoluntariado from '../../assets/Video_de_Voluntariados_en_Costa_Rica.mp4';
+import './Testimonials.module.css';
 
 const Testimonials = () => {
   return (
@@ -11,7 +10,7 @@ const Testimonials = () => {
       <section className="video-section">
         <div className="video-placeholder">
           <video className="video-player" controls>
-            <source src={videoVoluntariado} type="video/mp4" />
+            <source src="../src/components/Video/Video_Voluntariado_Testimonio.mp4" type="video/mp4" />
             Tu navegador no soporta el elemento de video.
           </video>
         </div>

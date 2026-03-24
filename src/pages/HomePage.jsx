@@ -1,11 +1,11 @@
 import React from 'react';
 import Hero from '../components/Hero/Hero';
-import Navbar from '../components/Navbar/NavBar';
 import Footer from '../components/Footer/Footer';
 import About from '../components/AboutUs/AboutUs';
 import Services from '../services/ServiceUser';
 import Testimonials from '../components/Testimonials/Testimonials';
 import background from '../images/fondo (1).png';
+import NavbarGlobal from '../components/NavbarGlobal/NavbarGlobal';
 
 const HomePage = () => {
   const pageStyle = {
@@ -17,7 +17,7 @@ const HomePage = () => {
 
   return (
     <div style={pageStyle}>
-      <Navbar redirigir={()=>{
+      <NavbarGlobal redirigir={()=>{
           window.location.href = "#footer"
       }}/>
       <Hero />

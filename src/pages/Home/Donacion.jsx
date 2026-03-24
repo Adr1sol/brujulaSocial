@@ -1,12 +1,12 @@
 import React from 'react'
-import Navbar from '../../components/Navbar/NavBar.jsx'
 import Footer from '../../components/Footer/Footer.jsx'
 import Donacion from '../../components/Donacion/Donacion.jsx'
+import NavbarGlobal from '../../components/NavbarGlobal/NavbarGlobal.jsx'
 
 function Donaciones () {
     return (
         <div>
-            <Navbar/>
+            <NavbarGlobal/>
             <Donacion/>
             <Footer/>
 

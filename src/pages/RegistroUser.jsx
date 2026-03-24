@@ -1,10 +1,10 @@
 import Formregistro from "../components/FormRegistro/Formregistro";
-import Navbar from "../components/Navbar/Navbar";
+import NavbarGlobal from "../components/NavbarGlobal/NavbarGlobal";
 
 function Registro(){
  return (
   <>
-    <Navbar />
+    <NavbarGlobal />
     <Formregistro/>
   </>
  )

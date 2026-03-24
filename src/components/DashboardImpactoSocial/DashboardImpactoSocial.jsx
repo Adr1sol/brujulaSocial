@@ -7,7 +7,7 @@ import ServiceCategorias from '../../services/ServiceCategorias'
 import ServiceProvincias from '../../services/ServiceProvincias'
 import styles from './DashboardImpactoSocial.module.css'
 // 1. Importamos el nuevo componente
-import NavbarVarios from '../NavbarGlobal/NavbarGlobal' 
+
 
 function DashboardImpactoSocial() {
     const [usuarios, setUsuarios] = useState([])

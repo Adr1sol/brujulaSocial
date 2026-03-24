@@ -1,6 +1,6 @@
 // components/Hero/Hero.jsx
 import React from 'react';
-import './Hero.css';
+import './Hero.module.css';
 import Carrusel from '../Carrusel/Carrusel';
 
 

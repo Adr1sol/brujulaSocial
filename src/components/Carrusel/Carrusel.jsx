@@ -1,5 +1,5 @@
 import Carousel from 'react-bootstrap/Carousel';
-import './Carrusel.css';
+import './Carrusel.module.css';
 
 function Carrusel() {
     const images = [

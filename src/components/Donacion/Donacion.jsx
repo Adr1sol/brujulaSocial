@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Donacion.css';
+import './Donacion.module.css';
 import Swal from 'sweetalert2'
 
 const Donacion = () => {

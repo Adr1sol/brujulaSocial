@@ -1,14 +1,14 @@
 import React from 'react';
-import './terminos.css';
-import Navbar from '../Navbar/NavBar';
+import './Terminos.css';
+import NavbarGlobal from '../NavbarGlobal/NavbarGlobal';
 const Terminos = () => {
     return (
         <div className="terminos-wrapper">
-            <Navbar />
+            <NavbarGlobal />
             <div className="terminos-container">
                 <header className="terminos-header">
                     <h1>Términos y Condiciones</h1>
-                    <p>Última actualización: [Fecha Actual]</p>
+                    
                 </header>
 
                 <section className="terminos-seccion">
@@ -80,7 +80,7 @@ const Terminos = () => {
                 </section>
 
                 <footer className="terminos-footer">
-                    <p>Para más información, contáctenos en: [Su correo electrónico]</p>
+                    <p>Para más información, contáctenos en:brujulasocialinfo@gmail.com </p>
                 </footer>
             </div>
         </div>

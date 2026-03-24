@@ -29,6 +29,7 @@ function Routing() {
         <Route path="/impacto" element={<DashImpacto />} />
         <Route path="/panel" element={<Admin />} />
         <Route path="/home" element={<HomePage/>}/>
+        <Route path="/" element={<HomePage/>}/>
       </Routes>
     </BrowserRouter>
   );
