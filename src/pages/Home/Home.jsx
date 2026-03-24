@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Home.module.css';
-import videoVoluntariado from '../../assets/Video_de_Voluntariados_en_Costa_Rica.mp4';
+import videoVoluntariado from '../../Video/video_voluntariado_testimonio.mp4 ';
 
 const Home = () => {
   return (

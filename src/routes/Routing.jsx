@@ -6,6 +6,7 @@ import HomePage from "../pages/HomePage";
 import RegisterOrganizacion from "../pages/RegisterOrganizacion";
 import PerfilPage from "../pages/PerfilPage";
 import PerfilOrganizacion from '../pages/PerfilOrganizacion'
+import Terminos from '../pages/Terminos'
 
 
 function Routing() {
@@ -19,6 +20,7 @@ function Routing() {
         <Route path="/register" element={<RegisterOrganizacion />} />
         <Route path="/perfil" element={<PerfilPage />} />
         <Route path="/miOrganizacion" element={<PerfilOrganizacion />} />
+        <Route path="/terminos" element={<Terminos />} />
       </Routes>
     </BrowserRouter>
   );

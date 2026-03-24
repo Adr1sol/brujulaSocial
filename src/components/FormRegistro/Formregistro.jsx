@@ -204,6 +204,13 @@ function Formregistro() {
               </div>
             </div>
 
+            <div className={styles.checkboxTerminos}>
+              <input type="checkbox" id="aceptoTerminos" required />
+              <label htmlFor="aceptoTerminos">
+                He leído y acepto los <Link to="/terminos"><span>Términos y Condiciones</span></Link>
+              </label>
+            </div>
+
             <button type="submit" className={styles.submitBtn} disabled={loading}>
               {loading ? "Creando cuenta..." : "Registrarse"}
             </button>
