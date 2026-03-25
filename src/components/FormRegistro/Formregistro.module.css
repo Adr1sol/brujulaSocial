@@ -255,6 +255,44 @@
     text-decoration: underline;
 }
 
+.checkboxTerminos {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 2px solid #f1f5f9;
+    transition: all 0.2s;
+}
+
+.checkboxTerminos:hover {
+    border-color: #078A87;
+    background: #f0fdfa;
+}
+
+.checkboxTerminos input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #078A87;
+}
+
+.checkboxTerminos label {
+    font-size: 0.9rem;
+    color: #475569;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkboxTerminos label span {
+    color: #078A87;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
 /* Responsive */
 @media (max-width: 992px) {
     .visualSide {

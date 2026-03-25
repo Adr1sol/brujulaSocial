@@ -11,6 +11,7 @@ import DashImpacto from "../pages/DashImpacto"
 import Donaciones from "../pages/Home/Donacion";
 
 import Admin from "../pages/Admin"
+import Terminos from '../pages/Terminos'
 
 
 function Routing() {
@@ -30,6 +31,7 @@ function Routing() {
         <Route path="/panel" element={<Admin />} />
         <Route path="/home" element={<HomePage/>}/>
         <Route path="/" element={<HomePage/>}/>
+        <Route path="/terminos" element={<Terminos />} />
       </Routes>
     </BrowserRouter>
   );

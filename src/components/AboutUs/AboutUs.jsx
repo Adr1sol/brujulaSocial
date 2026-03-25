@@ -6,14 +6,12 @@ const AboutUs = () => {
   return (
     <section className="about-section" id="about">
       <div className="about-container">
-
         {/* Leyenda y Títulos */}
         <div className="about-left">
           <div className="section-tag">
             <span className="tag-line"></span>
             <span className="tag-text">PROPÓSITO VITAL</span>
           </div>
-
           <h2 className="main-title">
             <span className="title-dark">Nuestra</span><br />
             <span className="title-green">Misión</span>
@@ -55,7 +53,6 @@ const AboutUs = () => {
               <h3>Pasión</h3>
               <p>Ponemos el corazón en cada acción, fomentando la empatía y la solidaridad en todo el país.</p>
             </div>
-
             <div className="mission-card card-brown">
               <div className="brown-inner">
                 <div className="card-icon-wrapper large">
