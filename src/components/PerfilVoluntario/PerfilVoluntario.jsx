@@ -4,14 +4,10 @@ import ServiceOrganizaciones from '../../services/ServiceOrganizaciones';
 import ServiceHoras from '../../services/ServiceHoras';
 import ServiceCategorias from '../../services/ServiceCategorias';
 import ServiceUsuario from '../../services/ServiceUsuario';
-// ✅ NavbarGlobal eliminado — ya vive en Routing.jsx
 import styles from './PerfilVoluntario.module.css';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import {
-    BarChart, Bar, XAxis, YAxis, Tooltip,
-    ResponsiveContainer, PieChart, Pie, Cell, Legend
-} from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend} from 'recharts';
 
 function PerfilVoluntario() {
     const [usuario, setUsuario] = useState(null);
