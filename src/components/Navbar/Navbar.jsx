@@ -5,8 +5,8 @@ import styles from './Navbar.module.css';
 import { useNavigate } from 'react-router-dom';
 
 
-const Navbar = ({redirigir}) => {
-  const navigate =useNavigate()
+const Navbar = ({ redirigir }) => {
+  const navigate = useNavigate()
   return (
     <nav className={styles.navbar}>
       <Link to="/" className={styles['nav-logo-container']}>
@@ -18,7 +18,7 @@ const Navbar = ({redirigir}) => {
         <li><Link to="/inicio">Iniciar Sesión</Link></li>
         <li><Link to="/registro">Registro</Link></li>
         <li onClick={redirigir}><Link>Contacto</Link></li>
-        <li><button onClick={()=> navigate ("/donacion")} className={styles['btn-donate']}>❤️ Donación</button></li>
+        <li><button onClick={() => navigate("/donacion")} className={styles['btn-donate']}>❤️ Donación</button></li>
       </ul>
     </nav>
   );
