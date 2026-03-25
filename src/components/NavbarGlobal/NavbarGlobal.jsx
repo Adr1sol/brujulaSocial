@@ -14,7 +14,7 @@ export default function NavbarGlobal() {
     const handleLogout = () => {
         const confirmar = window.confirm("¿Estás seguro de que deseas cerrar sesión?");
         if (confirmar) {
-            // ✅ Limpiar todo el localStorage al cerrar sesión
+            // Limpia todo el localStorage al cerrar sesión
             localStorage.removeItem("user");
             localStorage.removeItem("miOrganizacion");
             navigate('/');
@@ -85,7 +85,7 @@ export default function NavbarGlobal() {
         ];
     }
 
-    // ── Renderizar cada link ───────────────────────────────────
+    // ── Renderiza cada link 
     const renderLink = (item, index) => {
         const isActive = item.path && path === item.path;
 
