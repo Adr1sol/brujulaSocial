@@ -1,14 +1,13 @@
 /* components/Hero/Hero.css */
 .hero {
   position: relative;
-  height: 70vh; /* Increased height for better carousel visibility */
+  height: 80vh; /* Increased height for better carousel visibility */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 2rem;
-  overflow: hidden; /* This will contain the absolutely positioned children */
+  overflow: hidden;
 }
 
 .carousel-background {
@@ -27,132 +26,169 @@
   height: 100%;
 }
 
-.carousel-background .carousel-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* This makes the image cover the area without distortion */
-  object-position: center;
-}
-
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text contrast */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.6)
+  ); 
   z-index: 2;
+  pointer-events: none; /* Let clicks pass through if needed, though buttons are above */
 }
 
 .hero-content {
   position: relative;
-  z-index: 3; /* Above the overlay */
-  margin-bottom: 3rem;
-  color: white; /* Ensure text is white */
+  z-index: 3;
+  color: white;
+  max-width: 800px;
+  padding: 0 20px;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-tag {
-  background-color: rgba(255, 255, 255, 0.2);
+  background: rgba(7, 138, 135, 0.8);
   color: white;
-  padding: 0.3rem 1rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .hero-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin: 1rem 0;
-  color: white; /* Changed from gradient to plain white for better readability on image */
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.7); /* Stronger shadow for readability */
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.btn-primary {
-  background-color: #ef8514;
+.btn-primary-hero {
+  background: #ef8514;
   color: white;
   border: none;
-  padding: 0.8rem 2rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border-radius: 4px;
+  padding: 18px 45px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background 0.3s;
-  z-index: 3;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 20px rgba(239, 133, 20, 0.3);
+  text-decoration: none;
+  display: inline-block;
 }
 
-.btn-primary:hover {
-  background-color: #d67612;
+.btn-primary-hero:hover {
+  background: #f49d3f;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(239, 133, 20, 0.4);
 }
 
 .search-bar {
   position: absolute;
-  bottom: -40px; /* This will position it sticking out from the bottom */
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
   background: white;
   display: flex;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
   gap: 2rem;
   align-items: center;
-  width: 80%;
-  max-width: 1000px;
+  width: 90%;
+  max-width: 1100px;
   justify-content: space-between;
-  z-index: 4; /* Highest z-index to be on top of everything */
+  z-index: 10;
 }
 
 .search-field {
+  flex: 1;
   display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  text-align: left;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 2rem;
+  border-right: 1px solid #eee;
+}
+
+.search-field:last-of-type {
+  border-right: none;
 }
 
 .search-field label {
-  display: block;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: #888;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .search-field select {
   border: none;
-  font-size: 0.9rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 600;
   outline: none;
-  color: #333;
+  color: #1a1a1a;
   background: transparent;
-}
-
-.btn-search {
-  background-color: #078a87;
-  color: white;
-  border: none;
-  padding: 1rem;
-  border-radius: 4px;
   cursor: pointer;
 }
 
+.btn-search {
+  background: #078a87;
+  color: white;
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
 .btn-search:hover {
-  background-color: #066d6b;
+  background: #066d6b;
+  transform: rotate(90deg);
 }
 
-/* Estilos para las leyendas del carrusel */
-.carousel-caption {
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
-    padding: 1rem;
-    bottom: 20%;
-    z-index: 10;
-}
-
-.carousel-caption h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-}
-
-.carousel-caption p {
-    font-size: 1rem;
-    color: #eee;
+@media (max-width: 768px) {
+  .search-bar {
+    flex-direction: column;
+    bottom: -150px;
+    padding: 1.5rem;
+  }
+  
+  .search-field {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
 }

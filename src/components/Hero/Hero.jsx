@@ -14,9 +14,8 @@ const Hero = () => {
       <div className="hero-content">
         <span className="hero-tag">VOLUNTARIADO EN COSTA RICA</span>
         <h1 className="hero-title">Encuentra tu causa.<br/>Impacta tu mundo.</h1>
-        <button className="btn-primary">Regístrate y Ayuda</button>
+        <button className="btn-primary-hero">Regístrate y Ayuda</button>
       </div>
-      
     </section>
   );
 };

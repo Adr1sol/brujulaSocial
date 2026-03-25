@@ -1,34 +1,43 @@
 import Carousel from 'react-bootstrap/Carousel';
-import escuela from '../../img/escuela.jpg';
-import basuraPlaya from '../../img/basura playa.jpg';
-import puente from '../../img/Puente.jpg';
-import refugio from '../../img/Refugio.jpg';
-import voluntariado from '../../img/voluntariado.png';
+import './Carrusel.css';
 
 function Carrusel() {
+    const images = [
+        {
+            src: "https://images.unsplash.com/photo-1618477434127-59728288544e?auto=format&fit=crop&q=80&w=1200",
+            alt: "Limpieza de Playas",
+            title: "Limpieza de Playas",
+            description: "Protegiendo el ecosistema marino de Costa Rica."
+        },
+        {
+            src: "https://images.unsplash.com/photo-1599059021752-19e3650143b1?auto=format&fit=crop&q=80&w=1200",
+            alt: "Huertas Comunitarias",
+            title: "Huertas Comunitarias",
+            description: "Sembrando un futuro sostenible para todos."
+        },
+        {
+            src: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&q=80&w=1200",
+            alt: "Talleres Sociales",
+            title: "Talleres de Impacto",
+            description: "Capacitación y empoderamiento comunitario."
+        }
+    ];
+
     return (
-        <Carousel>
-            <Carousel.Item>
-                <img className="d-block w-100" src={escuela} alt="Escuela" style={{ height: '100vh', objectFit: 'cover' }} />
-                <Carousel.Caption>
-                    <h3>Educación que transforma</h3>
-                    <p>Apoya el futuro de nuestros niños en comunidades locales.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img className="d-block w-100" src={basuraPlaya} alt="Playa" style={{ height: '100vh', objectFit: 'cover' }} />
-                <Carousel.Caption>
-                    <h3>Costas limpias, vida sana</h3>
-                    <p>Únete a las jornadas de limpieza y conservación en nuestras playas.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img className="d-block w-100" src={voluntariado} alt="Voluntariado" style={{ height: '100vh', objectFit: 'cover' }} />
-                <Carousel.Caption>
-                    <h3>Impacto Real</h3>
-                    <p>Cientos de voluntarios ya están haciendo la diferencia en Costa Rica.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
+        <Carousel fade interval={5000} pause="hover">
+            {images.map((image, index) => (
+                <Carousel.Item key={index}>
+                    <img
+                        className="d-block w-100"
+                        src={image.src}
+                        alt={image.alt}
+                    />
+                    <Carousel.Caption className="custom-caption">
+                        <h3>{image.title}</h3>
+                        <p>{image.description}</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            ))}
         </Carousel>
     );
 }

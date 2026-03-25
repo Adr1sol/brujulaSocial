@@ -18,15 +18,16 @@
     "@mui/icons-material": "^7.3.9",
     "@mui/material": "^7.3.9",
     "@mui/styled-engine-sc": "^7.3.9",
+    "bootstrap": "^5.3.8",
     "concurrently": "^9.2.1",
     "json-server": "^1.0.0-beta.13",
     "react": "^19.2.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.0",
     "react-is": "^18.3.1",
-    "styled-components": "^6.3.11",
     "react-router-dom": "^7.13.1",
     "recharts": "^3.8.0",
+    "styled-components": "^6.3.11",
     "sweetalert2": "^11.26.23"
   },
   "devDependencies": {
