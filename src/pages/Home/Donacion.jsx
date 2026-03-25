@@ -6,7 +6,6 @@ import NavbarGlobal from '../../components/NavbarGlobal/NavbarGlobal.jsx'
 function Donaciones () {
     return (
         <div>
-            <NavbarGlobal/>
             <Donacion/>
             <Footer/>
 

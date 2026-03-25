@@ -41,6 +41,7 @@ export default function FormInicio() {
       const user = users.find(u => u.Correo === email && u.Contrasena === password && u.Tipo === tipo);
 
       if (user) {
+        // ✅ Guardar usuario en localStorage
         localStorage.setItem("user", JSON.stringify(user));
 
         Swal.fire({
@@ -50,13 +51,14 @@ export default function FormInicio() {
           timer: 2000,
           showConfirmButton: false
         }).then(() => {
-          // ── Redirigir según el tipo ──
+          // ✅ Redirigir según Tipo del usuario
           if (user.Tipo === "admin") {
-            navigate("/panel")
-          } else if (localStorage.getItem("miOrganizacion")) {
-            navigate("/miOrganizacion")
+            navigate("/panel");
+          } else if (user.Tipo === "organizacion") {
+            navigate("/miOrganizacion");
           } else {
-            navigate("/buscador")
+            // voluntario (o cualquier otro tipo)
+            navigate("/buscador");
           }
         });
 

@@ -5,7 +5,8 @@ import Swal from "sweetalert2";
 import ServiceUsuario from "../../services/ServiceUsuario";
 
 function Formregistro() {
-  const [tipo, setTipo] = useState("voluntario");
+  // ✅ Tipo siempre será "voluntario" en este form
+  // Si el usuario quiere registrarse como organización, lo redirige a /register
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -64,7 +65,7 @@ function Formregistro() {
       Correo: formData.email,
       Contrasena: formData.password,
       Telefono: formData.tel,
-      Tipo: tipo,
+      Tipo: "voluntario",  // ✅ Siempre "voluntario" — debe coincidir con db.json y NavbarGlobal
       IdProvincia: 1,
       FechaRegistro: new Date().toISOString().split('T')[0]
     };
@@ -73,7 +74,7 @@ function Formregistro() {
       const response = await ServiceUsuario.postUsuario(newUser);
 
       if (response) {
-        // ── Guardar en localStorage y redirigir ──
+        // ✅ Guardar en localStorage
         localStorage.setItem("user", JSON.stringify(response));
 
         Swal.fire({
@@ -83,7 +84,7 @@ function Formregistro() {
           timer: 2000,
           showConfirmButton: false
         }).then(() => {
-          navigate("/buscador")
+          navigate("/buscador");
         });
 
       } else {
@@ -108,12 +109,25 @@ function Formregistro() {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.visualSide}>
-        <div className={styles.overlay}></div>
-        <div className={styles.branding}>
-          <h1>Únete a nosotros</h1>
-          <p>Crea tu cuenta para empezar a mejorar el mundo a través del voluntariado.</p>
+    <div className={styles.fondo}>
+      <div className={styles.card}>
+        <h2>Únete a Brújula Social</h2>
+        <p className={styles.sub}>Crea tu cuenta para empezar a mejorar el mundo</p>
+
+        <p className={styles.tipo}>Tipo de cuenta</p>
+        <div className={styles.selector}>
+          {/* ✅ Voluntario: siempre activo en este formulario */}
+          <div className={`${styles.opcion} ${styles.activo}`}>
+            <h4>Voluntario</h4>
+          </div>
+          {/* ✅ Organización: redirige a su propio formulario de registro */}
+          <div
+            className={styles.opcion}
+            onClick={() => navigate("/register")}
+            style={{ cursor: 'pointer' }}
+          >
+            <h4>Organización</h4>
+          </div>
         </div>
       </div>
       <div className={styles.formSide}>

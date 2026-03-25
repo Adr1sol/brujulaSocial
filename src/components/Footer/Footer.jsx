@@ -118,10 +118,9 @@ const Footer = () => {
       {/* Footer inferior */}
       <div className={styles['footer-bottom']}>
         <p>© 2026 Brújula Social. Todos los derechos reservados.</p>
-        <p>Hecho con ❤️ en Costa Rica</p>
+        <p>Hecho con :heart: en Costa Rica</p>
       </div>
     </footer>
   );
 };
-
-export default Footer;
+export default Footer

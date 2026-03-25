@@ -36,20 +36,30 @@ function PerfilOrganizacion() {
     }, [])
 
     async function cargarDatos() {
-        const miOrg = JSON.parse(localStorage.getItem("miOrganizacion"))
+        // ✅ Leer org desde el usuario logueado, no desde miOrganizacion
+        const user = JSON.parse(localStorage.getItem("user") || "null")
+        if (!user || !user.idOrganizacion) return
+
+        const todasLasOrgs = await ServiceOrganizaciones.getOrganizaciones()
+        const miOrg = todasLasOrgs.find(
+            (o) => String(o.id) === String(user.idOrganizacion)
+        )
         if (!miOrg) return
+
+        // ✅ Actualizar localStorage con la org correcta
+        localStorage.setItem("miOrganizacion", JSON.stringify(miOrg))
         setOrganizacion(miOrg)
 
-        const categorias = await ServiceCategorias.getCategorias()
-        const provincias = await ServiceProvincias.getProvincias()
+        const categorias      = await ServiceCategorias.getCategorias()
+        const provincias      = await ServiceProvincias.getProvincias()
         const disponibilidades = await ServiceDisponibilidades.getDisponibilidades()
 
-        const cat = categorias.find((c) => parseInt(c.id) === parseInt(miOrg.idCategoria))
+        const cat  = categorias.find((c) => parseInt(c.id) === parseInt(miOrg.idCategoria))
         const prov = provincias.find((p) => parseInt(p.id) === parseInt(miOrg.IdProvincia))
         const disp = disponibilidades.find((d) => parseInt(d.id) === parseInt(miOrg.idDisponibilidad))
 
-        setCategoriaNombre(cat ? cat.NombreCategoria : "Sin categoría")
-        setProvinciaNombre(prov ? prov.NombreProvincia : "Sin provincia")
+        setCategoriaNombre(cat  ? cat.NombreCategoria        : "Sin categoría")
+        setProvinciaNombre(prov ? prov.NombreProvincia       : "Sin provincia")
         setDisponibilidadNombre(disp ? disp.NombreDisponibilidad : "Sin disponibilidad")
 
         const todasLasAplicaciones = await ServiceVoluntariado.getVoluntariado()
@@ -62,11 +72,8 @@ function PerfilOrganizacion() {
             const usuario = todosLosUsuarios.find(
                 (u) => String(u.id) === String(aplicacion.idUsuario)
             )
-            return {
-                ...usuario,
-                FechaAplicacion: aplicacion.FechaAplicacion
-            }
-        })
+            return { ...usuario, FechaAplicacion: aplicacion.FechaAplicacion }
+        }).filter(v => v && v.Nombre)
 
         setVoluntarios(voluntariosDeLaOrg)
     }
@@ -103,10 +110,10 @@ function PerfilOrganizacion() {
 
         const objOrganizacion = {
             NombreOrganizacion: nombreOrganizacion,
-            idCategoria: parseInt(idCategoria),
-            IdProvincia: parseInt(idProvincia),
-            idDisponibilidad: parseInt(idDisponibilidad),
-            Descripcion: descripcion
+            idCategoria:        parseInt(idCategoria),
+            IdProvincia:        parseInt(idProvincia),
+            idDisponibilidad:   parseInt(idDisponibilidad),
+            Descripcion:        descripcion
         }
 
         const actualizada = await ServiceOrganizaciones.putOrganizaciones(objOrganizacion, organizacion.id)
@@ -149,6 +156,7 @@ function PerfilOrganizacion() {
             if (result.isConfirmed) {
                 await ServiceOrganizaciones.deleteOrganizaciones(organizacion.id)
                 localStorage.removeItem("miOrganizacion")
+                localStorage.removeItem("user")
                 setOrganizacion(null)
 
                 Swal.fire({
@@ -165,11 +173,8 @@ function PerfilOrganizacion() {
 
     return (
         <div>
-
             {organizacion ? (
                 <div>
-
-                    {/* ── Perfil — siempre visible ── */}
                     <div>
                         <h2>Mi Organización</h2>
                         <p><strong>Nombre:</strong> {organizacion.NombreOrganizacion}</p>
@@ -177,48 +182,26 @@ function PerfilOrganizacion() {
                         <p><strong>Categoría:</strong> {categoriaNombre}</p>
                         <p><strong>Provincia:</strong> {provinciaNombre}</p>
                         <p><strong>Disponibilidad:</strong> {disponibilidadNombre}</p>
-
                         <button onClick={handleEditar}>Editar</button>
                         <button onClick={handleEliminar}>Eliminar</button>
                     </div>
 
-                    {/* ── Formulario editar — aparece debajo al hacer click ── */}
                     {editando && (
                         <div style={{
-                            background: '#fff',
-                            border: '0.5px solid #D3D1C7',
-                            borderRadius: '12px',
-                            padding: '20px',
-                            marginTop: '16px'
+                            background: '#fff', border: '0.5px solid #D3D1C7',
+                            borderRadius: '12px', padding: '20px', marginTop: '16px'
                         }}>
-                            <div style={{
-                                fontSize: '14px',
-                                fontWeight: '500',
-                                color: '#2C2C2A',
-                                marginBottom: '16px',
-                                paddingBottom: '10px',
-                                borderBottom: '0.5px solid #D3D1C7'
-                            }}>
+                            <div style={{ fontSize: '14px', fontWeight: '500', color: '#2C2C2A', marginBottom: '16px', paddingBottom: '10px', borderBottom: '0.5px solid #D3D1C7' }}>
                                 Editar organización
                             </div>
-
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                                     <label style={{ fontSize: '12px', color: '#5F5E5A', fontWeight: '500' }}>Nombre de la organización</label>
-                                    <input
-                                        type="text"
-                                        value={nombreOrganizacion}
-                                        onChange={(e) => setNombreOrganizacion(e.target.value)}
-                                        style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}
-                                    />
+                                    <input type="text" value={nombreOrganizacion} onChange={(e) => setNombreOrganizacion(e.target.value)} style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }} />
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                                     <label style={{ fontSize: '12px', color: '#5F5E5A', fontWeight: '500' }}>Categoría</label>
-                                    <select
-                                        value={idCategoria}
-                                        onChange={(e) => setIdCategoria(e.target.value)}
-                                        style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}
-                                    >
+                                    <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)} style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}>
                                         <option value="">Seleccionar categoría</option>
                                         <option value="1">Medio Ambiente</option>
                                         <option value="2">Educación</option>
@@ -229,11 +212,7 @@ function PerfilOrganizacion() {
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                                     <label style={{ fontSize: '12px', color: '#5F5E5A', fontWeight: '500' }}>Provincia</label>
-                                    <select
-                                        value={idProvincia}
-                                        onChange={(e) => setIdProvincia(e.target.value)}
-                                        style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}
-                                    >
+                                    <select value={idProvincia} onChange={(e) => setIdProvincia(e.target.value)} style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}>
                                         <option value="">Seleccionar provincia</option>
                                         <option value="1">San José</option>
                                         <option value="2">Alajuela</option>
@@ -246,11 +225,7 @@ function PerfilOrganizacion() {
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                                     <label style={{ fontSize: '12px', color: '#5F5E5A', fontWeight: '500' }}>Disponibilidad</label>
-                                    <select
-                                        value={idDisponibilidad}
-                                        onChange={(e) => setIdDisponibilidad(e.target.value)}
-                                        style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}
-                                    >
+                                    <select value={idDisponibilidad} onChange={(e) => setIdDisponibilidad(e.target.value)} style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}>
                                         <option value="">Seleccionar disponibilidad</option>
                                         <option value="1">Fines de semana</option>
                                         <option value="2">Por horas</option>
@@ -260,30 +235,16 @@ function PerfilOrganizacion() {
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', gridColumn: '1 / -1' }}>
                                     <label style={{ fontSize: '12px', color: '#5F5E5A', fontWeight: '500' }}>Descripción</label>
-                                    <textarea
-                                        value={descripcion}
-                                        onChange={(e) => setDescripcion(e.target.value)}
-                                        style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit', minHeight: '80px', resize: 'vertical' }}
-                                    />
+                                    <textarea value={descripcion} onChange={(e) => setDescripcion(e.target.value)} style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit', minHeight: '80px', resize: 'vertical' }} />
                                 </div>
                             </div>
-
                             <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
-                                <button onClick={handleCancelar} style={{
-                                    padding: '9px 20px', background: '#F1EFE8',
-                                    border: '0.5px solid #D3D1C7', borderRadius: '8px',
-                                    fontSize: '13px', cursor: 'pointer', color: '#5F5E5A'
-                                }}>Cancelar</button>
-                                <button onClick={handleGuardarCambios} style={{
-                                    padding: '9px 24px', background: '#1D9E75',
-                                    border: 'none', borderRadius: '8px',
-                                    color: '#fff', fontSize: '13px', cursor: 'pointer', fontWeight: '500'
-                                }}>Guardar cambios</button>
+                                <button onClick={handleCancelar} style={{ padding: '9px 20px', background: '#F1EFE8', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', cursor: 'pointer', color: '#5F5E5A' }}>Cancelar</button>
+                                <button onClick={handleGuardarCambios} style={{ padding: '9px 24px', background: '#1D9E75', border: 'none', borderRadius: '8px', color: '#fff', fontSize: '13px', cursor: 'pointer', fontWeight: '500' }}>Guardar cambios</button>
                             </div>
                         </div>
                     )}
 
-                    {/* ── Lista de voluntarios ── */}
                     <div>
                         <h3>Voluntarios que aplicaron</h3>
                         {voluntarios.length > 0 ? (
@@ -303,12 +264,8 @@ function PerfilOrganizacion() {
                                             <td>{vol.Correo}</td>
                                             <td>{vol.FechaAplicacion}</td>
                                             <td>
-                                                <button onClick={() => setVoluntarioSeleccionado(vol)}>
-                                                    Ver perfil
-                                                </button>
-                                                <button onClick={() => setVoluntarioParaHoras(vol)}>
-                                                    Registrar horas
-                                                </button>
+                                                <button onClick={() => setVoluntarioSeleccionado(vol)}>Ver perfil</button>
+                                                <button onClick={() => setVoluntarioParaHoras(vol)}>Registrar horas</button>
                                             </td>
                                         </tr>
                                     ))}
@@ -318,13 +275,11 @@ function PerfilOrganizacion() {
                             <p>Aún no hay voluntarios que hayan aplicado a tu organización.</p>
                         )}
                     </div>
-
                 </div>
             ) : (
                 <p>No hay organización registrada. <a href="/register">Registrá tu organización aquí.</a></p>
             )}
 
-            {/* Modal ver perfil del voluntario */}
             {voluntarioSeleccionado && (
                 <ModalVoluntario
                     voluntario={voluntarioSeleccionado}
@@ -332,7 +287,6 @@ function PerfilOrganizacion() {
                 />
             )}
 
-            {/* Modal registrar horas */}
             {voluntarioParaHoras && (
                 <ModalRegistroHoras
                     voluntario={voluntarioParaHoras}
@@ -340,7 +294,6 @@ function PerfilOrganizacion() {
                     onCerrar={() => setVoluntarioParaHoras(null)}
                 />
             )}
-
         </div>
     )
 }

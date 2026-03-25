@@ -6,8 +6,6 @@ import ServiceHoras from '../../services/ServiceHoras'
 import ServiceCategorias from '../../services/ServiceCategorias'
 import ServiceProvincias from '../../services/ServiceProvincias'
 import styles from './DashboardImpactoSocial.module.css'
-// 1. Importamos el nuevo componente
-
 
 function DashboardImpactoSocial() {
     const [usuarios, setUsuarios] = useState([])
@@ -39,7 +37,6 @@ function DashboardImpactoSocial() {
         setProvincias(p)
     }
 
-    // ... (tus funciones de lógica se mantienen exactamente igual)
     function totalHoras() { return horas.reduce((sum, h) => sum + parseInt(h.horas || 0), 0) }
     function getNombreCategoria(idCategoria) {
         const cat = categorias.find((c) => String(c.id) === String(idCategoria))
@@ -107,12 +104,20 @@ function DashboardImpactoSocial() {
     return (
         <div className={styles.pagina}>
 
-            {/* 2. REEMPLAZO DEL NAVBAR: Usamos el componente dinámico */}
-            <NavbarVarios 
-                tipo="impacto" 
-                tabActiva={tabActiva} 
-                setTabActiva={setTabActiva} 
-            />
+            {/* ✅ Navbar eliminado — NavbarGlobal vive en Routing.jsx */}
+
+            {/* Tabs de navegación interna */}
+            <div className={styles.tabs}>
+                {["dashboard", "voluntarios", "organizaciones"].map((tab) => (
+                    <button
+                        key={tab}
+                        className={`${styles.tab} ${tabActiva === tab ? styles.tabActiva : ''}`}
+                        onClick={() => setTabActiva(tab)}
+                    >
+                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                    </button>
+                ))}
+            </div>
 
             {/* ===== DASHBOARD ===== */}
             {tabActiva === "dashboard" && (

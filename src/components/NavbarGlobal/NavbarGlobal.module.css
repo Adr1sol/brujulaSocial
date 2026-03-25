@@ -92,3 +92,10 @@
     background: #e74c3c;
     color: white;
 }
+/* ── Botón que actúa como link (para scroll) ──────────────── */
+.linkBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}

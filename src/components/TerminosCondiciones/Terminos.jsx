@@ -1,10 +1,11 @@
 import React from 'react';
-import './Terminos.css';
-import NavbarGlobal from '../NavbarGlobal/NavbarGlobal';
+import './terminos.css';
+// ✅ Navbar eliminado — NavbarGlobal vive en Routing.jsx
+
 const Terminos = () => {
     return (
         <div className="terminos-wrapper">
-            <NavbarGlobal />
+            {/* ✅ <Navbar /> eliminado */}
             <div className="terminos-container">
                 <header className="terminos-header">
                     <h1>Términos y Condiciones</h1>
