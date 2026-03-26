@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavbarGlobal from "../components/NavbarGlobal/NavbarGlobal";
-
 import HomePage             from "../pages/HomePage";
 import InicioUser           from "../pages/InicioUser";
 import RegistroUser         from "../pages/RegistroUser";
