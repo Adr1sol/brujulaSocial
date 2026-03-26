@@ -1,0 +1,175 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 6% 0.75rem 3%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #09908C;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.logo a {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #066B68;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.3s ease;
+}
+
+.logo a:hover {
+    transform: scale(1.02);
+}
+
+.navLinks {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 0;
+}
+
+.link {
+    text-decoration: none;
+    color: #4A5568;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 8px 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border-radius: 8px;
+}
+
+.link:hover {
+    color: #09908C;
+    background: rgba(9, 144, 140, 0.08);
+}
+
+/* Scroll button specific */
+.linkBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* Active state for normal links */
+.linkActivo {
+    color: #09908C;
+    background: rgba(9, 144, 140, 0.12);
+}
+
+.linkActivo::after {
+    content: "";
+    position: absolute;
+    bottom: 6px;
+    left: 12px;
+    right: 12px;
+    height: 2px;
+    background-color: #09908C;
+    border-radius: 2px;
+}
+
+/* ── Specific Premium Buttons ────────────────────────── */
+
+.btnLogin {
+    text-decoration: none;
+    color: #09908C;
+    font-weight: 700;
+    padding: 10px 20px;
+    border: 2px solid #09908C;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: transparent;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnLogin:hover {
+    background: rgba(9, 144, 140, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(9, 144, 140, 0.15);
+}
+
+.btnRegister {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-weight: 700;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #09908C 0%, #066B68 100%);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(9, 144, 140, 0.3);
+    border: none;
+}
+
+.btnRegister:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(9, 144, 140, 0.4);
+    filter: brightness(1.1);
+}
+
+.btnLogout {
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.5);
+    color: #E74C3C;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btnLogout:hover {
+    background: #E74C3C;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+}
+
+/* User Profile Badge */
+.userBadge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #E6F4F3;
+    padding: 6px 14px;
+    border-radius: 50px;
+    border: 1px solid rgba(9, 144, 140, 0.2);
+}
+
+.avatarMini {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #09908C 0%, #066B68 100%);
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.userName {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2D3748;
+}
+

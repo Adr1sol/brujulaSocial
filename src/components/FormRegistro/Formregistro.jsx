@@ -4,8 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ServiceUsuario from "../../services/ServiceUsuario";
 
-function Formregistro() {
-  const [tipo, setTipo] = useState("voluntario");
+function FormRegistro() { // Added opening brace
+  // ✅ Tipo siempre será "voluntario" en este form
+  const [tipo, setTipo] = useState("voluntario"); // Added missing state
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -24,33 +25,23 @@ function Formregistro() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const { nombre, apellido, tel, email, password, confirmPassword } = formData;
+
     if (!nombre.trim() || !apellido.trim() || !tel.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) {
       Swal.fire({
         icon: 'error',
         title: 'Formulario incompleto',
-        text: 'Todos los campos son obligatorios. Por favor, revísalos.',
+        text: 'Todos los campos son obligatorios.',
         confirmButtonColor: '#EF8514'
       });
       return;
     }
 
-    if (formData.password.length < 6) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Contraseña débil',
-        text: 'La contraseña debe tener al menos 6 caracteres.',
-        confirmButtonColor: '#EF8514'
-      });
-      return;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
+    if (password !== confirmPassword) {
       Swal.fire({
         icon: 'error',
         title: 'Error de coincidencia',
-        text: 'Las contraseñas ingresadas no coinciden.',
+        text: 'Las contraseñas no coinciden.',
         confirmButtonColor: '#EF8514'
       });
       return;
@@ -63,39 +54,25 @@ function Formregistro() {
       Correo: formData.email,
       Contrasena: formData.password,
       Telefono: formData.tel,
-      Tipo: tipo,
+      Tipo: "voluntario",
       IdProvincia: 1,
       FechaRegistro: new Date().toISOString().split('T')[0]
     };
 
     try {
-      const response = await ServiceUsuario.postRegistro(newUser);
-
+      const response = await ServiceUsuario.postUsuario(newUser);
       if (response) {
+        localStorage.setItem("user", JSON.stringify(response));
         Swal.fire({
           icon: 'success',
           title: '¡Cuenta creada!',
-          text: 'Se ha registrado con éxito. Ahora puede iniciar sesión.',
-          confirmButtonColor: '#078A87'
-        }).then(() => {
-          navigate("/inicio");
-        });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error al registrar',
-          text: 'No se pudo crear la cuenta. Inténtelo de nuevo.',
-          confirmButtonColor: '#078A87'
-        });
+          timer: 2000,
+          showConfirmButton: false
+        }).then(() => navigate("/buscador"));
       }
     } catch (error) {
-      console.error("Error al registrar usuario:", error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Error de servidor',
-        text: 'No se pudo conectar con el servidor en este momento.',
-        confirmButtonColor: '#078A87'
-      });
+      console.error(error);
+      Swal.fire({ icon: 'error', title: 'Error de servidor' });
     } finally {
       setLoading(false);
     }
@@ -107,19 +84,15 @@ function Formregistro() {
         <div className={styles.overlay}></div>
         <div className={styles.branding}>
           <h1>Únete a nosotros</h1>
-          <p>Crea tu cuenta para empezar a mejorar el mundo a través del voluntariado.</p>
+          <p>Crea tu cuenta para empezar a mejorar el mundo.</p>
         </div>
       </div>
       <div className={styles.formSide}>
         <div className={styles.card}>
           <div className={styles.header}>
             <h2>Crear cuenta</h2>
-            <p className={styles.sub}>Completa tus datos para formar parte de la comunidad.</p>
           </div>
 
-          <div className={styles.accountTypeHeader}>
-            <p className={styles.tipo}>Tipo de cuenta</p>
-          </div>
           <div className={styles.selector}>
             <div
               className={`${styles.opcion} ${tipo === "voluntario" ? styles.activo : ""}`}
@@ -139,90 +112,43 @@ function Formregistro() {
             <div className={styles.row}>
               <div className={styles.inputGroup}>
                 <label>Nombre</label>
-                <input 
-                  name="nombre" 
-                  type="text" 
-                  placeholder="Nombre" 
-                  value={formData.nombre}
-                  onChange={handleChange}
-                />
+                <input name="nombre" type="text" value={formData.nombre} onChange={handleChange} />
               </div>
               <div className={styles.inputGroup}>
                 <label>Apellido</label>
-                <input 
-                  name="apellido" 
-                  type="text" 
-                  placeholder="Apellido" 
-                  value={formData.apellido}
-                  onChange={handleChange}
-                />
+                <input name="apellido" type="text" value={formData.apellido} onChange={handleChange} />
               </div>
             </div>
 
             <div className={styles.inputGroup}>
               <label>Teléfono</label>
-              <input 
-                name="tel" 
-                type="tel" 
-                placeholder="+506 0000-0000" 
-                value={formData.tel}
-                onChange={handleChange}
-              />
+              <input name="tel" type="tel" value={formData.tel} onChange={handleChange} />
             </div>
 
             <div className={styles.inputGroup}>
               <label>Correo electrónico</label>
-              <input 
-                name="email" 
-                type="email" 
-                placeholder="ejemplo@correo.com" 
-                value={formData.email}
-                onChange={handleChange}
-              />
+              <input name="email" type="email" value={formData.email} onChange={handleChange} />
             </div>
 
             <div className={styles.row}>
               <div className={styles.inputGroup}>
                 <label>Contraseña</label>
-                <input 
-                  name="password" 
-                  type="password" 
-                  placeholder="••••••••" 
-                  value={formData.password}
-                  onChange={handleChange}
-                />
+                <input name="password" type="password" value={formData.password} onChange={handleChange} />
               </div>
               <div className={styles.inputGroup}>
                 <label>Confirmar</label>
-                <input 
-                  name="confirmPassword" 
-                  type="password" 
-                  placeholder="••••••••" 
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                />
+                <input name="confirmPassword" type="password" value={formData.confirmPassword} onChange={handleChange} />
               </div>
-            </div>
-
-            <div className={styles.checkboxTerminos}>
-              <input type="checkbox" id="aceptoTerminos" required />
-              <label htmlFor="aceptoTerminos">
-                He leído y acepto los <Link to="/terminos"><span>Términos y Condiciones</span></Link>
-              </label>
             </div>
 
             <button type="submit" className={styles.submitBtn} disabled={loading}>
               {loading ? "Creando cuenta..." : "Registrarse"}
             </button>
           </form>
-
-          <p className={styles.login}>
-            ¿Ya tienes una cuenta? <Link to="/inicio"><span>Inicia sesión aquí</span></Link>
-          </p>
         </div>
       </div>
     </div>
   );
 }
 
-export default Formregistro;
+export default FormRegistro;

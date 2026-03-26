@@ -14,7 +14,7 @@ async function getUsuarios() {
 
 
 // POST USUARIOS - función para guardar un nuevo usuario
-async function postRegistro(usuario) {
+async function postUsuario(usuario) {
     try {
         const respuesta = await fetch("http://localhost:3001/usuarios", {
             method: "POST",
@@ -56,20 +56,14 @@ async function putUsuario(usuario, id) {
 
 
 // DELETE USUARIOS - función para eliminar un usuario
+
 async function deleteUsuario(id) {
     try {
-        const respuesta = await fetch("http://localhost:3001/usuarios/" + id, {
+        await fetch("http://localhost:3001/usuarios/" + id, {
             method: "DELETE"
         })
-
-        const datosUsuario = await respuesta.json();
-
-        return datosUsuario;
-
     } catch (error) {
-        console.error("Error al eliminar el usuario", error);
+        console.error("Error al eliminar el usuario", error)
     }
 }
-
-
-export default { getUsuarios, postRegistro, putUsuario, deleteUsuario }
+export default { getUsuarios, postUsuario, putUsuario, deleteUsuario }

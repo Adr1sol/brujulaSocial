@@ -48,7 +48,8 @@ function ModalVoluntario({ voluntario, onCerrar }) {
                 borderRadius: '14px',
                 width: '100%',
                 maxWidth: '480px',
-                overflow: 'hidden'
+                maxHeight: '90vh',
+                overflow: 'auto'
             }}>
 
                 {/* Header */}
@@ -62,6 +63,7 @@ function ModalVoluntario({ voluntario, onCerrar }) {
                     <h3 style={{ color: '#fff', fontSize: '16px', fontWeight: '500' }}>
                         Perfil del voluntario
                     </h3>
+                    {/* ✅ Se eliminó el background duplicado, se conserva el semitransparente */}
                     <button onClick={onCerrar} style={{
                         background: 'rgba(255,255,255,.2)',
                         border: 'none',

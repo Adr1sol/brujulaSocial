@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Home.module.css';
-import videoVoluntariado from '../../Video/video_voluntariado_testimonio.mp4 ';
+import videoVoluntariado from '../../images/Video_Voluntariado_Testimonio.mp4';
 
 const Home = () => {
   return (
