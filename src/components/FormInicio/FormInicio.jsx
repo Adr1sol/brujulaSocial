@@ -5,67 +5,71 @@ import Swal from "sweetalert2";
 import ServiceUsuario from "../../services/ServiceUsuario";
 
 export default function FormInicio() {
-  const [tipo, setTipo] = useState("voluntario");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const [email, setEmail]           = useState("");
+  const [password, setPassword]     = useState("");
+  const [loading, setLoading]       = useState(false);
+  const [tipoCuenta, setTipoCuenta] = useState("voluntario");
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email.trim() || !password.trim()) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Campos vacíos',
-        text: 'Por favor, completa todos los campos para continuar.',
-        confirmButtonColor: '#EF8514'
-      });
+      Swal.fire({ icon: 'error', title: 'Campos vacíos', text: 'Por favor, completa todos los campos.', confirmButtonColor: '#EF8514' });
       return;
     }
-
     if (password.length < 6) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Contraseña corta',
-        text: 'La contraseña debe tener al menos 6 caracteres.',
-        confirmButtonColor: '#EF8514'
-      });
+      Swal.fire({ icon: 'error', title: 'Contraseña corta', text: 'La contraseña debe tener al menos 6 caracteres.', confirmButtonColor: '#EF8514' });
       return;
     }
 
     setLoading(true);
-
     try {
       const users = await ServiceUsuario.getUsuarios();
-      const user = users.find(u => u.Correo === email && u.Contrasena === password && u.Tipo === tipo);
+
+
+      const user = users.find(u =>
+        u.Correo === email &&
+        u.Contrasena === password &&
+        (tipoCuenta === "voluntario"
+          ? (u.Tipo === "voluntario" || u.Tipo === "admin" || !u.Tipo)
+          : u.Tipo === "organizacion"
+        )
+      );
+
 
       if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+
         Swal.fire({
           icon: 'success',
-          title: `¡Bienvenido, ${user.Nombre}!`,
+          title: `¡Hola, ${user.Nombre}!`,
           text: 'Inicio de sesión exitoso',
           timer: 2000,
           showConfirmButton: false
+        }).then(() => {
+          if (user.Tipo === "admin")             navigate("/panel");
+          else if (user.Tipo === "organizacion") navigate("/miOrganizacion");
+          else                                   navigate("/buscador");
         });
-        localStorage.setItem("user", JSON.stringify(user));
-        navigate("/buscador"); 
+
       } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Correo o contraseña incorrectos.',
-          confirmButtonColor: '#078A87'
-        });
+        const existeUsuario = users.find(u => u.Correo === email && u.Contrasena === password);
+        if (existeUsuario) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Tipo de cuenta incorrecto',
+            text: `Este correo está registrado como ${existeUsuario.Tipo === "organizacion" ? "Organización" : "Voluntario"}. Por favor selecciona el tipo correcto.`,
+            confirmButtonColor: '#078A87'
+          });
+        } else {
+          Swal.fire({ icon: 'error', title: 'Credenciales incorrectas', text: 'Correo o contraseña incorrectos.', confirmButtonColor: '#078A87' });
+        }
       }
     } catch (error) {
-      console.error("Error al iniciar sesión:", error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Error de conexión',
-        text: 'Hubo un error al conectar con el servidor.',
-        confirmButtonColor: '#078A87'
-      });
+      Swal.fire({ icon: 'error', title: 'Error de conexión', text: 'Hubo un error al conectar con el servidor.', confirmButtonColor: '#078A87' });
     } finally {
       setLoading(false);
     }
@@ -73,38 +77,66 @@ export default function FormInicio() {
 
   return (
     <div className={styles.wrapper}>
+
+
+      {/* ── Lado visual ── */}
       <div className={styles.visualSide}>
-        <div className={styles.overlay}></div>
         <div className={styles.branding}>
           <h1>Brújula Social</h1>
           <p>Conectando voluntarios con oportunidades que importan.</p>
         </div>
       </div>
+
+      {/* ── Lado formulario ── */}
       <div className={styles.formSide}>
         <div className={styles.card}>
+
           <div className={styles.header}>
             <h2>Iniciar sesión</h2>
             <p className={styles.sub}>Bienvenido de nuevo. Por favor, introduce tus datos.</p>
           </div>
 
+          {/* Selector tipo de cuenta */}
           <div className={styles.accountTypeHeader}>
-            <p className={styles.tipo}>Tipo de cuenta</p>
+            <p className={styles.tipo}>TIPO DE CUENTA</p>
           </div>
-          
           <div className={styles.selector}>
+
+            {/* ✅ Voluntario — activo por defecto */}
             <div
-              className={`${styles.opcion} ${tipo === "voluntario" ? styles.activo : ""}`}
-              onClick={() => setTipo("voluntario")}
+              className={`${styles.opcion} ${tipoCuenta === "voluntario" ? styles.activo : ""}`}
+              onClick={() => setTipoCuenta("voluntario")}
             >
               <h4>Voluntario</h4>
             </div>
+
+            {/* ✅ Organización — redirige a /register para registrarse
+                o muestra el form si ya tiene cuenta (futuro) */}
             <div
-              className={`${styles.opcion} ${tipo === "org" ? styles.activo : ""}`}
-              onClick={() => setTipo("org")}
+              className={`${styles.opcion} ${tipoCuenta === "organizacion" ? styles.activo : ""}`}
+              onClick={() => {
+                setTipoCuenta("organizacion")
+                // Si no hay sesión activa, no hacer nada más —
+                // el usuario puede ingresar sus credenciales de org
+              }}
             >
               <h4>Organización</h4>
             </div>
+
           </div>
+
+          {/* ✅ Mensaje contextual según tipo seleccionado */}
+          {tipoCuenta === "organizacion" && (
+            <p className={styles.orgHint}>
+              ¿Aún no tienes una cuenta de organización?{" "}
+              <span
+                className={styles.orgHintLink}
+                onClick={() => navigate("/register")}
+              >
+                Regístrala aquí →
+              </span>
+            </p>
+          )}
 
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.inputGroup}>
@@ -130,13 +162,18 @@ export default function FormInicio() {
             </div>
 
             <button type="submit" className={styles.submitBtn} disabled={loading}>
-              {loading ? "Iniciando sesión..." : "Iniciar sesión"}
+              {loading ? "Cargando..." : "Iniciar sesión"}
+
             </button>
           </form>
 
           <p className={styles.register}>
-            ¿No tienes una cuenta? <Link to="/registro"><span>Regístrate aquí</span></Link>
+
+            ¿No tienes una cuenta?{" "}
+            <Link to="/registro"><span>Regístrate aquí</span></Link>
           </p>
+
+
         </div>
       </div>
     </div>

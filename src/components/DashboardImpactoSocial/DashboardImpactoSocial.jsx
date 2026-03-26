@@ -6,10 +6,8 @@ import ServiceHoras from '../../services/ServiceHoras'
 import ServiceCategorias from '../../services/ServiceCategorias'
 import ServiceProvincias from '../../services/ServiceProvincias'
 import styles from './DashboardImpactoSocial.module.css'
-import logo from '../../assets/logo.png'
 
 function DashboardImpactoSocial() {
-
     const [usuarios, setUsuarios] = useState([])
     const [organizaciones, setOrganizaciones] = useState([])
     const [aplicaciones, setAplicaciones] = useState([])
@@ -39,25 +37,19 @@ function DashboardImpactoSocial() {
         setProvincias(p)
     }
 
-    function totalHoras() {
-        return horas.reduce((sum, h) => sum + parseInt(h.horas || 0), 0)
-    }
-
+    function totalHoras() { return horas.reduce((sum, h) => sum + parseInt(h.horas || 0), 0) }
     function getNombreCategoria(idCategoria) {
         const cat = categorias.find((c) => String(c.id) === String(idCategoria))
         return cat ? cat.NombreCategoria : "Sin categoría"
     }
-
     function getNombreProvincia(idProvincia) {
         const prov = provincias.find((p) => String(p.id) === String(idProvincia))
         return prov ? prov.NombreProvincia : "Sin provincia"
     }
-
     function getNombreOrg(idOrganizacion) {
         const org = organizaciones.find((o) => String(o.id) === String(idOrganizacion))
         return org ? org.NombreOrganizacion : "Organización desconocida"
     }
-
     function horasPorCategoria() {
         const resultado = {}
         horas.forEach((h) => {
@@ -69,7 +61,6 @@ function DashboardImpactoSocial() {
         })
         return Object.entries(resultado).sort((a, b) => b[1] - a[1])
     }
-
     function voluntariosPorProvincia() {
         const resultado = {}
         usuarios.forEach((u) => {
@@ -78,7 +69,6 @@ function DashboardImpactoSocial() {
         })
         return Object.entries(resultado).sort((a, b) => b[1] - a[1])
     }
-
     function orgsActivas() {
         const resultado = {}
         horas.forEach((h) => {
@@ -93,7 +83,6 @@ function DashboardImpactoSocial() {
             }))
             .filter((item) => item.org)
     }
-
     function aplicacionesRecientes() {
         return aplicaciones.slice(-5).reverse().map((a) => ({
             usuario: usuarios.find((u) => String(u.id) === String(a.idUsuario)),
@@ -101,7 +90,6 @@ function DashboardImpactoSocial() {
             fecha: a.FechaAplicacion
         })).filter((item) => item.usuario)
     }
-
     function getIniciales(nombre) {
         if (!nombre) return "??"
         const partes = nombre.split(" ")
@@ -109,39 +97,26 @@ function DashboardImpactoSocial() {
             ? partes[0][0] + partes[1][0]
             : nombre.substring(0, 2).toUpperCase()
     }
-
     const coloresAvatar = ["#1D9E75", "#E8841A", "#185FA5", "#534AB7", "#3B6D11", "#D4537E"]
-    function getColorAvatar(index) {
-        return coloresAvatar[index % coloresAvatar.length]
-    }
-
-    function getMaximo(arr) {
-        return Math.max(...arr.map(([, v]) => v), 1)
-    }
+    function getColorAvatar(index) { return coloresAvatar[index % coloresAvatar.length] }
+    function getMaximo(arr) { return Math.max(...arr.map(([, v]) => v), 1) }
 
     return (
         <div className={styles.pagina}>
 
-            {/* NAVBAR */}
-            <div className={styles.navbar}>
-                <div className={styles.navLogo}>
-                    <img src={logo} alt="Brújula Social" className={styles.logoImg} />
-                </div>
-                <div className={styles.navTabs}>
+            {/* ✅ Navbar eliminado — NavbarGlobal vive en Routing.jsx */}
+
+            {/* Tabs de navegación interna */}
+            <div className={styles.tabs}>
+                {["dashboard", "voluntarios", "organizaciones"].map((tab) => (
                     <button
-                        className={`${styles.navTab} ${tabActiva === "dashboard" ? styles.navTabActiva : ""}`}
-                        onClick={() => setTabActiva("dashboard")}
-                    >Dashboard</button>
-                    <button
-                        className={`${styles.navTab} ${tabActiva === "voluntarios" ? styles.navTabActiva : ""}`}
-                        onClick={() => setTabActiva("voluntarios")}
-                    >Voluntarios</button>
-                    <button
-                        className={`${styles.navTab} ${tabActiva === "organizaciones" ? styles.navTabActiva : ""}`}
-                        onClick={() => setTabActiva("organizaciones")}
-                    >Organizaciones</button>
-                </div>
-                <div className={styles.navBadge}>📊 Impacto</div>
+                        key={tab}
+                        className={`${styles.tab} ${tabActiva === tab ? styles.tabActiva : ''}`}
+                        onClick={() => setTabActiva(tab)}
+                    >
+                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                    </button>
+                ))}
             </div>
 
             {/* ===== DASHBOARD ===== */}

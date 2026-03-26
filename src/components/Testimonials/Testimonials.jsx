@@ -1,12 +1,22 @@
 // components/Testimonials/Testimonials.jsx
 import React from 'react';
 import './Testimonials.css';
+import videoVoluntariado from '../../assets/Video_de_Voluntariados_en_Costa_Rica.mp4';
 
 const Testimonials = () => {
   return (
     <section className="testimonials-section">
-      <h2>Voces del Cambio</h2>
-      
+      <h2>Voluntariados Inspiradores </h2>
+
+      <section className="video-section">
+        <div className="video-placeholder">
+          <video className="video-player" controls>
+            <source src={videoVoluntariado} type="video/mp4" />
+            Tu navegador no soporta el elemento de video.
+          </video>
+        </div>
+      </section>
+
       <div className="testimonials-grid">
         <div className="testimonial-card">
           <div className="quote-icon bg-orange">"</div>

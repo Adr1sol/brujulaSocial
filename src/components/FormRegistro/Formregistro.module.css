@@ -2,7 +2,9 @@
     display: flex;
     min-height: 100vh;
     width: 100%;
-    background-color: #f8fafc;
+
+    background-color: #F8FAFC;
+
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
@@ -41,14 +43,18 @@
     font-weight: 800;
     margin-bottom: 20px;
     letter-spacing: -0.02em;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
 }
 
 .branding p {
     font-size: 1.25rem;
     opacity: 1;
     line-height: 1.6;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
     font-weight: 500;
 }
 
@@ -93,7 +99,9 @@
 }
 
 .sub {
-    color: #64748b;
+
+    color: #64748B;
+
     font-size: 1rem;
     font-weight: 500;
 }
@@ -118,7 +126,9 @@
 
 .opcion {
     flex: 1;
-    border: 2px solid #f1f5f9;
+
+    border: 2px solid #F1F5F9;
+
     border-radius: 12px;
     padding: 14px;
     display: flex;
@@ -126,14 +136,18 @@
     align-items: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: #f8fafc;
+
+    background: #F8FAFC;
+
 }
 
 .opcion h4 {
     margin: 0;
     font-size: 0.95rem;
     font-weight: 700;
-    color: #64748b;
+
+    color: #64748B;
+
 }
 
 .activo {
@@ -171,7 +185,9 @@
     gap: 12px;
 }
 
-.row > div {
+
+.row>div {
+
     flex: 1;
 }
 
@@ -191,11 +207,13 @@
     width: 100%;
     padding: 12px 14px;
     border-radius: 10px;
-    border: 2px solid #f1f5f9;
-    background-color: #f8fafc;
+
+    border: 2px solid #F1F5F9;
+    background-color: #F8FAFC;
     font-size: 0.95rem;
     transition: all 0.2s;
-    color: #1e293b;
+    color: #1E293B;
+
 }
 
 .inputGroup input:focus {
@@ -237,7 +255,9 @@
 .login {
     text-align: center;
     margin-top: 24px;
-    color: #64748b;
+
+    color: #64748B;
+
     font-size: 0.9rem;
     font-weight: 500;
 }
@@ -251,7 +271,9 @@
 }
 
 .login span:hover {
-    color: #d97706;
+
+    color: #D97706;
+
     text-decoration: underline;
 }
 
@@ -261,15 +283,19 @@
     gap: 12px;
     margin: 8px 0;
     padding: 12px;
-    background: #f8fafc;
+
+    background: #F8FAFC;
     border-radius: 10px;
-    border: 2px solid #f1f5f9;
+    border: 2px solid #F1F5F9;
+
     transition: all 0.2s;
 }
 
 .checkboxTerminos:hover {
     border-color: #078A87;
-    background: #f0fdfa;
+
+    background: #F0FDFA;
+
 }
 
 .checkboxTerminos input[type="checkbox"] {
@@ -305,15 +331,17 @@
     .visualSide {
         display: none;
     }
-    
+
+
     .formSide {
         padding: 30px;
     }
-    
+
     .formSide::after {
         display: none;
     }
-    
+
+
     .card {
         max-width: 100%;
     }

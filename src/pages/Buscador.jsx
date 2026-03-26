@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
+import FiltrosOrganizaciones  from '../components/Filtros/FiltrosOrganizaciones'
 import BuscadorOrganizaciones from '../components/Buscador/BuscadorOrganizaciones'
-import FiltrosOrganizaciones from '../components/Filtros/FiltrosOrganizaciones'
 
 function Buscador() {
 
@@ -15,16 +15,10 @@ function Buscador() {
     }
 
     return (
-        <div>
-            <FiltrosOrganizaciones
-                filtros={filtros}
-                onFiltroChange={manejoCambioFiltro}
-            />
-
-            <BuscadorOrganizaciones
-                filtros={filtros}
-            />
-        </div>
+        <BuscadorOrganizaciones
+            filtros={filtros}
+            onFiltroChange={manejoCambioFiltro}
+        />
     )
 }
 

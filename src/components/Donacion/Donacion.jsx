@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import styles from './Donacion.module.css';
+
+import './Donacion.css';
+
 import Swal from 'sweetalert2'
 
 const Donacion = () => {
@@ -9,7 +11,9 @@ const Donacion = () => {
 
     const causas = [
         { id: 'edu', nombre: 'Educación', icon: '🎓' },
-        { id: 'amb', nombre: 'Ambiente', icon: '🌿' },
+
+        { id: 'amb', nombre: 'Ambiente', icon: '🍃' },
+
         { id: 'adu', nombre: 'Adulto Mayor', icon: '👴' },
         { id: 'res', nombre: 'Rescate Animal', icon: '🐾' },
     ];
@@ -29,39 +33,43 @@ const Donacion = () => {
     // info celeste
 
     return (
-        <div className={styles.donationCard}>
+
+        <div className="donation-card">
 
             {/* Paso 1: Selecciona una Causa */}
-            <section className={styles.stepSection}>
-                <div className={styles.stepHeader}>
-                    <span className={styles.stepNumber}>1</span>
+            <section className="step-section">
+                <div className="step-header">
+                    <span className="step-number">1</span>
                     <h3>Selecciona una Causa</h3>
                 </div>
-                <div className={styles.optionsGrid}>
+                <div className="options-grid">
                     {causas.map((c) => (
                         <button
                             key={c.id}
-                            className={`${styles.optionBtn} ${causa === c.nombre ? styles.active : ''}`}
+                            className={`option-btn ${causa === c.nombre ? 'active' : ''}`}
                             onClick={() => setCausa(c.nombre)}
                         >
-                            <span className={styles.icon}>{c.icon}</span>
-                            <span className={styles.label}>{c.nombre}</span>
+                            <span className="icon">{c.icon}</span>
+                            <span className="label">{c.nombre}</span>
+
                         </button>
                     ))}
                 </div>
             </section>
 
             {/* Paso 2: Monto de la Donación */}
-            <section className={styles.stepSection}>
-                <div className={styles.stepHeader}>
-                    <span className={styles.stepNumber}>2</span>
+
+            <section className="step-section">
+                <div className="step-header">
+                    <span className="step-number">2</span>
                     <h3>Monto de la Donación</h3>
                 </div>
-                <div className={styles.amountsGrid}>
+                <div className="amounts-grid">
                     {montos.map((m) => (
                         <button
                             key={m}
-                            className={`${styles.amountBtn} ${monto === m ? styles.active : ''}`}
+                            className={`amount-btn ${monto === m ? 'active' : ''}`}
+
                             onClick={() => setMonto(m)}
                         >
                             {m !== 'Otro monto' ? `₡${m}` : m}
@@ -69,73 +77,84 @@ const Donacion = () => {
                     ))}
                 </div>
                 {monto === 'Otro monto' && (
-                    <div className={styles.inputGroup}>
+
+                    <div className="input-group">
+
                         <label>Ingresa un monto personalizado</label>
                         <input
                             type="number"
                             placeholder="Otro Monto"
                             value={otroMonto}
                             onChange={(e) => setOtroMonto(e.target.value)}
-                            className={styles.customAmountInput}
+
+                            className="custom-amount-input"
+
                         />
                     </div>
                 )}
             </section>
 
             {/* Paso 3: Información de Pago */}
-            <section className={styles.stepSection}>
-                <div className={styles.stepHeader}>
-                    <span className={styles.stepNumber}>3</span>
+
+            <section className="step-section">
+                <div className="step-header">
+                    <span className="step-number">3</span>
                     <h3>Información de Pago</h3>
                 </div>
 
-                <div className={styles.paymentLayout}>
-                    <div className={styles.paymentForm}>
-                        <div className={styles.inputGroup}>
+                <div className="payment-layout">
+                    <div className="payment-form">
+                        <div className="input-group">
                             <label>NOMBRE DEL TITULAR</label>
                             <input type="text" placeholder="Ej. María García" />
                         </div>
-                        <div className={styles.inputGroup}>
+                        <div className="input-group">
                             <label>NÚMERO DE TARJETA</label>
-                            <div className={styles.cardInputWrapper}>
+                            <div className="card-input-wrapper">
                                 <input type="text" placeholder="0000 0000 0000 0000" />
                             </div>
                         </div>
-                        <div className={styles.formRow}>
-                            <div className={styles.inputGroup}>
+                        <div className="form-row">
+                            <div className="input-group">
                                 <label>VENCIMIENTO</label>
                                 <input type="text" placeholder="MM/YY" />
                             </div>
-                            <div className={styles.inputGroup}>
+                            <div className="input-group">
+
                                 <label>CVV</label>
                                 <input type="password" placeholder="***" />
                             </div>
                         </div>
                     </div>
 
-                    <div className={styles.secureInfo}>
-                        <div className={styles.shieldIcon}>🛡️</div>
+
+                    <div className="secure-info">
+                        <div className="shield-icon">🛡️</div>
                         <h4>Transacción Segura</h4>
                         <p>Tus datos están protegidos bajo protocolos de seguridad de grado bancario.</p>
-                        <div className={styles.cardLogos}>
+                        <div className="card-logos">
+
                             <span>VISA</span> <span>MC</span> <span>AMEX</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <button className={styles.submitBtn} onClick={handleDonarClick}>
 
-                ❤️ Donar ahora
+            <button className="submit-btn" onClick={handleDonarClick}>
+                
+                🧡 Donar ahora
             </button>
 
+            
+            <p className="tax-disclaimer">
 
-
-            <p className={styles.taxDisclaimer}>
                 ✓ Tu donación es 100% deducible de impuestos.
             </p>
         </div>
     );
 };
 
+
 export default Donacion;
+

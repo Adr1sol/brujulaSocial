@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ServiceCategorias from '../../services/ServiceCategorias'
 import ServiceProvincias from '../../services/ServiceProvincias'
 import ServiceDisponibilidades from '../../services/ServiceDisponibilidades'
+import styles from './FiltrosOrganizaciones.module.css'
 
 function FiltrosOrganizaciones({ filtros, onFiltroChange }) {
 
@@ -19,53 +20,52 @@ function FiltrosOrganizaciones({ filtros, onFiltroChange }) {
             setProvincias(todasLasProvincias)
             setDisponibilidades(todasLasDisponibilidades)
         }
-
         cargarOpciones()
     }, [])
 
     return (
-        <div>
-            <label htmlFor="categoria">Categoría</label>
-            <select
-                id="categoria"
-                value={filtros.idCategoria}
-                onChange={(e) => onFiltroChange('idCategoria', e.target.value)}
-            >
-                <option value="">Todas las categorías</option>
-                {categorias.map((cat) => (
-                    <option key={cat.id} value={cat.id}>
-                        {cat.NombreCategoria}
-                    </option>
-                ))}
-            </select>
+        <div className={styles.filtrosWrap}>
+            <div className={styles.filtroGroup}>
+                <label className={styles.filtroLabel}>Categoría</label>
+                <select
+                    className={styles.filtroSelect}
+                    value={filtros.idCategoria}
+                    onChange={(e) => onFiltroChange('idCategoria', e.target.value)}
+                >
+                    <option value="">Todas las categorías</option>
+                    {categorias.map((cat) => (
+                        <option key={cat.id} value={cat.id}>{cat.NombreCategoria}</option>
+                    ))}
+                </select>
+            </div>
 
-            <label htmlFor="provincia">Provincia</label>
-            <select
-                id="provincia"
-                value={filtros.IdProvincia}
-                onChange={(e) => onFiltroChange('IdProvincia', e.target.value)}
-            >
-                <option value="">Todas las provincias</option>
-                {provincias.map((prov) => (
-                    <option key={prov.id} value={prov.id}>
-                        {prov.NombreProvincia}
-                    </option>
-                ))}
-            </select>
+            <div className={styles.filtroGroup}>
+                <label className={styles.filtroLabel}>Provincia</label>
+                <select
+                    className={styles.filtroSelect}
+                    value={filtros.IdProvincia}
+                    onChange={(e) => onFiltroChange('IdProvincia', e.target.value)}
+                >
+                    <option value="">Todas las provincias</option>
+                    {provincias.map((prov) => (
+                        <option key={prov.id} value={prov.id}>{prov.NombreProvincia}</option>
+                    ))}
+                </select>
+            </div>
 
-            <label htmlFor="disponibilidad">Disponibilidad</label>
-            <select
-                id="disponibilidad"
-                value={filtros.idDisponibilidad}
-                onChange={(e) => onFiltroChange('idDisponibilidad', e.target.value)}
-            >
-                <option value="">Toda la disponibilidad</option>
-                {disponibilidades.map((disp) => (
-                    <option key={disp.id} value={disp.id}>
-                        {disp.NombreDisponibilidad}
-                    </option>
-                ))}
-            </select>
+            <div className={styles.filtroGroup}>
+                <label className={styles.filtroLabel}>Disponibilidad</label>
+                <select
+                    className={styles.filtroSelect}
+                    value={filtros.idDisponibilidad}
+                    onChange={(e) => onFiltroChange('idDisponibilidad', e.target.value)}
+                >
+                    <option value="">Toda la disponibilidad</option>
+                    {disponibilidades.map((disp) => (
+                        <option key={disp.id} value={disp.id}>{disp.NombreDisponibilidad}</option>
+                    ))}
+                </select>
+            </div>
         </div>
     )
 }
