@@ -1,0 +1,141 @@
+import React, { useState } from 'react';
+import styles from './Donacion.module.css';
+import Swal from 'sweetalert2'
+
+const Donacion = () => {
+    const [causa, setCausa] = useState('Educación');
+    const [monto, setMonto] = useState('10.000');
+    const [otroMonto, setOtroMonto] = useState('');
+
+    const causas = [
+        { id: 'edu', nombre: 'Educación', icon: '🎓' },
+        { id: 'amb', nombre: 'Ambiente', icon: '🌿' },
+        { id: 'adu', nombre: 'Adulto Mayor', icon: '👴' },
+        { id: 'res', nombre: 'Rescate Animal', icon: '🐾' },
+    ];
+
+    const montos = ['5.000', '10.000', '25.000', 'Otro monto'];
+
+    const handleDonarClick = () => {
+        Swal.fire({
+            title: 'Gracias Por tu Donacion',
+            text: 'Tu Donacion ha sido enviada con exito.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        });
+    };
+    // success verde
+    // warning amarillo
+    // info celeste
+
+    return (
+        <div className={styles.donationCard}>
+
+            {/* Paso 1: Selecciona una Causa */}
+            <section className={styles.stepSection}>
+                <div className={styles.stepHeader}>
+                    <span className={styles.stepNumber}>1</span>
+                    <h3>Selecciona una Causa</h3>
+                </div>
+                <div className={styles.optionsGrid}>
+                    {causas.map((c) => (
+                        <button
+                            key={c.id}
+                            className={`${styles.optionBtn} ${causa === c.nombre ? styles.active : ''}`}
+                            onClick={() => setCausa(c.nombre)}
+                        >
+                            <span className={styles.icon}>{c.icon}</span>
+                            <span className={styles.label}>{c.nombre}</span>
+                        </button>
+                    ))}
+                </div>
+            </section>
+
+            {/* Paso 2: Monto de la Donación */}
+            <section className={styles.stepSection}>
+                <div className={styles.stepHeader}>
+                    <span className={styles.stepNumber}>2</span>
+                    <h3>Monto de la Donación</h3>
+                </div>
+                <div className={styles.amountsGrid}>
+                    {montos.map((m) => (
+                        <button
+                            key={m}
+                            className={`${styles.amountBtn} ${monto === m ? styles.active : ''}`}
+                            onClick={() => setMonto(m)}
+                        >
+                            {m !== 'Otro monto' ? `₡${m}` : m}
+                        </button>
+                    ))}
+                </div>
+                {monto === 'Otro monto' && (
+                    <div className={styles.inputGroup}>
+                        <label>Ingresa un monto personalizado</label>
+                        <input
+                            type="number"
+                            placeholder="Otro Monto"
+                            value={otroMonto}
+                            onChange={(e) => setOtroMonto(e.target.value)}
+                            className={styles.customAmountInput}
+                        />
+                    </div>
+                )}
+            </section>
+
+            {/* Paso 3: Información de Pago */}
+            <section className={styles.stepSection}>
+                <div className={styles.stepHeader}>
+                    <span className={styles.stepNumber}>3</span>
+                    <h3>Información de Pago</h3>
+                </div>
+
+                <div className={styles.paymentLayout}>
+                    <div className={styles.paymentForm}>
+                        <div className={styles.inputGroup}>
+                            <label>NOMBRE DEL TITULAR</label>
+                            <input type="text" placeholder="Ej. María García" />
+                        </div>
+                        <div className={styles.inputGroup}>
+                            <label>NÚMERO DE TARJETA</label>
+                            <div className={styles.cardInputWrapper}>
+                                <input type="text" placeholder="0000 0000 0000 0000" />
+                            </div>
+                        </div>
+                        <div className={styles.formRow}>
+                            <div className={styles.inputGroup}>
+                                <label>VENCIMIENTO</label>
+                                <input type="text" placeholder="MM/YY" />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label>CVV</label>
+                                <input type="password" placeholder="***" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.secureInfo}>
+                        <div className={styles.shieldIcon}>🛡️</div>
+                        <h4>Transacción Segura</h4>
+                        <p>Tus datos están protegidos bajo protocolos de seguridad de grado bancario.</p>
+                        <div className={styles.cardLogos}>
+                            <span>VISA</span> <span>MC</span> <span>AMEX</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <button className={styles.submitBtn} onClick={handleDonarClick}>
+
+                ❤️ Donar ahora
+            </button>
+
+
+
+            <p className={styles.taxDisclaimer}>
+                ✓ Tu donación es 100% deducible de impuestos.
+            </p>
+        </div>
+    );
+};
+
+export default Donacion;

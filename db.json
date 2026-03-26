@@ -181,6 +181,16 @@
       "Tipo": "voluntario",
       "IdProvincia": 1,
       "FechaRegistro": "2026-03-18"
+    },
+    {
+      "id": "2798",
+      "Nombre": "Adrian Ippolito",
+      "Correo": "adrianippo9407@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "60029403",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-26"
     }
   ],
   "aplicaciones": [
@@ -203,6 +213,6 @@
       "FechaAplicacion": "2026-03-18"
     }
   ],
- "horas": []
-
+  "horas": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
