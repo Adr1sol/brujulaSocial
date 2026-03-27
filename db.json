@@ -261,7 +261,6 @@
       "FechaRegistro": "2026-03-18"
     },
     {
-
       "id": "0001",
       "Nombre": "Ana Fran",
       "Correo": "ana@gmial.com",
@@ -405,7 +404,6 @@
       "idOrganizacion": "bDW4HDn2tM4",
       "FechaRegistro": "2026-03-26",
       "id": "RujMHiT7J2I"
-
     }
   ],
   "aplicaciones": [
@@ -428,7 +426,6 @@
       "FechaAplicacion": "2026-03-18"
     },
     {
-
       "id": "43e3",
       "idUsuario": "7d30",
       "idOrganizacion": "1",
@@ -769,6 +766,12 @@
       "idOrganizacion": "bDW4HDn2tM4",
       "FechaAplicacion": "2026-03-26",
       "id": "s8lVsNLh_No"
+    },
+    {
+      "id": "f254",
+      "idUsuario": "2798",
+      "idOrganizacion": "1",
+      "FechaAplicacion": "2026-03-26"
     }
   ],
   "horas": [
@@ -787,8 +790,15 @@
       "actividad": "Siembra de árbolitos",
       "fecha": "2026-03-23",
       "horas": 15
+    },
+    {
+      "id": "a9f1",
+      "idUsuario": "1",
+      "idOrganizacion": "1",
+      "actividad": "Rescate Animal",
+      "fecha": "1998-07-04",
+      "horas": 35
     }
   ],
-
   "$schema": "./node_modules/json-server/schema.json"
 }

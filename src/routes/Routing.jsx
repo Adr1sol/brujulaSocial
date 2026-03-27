@@ -1,3 +1,6 @@
+
+
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavbarGlobal from "../components/NavbarGlobal/NavbarGlobal";
 import HomePage             from "../pages/HomePage";
@@ -5,7 +8,6 @@ import InicioUser           from "../pages/InicioUser";
 import RegistroUser         from "../pages/RegistroUser";
 import Buscador             from "../pages/Buscador";
 import RegisterOrganizacion from "../pages/RegisterOrganizacion";
-
 import PerfilPage           from "../pages/PerfilPage";
 import PerfilOrganizacion   from "../pages/PerfilOrganizacion";
 import TerminosCondiciones  from "../pages/Terminos";
@@ -13,17 +15,15 @@ import DashImpacto          from "../pages/DashImpacto";
 import Donaciones           from "../pages/Home/Donacion";
 import Admin                from "../pages/Admin";
 
-
 function Routing() {
   return (
     <BrowserRouter>
 
-      {/* ✅ NavbarGlobal aparece en TODAS las páginas automáticamente */}
+      {/* :white_check_mark: NavbarGlobal aparece en TODAS las páginas automáticamente */}
       <NavbarGlobal />
 
       <Routes>
-
-        {/* ✅ Ruta raíz agregada */}
+        {/* :white_check_mark: Ruta raíz agregada */}
         <Route path="/"               element={<HomePage />} />
         <Route path="/home"           element={<HomePage />} />
 
@@ -37,7 +37,7 @@ function Routing() {
         <Route path="/register"       element={<RegisterOrganizacion />} />
         <Route path="/Donacion"       element={<Donaciones />} />
         <Route path="/terminos"       element={<TerminosCondiciones />} />
-
+      </Routes>
 
     </BrowserRouter>
   );

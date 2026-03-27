@@ -54,14 +54,9 @@ async function putOrganizaciones(organizaciones, id) {
 // DELETE organización - función para eliminar una organización
 async function deleteOrganizaciones(id) {
     try {
-        const respuesta = await fetch("http://localhost:3001/organizaciones/" + id, {
+        await fetch("http://localhost:3001/organizaciones/" + id, {
             method: "DELETE"
         })
-
-        const datosOrganizaciones = await respuesta.json();
-
-        return datosOrganizaciones;
-
     } catch (error) {
         console.error("Error al eliminar la organizaciones", error);
     }
