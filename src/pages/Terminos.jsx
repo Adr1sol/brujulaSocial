@@ -1,15 +1,13 @@
-
 import React from "react"
-import Terminos from "../components/TerminosCondiciones/Terminos"
+import TerminosN from "../components/terminos/TerminosN"
 
-function TerminosCondiciones() {
+function Terminos() {
     return (
         <div>
-            <Terminos />
+            <TerminosN />
         </div>
     )
     
 }
 
-export default TerminosCondiciones
-
+export default Terminos

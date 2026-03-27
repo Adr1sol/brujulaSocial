@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './terminos.module.css';
 
-const Terminos = () => {
+const TerminosN = () => {
   return (
     <div className={styles.container}>
       <div className={styles.paper}>
@@ -88,7 +88,7 @@ const Terminos = () => {
           <h2>XV. VALIDEZ DE LA FIRMA ELECTRÓNICA</h2>
           <p>De conformidad con la Ley de Certificados, Firmas Digitales y Documentos Electrónicos (Ley N° 8454), la aceptación mediante el marcado de la casilla "Acepto los Términos y Condiciones" en el formulario de registro posee la misma validez jurídica que una firma autógrafa para todos los efectos legales.</p>
         </section>
-        
+
         <footer className={styles.termsFooter}>
           <button className={styles.backButton} onClick={() => window.history.back()}>
             Volver
@@ -99,4 +99,4 @@ const Terminos = () => {
   );
 };
 
-export default Terminos;
+export default TerminosN;

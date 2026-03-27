@@ -1,7 +1,7 @@
 // components/Testimonials/Testimonials.jsx
 import React from 'react';
 import './Testimonials.css';
-import videoVoluntariado from '../../assets/Video_de_Voluntariados_en_Costa_Rica.mp4';
+import videoVoluntariado from '../../images/Video_Voluntariado_Testimonio.mp4';
 
 const Testimonials = () => {
   return (

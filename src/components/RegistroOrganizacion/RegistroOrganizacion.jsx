@@ -128,26 +128,26 @@ function RegistroOrganizacion() {
     return (
         <div className={styles.wrapper}>
 
-                {/* ── Lado visual ── */}
-                <div className={styles.visualSide}>
-                    <div className={styles.branding}>
-                        <h1>Registrá tu organización</h1>
-                        <p>Conectá con voluntarios comprometidos que quieren hacer la diferencia.</p>
-                    </div>
+            {/* ── Lado visual ── */}
+            <div className={styles.visualSide}>
+                <div className={styles.branding}>
+                    <h1>Registrá tu organización</h1>
+                    <p>Conectá con voluntarios comprometidos que quieren hacer la diferencia.</p>
                 </div>
+            </div>
 
-                {/* ── Lado formulario ── */}
-                <div className={styles.formSide}>
-                    <div className={styles.card}>
+            {/* ── Lado formulario ── */}
+            <div className={styles.formSide}>
+                <div className={styles.card}>
 
-                        <Link to="/" className={styles.backLink}>← Volver al inicio</Link>
+                    <Link to="/" className={styles.backLink}>← Volver al inicio</Link>
 
-                        <div className={styles.header}>
-                            <h2>Crear cuenta</h2>
-                            <p className={styles.sub}>Completá los datos de tu organización para comenzar.</p>
-                        </div>
+                    <div className={styles.header}>
+                        <h2>Crear cuenta</h2>
+                        <p className={styles.sub}>Completá los datos de tu organización para comenzar.</p>
+                    </div>
 
-                        <div className={styles.form}>
+                    <div className={styles.form}>
 
                         <div className={styles.inputGroup}>
                             <label>Nombre de la organización</label>
@@ -248,9 +248,22 @@ function RegistroOrganizacion() {
                         <span onClick={() => navigate("/inicio")}>Iniciá sesión →</span>
                     </p>
 
+                    <div className={styles.inputGroup}>
+                        <label>Provincia</label>
+                        <select value={idProvincia} onChange={(e) => setIdProvincia(e.target.value)}>
+                            <option value="">Seleccionar</option>
+                            <option value="1">San José</option>
+                            <option value="2">Alajuela</option>
+                            <option value="3">Cartago</option>
+                            <option value="4">Heredia</option>
+                            <option value="5">Guanacaste</option>
+                            <option value="6">Puntarenas</option>
+                            <option value="7">Limón</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-        </div >
+            </div >
+        </div>
     )
 }
 

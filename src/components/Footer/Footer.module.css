@@ -17,10 +17,8 @@
   gap: 1rem;
 }
 
-
 .footer-section h3,
 .title {
-
   margin-bottom: 0.8rem;
   font-size: 1rem;
   background: var(--primary-gradient);
@@ -30,10 +28,8 @@
   font-weight: 700;
 }
 
-
 .footer-section p,
 .footer-section ul {
-
   color: #9CA3AF;
   font-size: 0.8rem;
   line-height: 1.6;
@@ -116,9 +112,7 @@
   flex-direction: column;
   gap: 0.5rem;
   position: relative;
-
   right: 80px;
-
 }
 
 .inputField {
@@ -170,8 +164,6 @@
 
 
 
-
-
 /* Contenedor de la columna de ubicación */
 .mapCol {
   display: flex;
@@ -192,13 +184,14 @@
 /* Contenedor principal del mapa con efecto Glassmorphism */
 .mapWrapper {
   position: relative;
-
+  border-radius: 1rem; /* rounded-2xl */
+  overflow: hidden;
+  height: 10rem; /* h-40 */
   border-radius: 1rem;
   /* rounded-2xl */
   overflow: hidden;
   height: 10rem;
   /* h-40 */
-
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.03);
   transition: all 0.7s ease;
@@ -219,10 +212,8 @@
 }
 
 .mapWrapper:hover {
-
   border-color: #078A87;
   /* Color primario del gradiente */
-
 }
 
 /* Capa oscura sobre la imagen */
@@ -240,12 +231,10 @@
   background-color: #FFFFFF;
   color: #000000;
   padding: 0.5rem 1rem;
-
   border-radius: 0.5rem;
   /* rounded-lg */
   font-size: 0.625rem;
   /* text-[10px] */
-
   font-weight: 900;
   text-decoration: none;
   text-transform: uppercase;

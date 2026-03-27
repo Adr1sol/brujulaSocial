@@ -1,10 +1,9 @@
-import Formregistro from "../components/FormRegistro/Formregistro";
+import Formregistro from "../components/FormRegistro/FormRegistro"
 
 function Registro(){
  return (
   <>
     <Formregistro/>
   </>
- )
-}
+ )}
 export default Registro
