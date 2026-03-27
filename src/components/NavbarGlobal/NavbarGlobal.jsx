@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styles from './NavbarGlobal.module.css';
+import logoImg from '../../images/logoNavbar.png';
 
 export default function NavbarGlobal() {
     const navigate = useNavigate();
@@ -147,21 +148,30 @@ export default function NavbarGlobal() {
 
     return (
         <nav className={styles.navbar}>
-            <div className={styles.logo}>
-                <Link to="/">🧭 Brújula Social</Link>
+            <div className={styles.inner}>
+                {/* Logo */}
+                <Link to="/" className={styles.logoLink}>
+                    <div className={styles.logoIcon}>
+                        <img src={logoImg} alt="Brújula Social" className={styles.logoImg} />
+                    </div>
+                    <span className={styles.logoText}>
+                        Brújula<span className={styles.logoAccent}>Social</span>
+                    </span>
+                </Link>
+
+                {/* Links */}
+                <ul className={styles.navLinks}>
+                    {links.map((item, index) => renderLink(item, index))}
+
+                    {usuario && (
+                        <li>
+                            <button onClick={handleLogout} className={styles.btnLogout}>
+                                Cerrar sesión
+                            </button>
+                        </li>
+                    )}
+                </ul>
             </div>
-
-            <ul className={styles.navLinks}>
-                {links.map((item, index) => renderLink(item, index))}
-
-                {usuario && (
-                    <li>
-                        <button onClick={handleLogout} className={styles.btnLogout}>
-                            Cerrar sesión
-                        </button>
-                    </li>
-                )}
-            </ul>
         </nav>
     );
 }

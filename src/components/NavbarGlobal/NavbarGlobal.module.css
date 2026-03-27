@@ -1,44 +1,103 @@
+/* ── Navbar wrapper — fijo, ancho completo, fondo oscuro semitransparente ── */
 .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.25rem 2rem;
+}
+
+/* ── Contenedor interior con efecto glass ── */
+.inner {
+    max-width: 80rem;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 5%;
-    background-color: #ffffff;
-    border-bottom: 2px solid #1D9E75; /* Línea verde inferior como en tu captura */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    background: rgba(1, 101, 104, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 0.75rem 2rem;
+    transition: background 0.4s ease, border-color 0.4s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    overflow: visible;
 }
 
-.logo a {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #0d4d38;
+/* ── Logo ── */
+.logoLink {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     text-decoration: none;
 }
 
+.logoIcon {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    flex-shrink: 0;
+    margin-top: -1rem;
+    margin-bottom: -1rem;
+}
+
+.logoImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 4px;
+}
+
+.logoText {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.logoAccent {
+    color: #016568;
+}
+
+/* ── Links de navegación ── */
 .navLinks {
     display: flex;
     list-style: none;
     align-items: center;
-    gap: 2rem;
+    gap: 2.5rem;
     margin: 0;
+    padding: 0;
 }
 
 .link {
     text-decoration: none;
-    color: #555;
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 10px 0;
-    transition: color 0.3s;
+    color: #9ca3af;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 0;
+    transition: color 0.25s ease;
     position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Efecto de línea activa */
+.link:hover {
+    color: #ffffff;
+}
+
+/* ── Link activo ── */
 .linkActivo {
-    color: #1D9E75;
-    font-weight: bold;
+    color: #00f2ea;
 }
 
 .linkActivo::after {
@@ -47,55 +106,75 @@
     bottom: -2px;
     left: 0;
     width: 100%;
-    height: 3px;
-    background-color: #1D9E75;
-    border-radius: 5px 5px 0 0;
+    height: 2px;
+    background: #00f2ea;
+    border-radius: 2px;
 }
 
-.userBadge {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #f0f7f4;
-    padding: 4px 12px;
-    border-radius: 20px;
-}
-
-.avatarMini {
-    width: 24px;
-    height: 24px;
-    background: #1D9E75;
-    color: white;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-}
-
-.userName {
-    font-size: 0.85rem;
-    color: #333;
-}
-
-.btnLogout {
-    background: none;
-    border: 1px solid #e74c3c;
-    color: #e74c3c;
-    padding: 5px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.btnLogout:hover {
-    background: #e74c3c;
-    color: white;
-}
-/* ── Botón que actúa como link (para scroll) ──────────────── */
+/* ── Botón que actúa como link (para scroll) ── */
 .linkBtn {
     background: none;
     border: none;
     cursor: pointer;
     font-family: inherit;
+}
+
+/* ── Botón Iniciar sesión ── */
+.btnLogin {
+    text-decoration: none;
+    color: #9ca3af;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.25s ease;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.btnLogin:hover {
+    color: #ffffff;
+}
+
+/* ── Botón Registrarse ── */
+.btnRegister {
+    text-decoration: none;
+    background: #ffffff;
+    color: #000000;
+    padding: 0.5rem 1.4rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: background 0.25s ease, transform 0.15s ease;
+    display: inline-block;
+}
+
+.btnRegister:hover {
+    background: #00f2ea;
+    transform: scale(1.05);
+}
+
+.btnRegister:active {
+    transform: scale(0.95);
+}
+
+/* ── Botón Cerrar sesión ── */
+.btnLogout {
+    background: none;
+    border: 1px solid rgba(231, 76, 60, 0.6);
+    color: #e74c3c;
+    padding: 0.4rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: background 0.25s ease, color 0.25s ease;
+    font-family: inherit;
+}
+
+.btnLogout:hover {
+    background: #e74c3c;
+    color: #ffffff;
 }
