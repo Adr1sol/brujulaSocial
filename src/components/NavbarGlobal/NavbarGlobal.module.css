@@ -2,19 +2,45 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 5%;
-    background-color: #ffffff;
-    border-bottom: 2px solid #1D9E75; /* Línea verde inferior como en tu captura */
+    padding: 0.75rem 5%;
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--glass-border);
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 2000;
+    transition: var(--transition);
 }
 
 .logo a {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #0d4d38;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
     text-decoration: none;
+    transition: var(--transition);
+}
+
+.logo a span {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Outfit', sans-serif;
+}
+
+.logo a:hover {
+    transform: translateY(-1px);
+}
+
+.logoImage {
+    height: 54px;
+    width: auto;
+    object-fit: contain;
+    transition: var(--transition);
 }
 
 .navLinks {
@@ -27,75 +53,104 @@
 
 .link {
     text-decoration: none;
-    color: #555;
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 10px 0;
-    transition: color 0.3s;
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 8px 12px;
+    transition: var(--transition);
     position: relative;
+    border-radius: var(--radius-sm);
 }
 
-/* Efecto de línea activa */
-.linkActivo {
-    color: #1D9E75;
-    font-weight: bold;
+.link:hover {
+    color: var(--primary);
+    background: rgba(0, 163, 166, 0.05);
 }
 
-.linkActivo::after {
+.link::after {
     content: "";
     position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
+    bottom: 0;
+    left: 12px;
+    right: 12px;
     height: 3px;
-    background-color: #1D9E75;
-    border-radius: 5px 5px 0 0;
+    background: var(--secondary);
+    transform: scaleX(0);
+    transition: var(--transition);
+    border-radius: 4px;
 }
 
-.userBadge {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #f0f7f4;
-    padding: 4px 12px;
-    border-radius: 20px;
+.link:hover::after, .linkActivo::after {
+    transform: scaleX(1);
 }
 
-.avatarMini {
-    width: 24px;
-    height: 24px;
-    background: #1D9E75;
-    color: white;
-    font-size: 10px;
+.linkActivo {
+    color: var(--primary) !important;
+}
+
+.btnLogin, .btnRegister {
+    padding: 0.7rem 1.8rem;
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: var(--transition);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
 }
 
-.userName {
-    font-size: 0.85rem;
-    color: #333;
+.btnLogin {
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    background: transparent;
+}
+
+.btnLogin:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 51, 102, 0.2);
+}
+
+.btnRegister {
+    background: linear-gradient(135deg, var(--accent) 0%, #ff6b00 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 10px 20px rgba(242, 140, 0, 0.3);
+}
+
+.btnRegister:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(242, 140, 0, 0.4);
 }
 
 .btnLogout {
-    background: none;
-    border: 1px solid #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.3);
     color: #e74c3c;
-    padding: 5px 15px;
-    border-radius: 5px;
+    padding: 0.6rem 1.4rem;
+    border-radius: var(--radius-xl);
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
+    transition: var(--transition);
 }
 
 .btnLogout:hover {
     background: #e74c3c;
     color: white;
+    transform: scale(0.95);
 }
-/* ── Botón que actúa como link (para scroll) ──────────────── */
+
 .linkBtn {
     background: none;
     border: none;
     cursor: pointer;
     font-family: inherit;
 }
+
+@media (max-width: 968px) {
+    .navLinks {
+        display: none; /* In a real app we'd add a mobile menu here */
+    }
+}

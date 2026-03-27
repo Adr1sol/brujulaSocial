@@ -1,71 +1,121 @@
-/* terminos.css */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
 .terminos-wrapper {
-  background-color: #f0f4f8; /* Light blue-gray background */
+  min-height: 100vh;
+  background: var(--bg-main);
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: 'Outfit', sans-serif;
 }
 
 .terminos-container {
-  max-width: 900px; /* Increased max-width */
-  margin: 2rem auto; /* Responsive margin */
-  padding: 2rem;
-  background-color: #ffffff; /* White background for content */
-  border-radius: 12px; /* Softer corners */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Deeper shadow */
-  font-family: 'Roboto', sans-serif; /* Professional font */
+  max-width: 1000px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-2xl, 32px);
+  padding: 5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+  animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .terminos-header {
   text-align: center;
-  padding: 2rem 0;
-  border-bottom: 1px solid #e0e0e0; /* Subtle separator */
-  margin-bottom: 2.5rem;
+  margin-bottom: 5rem;
 }
 
 .terminos-header h1 {
-  color: #078a87; /* Main teal color */
-  font-size: 2.8rem; /* Larger title */
-  font-weight: 700;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -2px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
 }
 
 .terminos-header p {
-  color: #888;
-  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
 }
 
 .terminos-seccion {
-  margin-bottom: 2.5rem;
+  margin-bottom: 4rem;
+  position: relative;
+  padding-left: 2rem;
+  border-left: 2px solid rgba(7, 138, 135, 0.1);
+  transition: var(--transition);
+}
+
+.terminos-seccion:hover {
+  border-left-color: var(--primary);
+  background: rgba(7, 138, 135, 0.02);
+  border-radius: 0 16px 16px 0;
 }
 
 .terminos-seccion h2 {
-  color: #ef8514; /* Secondary orange color */
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #078a87;
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  font-family: 'Outfit', sans-serif;
 }
 
-.terminos-seccion p,
+.terminos-seccion p, 
 .terminos-seccion li {
-  color: #444; /* Darker gray for better readability */
-  line-height: 1.8; /* Increased line height */
-  font-size: 1.1rem;
+  color: #4b5563;
+  line-height: 1.8;
+  font-size: 1.15rem;
+  font-weight: 500;
 }
 
 .terminos-seccion ul {
-  list-style-position: inside; /* Better alignment */
-  padding-left: 1rem;
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.terminos-seccion li {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.terminos-seccion li::before {
+  content: "✓";
+  color: var(--secondary);
+  font-weight: 900;
 }
 
 .terminos-footer {
+  margin-top: 6rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
   text-align: center;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid #e0e0e0;
+  color: var(--text-muted);
+  font-weight: 600;
 }
 
-.terminos-footer p {
-  color: #888;
-  font-size: 1rem;
+@media (max-width: 768px) {
+  .terminos-container {
+    padding: 3rem 1.5rem;
+  }
 }

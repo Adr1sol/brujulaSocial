@@ -1,0 +1,169 @@
+.wrapper {
+    display: flex;
+    min-height: calc(100vh - var(--navbar-height));
+    width: 100%;
+    background-color: var(--bg-main);
+}
+
+.visualSide {
+    flex: 1.2;
+    position: relative;
+    background-image: url('../../images/Refugio.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end;
+    padding: 80px;
+    color: white;
+}
+
+.visualSide::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 51, 102, 0.5) 0%, rgba(0, 163, 166, 0.4) 100%);
+    z-index: 1;
+}
+
+.branding {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+}
+
+.branding h1 {
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -2px;
+}
+
+.branding p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.formSide {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    background-color: white;
+    position: relative;
+    overflow-y: auto;
+}
+
+.card {
+    width: 100%;
+    max-width: 540px;
+    padding: 20px 0;
+}
+
+.header {
+    margin-bottom: 32px;
+}
+
+.header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--primary);
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -1px;
+}
+
+.sub {
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.row {
+    display: flex;
+    gap: 20px;
+}
+
+.row > div {
+    flex: 1;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inputGroup label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.inputGroup input,
+.inputGroup select,
+.inputGroup textarea {
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border: 2px solid #f1f5f9;
+    background-color: #f8fafc;
+    font-size: 1rem;
+    transition: var(--transition);
+    color: var(--text-main);
+    width: 100%;
+    font-family: inherit;
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus,
+.inputGroup textarea:focus {
+    outline: none;
+    border-color: var(--secondary);
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(0, 163, 166, 0.1);
+}
+
+.inputGroup textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.submitBtn {
+    margin-top: 20px;
+    padding: 16px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-light) 100%);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 10px 25px rgba(0, 163, 166, 0.2);
+}
+
+.submitBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(0, 163, 166, 0.3);
+    filter: brightness(1.05);
+}
+
+@media (max-width: 1024px) {
+    .visualSide { padding: 40px; }
+}
+
+@media (max-width: 768px) {
+    .visualSide { display: none; }
+    .formSide { padding: 40px 20px; }
+    .card { max-width: 100%; }
+}

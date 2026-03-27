@@ -120,18 +120,19 @@ export default function FormInicio() {
 
           </div>
 
-          {/* ✅ Mensaje contextual según tipo seleccionado */}
-          {tipoCuenta === "organizacion" && (
-            <p className={styles.orgHint}>
-              ¿Aún no tienes una cuenta de organización?{" "}
-              <span
-                className={styles.orgHintLink}
-                onClick={() => navigate("/register")}
-              >
-                Regístrala aquí →
-              </span>
-            </p>
-          )}
+          <div className={styles.hintBox}>
+            {tipoCuenta === "organizacion" && (
+              <p className={styles.orgHint}>
+                ¿Aún no tienes una cuenta de organización?{" "}
+                <span
+                  className={styles.orgHintLink}
+                  onClick={() => navigate("/register")}
+                >
+                  Regístrala aquí →
+                </span>
+              </p>
+            )}
+          </div>
 
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.inputGroup}>

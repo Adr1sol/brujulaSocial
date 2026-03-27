@@ -131,20 +131,22 @@ function BuscadorOrganizaciones({ filtros, onFiltroChange }) {
                 ) : (
                     organizacionesFiltradas.map((org, i) => (
                         <div key={org.id} className={styles.orgCard}>
-                            <div
-                                className={styles.orgAvatar}
-                                style={{ background: COLORES[i % COLORES.length] }}
-                            >
-                                {getIniciales(org.NombreOrganizacion)}
-                            </div>
-                            <div className={styles.orgBody}>
+                            <div className={styles.cardHeader}>
+                                <div
+                                    className={styles.orgAvatar}
+                                    style={{ background: COLORES[i % COLORES.length] }}
+                                >
+                                    {getIniciales(org.NombreOrganizacion)}
+                                </div>
                                 <div className={styles.orgNombre}>{org.NombreOrganizacion}</div>
+                            </div>
+
+                            <div className={styles.orgBody}>
                                 <div className={styles.orgDesc}>{org.Descripcion}</div>
 
-                                {/* ✅ Correo de contacto — solo si existe */}
                                 {org.CorreoContacto && (
                                     <div className={styles.orgCorreo}>
-                                        ✉️ <a href={`mailto:${org.CorreoContacto}`}>{org.CorreoContacto}</a>
+                                        <a href={`mailto:${org.CorreoContacto}`}>✉️ {org.CorreoContacto}</a>
                                     </div>
                                 )}
 
@@ -154,12 +156,13 @@ function BuscadorOrganizaciones({ filtros, onFiltroChange }) {
                                     <span className={styles.orgTag}>⏰ {getNombreDisponibilidad(org.idDisponibilidad)}</span>
                                 </div>
                             </div>
+
                             <div className={styles.orgAccion}>
                                 <button
                                     className={styles.btnAplicar}
                                     onClick={() => handleAplicar(org)}
                                 >
-                                    Aplicar
+                                    Aplicar para Voluntariado
                                 </button>
                             </div>
                         </div>

@@ -15,11 +15,11 @@ const HomePage = () => {
         <About />
       </div>
 
+      <Testimonials />
+
       <div id="organizaciones">
         <ProyectosDestacados />
       </div>
-
-      <Testimonials />
 
       <div id="footer">
         <Footer />

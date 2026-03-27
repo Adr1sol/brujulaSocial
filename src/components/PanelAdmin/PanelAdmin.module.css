@@ -21,7 +21,7 @@
     --r-sm: 8px;
 
     display: flex;
-    min-height: 100vh;
+    min-height: calc(100vh - var(--navbar-height));
     background: var(--navy);
     font-family: 'DM Sans', sans-serif;
     color: var(--text-1);
@@ -37,7 +37,7 @@
     flex-direction: column;
     position: sticky;
     top: 0;
-    height: 100vh;
+    height: calc(100vh - var(--navbar-height));
     background-image: radial-gradient(ellipse 220px 200px at 10% -5%, rgba(0,184,169,0.07) 0%, transparent 100%);
 }
 
