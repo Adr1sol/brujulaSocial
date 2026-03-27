@@ -54,9 +54,25 @@
 .orgDesc {
     font-size: 13px;
     color: #5F5E5A;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     line-height: 1.5;
 }
+
+/* ✅ Correo de contacto */
+.orgCorreo {
+    font-size: 12px;
+    color: #5F5E5A;
+    margin-bottom: 10px;
+}
+.orgCorreo a {
+    color: #1D9E75;
+    text-decoration: none;
+    font-weight: 500;
+}
+.orgCorreo a:hover {
+    text-decoration: underline;
+}
+
 .orgTags {
     display: flex;
     gap: 8px;
@@ -105,4 +121,15 @@
 .emptyIcon {
     font-size: 36px;
     margin-bottom: 12px;
+}
+.pagina {
+    background: #F1EFE8;
+    min-height: 100vh;
+    padding: 24px 32px;
+    font-family: 'DM Sans', sans-serif;
+}
+@media (max-width: 600px) {
+    .pagina {
+        padding: 16px;
+    }
 }

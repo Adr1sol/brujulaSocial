@@ -1,24 +1,31 @@
 import React, { useState } from 'react'
 import styles from './RegistroOrganizacion.module.css'
 import ServiceOrganizaciones from '../../services/ServiceOrganizaciones'
-import { useNavigate, Link } from 'react-router-dom'
+
+import ServiceUsuario from '../../services/ServiceUsuario'
+import { useNavigate } from 'react-router-dom'
+
 import Swal from 'sweetalert2'
 import logo from '../../images/LogoEntero.png'
 
 function RegistroOrganizacion() {
 
     const [nombreOrganizacion, setNombreOrganizacion] = useState("")
-    const [correoOrganizacion, setCorreoOrganizacion] = useState("") // <--- Nuevo estado
-    const [idCategoria, setIdCategoria] = useState("")
-    const [idProvincia, setIdProvincia] = useState("")
-    const [idDisponibilidad, setIdDisponibilidad] = useState("")
-    const [descripcion, setDescripcion] = useState("")
+    const [correoOrganizacion, setCorreoOrganizacion] = useState("")
+    const [contrasena, setContrasena]                 = useState("")
+    const [confirmarContrasena, setConfirmarContrasena] = useState("")
+    const [idCategoria, setIdCategoria]               = useState("")
+    const [idProvincia, setIdProvincia]               = useState("")
+    const [idDisponibilidad, setIdDisponibilidad]     = useState("")
+    const [descripcion, setDescripcion]               = useState("")
 
     const navigate = useNavigate()
 
     function limpiarFormulario() {
         setNombreOrganizacion("")
-        setCorreoOrganizacion("") // <--- Limpiar correo
+        setCorreoOrganizacion("")
+        setContrasena("")
+        setConfirmarContrasena("")
         setIdCategoria("")
         setIdProvincia("")
         setIdDisponibilidad("")
@@ -26,8 +33,9 @@ function RegistroOrganizacion() {
     }
 
     async function guardarOrganizacion() {
-        // Validamos que el correo también esté lleno
-        if (!nombreOrganizacion || !correoOrganizacion || !idCategoria || !idProvincia || !idDisponibilidad || !descripcion) {
+
+        if (!nombreOrganizacion || !correoOrganizacion || !contrasena || !confirmarContrasena ||
+            !idCategoria || !idProvincia || !idDisponibilidad || !descripcion) {
             Swal.fire({
                 icon: 'error',
                 title: 'Formulario incompleto',
@@ -37,19 +45,64 @@ function RegistroOrganizacion() {
             return
         }
 
-        const objOrganizacion = {
-            NombreOrganizacion: nombreOrganizacion,
-            CorreoContacto: correoOrganizacion, // <--- Enviamos el correo al servicio
-            idCategoria: parseInt(idCategoria),
-            IdProvincia: parseInt(idProvincia),
-            idDisponibilidad: parseInt(idDisponibilidad),
-            Descripcion: descripcion
+        if (contrasena.length < 6) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Contraseña débil',
+                text: 'La contraseña debe tener al menos 6 caracteres.',
+                confirmButtonColor: '#EF8514'
+            })
+            return
         }
 
-        const registrada = await ServiceOrganizaciones.postOrganizaciones(objOrganizacion)
+        if (contrasena !== confirmarContrasena) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error de coincidencia',
+                text: 'Las contraseñas no coinciden.',
+                confirmButtonColor: '#EF8514'
+            })
+            return
+        }
 
-        if (registrada) {
-            localStorage.setItem("miOrganizacion", JSON.stringify(registrada))
+        // ── 1. POST a /organizaciones ──────────────────────────
+        const objOrganizacion = {
+            NombreOrganizacion: nombreOrganizacion,
+            CorreoContacto:     correoOrganizacion,
+            idCategoria:        parseInt(idCategoria),
+            IdProvincia:        parseInt(idProvincia),
+            idDisponibilidad:   parseInt(idDisponibilidad),
+            Descripcion:        descripcion
+        }
+
+        const orgRegistrada = await ServiceOrganizaciones.postOrganizaciones(objOrganizacion)
+
+        if (!orgRegistrada) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al registrar',
+                text: 'No se pudo registrar la organización. Intentá de nuevo.',
+                confirmButtonColor: '#EF8514'
+            })
+            return
+        }
+
+        // ── 2. POST a /usuarios — vincula la org con su cuenta ──
+        const objUsuario = {
+            Nombre:         nombreOrganizacion,
+            Correo:         correoOrganizacion,
+            Contrasena:     contrasena,
+            Tipo:           "organizacion",
+            idOrganizacion: orgRegistrada.id,   // ← vincula ambos
+            FechaRegistro:  new Date().toISOString().split('T')[0]
+        }
+
+        const usuarioRegistrado = await ServiceUsuario.postUsuario(objUsuario)
+
+        if (usuarioRegistrado) {
+            // Guardar en localStorage para que el navbar y perfil funcionen
+            localStorage.setItem("user",           JSON.stringify(usuarioRegistrado))
+            localStorage.setItem("miOrganizacion", JSON.stringify(orgRegistrada))
 
             Swal.fire({
                 icon: 'success',
@@ -66,8 +119,8 @@ function RegistroOrganizacion() {
         } else {
             Swal.fire({
                 icon: 'error',
-                title: 'Error al registrar',
-                text: 'No se pudo registrar la organización. Intentá de nuevo.',
+                title: 'Error al crear cuenta',
+                text: 'La organización se registró pero no se pudo crear la cuenta. Contactá soporte.',
                 confirmButtonColor: '#EF8514'
             })
         }
@@ -84,35 +137,40 @@ function RegistroOrganizacion() {
                 onChange={(e) => setNombreOrganizacion(e.target.value)}
                 placeholder="Nombre de la organización"
             />
+            <p>Correo de contacto</p>
+            <input
+                type="email"
+                value={correoOrganizacion}
+                onChange={(e) => setCorreoOrganizacion(e.target.value)}
+                placeholder="ejemplo@organizacion.org"
+            />
 
-            {/* Categoría + Provincia en la misma fila */}
-            <div className={styles.row}>
-                <div className={styles.inputGroup}>
-                    <label>Categoría</label>
-                    <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
-                        <option value="">Seleccionar</option>
-                        <option value="1">Medio Ambiente</option>
-                        <option value="2">Educación</option>
-                        <option value="3">Salud</option>
-                        <option value="4">Bienestar Animal</option>
-                        <option value="5">Cultura</option>
-                    </select>
-                </div>
+            {/* ✅ Nuevos campos de contraseña */}
+            <p>Contraseña</p>
+            <input
+                type="password"
+                value={contrasena}
+                onChange={(e) => setContrasena(e.target.value)}
+                placeholder="Mínimo 6 caracteres"
+            />
 
-                <div className={styles.inputGroup}>
-                    <label>Provincia</label>
-                    <select value={idProvincia} onChange={(e) => setIdProvincia(e.target.value)}>
-                        <option value="">Seleccionar</option>
-                        <option value="1">San José</option>
-                        <option value="2">Alajuela</option>
-                        <option value="3">Cartago</option>
-                        <option value="4">Heredia</option>
-                        <option value="5">Guanacaste</option>
-                        <option value="6">Puntarenas</option>
-                        <option value="7">Limón</option>
-                    </select>
-                </div>
-            </div>
+            <p>Confirmar contraseña</p>
+            <input
+                type="password"
+                value={confirmarContrasena}
+                onChange={(e) => setConfirmarContrasena(e.target.value)}
+                placeholder="Repetí la contraseña"
+            />
+
+            <p>Categoría</p>
+            <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
+                <option value="">Seleccionar categoría</option>
+                <option value="1">Medio Ambiente</option>
+                <option value="2">Educación</option>
+                <option value="3">Salud</option>
+                <option value="4">Bienestar Animal</option>
+                <option value="5">Cultura</option>
+            </select>
 
             {/* Disponibilidad */}
             <div className={styles.inputGroup}>
@@ -143,6 +201,7 @@ function RegistroOrganizacion() {
                 Registrar organización
             </button>
 
+            <button onClick={guardarOrganizacion}>Registrar organización</button>
         </div>
     )
 }

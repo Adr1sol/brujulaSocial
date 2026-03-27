@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavbarGlobal from "../components/NavbarGlobal/NavbarGlobal";
-import HomePage from "../pages/HomePage";
-import InicioUser from "../pages/InicioUser";
-import RegistroUser from "../pages/RegistroUser";
-import Buscador from "../pages/Buscador";
+import HomePage             from "../pages/HomePage";
+import InicioUser           from "../pages/InicioUser";
+import RegistroUser         from "../pages/RegistroUser";
+import Buscador             from "../pages/Buscador";
 import RegisterOrganizacion from "../pages/RegisterOrganizacion";
 import PerfilOrganizacion from '../pages/PerfilOrganizacion'
 import Terminos from '../pages/Terminos'
@@ -11,6 +11,7 @@ import PerfilPage from "../pages/PerfilPage";
 import DashImpacto from "../pages/DashImpacto";
 import Donaciones from "../pages/Home/Donacion";
 import Admin from "../pages/Admin";
+import TestimoniosAgenos from "../components/Testimonials/TestimoniosAgenos";
 
 function Routing() {
   return (
@@ -34,6 +35,7 @@ function Routing() {
         <Route path="/register" element={<RegisterOrganizacion />} />
         <Route path="/Donacion" element={<Donaciones />} />
         <Route path="/terminos" element={<Terminos />} />
+        <Route path="/dejar-testimonio" element={<TestimoniosAgenos />} />
       </Routes>
 
     </BrowserRouter>

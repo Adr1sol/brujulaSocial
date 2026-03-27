@@ -1,15 +1,18 @@
+
 .wrapper {
     display: flex;
     min-height: 100vh;
     width: 100%;
-    background-color: #f8fafc;
+    background-color: #F8FAFC;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+/* ── Lado visual ─────────────────────────────────────── */
 .visualSide {
     flex: 1.2;
     position: relative;
-    background-image: url('../../images/fondoinicio.png');
+    /* ✅ Usa imagen disponible en src/images/ */
+    background-image: url('../../images/basura playa.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -22,11 +25,13 @@
 .visualSide::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(7, 138, 135, 0.4) 0%, rgba(239, 133, 20, 0.6) 50%, rgba(80, 161, 90, 0.8) 100%);
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(7, 138, 135, 0.55) 0%,
+        rgba(239, 133, 20, 0.55) 50%,
+        rgba(10, 80, 64, 0.75) 100%
+    );
     z-index: 1;
 }
 
@@ -41,17 +46,17 @@
     font-weight: 800;
     margin-bottom: 20px;
     letter-spacing: -0.02em;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 .branding p {
     font-size: 1.25rem;
-    opacity: 1;
     line-height: 1.6;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     font-weight: 500;
 }
 
+/* ── Lado formulario ─────────────────────────────────── */
 .formSide {
     flex: 1;
     display: flex;
@@ -65,8 +70,7 @@
 .formSide::after {
     content: '';
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 0; right: 0;
     width: 4px;
     height: 100%;
     background: linear-gradient(to bottom, #078A87, #EF8514, #50A154);
@@ -77,8 +81,9 @@
     max-width: 440px;
 }
 
+/* ── Header ──────────────────────────────────────────── */
 .header {
-    margin-bottom: 32px;
+    margin-bottom: 28px;
 }
 
 .header h2 {
@@ -93,53 +98,55 @@
 }
 
 .sub {
-    color: #64748b;
+    color: #64748B;
     font-size: 1rem;
     font-weight: 500;
 }
 
+/* ── Tipo de cuenta ──────────────────────────────────── */
 .accountTypeHeader {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .tipo {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: #334155;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
+    margin: 0;
 }
 
 .selector {
     display: flex;
     gap: 12px;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
 }
 
 .opcion {
     flex: 1;
-    border: 2px solid #f1f5f9;
+    border: 2px solid #F1F5F9;
     border-radius: 12px;
-    padding: 18px;
+    padding: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: #f8fafc;
+    background: #F8FAFC;
 }
 
 .opcion h4 {
     margin: 0;
     font-size: 0.95rem;
     font-weight: 700;
-    color: #64748b;
+    color: #64748B;
 }
 
 .activo {
     border-color: transparent;
     background: white;
-    box-shadow: 0 10px 15px -3px rgba(7, 138, 135, 0.1), 0 4px 6px -2px rgba(7, 138, 135, 0.05);
+    box-shadow: 0 10px 15px -3px rgba(7,138,135,0.1), 0 4px 6px -2px rgba(7,138,135,0.05);
     position: relative;
 }
 
@@ -160,16 +167,17 @@
     color: #078A87;
 }
 
+/* ── Form ────────────────────────────────────────────── */
 .form {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
 }
 
 .inputGroup {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .inputGroup label {
@@ -181,42 +189,44 @@
 .inputGroup input {
     padding: 14px 18px;
     border-radius: 12px;
-    border: 2px solid #f1f5f9;
-    background-color: #f8fafc;
+    border: 2px solid #F1F5F9;
+    background-color: #F8FAFC;
     font-size: 1rem;
     transition: all 0.2s;
-    color: #1e293b;
+    color: #1E293B;
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .inputGroup input:focus {
     outline: none;
     border-color: #078A87;
     background-color: white;
-    box-shadow: 0 0 0 4px rgba(7, 138, 135, 0.1);
+    box-shadow: 0 0 0 4px rgba(7,138,135,0.1);
 }
 
+/* ── Botón ───────────────────────────────────────────── */
 .submitBtn {
-    margin-top: 12px;
+    margin-top: 8px;
     padding: 16px;
     border: none;
     border-radius: 12px;
     background: linear-gradient(135deg, #078A87, #50A154);
     color: white;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 10px 15px -3px rgba(7, 138, 135, 0.2);
+    box-shadow: 0 10px 15px -3px rgba(7,138,135,0.2);
+    font-family: inherit;
+    width: 100%;
 }
 
 .submitBtn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 20px 25px -5px rgba(7, 138, 135, 0.3);
-    filter: brightness(1.1);
-}
-
-.submitBtn:active {
-    transform: translateY(0);
+    box-shadow: 0 20px 25px -5px rgba(7,138,135,0.3);
+    filter: brightness(1.08);
 }
 
 .submitBtn:disabled {
@@ -225,53 +235,60 @@
     transform: none;
 }
 
+/* ── Registro ────────────────────────────────────────── */
 .register {
     text-align: center;
-    margin-top: 32px;
-    color: #64748b;
+    margin-top: 28px;
+    color: #64748B;
     font-size: 0.95rem;
     font-weight: 500;
+}
+
+.register a {
+    text-decoration: none;
 }
 
 .register span {
     color: #EF8514;
     font-weight: 700;
-    text-decoration: none;
     margin-left: 6px;
     transition: all 0.2s;
 }
 
 .register span:hover {
-    color: #d97706;
+    color: #D97706;
     text-decoration: underline;
 }
 
-/* Responsive */
+/* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 992px) {
-    .visualSide {
-        flex: 1;
-        padding: 40px;
-    }
-    
-    .branding h1 {
-        font-size: 2.8rem;
-    }
+    .visualSide { flex: 1; padding: 40px; }
+    .branding h1 { font-size: 2.8rem; }
 }
 
 @media (max-width: 768px) {
-    .visualSide {
-        display: none;
-    }
-    
-    .formSide {
-        padding: 30px;
-    }
-    
-    .formSide::after {
-        display: none;
-    }
-    
-    .card {
-        max-width: 100%;
-    }
-}
+    .visualSide  { display: none; }
+    .formSide    { padding: 30px; }
+    .formSide::after { display: none; }
+    .card        { max-width: 100%; }
+}
+
+/* ── Hint organización ───────────────────────────────── */
+.orgHint {
+    font-size: 0.85rem;
+    color: #64748B;
+    margin: -16px 0 16px;
+    text-align: center;
+}
+
+.orgHintLink {
+    color: #078A87;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.orgHintLink:hover {
+    color: #EF8514;
+    text-decoration: underline;
+}
