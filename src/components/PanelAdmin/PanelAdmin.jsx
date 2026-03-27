@@ -75,7 +75,7 @@ function PanelAdmin() {
         return p.length >= 2 ? p[0][0] + p[1][0] : nombre.substring(0, 2).toUpperCase()
     }
     function getColorAvatar(i) {
-        const colores = ["#00b8a9", "#f6ad55", "#185FA5", "#9b59b6", "#3B6D11", "#e74c3c"]
+        const colores = ["#14b8a6", "#f59e0b", "#3b82f6", "#a855f7", "#22c55e", "#ef4444"]
         return colores[i % colores.length]
     }
     function actividadReciente() {
@@ -84,14 +84,14 @@ function PanelAdmin() {
             actividades.push({
                 texto: `${getNombreUsuario(a.idUsuario)} aplicó a ${getNombreOrg(a.idOrganizacion)}`,
                 fecha: a.FechaAplicacion,
-                color: "#00b8a9"
+                color: "#14b8a6"
             })
         })
         horas.slice(-2).reverse().forEach(h => {
             actividades.push({
                 texto: `${getNombreUsuario(h.idUsuario)} registró ${h.horas}h en ${getNombreOrg(h.idOrganizacion)}`,
                 fecha: h.fecha,
-                color: "#f6ad55"
+                color: "#f59e0b"
             })
         })
         return actividades.slice(0, 5)
@@ -120,7 +120,7 @@ function PanelAdmin() {
         Swal.fire({
             icon: 'warning', title: '¿Eliminar voluntario?', text: 'Esta acción no se puede deshacer.',
             showCancelButton: true, confirmButtonText: 'Sí, eliminar', cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#e74c3c', cancelButtonColor: '#00b8a9'
+            confirmButtonColor: '#ef4444', cancelButtonColor: '#14b8a6'
         }).then(async (r) => {
             if (r.isConfirmed) {
                 await ServiceUsuario.deleteUsuario(id)
@@ -146,7 +146,7 @@ function PanelAdmin() {
         Swal.fire({
             icon: 'warning', title: '¿Eliminar organización?', text: 'Esta acción no se puede deshacer.',
             showCancelButton: true, confirmButtonText: 'Sí, eliminar', cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#e74c3c', cancelButtonColor: '#00b8a9'
+            confirmButtonColor: '#ef4444', cancelButtonColor: '#14b8a6'
         }).then(async (r) => {
             if (r.isConfirmed) {
                 await ServiceOrganizaciones.deleteOrganizaciones(id)
@@ -170,7 +170,7 @@ function PanelAdmin() {
         Swal.fire({
             icon: 'warning', title: '¿Eliminar registro?',
             showCancelButton: true, confirmButtonText: 'Sí, eliminar', cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#e74c3c', cancelButtonColor: '#00b8a9'
+            confirmButtonColor: '#ef4444', cancelButtonColor: '#14b8a6'
         }).then(async (r) => {
             if (r.isConfirmed) {
                 await ServiceHoras.deleteHoras(id)
@@ -194,10 +194,10 @@ function PanelAdmin() {
     }
 
     const stats = [
-        { label: "Organizaciones", val: organizaciones.length, icon: "🏢", color: "#00b8a9", bg: "rgba(0,184,169,0.1)",    accent: "#00b8a9" },
-        { label: "Voluntarios",    val: usuarios.length,        icon: "👥", color: "#185FA5", bg: "rgba(24,95,165,0.1)",    accent: "#185FA5" },
-        { label: "Horas totales",  val: totalHoras(),            icon: "⏱️", color: "#f6ad55", bg: "rgba(246,173,85,0.1)",  accent: "#f6ad55" },
-        { label: "Solicitudes",    val: aplicaciones.length,    icon: "📋", color: "#9b59b6", bg: "rgba(155,89,182,0.1)",   accent: "#9b59b6" },
+        { label: "Organizaciones", val: organizaciones.length, icon: "🏢", color: "#14b8a6", bg: "rgba(20,184,166,0.15)",    accent: "#14b8a6" },
+        { label: "Voluntarios",    val: usuarios.length,        icon: "👥", color: "#3b82f6", bg: "rgba(59,130,246,0.15)",    accent: "#3b82f6" },
+        { label: "Horas totales",  val: totalHoras(),            icon: "⏱️", color: "#f59e0b", bg: "rgba(245,158,11,0.15)",  accent: "#f59e0b" },
+        { label: "Solicitudes",    val: aplicaciones.length,    icon: "📋", color: "#a855f7", bg: "rgba(168,85,247,0.15)",   accent: "#a855f7" },
     ]
 
     return (
@@ -302,7 +302,7 @@ function PanelAdmin() {
                             <div className={styles.twoCol}>
                                 <div className={styles.card}>
                                     <h3 className={styles.cardTitle}>
-                                        <span className={styles.cardDot} style={{background:'#00b8a9'}}/>
+                                        <span className={styles.cardDot} style={{background:'#14b8a6'}}/>
                                         Actividad reciente
                                     </h3>
                                     {actividadReciente().length > 0 ? actividadReciente().map((a, i) => (
@@ -317,7 +317,7 @@ function PanelAdmin() {
                                 </div>
                                 <div className={styles.card}>
                                     <h3 className={styles.cardTitle}>
-                                        <span className={styles.cardDot} style={{background:'#f6ad55'}}/>
+                                        <span className={styles.cardDot} style={{background:'#f59e0b'}}/>
                                         Categorías activas
                                     </h3>
                                     {categoriasActivas().map((cat, i) => (
@@ -337,7 +337,7 @@ function PanelAdmin() {
                     {/* ══ ORGANIZACIONES ══ */}
                     {seccionActiva === "organizaciones" && (
                         <div className={styles.card}>
-                            <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#00b8a9'}}/>{organizaciones.length} organizaciones</h3>
+                            <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#14b8a6'}}/>{organizaciones.length} organizaciones</h3>
                             <div className={styles.tableWrap}>
                                 <table className={styles.table}>
                                     <thead><tr><th>Organización</th><th>Categoría</th><th>Provincia</th><th>Voluntarios</th><th>Acciones</th></tr></thead>
@@ -360,7 +360,7 @@ function PanelAdmin() {
                     {/* ══ VOLUNTARIOS ══ */}
                     {seccionActiva === "voluntarios" && (
                         <div className={styles.card}>
-                            <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#185FA5'}}/>{usuarios.length} voluntarios</h3>
+                            <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#3b82f6'}}/>{usuarios.length} voluntarios</h3>
                             <div className={styles.tableWrap}>
                                 <table className={styles.table}>
                                     <thead><tr><th>Voluntario</th><th>Provincia</th><th>Horas</th><th>Aplicaciones</th><th>Registro</th><th>Acciones</th></tr></thead>
@@ -384,7 +384,7 @@ function PanelAdmin() {
                     {/* ══ HORAS ══ */}
                     {seccionActiva === "horas" && (
                         <div className={styles.card}>
-                            <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#f6ad55'}}/>Total {totalHoras()} horas registradas</h3>
+                            <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#f59e0b'}}/>Total {totalHoras()} horas registradas</h3>
                             <div className={styles.tableWrap}>
                                 <table className={styles.table}>
                                     <thead><tr><th>Voluntario</th><th>Organización</th><th>Actividad</th><th>Fecha</th><th>Horas</th><th>Acciones</th></tr></thead>
@@ -408,7 +408,7 @@ function PanelAdmin() {
                     {/* ══ APLICACIONES ══ */}
                     {seccionActiva === "aplicaciones" && (
                         <div className={styles.card}>
-                            <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#9b59b6'}}/>{aplicaciones.length} solicitudes</h3>
+                            <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#a855f7'}}/>{aplicaciones.length} solicitudes</h3>
                             <div className={styles.tableWrap}>
                                 <table className={styles.table}>
                                     <thead><tr><th>Voluntario</th><th>Organización</th><th>Fecha solicitud</th><th>Estado</th></tr></thead>

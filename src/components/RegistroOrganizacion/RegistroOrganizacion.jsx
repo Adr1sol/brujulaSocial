@@ -3,8 +3,7 @@ import styles from './RegistroOrganizacion.module.css'
 import ServiceOrganizaciones from '../../services/ServiceOrganizaciones'
 
 import ServiceUsuario from '../../services/ServiceUsuario'
-import { useNavigate } from 'react-router-dom'
-
+import { useNavigate, Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import logo from '../../images/LogoEntero.png'
 
@@ -12,12 +11,12 @@ function RegistroOrganizacion() {
 
     const [nombreOrganizacion, setNombreOrganizacion] = useState("")
     const [correoOrganizacion, setCorreoOrganizacion] = useState("")
-    const [contrasena, setContrasena]                 = useState("")
+    const [contrasena, setContrasena] = useState("")
     const [confirmarContrasena, setConfirmarContrasena] = useState("")
-    const [idCategoria, setIdCategoria]               = useState("")
-    const [idProvincia, setIdProvincia]               = useState("")
-    const [idDisponibilidad, setIdDisponibilidad]     = useState("")
-    const [descripcion, setDescripcion]               = useState("")
+    const [idCategoria, setIdCategoria] = useState("")
+    const [idProvincia, setIdProvincia] = useState("")
+    const [idDisponibilidad, setIdDisponibilidad] = useState("")
+    const [descripcion, setDescripcion] = useState("")
 
     const navigate = useNavigate()
 
@@ -68,11 +67,11 @@ function RegistroOrganizacion() {
         // ── 1. POST a /organizaciones ──────────────────────────
         const objOrganizacion = {
             NombreOrganizacion: nombreOrganizacion,
-            CorreoContacto:     correoOrganizacion,
-            idCategoria:        parseInt(idCategoria),
-            IdProvincia:        parseInt(idProvincia),
-            idDisponibilidad:   parseInt(idDisponibilidad),
-            Descripcion:        descripcion
+            CorreoContacto: correoOrganizacion,
+            idCategoria: parseInt(idCategoria),
+            IdProvincia: parseInt(idProvincia),
+            idDisponibilidad: parseInt(idDisponibilidad),
+            Descripcion: descripcion
         }
 
         const orgRegistrada = await ServiceOrganizaciones.postOrganizaciones(objOrganizacion)
@@ -89,19 +88,19 @@ function RegistroOrganizacion() {
 
         // ── 2. POST a /usuarios — vincula la org con su cuenta ──
         const objUsuario = {
-            Nombre:         nombreOrganizacion,
-            Correo:         correoOrganizacion,
-            Contrasena:     contrasena,
-            Tipo:           "organizacion",
+            Nombre: nombreOrganizacion,
+            Correo: correoOrganizacion,
+            Contrasena: contrasena,
+            Tipo: "organizacion",
             idOrganizacion: orgRegistrada.id,   // ← vincula ambos
-            FechaRegistro:  new Date().toISOString().split('T')[0]
+            FechaRegistro: new Date().toISOString().split('T')[0]
         }
 
         const usuarioRegistrado = await ServiceUsuario.postUsuario(objUsuario)
 
         if (usuarioRegistrado) {
             // Guardar en localStorage para que el navbar y perfil funcionen
-            localStorage.setItem("user",           JSON.stringify(usuarioRegistrado))
+            localStorage.setItem("user", JSON.stringify(usuarioRegistrado))
             localStorage.setItem("miOrganizacion", JSON.stringify(orgRegistrada))
 
             Swal.fire({
@@ -127,139 +126,131 @@ function RegistroOrganizacion() {
     }
 
     return (
-        <div className={styles.page}>
+        <div className={styles.wrapper}>
 
-            {/* ── Barra superior ── */}
-            <header className={styles.topbar}>
-                <img src={logo} alt="Brújula Social" className={styles.logo} />
-                <Link to="/" className={styles.homeBtn}>
-                    <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                        <polyline points="9 22 9 12 15 12 15 22" />
-                    </svg>
-                    Inicio
-                </Link>
-            </header>
-
-
-            <p>Correo de contacto</p>
-            <input
-                type="email"
-                value={correoOrganizacion}
-                onChange={(e) => setCorreoOrganizacion(e.target.value)}
-                placeholder="ejemplo@organizacion.org"
-            />
-
-            {/* ✅ Nuevos campos de contraseña */}
-            <p>Contraseña</p>
-            <input
-                type="password"
-                value={contrasena}
-                onChange={(e) => setContrasena(e.target.value)}
-                placeholder="Mínimo 6 caracteres"
-            />
-
-            <p>Confirmar contraseña</p>
-            <input
-                type="password"
-                value={confirmarContrasena}
-                onChange={(e) => setConfirmarContrasena(e.target.value)}
-                placeholder="Repetí la contraseña"
-            />
-
-            <p>Categoría</p>
-            <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
-                <option value="">Seleccionar categoría</option>
-                <option value="1">Medio Ambiente</option>
-                <option value="2">Educación</option>
-                <option value="3">Salud</option>
-                <option value="4">Bienestar Animal</option>
-                <option value="5">Cultura</option>
-            </select>
-
-
-            {/* ── Tarjeta ── */}
-            <div className={styles.card}>
-                <div className={styles.form}>
-
-                    {/* Nombre */}
-                    <div className={styles.inputGroup}>
-                        <label>Nombre de la organización</label>
-                        <input
-                            type="text"
-                            value={nombreOrganizacion}
-                            onChange={(e) => setNombreOrganizacion(e.target.value)}
-                            placeholder="Ej: Fundación Verde"
-                        />
+                {/* ── Lado visual ── */}
+                <div className={styles.visualSide}>
+                    <div className={styles.branding}>
+                        <h1>Registrá tu organización</h1>
+                        <p>Conectá con voluntarios comprometidos que quieren hacer la diferencia.</p>
                     </div>
+                </div>
 
-                    <div className={styles.divider} />
+                {/* ── Lado formulario ── */}
+                <div className={styles.formSide}>
+                    <div className={styles.card}>
 
-                    {/* Categoría + Provincia en la misma fila */}
-                    <div className={styles.row}>
+                        <Link to="/" className={styles.backLink}>← Volver al inicio</Link>
+
+                        <div className={styles.header}>
+                            <h2>Crear cuenta</h2>
+                            <p className={styles.sub}>Completá los datos de tu organización para comenzar.</p>
+                        </div>
+
+                        <div className={styles.form}>
+
                         <div className={styles.inputGroup}>
-                            <label>Categoría</label>
-                            <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
-                                <option value="">Seleccionar</option>
-                                <option value="1">Medio Ambiente</option>
-                                <option value="2">Educación</option>
-                                <option value="3">Salud</option>
-                                <option value="4">Bienestar Animal</option>
-                                <option value="5">Cultura</option>
+                            <label>Nombre de la organización</label>
+                            <input
+                                type="text"
+                                value={nombreOrganizacion}
+                                onChange={(e) => setNombreOrganizacion(e.target.value)}
+                                placeholder="Nombre de la organización"
+                            />
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label>Correo de contacto</label>
+                            <input
+                                type="email"
+                                value={correoOrganizacion}
+                                onChange={(e) => setCorreoOrganizacion(e.target.value)}
+                                placeholder="ejemplo@organizacion.org"
+                            />
+                        </div>
+
+                        <div className={styles.row}>
+                            <div className={styles.inputGroup}>
+                                <label>Contraseña</label>
+                                <input
+                                    type="password"
+                                    value={contrasena}
+                                    onChange={(e) => setContrasena(e.target.value)}
+                                    placeholder="Mínimo 6 caracteres"
+                                />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label>Confirmar contraseña</label>
+                                <input
+                                    type="password"
+                                    value={confirmarContrasena}
+                                    onChange={(e) => setConfirmarContrasena(e.target.value)}
+                                    placeholder="Repetí la contraseña"
+                                />
+                            </div>
+                        </div>
+
+                        <div className={styles.row}>
+                            <div className={styles.inputGroup}>
+                                <label>Categoría</label>
+                                <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
+                                    <option value="">Seleccionar</option>
+                                    <option value="1">Medio Ambiente</option>
+                                    <option value="2">Educación</option>
+                                    <option value="3">Salud</option>
+                                    <option value="4">Bienestar Animal</option>
+                                    <option value="5">Cultura</option>
+                                </select>
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label>Provincia</label>
+                                <select value={idProvincia} onChange={(e) => setIdProvincia(e.target.value)}>
+                                    <option value="">Seleccionar</option>
+                                    <option value="1">San José</option>
+                                    <option value="2">Alajuela</option>
+                                    <option value="3">Cartago</option>
+                                    <option value="4">Heredia</option>
+                                    <option value="5">Guanacaste</option>
+                                    <option value="6">Puntarenas</option>
+                                    <option value="7">Limón</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label>Disponibilidad</label>
+                            <select value={idDisponibilidad} onChange={(e) => setIdDisponibilidad(e.target.value)}>
+                                <option value="">Seleccionar disponibilidad</option>
+                                <option value="1">Fines de semana</option>
+                                <option value="2">Por horas</option>
+                                <option value="3">Remoto</option>
+                                <option value="4">Entre semana</option>
                             </select>
                         </div>
 
                         <div className={styles.inputGroup}>
-                            <label>Provincia</label>
-                            <select value={idProvincia} onChange={(e) => setIdProvincia(e.target.value)}>
-                                <option value="">Seleccionar</option>
-                                <option value="1">San José</option>
-                                <option value="2">Alajuela</option>
-                                <option value="3">Cartago</option>
-                                <option value="4">Heredia</option>
-                                <option value="5">Guanacaste</option>
-                                <option value="6">Puntarenas</option>
-                                <option value="7">Limón</option>
-                            </select>
+                            <label>Descripción</label>
+                            <textarea
+                                value={descripcion}
+                                onChange={(e) => setDescripcion(e.target.value)}
+                                placeholder="Breve descripción de la organización"
+                            />
                         </div>
+
+                        <button className={styles.submitBtn} onClick={guardarOrganizacion}>
+                            Registrar organización
+                        </button>
+
                     </div>
 
-                    {/* Disponibilidad */}
-                    <div className={styles.inputGroup}>
-                        <label>Disponibilidad requerida</label>
-                        <select value={idDisponibilidad} onChange={(e) => setIdDisponibilidad(e.target.value)}>
-                            <option value="">Seleccionar disponibilidad</option>
-                            <option value="1">Fines de semana</option>
-                            <option value="2">Por horas</option>
-                            <option value="3">Remoto</option>
-                            <option value="4">Entre semana</option>
-                        </select>
-                    </div>
-
-                    <div className={styles.divider} />
-
-                    {/* Descripción */}
-                    <div className={styles.inputGroup}>
-                        <label>Descripción</label>
-                        <textarea
-                            value={descripcion}
-                            onChange={(e) => setDescripcion(e.target.value)}
-                            placeholder="Describí brevemente la misión y actividades de tu organización..."
-                        />
-                    </div>
-
-                    {/* Botón */}
-                    <button className={styles.submitBtn} onClick={guardarOrganizacion}>
-                        Registrar organización
-                    </button>
+                    <p className={styles.login}>
+                        ¿Ya tenés una cuenta?{" "}
+                        <span onClick={() => navigate("/inicio")}>Iniciá sesión →</span>
+                    </p>
 
                 </div>
             </div>
-
-
-            <button onClick={guardarOrganizacion}>Registrar organización</button>
-
-        </div>
+        </div >
     )
 }
 

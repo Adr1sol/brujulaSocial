@@ -2,7 +2,7 @@
 async function getUsuarios() {
     try {
         const respuestaServidor = await fetch("http://localhost:3001/usuarios")
-        
+
         const datosUsuarios = await respuestaServidor.json();
 
         return datosUsuarios;

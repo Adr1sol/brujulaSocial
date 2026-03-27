@@ -81,6 +81,21 @@
     max-width: 440px;
 }
 
+/* ── Back link ───────────────────────────────────────── */
+.backLink {
+    display: inline-block;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #078A87;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.backLink:hover {
+    color: #EF8514;
+}
+
 /* ── Header ──────────────────────────────────────────── */
 .header {
     margin-bottom: 28px;
