@@ -128,13 +128,47 @@ function RegistroOrganizacion() {
     return (
         <div className={styles.wrapper}>
 
-            {/* ── Lado visual ── */}
-            <div className={styles.visualSide}>
-                <div className={styles.branding}>
-                    <h1>Registrá tu organización</h1>
-                    <p>Conectá con voluntarios comprometidos que quieren hacer la diferencia.</p>
-                </div>
-            </div>
+            <p>Nombre de la organización</p>
+            <input
+                type="text"
+                value={nombreOrganizacion}
+                onChange={(e) => setNombreOrganizacion(e.target.value)}
+                placeholder="Nombre de la organización"
+            />
+            <p>Correo de contacto</p>
+            <input
+                type="email"
+                value={correoOrganizacion}
+                onChange={(e) => setCorreoOrganizacion(e.target.value)}
+                placeholder="ejemplo@organizacion.org"
+            />
+
+            {/* ✅ Nuevos campos de contraseña */}
+            <p>Contraseña</p>
+            <input
+                type="password"
+                value={contrasena}
+                onChange={(e) => setContrasena(e.target.value)}
+                placeholder="Mínimo 6 caracteres"
+            />
+
+            <p>Confirmar contraseña</p>
+            <input
+                type="password"
+                value={confirmarContrasena}
+                onChange={(e) => setConfirmarContrasena(e.target.value)}
+                placeholder="Repetí la contraseña"
+            />
+
+            <p>Categoría</p>
+            <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
+                <option value="">Seleccionar categoría</option>
+                <option value="1">Medio Ambiente</option>
+                <option value="2">Educación</option>
+                <option value="3">Salud</option>
+                <option value="4">Bienestar Animal</option>
+                <option value="5">Cultura</option>
+            </select>
 
             {/* ── Lado formulario ── */}
             <div className={styles.formSide}>

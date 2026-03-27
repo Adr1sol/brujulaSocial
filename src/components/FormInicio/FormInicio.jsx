@@ -29,7 +29,6 @@ export default function FormInicio() {
     try {
       const users = await ServiceUsuario.getUsuarios();
 
-
       const user = users.find(u =>
         u.Correo === email &&
         u.Contrasena === password &&
@@ -165,12 +164,10 @@ export default function FormInicio() {
 
             <button type="submit" className={styles.submitBtn} disabled={loading}>
               {loading ? "Cargando..." : "Iniciar sesión"}
-
             </button>
           </form>
 
           <p className={styles.register}>
-
             ¿No tienes una cuenta?{" "}
             <Link to="/registro"><span>Regístrate aquí</span></Link>
           </p>

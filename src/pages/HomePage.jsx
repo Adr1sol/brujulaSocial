@@ -5,6 +5,7 @@ import About from '../components/AboutUs/AboutUs';
 import ProyectosDestacados from '../components/ProyectosDestacados/ProyectosDestacados';
 import Testimonials from '../components/Testimonials/Testimonials';
 import Footer from '../components/Footer/Footer';
+import VideoSection from '../components/VideoSection/VideoSection';
 
 
 const HomePage = () => {
@@ -16,6 +17,8 @@ const HomePage = () => {
       <div id="sobre-nosotros">
         <About />
       </div>
+
+      <VideoSection />
 
       <div id="organizaciones">
         <ProyectosDestacados />

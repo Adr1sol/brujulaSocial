@@ -1,6 +1,3 @@
-
-
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavbarGlobal from "../components/NavbarGlobal/NavbarGlobal";
 import HomePage from "../pages/HomePage";
@@ -14,6 +11,8 @@ import PerfilPage from "../pages/PerfilPage";
 import DashImpacto from "../pages/DashImpacto";
 import Donaciones from "../pages/Home/Donacion";
 import Admin from "../pages/Admin";
+import TestimoniosAgenos from "../components/Testimonials/TestimoniosAgenos";
+import Proyectos from "../pages/Home/Proyectos";
 
 function Routing() {
   return (
@@ -37,6 +36,8 @@ function Routing() {
         <Route path="/register" element={<RegisterOrganizacion />} />
         <Route path="/Donacion" element={<Donaciones />} />
         <Route path="/terminos" element={<Terminos />} />
+        <Route path="/dejar-testimonio" element={<TestimoniosAgenos />} />
+        <Route path="/proyectos" element={<Proyectos />} />
       </Routes>
 
     </BrowserRouter>
