@@ -8,6 +8,8 @@ export default function NavbarGlobal() {
     const location = useLocation();
     const path     = location.pathname;
 
+    if (path === '/inicio' || path === '/registro' || path === '/register') return null;
+
     const usuario = JSON.parse(localStorage.getItem("user") || "null");
     const tipo    = usuario?.Tipo || null;
     const esHome  = path === '/' || path === '/home';

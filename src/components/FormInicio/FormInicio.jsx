@@ -86,6 +86,8 @@ export default function FormInicio() {
       <div className={styles.formSide}>
         <div className={styles.card}>
 
+          <Link to="/" className={styles.backLink}>← Volver al inicio</Link>
+
           <div className={styles.header}>
             <h2>Iniciar sesión</h2>
             <p className={styles.sub}>Bienvenido de nuevo. Por favor, introduce tus datos.</p>

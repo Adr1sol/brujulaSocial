@@ -9,7 +9,7 @@
 .visualSide {
     flex: 1.2;
     position: relative;
-    background-image: url('../../images/1000086191_720.png');
+    background-image: url('../../images/Refugio.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -60,6 +60,7 @@
     padding: 40px;
     background-color: white;
     position: relative;
+    overflow-y: auto;
 }
 
 .formSide::after {
@@ -75,6 +76,7 @@
 .card {
     width: 100%;
     max-width: 500px;
+    padding: 20px 0;
 }
 
 .backLink {
@@ -112,68 +114,6 @@
     font-weight: 500;
 }
 
-.accountTypeHeader {
-    margin-bottom: 12px;
-}
-
-.tipo {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #334155;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.selector {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.opcion {
-    flex: 1;
-    border: 2px solid #F1F5F9;
-    border-radius: 12px;
-    padding: 14px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: #F8FAFC;
-}
-
-.opcion h4 {
-    margin: 0;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #64748B;
-}
-
-.activo {
-    border-color: transparent;
-    background: white;
-    box-shadow: 0 10px 15px -3px rgba(7, 138, 135, 0.1), 0 4px 6px -2px rgba(7, 138, 135, 0.05);
-    position: relative;
-}
-
-.activo::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 14px;
-    padding: 2px;
-    background: linear-gradient(135deg, #078A87, #EF8514);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-}
-
-.activo h4 {
-    color: #078A87;
-}
-
 .form {
     display: flex;
     flex-direction: column;
@@ -185,7 +125,7 @@
     gap: 12px;
 }
 
-.row>div {
+.row > div {
     flex: 1;
 }
 
@@ -201,7 +141,9 @@
     color: #475569;
 }
 
-.inputGroup input {
+.inputGroup input,
+.inputGroup select,
+.inputGroup textarea {
     width: 100%;
     padding: 12px 14px;
     border-radius: 10px;
@@ -210,9 +152,27 @@
     font-size: 0.95rem;
     transition: all 0.2s;
     color: #1E293B;
+    font-family: inherit;
+    box-sizing: border-box;
 }
 
-.inputGroup input:focus {
+.inputGroup select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+.inputGroup textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus,
+.inputGroup textarea:focus {
     outline: none;
     border-color: #078A87;
     background-color: white;
@@ -231,6 +191,8 @@
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 10px 15px -3px rgba(7, 138, 135, 0.2);
+    width: 100%;
+    font-family: inherit;
 }
 
 .submitBtn:hover {
@@ -246,6 +208,7 @@
 .submitBtn:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+    transform: none;
 }
 
 .login {
@@ -262,48 +225,11 @@
     text-decoration: none;
     margin-left: 6px;
     transition: all 0.2s;
+    cursor: pointer;
 }
 
 .login span:hover {
     color: #D97706;
-    text-decoration: underline;
-}
-
-.checkboxTerminos {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 8px 0;
-    padding: 12px;
-    background: #F8FAFC;
-    border-radius: 10px;
-    border: 2px solid #F1F5F9;
-    transition: all 0.2s;
-}
-
-.checkboxTerminos:hover {
-    border-color: #078A87;
-    background: #F0FDFA;
-}
-
-.checkboxTerminos input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    accent-color: #078A87;
-}
-
-.checkboxTerminos label {
-    font-size: 0.9rem;
-    color: #475569;
-    font-weight: 500;
-    cursor: pointer;
-    user-select: none;
-}
-
-.checkboxTerminos label span {
-    color: #078A87;
-    font-weight: 700;
     text-decoration: underline;
 }
 

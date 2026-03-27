@@ -112,6 +112,8 @@ function Formregistro() {
       </div>
       <div className={styles.formSide}>
         <div className={styles.card}>
+          <Link to="/" className={styles.backLink}>← Volver al inicio</Link>
+
           <div className={styles.header}>
             <h2>Crear cuenta</h2>
             <p className={styles.sub}>Completa tus datos para formar parte de la comunidad.</p>
