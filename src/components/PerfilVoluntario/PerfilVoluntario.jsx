@@ -5,6 +5,7 @@ import ServiceHoras from '../../services/ServiceHoras';
 import ServiceCategorias from '../../services/ServiceCategorias';
 import ServiceUsuario from '../../services/ServiceUsuario';
 import styles from './PerfilVoluntario.module.css';
+import PerfilSidebar from './PerfilSidebar';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
@@ -136,6 +137,25 @@ function PerfilVoluntario() {
         });
     }
 
+    function handleCerrarSesion() {
+        Swal.fire({
+            icon: 'question',
+            title: 'Cerrar sesión',
+            text: '¿Estás seguro de que quieres cerrar sesión?',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, cerrar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#14b8a6'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem('user');
+                localStorage.removeItem('miOrganizacion');
+                navigate('/');
+            }
+        });
+    }
+
     function getNombreOrg(idOrganizacion) {
         const org = organizaciones.find((o) => String(o.id) === String(idOrganizacion));
         return org ? org.NombreOrganizacion : "Desconocida";
@@ -206,15 +226,11 @@ function PerfilVoluntario() {
     const nivel = getNivel();
     const insignias = getInsignias();
 
-    const navItems = [
-        { id: "resumen",        label: "Mi Perfil",         icon: "◈",  group: "GENERAL" },
-        { id: "historial",      label: "Mis Voluntariados", icon: "⏱️",  group: "GENERAL" },
-        { id: "organizaciones", label: "Mis Organizaciones", icon: "🏢",  group: "GENERAL" },
-    ];
 
     const titulos = {
         resumen: "Resumen de perfil",
         historial: "Historial de voluntariados y horas",
+        "mis-organizaciones": "Mis Organizaciones",
         organizaciones: "Organizaciones apoyadas"
     };
 
@@ -225,51 +241,14 @@ function PerfilVoluntario() {
     return (
         <div className={styles.layout}>
             {/* ── SIDEBAR ── */}
-            <aside className={styles.sidebar}>
-                <div className={styles.sidebarBrand}>
-                    <img src={logoBrujula} alt="Brújula Social" className={styles.brandLogo} />
-                    <div>
-                        <div className={styles.brandName}>
-                            Brújula<span className={styles.brandAccent}>Social</span>
-                        </div>
-                        <div className={styles.brandSub}>VOLUNTARIO</div>
-                    </div>
-                </div>
-
-                <nav className={styles.sidebarNav}>
-                    <p className={styles.navGroupLabel}>GENERAL</p>
-                    {navItems.map(item => (
-                        <button
-                            key={item.id}
-                            className={`${styles.navItem} ${seccionActiva === item.id ? styles.navItemActive : ''}`}
-                            onClick={() => setSeccionActiva(item.id)}
-                        >
-                            <span className={styles.navIcon}>{item.icon}</span>
-                            <span className={styles.navLabel}>{item.label}</span>
-                        </button>
-                    ))}
-                    
-                    <p className={styles.navGroupLabel} style={{marginTop: '24px'}}>AJUSTES</p>
-                    <button className={styles.navItem} onClick={abrirModalEditar}>
-                        <span className={styles.navIcon}>✏️</span>
-                        <span className={styles.navLabel}>Editar Perfil</span>
-                    </button>
-                    <button className={styles.navItem} onClick={handleEliminar} style={{color: 'var(--red)'}}>
-                        <span className={styles.navIcon}>🗑️</span>
-                        <span className={styles.navLabel}>Eliminar Cuenta</span>
-                    </button>
-                </nav>
-
-                <div className={styles.sidebarFooter}>
-                    <div className={styles.adminInfo} onClick={abrirModalEditar}>
-                        <div className={styles.adminAvatar}>{getIniciales(usuario.Nombre)}</div>
-                        <div>
-                            <div className={styles.adminName}>{usuario.Nombre.split(" ")[0]}</div>
-                            <div className={styles.adminRole}>Ver Perfil</div>
-                        </div>
-                    </div>
-                </div>
-            </aside>
+            <PerfilSidebar
+                user={usuario}
+                activeTab={seccionActiva}
+                onTabChange={setSeccionActiva}
+                onEditarPerfil={abrirModalEditar}
+                onCerrarSesion={handleCerrarSesion}
+                onEliminarCuenta={handleEliminar}
+            />
 
             {/* ── MAIN ── */}
             <main className={styles.main}>
@@ -445,6 +424,28 @@ function PerfilVoluntario() {
                                 ) : <p className={styles.emptyState}>Aún no tenés solicitudes registradas.</p>}
                             </div>
                         </>
+                    )}
+
+                    {/* ══ MIS ORGANIZACIONES ══ */}
+                    {seccionActiva === "mis-organizaciones" && (
+                        <div className={styles.card}>
+                            <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#10b981'}}/>Organizaciones apoyadas</h3>
+                            {orgsDelUsuario.length > 0 ? (
+                                <div style={{display:'flex', flexDirection:'column', gap:'4px'}}>
+                                    {orgsDelUsuario.map((org, i) => (
+                                        <div key={org.id} className={styles.orgRow}>
+                                            <div className={styles.orgAvatar} style={{background: COLORES_CHART[i % COLORES_CHART.length]}}>
+                                                {getIniciales(org.NombreOrganizacion)}
+                                            </div>
+                                            <div>
+                                                <div className={styles.orgNombre}>{org.NombreOrganizacion}</div>
+                                                <div className={styles.orgDesc}>{org.Descripcion}</div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : <p className={styles.emptyState}>Aún no has colaborado con ninguna organización.</p>}
+                        </div>
                     )}
 
                     {/* ══ ORGANIZACIONES ══ */}

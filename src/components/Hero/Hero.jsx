@@ -22,29 +22,20 @@ const Hero = () => {
       <div className="hero-content">
         <span className="hero-tag">🌿 VOLUNTARIADO EN COSTA RICA</span>
         <h1 className="hero-title">
-          Encuentra tu causa.<br />
-          <span className="hero-title-accent">Impacta tu mundo.</span>
+          Encuentra tu causa<br />
+          <span className="hero-title-accent">Impacta tu mundo</span>
         </h1>
         <p className="hero-subtitle">
           Conectamos personas apasionadas con organizaciones que necesitan tu ayuda.
         </p>
         <div className="hero-buttons">
-
           {/* ✅ Si ya está logueado va al buscador, si no va a registro */}
           <button
             className="btn-primary"
             onClick={() => navigate(usuario ? '/buscador' : '/registro')}
           >
-            {usuario ? 'Explorar causas' : 'Regístrate y Ayuda'}
+            {usuario ? 'Explorar causas' : 'Regístrate y Colabora'}
           </button>
-
-          <button
-            className="btn-secondary"
-            onClick={() => navigate('/buscador')}
-          >
-            Ver organizaciones →
-          </button>
-
         </div>
       </div>
 

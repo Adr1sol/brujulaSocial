@@ -1,8 +1,10 @@
 /* ── Sección — fondo oscuro ────────────────────────────────── */
 .section {
-  background: #0d0d0d;
+  background: linear-gradient(145deg, #fdf8f0, #f3eedc); /* Fondo cálido sofisticado */
   padding: 60px 40px;
   font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  border-top: 1px solid #efe8d5;
+  border-bottom: 1px solid #efe8d5;
 }
 
 /* ── Header ────────────────────────────────────────────────── */
@@ -18,13 +20,19 @@
 .title {
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 800;
-  color: #ffffff;
   margin: 0;
   line-height: 1.15;
+  background: linear-gradient(90deg, #078a87, #6fb353, #ef8514);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
 }
 
 .titleAccent {
-  color: #1D9E75;
+  color: inherit;
+  -webkit-text-fill-color: inherit;
 }
 
 .viewAll {

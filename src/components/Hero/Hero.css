@@ -47,8 +47,12 @@
 .hero-content {
   position: relative;
   z-index: 3; /* Above the overlay */
+  margin-top: 200px; /* Textos aún más abajo para despejarlos de cualquier Navbar grueso */
   margin-bottom: 3rem;
   color: white; /* Ensure text is white */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero-tag {
@@ -69,24 +73,25 @@
 }
 
 .btn-primary {
-  background-image: linear-gradient(to right, #078a87, #00c2a8);
+  background: linear-gradient(135deg, #078a87 0%, #1d9e75 100%);
   color: white;
   border: none;
-  padding: 0.8rem 2rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border-radius: 50px; /* Rounded corners */
+  padding: 1rem 2.5rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  border-radius: 50px;
   cursor: pointer;
-  transition: all 0.4s ease; /* Smooth transition for all properties */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Softer shadow */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 6px 20px rgba(7, 138, 135, 0.4);
   z-index: 3;
-  text-transform: uppercase; /* Uppercase text */
-  letter-spacing: 1.5px; /* Spacing between letters */
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 1.5rem;
 }
 
 .btn-primary:hover {
-  transform: scale(1.05); /* Slightly enlarges the button */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(7, 138, 135, 0.6);
 }
 
 .search-bar {

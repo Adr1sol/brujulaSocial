@@ -29,7 +29,7 @@ const ProyectosDestacados = () => {
       img: basura
     },
     {
-      category: "ADULTO MAYOR",
+      category: "SALUD",
       categoryColor: "#078A87",
       location: "Alajuela, Central",
       title: "Acompañamiento Generacional",
@@ -37,7 +37,7 @@ const ProyectosDestacados = () => {
       img: adulto
     },
     {
-      category: "RESCATE ANIMAL",
+      category: "BIENESTAR ANIMAL",
       categoryColor: "#EF8514",
       location: "Cartago, Paraíso",
       title: "Cuidado en Refugios de Fauna",
