@@ -106,7 +106,6 @@ function Formregistro() {
     <div className={styles.wrapper}>
       <div className={styles.visualSide}>
         <div className={styles.branding}>
-          <img src={logoIcon} alt="Brújula Social Logo" className={styles.formLogo} />
           <h1>Únete a nosotros</h1>
           <p>Crea tu cuenta para empezar a mejorar el mundo a través del voluntariado.</p>
         </div>

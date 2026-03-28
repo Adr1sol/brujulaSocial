@@ -23,11 +23,11 @@ const Hero = () => {
       <div className={styles['hero-content']}>
         <img src={logoFull} alt="Brújula Social Logo" className={styles['hero-logo']} />
         <h1 className={styles['hero-title']}>
-          Encuentra tu Norte.<br />
-          <span className={styles['hero-title-accent']}>Impacta Costa Rica.</span>
+          Encuentra voluntariados reales.<br />
+          <span className={styles['hero-title-accent']}>Empieza a ayudar hoy.</span>
         </h1>
         <p className={styles['hero-subtitle']}>
-          La plataforma que conecta corazones voluntarios con las organizaciones que están transformando cada rincón de nuestro país.
+          Conectamos personas con organizaciones que necesitan apoyo en este momento. Descubre oportunidades cerca de ti y participa sin complicaciones
         </p>
         <div className={styles['hero-buttons']}>
 
@@ -35,7 +35,7 @@ const Hero = () => {
             className={styles['btn-primary']}
             onClick={() => navigate(usuario ? '/buscador' : '/registro')}
           >
-            <span>{usuario ? 'Explorar causas' : 'Únete al Cambio'}</span>
+            <span>{usuario ? 'Explorar causas' : 'Crear cuenta gratis'}</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
 
@@ -43,7 +43,7 @@ const Hero = () => {
             className={styles['btn-secondary']}
             onClick={() => navigate('/buscador')}
           >
-            <span>Explorar Mapas</span>
+            <span>Explorar organizaciones</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
           </button>
 
