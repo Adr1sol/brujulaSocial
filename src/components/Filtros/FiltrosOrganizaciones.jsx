@@ -27,16 +27,16 @@ function FiltrosOrganizaciones({ filtros, onFiltroChange }) {
         <div className={styles.filtrosWrap}>
             <div className={styles.filtroGroup}>
                 <label className={styles.filtroLabel}>Categoría</label>
-                <select
+                {/* <select
                     className={styles.filtroSelect}
-                    value={filtros.idCategoria}
-                    onChange={(e) => onFiltroChange('idCategoria', e.target.value)}
+                    value={filtros.idOrganizacion}
+                    onChange={(e) => onFiltroChange('idOrganizacion', e.target.value)}
                 >
                     <option value="">Todas las categorías</option>
                     {categorias.map((cat) => (
                         <option key={cat.id} value={cat.id}>{cat.NombreCategoria}</option>
                     ))}
-                </select>
+                </select> */}
             </div>
 
             <div className={styles.filtroGroup}>
