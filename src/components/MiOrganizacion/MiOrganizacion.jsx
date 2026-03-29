@@ -11,6 +11,16 @@ import ModalVoluntario from './ModalVoluntario'
 import ModalRegistroHoras from './ModalRegistroHoras'
 import styles from "./MiOrganizacion.module.css"
 
+const COLORES = ["#1D9E75", "#E8841A", "#185FA5", "#534AB7", "#3B6D11", "#D4537E"]
+
+function getIniciales(nombre) {
+    if (!nombre) return "??"
+    const partes = nombre.split(" ")
+    return partes.length >= 2
+        ? partes[0][0] + partes[1][0]
+        : nombre.substring(0, 2).toUpperCase()
+}
+
 function PerfilOrganizacion() {
 
     const [organizacion, setOrganizacion] = useState(null)
@@ -36,7 +46,6 @@ function PerfilOrganizacion() {
     }, [])
 
     async function cargarDatos() {
-        // ✅ Leer org desde el usuario logueado, no desde miOrganizacion
         const user = JSON.parse(localStorage.getItem("user") || "null")
         if (!user || !user.idOrganizacion) return
 
@@ -46,20 +55,19 @@ function PerfilOrganizacion() {
         )
         if (!miOrg) return
 
-        // ✅ Actualizar localStorage con la org correcta
         localStorage.setItem("miOrganizacion", JSON.stringify(miOrg))
         setOrganizacion(miOrg)
 
-        const categorias      = await ServiceCategorias.getCategorias()
-        const provincias      = await ServiceProvincias.getProvincias()
+        const categorias       = await ServiceCategorias.getCategorias()
+        const provincias       = await ServiceProvincias.getProvincias()
         const disponibilidades = await ServiceDisponibilidades.getDisponibilidades()
 
         const cat  = categorias.find((c) => parseInt(c.id) === parseInt(miOrg.idCategoria))
         const prov = provincias.find((p) => parseInt(p.id) === parseInt(miOrg.IdProvincia))
         const disp = disponibilidades.find((d) => parseInt(d.id) === parseInt(miOrg.idDisponibilidad))
 
-        setCategoriaNombre(cat  ? cat.NombreCategoria        : "Sin categoría")
-        setProvinciaNombre(prov ? prov.NombreProvincia       : "Sin provincia")
+        setCategoriaNombre(cat  ? cat.NombreCategoria         : "Sin categoría")
+        setProvinciaNombre(prov ? prov.NombreProvincia        : "Sin provincia")
         setDisponibilidadNombre(disp ? disp.NombreDisponibilidad : "Sin disponibilidad")
 
         const todasLasAplicaciones = await ServiceVoluntariado.getVoluntariado()
@@ -99,12 +107,7 @@ function PerfilOrganizacion() {
 
     async function handleGuardarCambios() {
         if (!nombreOrganizacion || !idCategoria || !idProvincia || !idDisponibilidad || !descripcion) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Formulario incompleto',
-                text: 'Todos los campos deben estar llenos.',
-                confirmButtonColor: '#EF8514'
-            })
+            Swal.fire({ icon: 'error', title: 'Formulario incompleto', text: 'Todos los campos deben estar llenos.', confirmButtonColor: '#EF8514' })
             return
         }
 
@@ -122,23 +125,10 @@ function PerfilOrganizacion() {
             localStorage.setItem("miOrganizacion", JSON.stringify(actualizada))
             setOrganizacion(actualizada)
             setEditando(false)
-
-            Swal.fire({
-                icon: 'success',
-                title: '¡Actualización exitosa!',
-                text: 'Tu organización fue actualizada correctamente.',
-                timer: 2000,
-                showConfirmButton: false
-            })
-
+            Swal.fire({ icon: 'success', title: '¡Actualización exitosa!', text: 'Tu organización fue actualizada correctamente.', timer: 2000, showConfirmButton: false })
             cargarDatos()
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error al actualizar',
-                text: 'No se pudo actualizar la organización. Intentá de nuevo.',
-                confirmButtonColor: '#EF8514'
-            })
+            Swal.fire({ icon: 'error', title: 'Error al actualizar', text: 'No se pudo actualizar la organización. Intentá de nuevo.', confirmButtonColor: '#EF8514' })
         }
     }
 
@@ -158,127 +148,195 @@ function PerfilOrganizacion() {
                 localStorage.removeItem("miOrganizacion")
                 localStorage.removeItem("user")
                 setOrganizacion(null)
-
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Organización eliminada',
-                    timer: 2000,
-                    showConfirmButton: false
-                }).then(() => {
-                    navigate("/register")
-                })
+                Swal.fire({ icon: 'success', title: 'Organización eliminada', timer: 2000, showConfirmButton: false })
+                    .then(() => navigate("/register"))
             }
         })
     }
 
     return (
-        <div>
-            {organizacion ? (
-                <div>
-                    <div>
-                        <h2>Mi Organización</h2>
-                        <p><strong>Nombre:</strong> {organizacion.NombreOrganizacion}</p>
-                        <p><strong>Descripción:</strong> {organizacion.Descripcion}</p>
-                        <p><strong>Categoría:</strong> {categoriaNombre}</p>
-                        <p><strong>Provincia:</strong> {provinciaNombre}</p>
-                        <p><strong>Disponibilidad:</strong> {disponibilidadNombre}</p>
-                        <button onClick={handleEditar}>Editar</button>
-                        <button onClick={handleEliminar}>Eliminar</button>
-                    </div>
+        <div className={styles.pagina}>
+            <div className={styles.contenido}>
 
-                    {editando && (
-                        <div style={{
-                            background: '#fff', border: '0.5px solid #D3D1C7',
-                            borderRadius: '12px', padding: '20px', marginTop: '16px'
-                        }}>
-                            <div style={{ fontSize: '14px', fontWeight: '500', color: '#2C2C2A', marginBottom: '16px', paddingBottom: '10px', borderBottom: '0.5px solid #D3D1C7' }}>
-                                Editar organización
-                            </div>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                                    <label style={{ fontSize: '12px', color: '#5F5E5A', fontWeight: '500' }}>Nombre de la organización</label>
-                                    <input type="text" value={nombreOrganizacion} onChange={(e) => setNombreOrganizacion(e.target.value)} style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }} />
+                {organizacion ? (
+                    <>
+                        {/* ── Card principal de la organización ── */}
+                        <div className={styles.heroCard}>
+                            <div className={styles.heroHeader}>
+                                <div className={styles.orgAvatarWrap}>
+                                    <div className={styles.orgAvatar}>
+                                        {getIniciales(organizacion.NombreOrganizacion)}
+                                    </div>
+                                    <div className={styles.orgTitleGroup}>
+                                        <h2>{organizacion.NombreOrganizacion}</h2>
+                                        {organizacion.CorreoContacto && (
+                                            <span className={styles.correoLabel}>✉ {organizacion.CorreoContacto}</span>
+                                        )}
+                                    </div>
                                 </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                                    <label style={{ fontSize: '12px', color: '#5F5E5A', fontWeight: '500' }}>Categoría</label>
-                                    <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)} style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}>
-                                        <option value="">Seleccionar categoría</option>
-                                        <option value="1">Medio Ambiente</option>
-                                        <option value="2">Educación</option>
-                                        <option value="3">Salud</option>
-                                        <option value="4">Bienestar Animal</option>
-                                        <option value="5">Cultura</option>
-                                    </select>
-                                </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                                    <label style={{ fontSize: '12px', color: '#5F5E5A', fontWeight: '500' }}>Provincia</label>
-                                    <select value={idProvincia} onChange={(e) => setIdProvincia(e.target.value)} style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}>
-                                        <option value="">Seleccionar provincia</option>
-                                        <option value="1">San José</option>
-                                        <option value="2">Alajuela</option>
-                                        <option value="3">Cartago</option>
-                                        <option value="4">Heredia</option>
-                                        <option value="5">Guanacaste</option>
-                                        <option value="6">Puntarenas</option>
-                                        <option value="7">Limón</option>
-                                    </select>
-                                </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                                    <label style={{ fontSize: '12px', color: '#5F5E5A', fontWeight: '500' }}>Disponibilidad</label>
-                                    <select value={idDisponibilidad} onChange={(e) => setIdDisponibilidad(e.target.value)} style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}>
-                                        <option value="">Seleccionar disponibilidad</option>
-                                        <option value="1">Fines de semana</option>
-                                        <option value="2">Por horas</option>
-                                        <option value="3">Remoto</option>
-                                        <option value="4">Entre semana</option>
-                                    </select>
-                                </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', gridColumn: '1 / -1' }}>
-                                    <label style={{ fontSize: '12px', color: '#5F5E5A', fontWeight: '500' }}>Descripción</label>
-                                    <textarea value={descripcion} onChange={(e) => setDescripcion(e.target.value)} style={{ padding: '9px 12px', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit', minHeight: '80px', resize: 'vertical' }} />
+
+                                <div className={styles.heroStats}>
+                                    <div className={styles.heroStat}>
+                                        <div className={styles.heroStatN}>{voluntarios.length}</div>
+                                        <div className={styles.heroStatL}>Voluntarios</div>
+                                    </div>
+                                    <div className={styles.heroDivider}></div>
+                                    <div className={styles.heroStat}>
+                                        <div className={styles.heroStatN}>{organizacion.id}</div>
+                                        <div className={styles.heroStatL}>ID Org.</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end' }}>
-                                <button onClick={handleCancelar} style={{ padding: '9px 20px', background: '#F1EFE8', border: '0.5px solid #D3D1C7', borderRadius: '8px', fontSize: '13px', cursor: 'pointer', color: '#5F5E5A' }}>Cancelar</button>
-                                <button onClick={handleGuardarCambios} style={{ padding: '9px 24px', background: '#1D9E75', border: 'none', borderRadius: '8px', color: '#fff', fontSize: '13px', cursor: 'pointer', fontWeight: '500' }}>Guardar cambios</button>
+
+                            <div className={styles.heroTags}>
+                                <span className={`${styles.heroTag} ${styles.teal}`}>🏷️ {categoriaNombre}</span>
+                                <span className={`${styles.heroTag} ${styles.orange}`}>📍 {provinciaNombre}</span>
+                                <span className={`${styles.heroTag} ${styles.green}`}>⏰ {disponibilidadNombre}</span>
+                            </div>
+
+                            <div className={styles.heroDesc}>
+                                <h4>Descripción</h4>
+                                <p>{organizacion.Descripcion}</p>
+                            </div>
+
+                            <div className={styles.heroActions}>
+                                <button className={styles.btnEditar} onClick={handleEditar}>
+                                    ✏️ Editar información
+                                </button>
+                                <button className={styles.btnEliminar} onClick={handleEliminar}>
+                                    🗑 Eliminar organización
+                                </button>
                             </div>
                         </div>
-                    )}
 
-                    <div>
-                        <h3>Voluntarios que aplicaron</h3>
-                        {voluntarios.length > 0 ? (
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Correo</th>
-                                        <th>Fecha de aplicación</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {voluntarios.map((vol, index) => (
-                                        <tr key={index}>
-                                            <td>{vol.Nombre}</td>
-                                            <td>{vol.Correo}</td>
-                                            <td>{vol.FechaAplicacion}</td>
-                                            <td>
-                                                <button onClick={() => setVoluntarioSeleccionado(vol)}>Ver perfil</button>
-                                                <button onClick={() => setVoluntarioParaHoras(vol)}>Registrar horas</button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        ) : (
-                            <p>Aún no hay voluntarios que hayan aplicado a tu organización.</p>
+                        {/* ── Formulario de edición ── */}
+                        {editando && (
+                            <div className={styles.editCard}>
+                                <div className={styles.editCardHeader}>
+                                    <h3>Editar organización</h3>
+                                </div>
+                                <div className={styles.editCardBody}>
+                                    <div className={styles.editGrid}>
+                                        <div className={styles.editGroup}>
+                                            <label>Nombre de la organización</label>
+                                            <input type="text" value={nombreOrganizacion} onChange={(e) => setNombreOrganizacion(e.target.value)} />
+                                        </div>
+                                        <div className={styles.editGroup}>
+                                            <label>Categoría</label>
+                                            <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
+                                                <option value="">Seleccionar categoría</option>
+                                                <option value="1">Medio Ambiente</option>
+                                                <option value="2">Educación</option>
+                                                <option value="3">Salud</option>
+                                                <option value="4">Bienestar Animal</option>
+                                                <option value="5">Cultura</option>
+                                            </select>
+                                        </div>
+                                        <div className={styles.editGroup}>
+                                            <label>Provincia</label>
+                                            <select value={idProvincia} onChange={(e) => setIdProvincia(e.target.value)}>
+                                                <option value="">Seleccionar provincia</option>
+                                                <option value="1">San José</option>
+                                                <option value="2">Alajuela</option>
+                                                <option value="3">Cartago</option>
+                                                <option value="4">Heredia</option>
+                                                <option value="5">Guanacaste</option>
+                                                <option value="6">Puntarenas</option>
+                                                <option value="7">Limón</option>
+                                            </select>
+                                        </div>
+                                        <div className={styles.editGroup}>
+                                            <label>Disponibilidad</label>
+                                            <select value={idDisponibilidad} onChange={(e) => setIdDisponibilidad(e.target.value)}>
+                                                <option value="">Seleccionar disponibilidad</option>
+                                                <option value="1">Fines de semana</option>
+                                                <option value="2">Por horas</option>
+                                                <option value="3">Remoto</option>
+                                                <option value="4">Entre semana</option>
+                                            </select>
+                                        </div>
+                                        <div className={`${styles.editGroup} ${styles.fullWidth}`}>
+                                            <label>Descripción</label>
+                                            <textarea value={descripcion} onChange={(e) => setDescripcion(e.target.value)} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={styles.editCardFooter}>
+                                    <button className={styles.btnCancelar} onClick={handleCancelar}>Cancelar</button>
+                                    <button className={styles.btnGuardar} onClick={handleGuardarCambios}>Guardar cambios</button>
+                                </div>
+                            </div>
                         )}
+
+                        {/* ── Tabla de voluntarios ── */}
+                        <div className={styles.voluntariosCard}>
+                            <div className={styles.voluntariosHeader}>
+                                <h3>Voluntarios que aplicaron</h3>
+                                <span className={styles.badge}>{voluntarios.length} voluntarios</span>
+                            </div>
+
+                            {voluntarios.length > 0 ? (
+                                <div className={styles.tablaWrap}>
+                                    <table className={styles.tabla}>
+                                        <thead>
+                                            <tr>
+                                                <th>Voluntario</th>
+                                                <th>Correo</th>
+                                                <th>Fecha de aplicación</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {voluntarios.map((vol, index) => (
+                                                <tr key={index}>
+                                                    <td>
+                                                        <div className={styles.tdUser}>
+                                                            <div
+                                                                className={styles.avatarSm}
+                                                                style={{ background: COLORES[index % COLORES.length] }}
+                                                            >
+                                                                {getIniciales(vol.Nombre)}
+                                                            </div>
+                                                            <span>{vol.Nombre}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>{vol.Correo}</td>
+                                                    <td>
+                                                        <span className={styles.fechaBadge}>
+                                                            📅 {vol.FechaAplicacion}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div className={styles.accionesTd}>
+                                                            <button className={styles.btnVerPerfil} onClick={() => setVoluntarioSeleccionado(vol)}>
+                                                                Ver perfil
+                                                            </button>
+                                                            <button className={styles.btnHoras} onClick={() => setVoluntarioParaHoras(vol)}>
+                                                                + Horas
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            ) : (
+                                <div className={styles.emptyState}>
+                                    <div className={styles.emptyIcon}>🤝</div>
+                                    <p>Aún no hay voluntarios que hayan aplicado a tu organización.</p>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                ) : (
+                    <div className={styles.sinOrg}>
+                        <p>No hay organización registrada.</p>
+                        <a href="/register">Registrá tu organización aquí →</a>
                     </div>
-                </div>
-            ) : (
-                <p>No hay organización registrada. <a href="/register">Registrá tu organización aquí.</a></p>
-            )}
+                )}
+
+            </div>
 
             {voluntarioSeleccionado && (
                 <ModalVoluntario

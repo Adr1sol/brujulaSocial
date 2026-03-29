@@ -71,155 +71,184 @@
   ],
   "organizaciones": [
     {
-      "id": "1",
-      "NombreOrganizacion": "EcoVoluntarios CR",
+      "NombreOrganizacion": "Alianza Verde Costa Rica",
       "idCategoria": 1,
+      "contrasena": "123456",
+      "correo": "alianza@gmail.com",
       "IdProvincia": 2,
       "idDisponibilidad": 1,
-      "Descripcion": "Organización dedicada a la limpieza y conservación de espacios naturales.",
-      "Contrasena": "123456",
-      "correo": "eco@gmail.com"
+      "Descripcion": "Lideramos proyectos de regeneración ecosistémica y conservación de biodiversidad en áreas protegidas de todo el país.",
+      "id": "1"
     },
     {
       "id": "2",
-      "NombreOrganizacion": "Fundación Aprende",
+      "NombreOrganizacion": "Fundación Horizonte Educativo",
       "idCategoria": 2,
+      "contrasena": "123456",
+      "correo": "fundacion@gmail.com",
       "IdProvincia": 2,
       "idDisponibilidad": 4,
-      "Descripcion": "Apoyo educativo a niños y jóvenes en zonas vulnerables."
+      "Descripcion": "Empoderamos a las nuevas generaciones mediante programas integrales de nivelación académica y desarrollo de habilidades competitivas."
     },
     {
       "id": "3",
-      "NombreOrganizacion": "Rescate Animal",
+      "NombreOrganizacion": "Red de Protección de Vida Silvestre",
       "idCategoria": 4,
+      "contrasena": "123456",
+      "correo": "red@gmail.com",
       "IdProvincia": 3,
       "idDisponibilidad": 2,
-      "Descripcion": "Organización de bienestar animal."
+      "Descripcion": "Gestión y rehabilitación integral para especies en riesgo, promoviendo la coexistencia armónica y el bienestar animal en las comunidades."
     },
     {
       "id": "b632",
-      "NombreOrganizacion": "Luz",
+      "NombreOrganizacion": "Centro de Formación Integral Luz",
       "idCategoria": 2,
+      "contrasena": "123456",
+      "correo": "centro@gmail.com",
       "IdProvincia": 1,
       "idDisponibilidad": 4,
-      "Descripcion": "Educar"
+      "Descripcion": "Institución dedicada al desarrollo de programas pedagógicos avanzados para el fortalecimiento comunitario y el liderazgo juvenil."
     },
     {
       "id": "a992",
-      "NombreOrganizacion": "Luz dos",
+      "NombreOrganizacion": "Proyecto Re-Forestación Sostenible",
       "idCategoria": 1,
+      "contrasena": "123456",
+      "correo": "proyecto@gmail.com",
       "IdProvincia": 7,
       "idDisponibilidad": 2,
-      "Descripcion": "sembrar"
+      "Descripcion": "Iniciativa enfocada en la recuperación de corredores biológicos y soberanía alimentaria mediante técnicas de siembra de precisión."
     },
     {
       "id": "5efb",
-      "NombreOrganizacion": "Casa dos",
+      "NombreOrganizacion": "Residencia Académica Juvenil",
       "idCategoria": 5,
+      "contrasena": "123456",
+      "correo": "residencia@gmail.com",
       "IdProvincia": 1,
       "idDisponibilidad": 4,
-      "Descripcion": "educar"
+      "Descripcion": "Espacio de acompañamiento educativo y social diseñado para garantizar el éxito académico de estudiantes en situaciones de riesgo social."
     },
     {
       "id": "1246",
-      "NombreOrganizacion": "casa tres",
+      "NombreOrganizacion": "Centro de Innovación Educativa",
       "idCategoria": 5,
+      "contrasena": "123456",
+      "correo": "centro@gmail.com",
       "IdProvincia": 3,
       "idDisponibilidad": 3,
-      "Descripcion": "educación"
+      "Descripcion": "Plataforma de aprendizaje colaborativo que integra metodologías modernas y tecnología para la educación del siglo XXI."
     },
     {
       "id": "ac94",
-      "NombreOrganizacion": "casita",
-      "idCategoria": 1,
+      "NombreOrganizacion": "Hogar Esperanza",
+      "idCategoria": 3,
+      "contrasena": "123456",
+      "correo": "hogar@gmail.com",
       "IdProvincia": 1,
       "idDisponibilidad": 1,
-      "Descripcion": "casa"
+      "Descripcion": "Centro de acogida integral que brinda refugio digno y soporte emocional a personas en situaciones de vulnerabilidad extrema."
     },
     {
       "id": "9f57",
-      "NombreOrganizacion": "flores",
+      "NombreOrganizacion": "Programa Pétalos de Saber",
       "idCategoria": 1,
+      "contrasena": "123456",
+      "correo": "programa@gmail.com",
       "IdProvincia": 4,
       "idDisponibilidad": 1,
-      "Descripcion": "educar"
+      "Descripcion": "Iniciativa de educación ambiental y botánica aplicada orientada a la sensibilización sobre la importancia de la flora nativa."
     },
     {
       "id": "f368",
-      "NombreOrganizacion": "Educa Sin Fronteras",
+      "NombreOrganizacion": "Red Global de Alfabetización",
       "idCategoria": 2,
+      "contrasena": "123456",
+      "correo": "red@gmail.com",
       "IdProvincia": 2,
       "idDisponibilidad": 1,
-      "Descripcion": "Educación para todos"
+      "Descripcion": "Organización internacional que remueve barreras sociales para garantizar el derecho universal a una educación de calidad y equitativa."
     },
     {
       "id": "9815",
-      "NombreOrganizacion": "Animalitos CR",
+      "NombreOrganizacion": "Sociedad Protectora de Fauna Urbana",
       "idCategoria": 4,
+      "contrasena": "123456",
+      "correo": "sociedad@gmail.com",
       "IdProvincia": 1,
       "idDisponibilidad": 1,
-      "Descripcion": "Organización de cuido para el bienestar social de todos los animalitos"
+      "Descripcion": "Implementamos políticas de salud pública y bienestar para animales domésticos mediante educación ciudadana y jornadas de asistencia médica."
     },
     {
       "id": "2567",
-      "NombreOrganizacion": "Fundación manos juntas",
+      "NombreOrganizacion": "Corporación Cultural Manos Unidas",
       "idCategoria": 5,
+      "contrasena": "123456",
+      "correo": "corporacion@gmail.com",
       "IdProvincia": 6,
       "idDisponibilidad": 2,
-      "Descripcion": "Fundación para fomentar la cultura"
+      "Descripcion": "Promovemos el rescate de la identidad nacional y el acceso universal a las diversas expresiones artísticas y culturales costarricenses."
     },
     {
       "id": "a4f8",
-      "NombreOrganizacion": "Océanos Limpios",
-      "CorreoContacto": "oceano@gmail.com",
+      "NombreOrganizacion": "Guardianes del Litoral",
       "idCategoria": 1,
+      "correo": "guardianes@gmail.com",
+      "contrasena": "123456",
       "IdProvincia": 2,
       "idDisponibilidad": 1,
-      "Descripcion": "Limpieza de playas"
+      "Descripcion": "Movimiento ciudadano dedicado a la mitigación de la contaminación marina y la restauración activa de ecosistemas costeros."
     },
     {
       "id": "a229",
-      "NombreOrganizacion": "Semilla verde",
-      "CorreoContacto": "semilla@gmail.com",
+      "NombreOrganizacion": "Consorcio de Reforestación Semilla",
       "idCategoria": 1,
+      "correo": "semilla@gmail.com",
+      "contrasena": "123456",
       "IdProvincia": 7,
       "idDisponibilidad": 1,
-      "Descripcion": "Siembra de árboles",
-      "contrasena": "123456"
+      "Descripcion": "Expertos en silvicultura y restauración de suelos degradados, impulsando la resiliencia climática mediante la siembra estratégica."
     },
     {
       "id": "-BEOLgMzg8Y",
-      "NombreOrganizacion": "Huellitas",
-      "CorreoContacto": "huellitas@gmail.com",
+      "NombreOrganizacion": "Refugio Santuario Huellas",
       "idCategoria": 4,
+      "correo": "huellitas@gmail.com",
+      "contrasena": "123456",
       "IdProvincia": 5,
       "idDisponibilidad": 1,
-      "Descripcion": "Organización encargada del cuido y bienestar animal"
+      "Descripcion": "Brindamos cuidados médicos especializados y programas de adopción responsable para animales en estado crítico de abandono."
     },
     {
-      "NombreOrganizacion": "sonrisas",
+      "id": "U42Ij5nG7GA",
+      "NombreOrganizacion": "Alianza por la Salud Integral",
       "idCategoria": 3,
+      "correo": "alianza@gmail.com",
+      "contrasena": "123456",
       "IdProvincia": 4,
       "idDisponibilidad": 4,
-      "Descripcion": "Mejorando la calidad en salud ",
-      "id": "U42Ij5nG7GA"
+      "Descripcion": "Optimizamos el acceso a servicios médicos preventivos y soporte terapéutico especializado para poblaciones en zonas rurales."
     },
     {
-      "NombreOrganizacion": "Caminos juntos",
+      "id": "I25-umcszfw",
+      "NombreOrganizacion": "Coalición Ambiental por Limón",
       "idCategoria": 1,
+      "correo": "coalicion@gmail.com",
+       "contrasena": "123456",
       "IdProvincia": 6,
       "idDisponibilidad": 1,
-      "Descripcion": "Limón limpio",
-      "id": "I25-umcszfw"
+      "Descripcion": "Transformamos entornos urbanos y costeros mediante sistemas avanzados de gestión de residuos y educación cívica ambiental."
     },
     {
-      "NombreOrganizacion": "Cristal",
-      "CorreoContacto": "cristal@gmail.com",
-      "idCategoria": 3,
+      "id": "bDW4HDn2tM4",
+      "NombreOrganizacion": "Centro Médico Comunitario Cristal",
+        "idCategoria": 3,
+      "correo": "centro@gmail.com",
+      "contrasena": "123456",
       "IdProvincia": 1,
       "idDisponibilidad": 1,
-      "Descripcion": "Cuidado de la salud",
-      "id": "bDW4HDn2tM4"
+      "Descripcion": "Proveemos atención primaria de salud con un enfoque preventivo-comunitario y tecnología clínica de primer nivel."
     }
   ],
   "usuarios": [
@@ -342,16 +371,17 @@
     },
     {
       "id": "org-01",
-      "Nombre": "EcoVoluntarios CR",
+      "Nombre": "Alianza Verde Costa Rica",
       "Correo": "eco@gmail.com",
       "Contrasena": "123456",
       "Tipo": "organizacion",
       "idOrganizacion": "1",
-      "FechaRegistro": "2026-01-01"
+      "FechaRegistro": "2026-01-01",
+      "Telefono": "2121"
     },
     {
       "id": "org-02",
-      "Nombre": "Fundación Aprende",
+      "Nombre": "Fundación Horizonte Educativo",
       "Correo": "aprende@gmail.com",
       "Contrasena": "123456",
       "Tipo": "organizacion",
@@ -360,7 +390,7 @@
     },
     {
       "id": "org-03",
-      "Nombre": "Rescate Animal",
+      "Nombre": "Red de Protección de Vida Silvestre",
       "Correo": "rescate@gmail.com",
       "Contrasena": "123456",
       "Tipo": "organizacion",
@@ -388,7 +418,7 @@
       "id": "dGHP6P5upio"
     },
     {
-      "Nombre": "Caminos juntos",
+      "Nombre": "Coalición Ambiental por Limón",
       "Correo": "caminos@gmail.com",
       "Contrasena": "123456",
       "Tipo": "organizacion",
@@ -397,7 +427,7 @@
       "id": "2wCFwP4eIic"
     },
     {
-      "Nombre": "Cristal",
+      "Nombre": "Centro Médico Comunitario Cristal",
       "Correo": "cristal@gmail.com",
       "Contrasena": "123456",
       "Tipo": "organizacion",
@@ -766,6 +796,36 @@
       "idOrganizacion": "bDW4HDn2tM4",
       "FechaAplicacion": "2026-03-26",
       "id": "s8lVsNLh_No"
+    },
+    {
+      "idUsuario": "7d30",
+      "idOrganizacion": "2",
+      "FechaAplicacion": "2026-03-27",
+      "id": "y4pEVMXG-lE"
+    },
+    {
+      "idUsuario": "245e",
+      "idOrganizacion": "ac94",
+      "FechaAplicacion": "2026-03-27",
+      "id": "sk-yKgTVTeE"
+    },
+    {
+      "idUsuario": "dGHP6P5upio",
+      "idOrganizacion": "I25-umcszfw",
+      "FechaAplicacion": "2026-03-29",
+      "id": "xD-xeH8RC58"
+    },
+    {
+      "idUsuario": "dGHP6P5upio",
+      "idOrganizacion": "U42Ij5nG7GA",
+      "FechaAplicacion": "2026-03-29",
+      "id": "ZUk21EMSjUE"
+    },
+    {
+      "idUsuario": "dGHP6P5upio",
+      "idOrganizacion": "a229",
+      "FechaAplicacion": "2026-03-29",
+      "id": "SHWA3GoPVDs"
     }
   ],
   "horas": [
@@ -784,6 +844,22 @@
       "actividad": "Siembra de árbolitos",
       "fecha": "2026-03-23",
       "horas": 15
+    },
+    {
+      "idUsuario": "1",
+      "idOrganizacion": "1",
+      "actividad": "Voluntaria con alto desempeño y compañerismo",
+      "fecha": "2026-03-22",
+      "horas": 50,
+      "id": "2HiKlbVE4G4"
+    },
+    {
+      "idUsuario": "dGHP6P5upio",
+      "idOrganizacion": "1",
+      "actividad": "Desempeño y compañerismo",
+      "fecha": "2026-03-26",
+      "horas": 50,
+      "id": "MiaFmCze_so"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

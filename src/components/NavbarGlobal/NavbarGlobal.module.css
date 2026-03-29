@@ -14,57 +14,47 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(1, 101, 104, 0.65);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1rem;
-    padding: 0.75rem 2rem;
-    transition: background 0.4s ease, border-color 0.4s ease;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-    overflow: visible;
+    padding: 0.75rem 5%;
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    transition: var(--transition);
 }
 
-/* ── Logo ── */
-.logoLink {
+.logo a {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    text-decoration: none;
-}
-
-.logoIcon {
-    width: 4rem;
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible;
-    flex-shrink: 0;
-    margin-top: -1rem;
-    margin-bottom: -1rem;
-}
-
-.logoImg {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    padding: 4px;
-}
-
-.logoText {
-    font-size: 1.4rem;
+    gap: 12px;
+    font-size: 1.5rem;
     font-weight: 800;
-    letter-spacing: -0.03em;
-    color: #ffffff;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--transition);
 }
 
-.logoAccent {
-    color: #016568;
+.logo a span {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Outfit', sans-serif;
 }
 
-/* ── Links de navegación ── */
+.logo a:hover {
+    transform: translateY(-1px);
+}
+
+.logoImage {
+    height: 54px;
+    width: auto;
+    object-fit: contain;
+    transition: var(--transition);
+}
+
 .navLinks {
     display: flex;
     list-style: none;
@@ -76,42 +66,95 @@
 
 .link {
     text-decoration: none;
-    color: #9ca3af;
-    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-size: 1rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 6px 0;
-    transition: color 0.25s ease;
+    padding: 8px 12px;
+    transition: var(--transition);
     position: relative;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    border-radius: var(--radius-sm);
 }
 
 .link:hover {
-    color: #ffffff;
+    color: var(--primary);
+    background: rgba(0, 163, 166, 0.05);
 }
 
-/* ── Link activo ── */
-.linkActivo {
-    color: #00f2ea;
-}
-
-.linkActivo::after {
+.link::after {
     content: "";
     position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #00f2ea;
-    border-radius: 2px;
+    bottom: 0;
+    left: 12px;
+    right: 12px;
+    height: 3px;
+    background: var(--secondary);
+    transform: scaleX(0);
+    transition: var(--transition);
+    border-radius: 4px;
 }
 
-/* ── Botón que actúa como link (para scroll) ── */
+.link:hover::after, .linkActivo::after {
+    transform: scaleX(1);
+}
+
+.linkActivo {
+    color: var(--primary) !important;
+}
+
+.btnLogin, .btnRegister {
+    padding: 0.7rem 1.8rem;
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnLogin {
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    background: transparent;
+}
+
+.btnLogin:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 51, 102, 0.2);
+}
+
+.btnRegister {
+    background: linear-gradient(135deg, var(--accent) 0%, #ff6b00 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 10px 20px rgba(242, 140, 0, 0.3);
+}
+
+.btnRegister:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(242, 140, 0, 0.4);
+}
+
+.btnLogout {
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    color: #e74c3c;
+    padding: 0.6rem 1.4rem;
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.btnLogout:hover {
+    background: #e74c3c;
+    color: white;
+    transform: scale(0.95);
+}
+
 .linkBtn {
     background: none;
     border: none;
@@ -119,62 +162,8 @@
     font-family: inherit;
 }
 
-/* ── Botón Iniciar sesión ── */
-.btnLogin {
-    text-decoration: none;
-    color: #9ca3af;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color 0.25s ease;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-}
-
-.btnLogin:hover {
-    color: #ffffff;
-}
-
-/* ── Botón Registrarse ── */
-.btnRegister {
-    text-decoration: none;
-    background: #ffffff;
-    color: #000000;
-    padding: 0.5rem 1.4rem;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    transition: background 0.25s ease, transform 0.15s ease;
-    display: inline-block;
-}
-
-.btnRegister:hover {
-    background: #00f2ea;
-    transform: scale(1.05);
-}
-
-.btnRegister:active {
-    transform: scale(0.95);
-}
-
-/* ── Botón Cerrar sesión ── */
-.btnLogout {
-    background: none;
-    border: 1px solid rgba(231, 76, 60, 0.6);
-    color: #e74c3c;
-    padding: 0.4rem 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    transition: background 0.25s ease, color 0.25s ease;
-    font-family: inherit;
-}
-
-.btnLogout:hover {
-    background: #e74c3c;
-    color: #ffffff;
+@media (max-width: 968px) {
+    .navLinks {
+        display: none; /* In a real app we'd add a mobile menu here */
+    }
 }

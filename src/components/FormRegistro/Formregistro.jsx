@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ServiceUsuario from "../../services/ServiceUsuario";
+import logoIcon from "../../images/logoSinNombre.png";
 
 function Formregistro() {
   const [tipo, setTipo] = useState("voluntario");
@@ -101,23 +102,21 @@ function Formregistro() {
     }
   };
 
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.visualSide}>
-        <div className={styles.overlay}></div>
-        <div className={styles.branding}>
-          <h1>Únete a nosotros</h1>
-          <p>Crea tu cuenta para empezar a mejorar el mundo a través del voluntariado.</p>
-        </div>
-      </div>
-      <div className={styles.formSide}>
-        <div className={styles.card}>
-          <Link to="/" className={styles.backLink}>← Volver al inicio</Link>
-
-          <div className={styles.header}>
-            <h2>Crear cuenta</h2>
-            <p className={styles.sub}>Completa tus datos para formar parte de la comunidad.</p>
-          </div>
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.visualSide}>
+        <div className={styles.branding}>
+          <img src={logoIcon} alt="Brújula Social Logo" className={styles.formLogo} />
+          <h1>Únete a nosotros</h1>
+          <p>Crea tu cuenta para empezar a mejorar el mundo a través del voluntariado.</p>
+        </div>
+      </div>
+      <div className={styles.formSide}>
+        <div className={styles.card}>
+          <div className={styles.header}>
+            <h2>Crear cuenta</h2>
+            <p className={styles.sub}>Completa tus datos para formar parte de la comunidad.</p>
+          </div>
 
           <div className={styles.accountTypeHeader}>
             <p className={styles.tipo}>Tipo de cuenta</p>

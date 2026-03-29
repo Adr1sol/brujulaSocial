@@ -1,0 +1,77 @@
+:global(.carousel-item) {
+  position: relative;
+}
+
+:global(.carousel-item img) {
+  height: 100% !important;
+  object-fit: cover !important;
+  width: 100%;
+}
+
+/* Caption personalizada */
+.custom-caption {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px !important;
+  padding: 3rem !important;
+  max-width: 800px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  bottom: 10% !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+  z-index: 10;
+  animation: fadeInUpCustom 1s ease-out;
+}
+
+.custom-caption h3 {
+  font-size: 3rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 1.2rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 4px !important;
+  color: #ffffff !important;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8) !important;
+  font-family: 'Outfit', sans-serif;
+}
+
+.custom-caption p {
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  color: #eeeeee !important;
+  margin-bottom: 0 !important;
+  opacity: 0.95;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+@keyframes fadeInUpCustom {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 60px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  :global(.carousel-item img) {
+    height: 500px !important;
+  }
+  .custom-caption {
+    padding: 2rem !important;
+    max-width: 95% !important;
+    bottom: 8% !important;
+  }
+  .custom-caption h3 {
+    font-size: 2rem !important;
+    letter-spacing: 2px !important;
+  }
+  .custom-caption p {
+    font-size: 1.1rem !important;
+  }
+}

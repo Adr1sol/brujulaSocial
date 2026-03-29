@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styles from './NavbarGlobal.module.css';
-import logoImg from '../../images/logoNavbar.png';
+import logoImg from '/logoredondo.png';
+import Swal from 'sweetalert2';
 
 export default function NavbarGlobal() {
     const navigate = useNavigate();
@@ -15,12 +16,29 @@ export default function NavbarGlobal() {
     const esHome  = path === '/' || path === '/home';
 
     const handleLogout = () => {
-        const confirmar = window.confirm("¿Estás seguro de que deseas cerrar sesión?");
-        if (confirmar) {
-            localStorage.removeItem("user");
-            localStorage.removeItem("miOrganizacion");
-            navigate('/');
-        }
+        Swal.fire({
+            title: '¿Cerrar sesión?',
+            text: "Tendrás que ingresar tus datos nuevamente para entrar.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#078A87',
+            cancelButtonColor: '#EF8514',
+            confirmButtonText: 'Sí, salir',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem("user");
+                localStorage.removeItem("miOrganizacion");
+                navigate('/');
+                Swal.fire({
+                    title: '¡Sesión cerrada!',
+                    text: 'Te esperamos pronto.',
+                    icon: 'success',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+        });
     };
 
     const scrollTo = (id) => {
@@ -150,16 +168,12 @@ export default function NavbarGlobal() {
 
     return (
         <nav className={styles.navbar}>
-            <div className={styles.inner}>
-                {/* Logo */}
-                <Link to="/" className={styles.logoLink}>
-                    <div className={styles.logoIcon}>
-                        <img src={logoImg} alt="Brújula Social" className={styles.logoImg} />
-                    </div>
-                    <span className={styles.logoText}>
-                        Brújula<span className={styles.logoAccent}>Social</span>
-                    </span>
+            <div className={styles.logo}>
+                <Link to="/">
+                    <img src={logoImg} alt="Brújula Social Logo" className={styles.logoImage} />
+                    <span>Brújula Social</span>
                 </Link>
+            </div>
 
                 {/* Links */}
                 <ul className={styles.navLinks}>
@@ -173,7 +187,7 @@ export default function NavbarGlobal() {
                         </li>
                     )}
                 </ul>
-            </div>
+            
         </nav>
     );
 }

@@ -28,7 +28,7 @@
     --r-sm: 8px;
 
     display: flex;
-    min-height: 100vh;
+    min-height: calc(100vh - var(--navbar-height));
     background: var(--navy);
     font-family: 'Inter', system-ui, sans-serif;
     color: var(--text-1);

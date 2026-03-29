@@ -35,7 +35,7 @@ function PerfilVoluntario() {
     async function cargarDatos() {
         const user = JSON.parse(localStorage.getItem("user"));
         if (!user) {
-            navigate("/login");
+            navigate("/perfil");
             return;
         }
         setUsuario(user);

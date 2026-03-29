@@ -1,140 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './Testimonials.css';
-
-const StarRating = ({ rating }) => {
-  return (
-    <div className="review-stars">
-      {[1, 2, 3, 4, 5].map((s) => (
-        <span key={s} style={{ color: s <= rating ? 'var(--google-teal)' : '#DADCE0' }}>
-          ★
-        </span>
-      ))}
-    </div>
-  );
-};
-
-const RatingSummary = ({ testimonials }) => {
-  const totalReviews = testimonials.length;
-
-  // Calcular promedio
-  const averageRating = totalReviews > 0
-    ? (testimonials.reduce((acc, curr) => acc + (curr.rating || 5), 0) / totalReviews).toFixed(1)
-    : 0;
-
-  // Calcular distribución
-  const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-  testimonials.forEach(t => {
-    const r = t.rating || 5;
-    if (counts[r] !== undefined) counts[r]++;
-  });
-
-  const ratings = [5, 4, 3, 2, 1].map(stars => ({
-    stars,
-    percentage: totalReviews > 0 ? (counts[stars] / totalReviews) * 100 : 0
-  }));
-
-  return (
-    <div className="rating-summary">
-      <div className="rating-header">
-        <div className="rating-score-container">
-          <div className="rating-score-big">{averageRating}</div>
-          <StarRating rating={Math.round(averageRating)} />
-          <div className="rating-count">{totalReviews} {totalReviews === 1 ? 'opinión' : 'opiniones'}</div>
-        </div>
-        <div className="rating-bars">
-          {ratings.map((r) => (
-            <div key={r.stars} className="rating-bar-row">
-              <span className="star-num">{r.stars}</span>
-              <div className="bar-bg">
-                <div className="bar-fill" style={{ width: `${r.percentage}%` }}></div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
+// components/Testimonials/Testimonials.jsx
+import React from 'react';
+import styles from './Testimonials.module.css';
+import videoVoluntariado from '../Video/Video_de_Voluntariados_en_Costa_Rica.mp4';
+import mariaAvatar from '../../assets/testimonials/maria.png';
+import robertoAvatar from '../../assets/testimonials/roberto.png';
+import andresAvatar from '../../assets/testimonials/andres.png';
 
 const Testimonials = () => {
-  const [allTestimonials, setAllTestimonials] = useState([]);
-  const [showAll, setShowAll] = useState(false);
+  return (
+    <section className={styles['testimonials-section']}>
+      <h2>Voluntariados Inspiradores </h2>
 
-  useEffect(() => {
-    const stored = localStorage.getItem('user_testimonials');
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      setAllTestimonials(parsed);
-    } else {
-      setAllTestimonials([]);
-    }
-  }, []);
+      <section className={styles['video-section']}>
+        <div className={styles['video-placeholder']}>
+          <video className={styles['video-player']} controls>
+            <source src={videoVoluntariado} type="video/mp4" />
+            Tu navegador no soporta el elemento de video.
+          </video>
+        </div>
+      </section>
 
-  const handleDelete = (id) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar este testimonio?')) {
-      const updated = allTestimonials.filter(t => t.id !== id);
-      setAllTestimonials(updated);
-      localStorage.setItem('user_testimonials', JSON.stringify(updated));
-    }
-  };
+      <div className={styles['testimonials-grid']}>
+        <div className={styles['testimonial-card']}>
+          <div className={`${styles['quote-icon']} ${styles['bg-orange']}`}>"</div>
+          <p className={styles['quote-text']}>"Brújula Social me permitió encontrar un proyecto de reforestación que cambió mi perspectiva sobre el medio ambiente."</p>
+          <div className={styles['author-info']}>
+            <div className={styles.avatar}>
+              <img src={mariaAvatar} alt="María González" />
+            </div>
+            <div>
+              <h4>María González</h4>
+              <span className={`${styles.tag} ${styles['tag-teal']}`}>VOLUNTARIA REGISTRADA</span>
+            </div>
+          </div>
+        </div>
 
-  const visibleTestimonials = showAll ? allTestimonials : allTestimonials.slice(0, 3);
+        <div className={styles['testimonial-card']}>
+          <div className={`${styles['quote-icon']} ${styles['bg-teal']}`}>"</div>
+          <p className={styles['quote-text']}>"Ser voluntario con adultos mayores ha sido la experiencia más gratificante de mi jubilación. La plataforma lo hace muy fácil."</p>
+          <div className={styles['author-info']}>
+            <div className={styles.avatar}>
+              <img src={robertoAvatar} alt="Roberto Mora" />
+            </div>
+            <div>
+              <h4>Roberto Mora</h4>
+              <span className={`${styles.tag} ${styles['tag-orange']}`}>COORDINADOR DE REFUGIO</span>
+            </div>
+          </div>
+        </div>
 
-  return (
-    <section className="testimonials-section">
-      <h2>Opiniones de la Comunidad</h2>
-
-      <RatingSummary testimonials={allTestimonials} />
-
-      <div className="testimonials-grid">
-        {visibleTestimonials.length > 0 ? (
-          visibleTestimonials.map((t) => (
-            <div key={t.id || Math.random()} className="testimonial-card">
-              <button
-                className="btn-delete"
-                onClick={() => handleDelete(t.id)}
-                title="Eliminar testimonio"
-              >
-                &times;
-              </button>
-              <div className="author-info">
-                <div className="avatar-circle">{t.initials || (t.name ? t.name[0] : 'U')}</div>
-                <div>
-                  <h4>{t.name}</h4>
-                  <div className="review-meta">
-                    <StarRating rating={t.rating || 5} />
-                    <span className="review-date">{t.date}</span>
-                  </div>
-                </div>
-              </div>
-              <p className="quote-text">{t.text}</p>
-              <span className={`tag ${t.role?.toLowerCase().includes('voluntario') ? 'tag-teal' : 'tag-orange'}`}>
-                {t.role?.toUpperCase()}
-              </span>
-            </div>
-          ))
-        ) : (
-          <p className="no-testimonials">Aún no hay opiniones. ¡Sé el primero en dejar una!</p>
-        )}
-      </div>
-
-      <div className="testimonials-footer-actions">
-        {allTestimonials.length > 3 && (
-          <button
-            className="btn-ver-mas"
-            onClick={() => setShowAll(!showAll)}
-          >
-            {showAll ? 'Ver menos' : 'Ver más opiniones'}
-          </button>
-        )}
-
-        <Link to="/dejar-testimonio" className="btn-dejar-testimonio">
-          Dejar mi testimonio
-        </Link>
-      </div>
-    </section>
-  );
+        <div className={styles['testimonial-card']}>
+          <div className={`${styles['quote-icon']} ${styles['bg-orange']}`}>"</div>
+          <p className={styles['quote-text']}>"Conectar con otros jóvenes interesados en el rescate animal me motivó a crear mi propia red local de ayuda."</p>
+          <div className={styles['author-info']}>
+            <div className={styles.avatar}>
+              <img src={andresAvatar} alt="Andrés Castro" />
+            </div>
+            <div>
+              <h4>Andrés Castro</h4>
+              <span className={`${styles.tag} ${styles['tag-teal']}`}>VOLUNTARIO REGISTRADO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Testimonials
