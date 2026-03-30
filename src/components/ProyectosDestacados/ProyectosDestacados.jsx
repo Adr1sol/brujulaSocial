@@ -1,6 +1,5 @@
-import React from 'react';
-import styles from './ProyectosDestacados.module.css';
 import { useNavigate } from 'react-router-dom';
+import styles from './ProyectosDestacados.module.css';
 
 // ✅ Imágenes importadas correctamente con Vite
 import escuela from '../../images/escuela.jpg';
@@ -10,6 +9,8 @@ import refugio from '../../images/Refugio.jpg';
 
 const ProyectosDestacados = () => {
   const navigate = useNavigate();
+  const usuario = JSON.parse(localStorage.getItem('user') || 'null');
+  const rutaBuscador = usuario ? '/buscador' : '/explorar';
 
   const projects = [
     {
@@ -29,7 +30,7 @@ const ProyectosDestacados = () => {
       img: basura
     },
     {
-      category: "SALUD",
+      category: "ADULTO MAYOR",
       categoryColor: "#078A87",
       location: "Alajuela, Central",
       title: "Acompañamiento Generacional",
@@ -37,7 +38,7 @@ const ProyectosDestacados = () => {
       img: adulto
     },
     {
-      category: "BIENESTAR ANIMAL",
+      category: "RESCATE ANIMAL",
       categoryColor: "#EF8514",
       location: "Cartago, Paraíso",
       title: "Cuidado en Refugios de Fauna",
@@ -53,7 +54,7 @@ const ProyectosDestacados = () => {
         <h2 className={styles.title}>
           Proyectos <span className={styles.titleAccent}>Destacados</span>
         </h2>
-        <a href="/buscador" className={styles.viewAll}>
+        <a href={rutaBuscador} className={styles.viewAll}>
           VER TODOS LOS PROYECTOS →
         </a>
       </div>
@@ -80,7 +81,7 @@ const ProyectosDestacados = () => {
               <p className={styles.desc}>{proj.desc}</p>
               <button
                 className={styles.btn}
-                onClick={() => navigate("/buscador")}
+                onClick={() => { window.scrollTo(0, 0); navigate(rutaBuscador) }}
               >
                 Saber más
               </button>

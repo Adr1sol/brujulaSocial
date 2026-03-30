@@ -3,13 +3,13 @@ import emailjs from '@emailjs/browser';
 import styles from './Footer.module.css';
 
 const Footer = () => {
-  const form = useRef();
-  const [isSending, setIsSending] = useState(false);
-  const [status, setStatus] = useState({ message: '', type: '' });
+  const form = useRef();
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState({ message: '', type: '' });
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-    setIsSending(true);
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setIsSending(true);
 
     emailjs.sendForm(
       'service_brújsocial',
@@ -28,23 +28,23 @@ const Footer = () => {
     .finally(() => setIsSending(false));
   };
 
-  return (
-    <footer className={styles.footer} id="footer">
-      <div className={styles['footer-content']}>
+  return (
+    <footer className={styles.footer} id="footer">
+      <div className={styles['footer-content']}>
 
-        {/* Sección 1: Branding y Legal */}
-        <div className={styles['footer-section']}>
-          <div className={styles.brandWrapper}>
-            <h3 className={styles.title}>Brújula Social</h3>
-            <p>Orientación y conexión social para una mejor comunidad.</p>
-          </div>
-          <div className={styles.legalWrapper} style={{ marginTop: '1.5rem' }}>
-            <h3 className={styles.title}>Legal</h3>
-            <ul>
-              <li><a href="/terminos">Términos y Condiciones</a></li>
-            </ul>
-          </div>
-        </div>
+        {/* Sección 1: Branding y Legal */}
+        <div className={styles['footer-section']}>
+          <div className={styles.brandWrapper}>
+            <h3 className={styles.title}>Brújula Social</h3>
+            <p>Orientación y conexión social para una mejor comunidad.</p>
+          </div>
+          <div className={styles.legalWrapper} style={{ marginTop: '1.5rem' }}>
+            <h3 className={styles.title}>Legal</h3>
+            <ul>
+              <li><a href="/terminos">Términos y Condiciones</a></li>
+            </ul>
+          </div>
+        </div>
 
         {/* Sección 2: Redes Sociales */}
         <div className={styles['footer-section']}>
@@ -71,54 +71,54 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Sección 3: Formulario */}
-        <div className={styles['footer-section']}>
-          <h3 className={styles.title}>Hablemos</h3>
-          <form ref={form} onSubmit={sendEmail} className={styles.form}>
-            <input
-              type="email"
-              name="user_email"
-              placeholder="Tu correo electrónico"
-              required
-              className={styles.inputField}
-            />
-            <textarea
-              name="message"
-              placeholder="¿Cómo quieres ayudar?"
-              rows="2"
-              className={styles.inputField}
-            ></textarea>
-            <button
-              type="submit"
-              disabled={isSending}
-              className={styles.submitBtn}
-            >
-              {isSending ? 'ENVIANDO...' : 'ENVIAR MENSAJE'}
-            </button>
-            {status.message && (
-              <p className={`${styles.statusMsg} ${styles[status.type]}`}>
-                {status.message}
-              </p>
-            )}
-          </form>
-        </div>
+        {/* Sección 3: Formulario */}
+        <div className={styles['footer-section']}>
+          <h3 className={styles.title}>Hablemos</h3>
+          <form ref={form} onSubmit={sendEmail} className={styles.form}>
+            <input
+              type="email"
+              name="user_email"
+              placeholder="Tu correo electrónico"
+              required
+              className={styles.inputField}
+            />
+            <textarea
+              name="message"
+              placeholder="¿Cómo quieres ayudar?"
+              rows="2"
+              className={styles.inputField}
+            ></textarea>
+            <button
+              type="submit"
+              disabled={isSending}
+              className={styles.submitBtn}
+            >
+              {isSending ? 'ENVIANDO...' : 'ENVIAR MENSAJE'}
+            </button>
+            {status.message && (
+              <p className={`${styles.statusMsg} ${styles[status.type]}`}>
+                {status.message}
+              </p>
+            )}
+          </form>
+        </div>
 
-        {/* Sección 4: Contacto y Mapa */}
-        <div className={styles.mapCol}>
-          <h4 className={styles.title}>Ubicación</h4>
-          <div className={styles.mapWrapper}>
-            <img
-              src="https://images.unsplash.com/photo-1580655653885-65763b2597d0?auto=format&fit=crop&q=80&w=400"
-              alt="Ubicación"
-              className={styles.mapImg}
-            />
-            <div className={styles.mapOverlay}>
-              <a href="https://www.google.com/maps/place/Lim%C3%B3n/@10.0081724,-84.5694632,331437m/data=!3m2!1e3!4b1!4m6!3m5!1s0x8fa71808603dc769:0x5a58748f67d92dde!8m2!3d10.1064393!4d-83.5070203!16zL20vMDJwNzBs?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D" className={styles.mapBtn}>ABRIR GOOGLE MAPS</a>
-            </div>
-          </div>
-        </div>
+        {/* Sección 4: Contacto y Mapa */}
+        <div className={styles.mapCol}>
+          <h4 className={styles.title}>Ubicación</h4>
+          <div className={styles.mapWrapper}>
+            <img
+              src="https://images.unsplash.com/photo-1580655653885-65763b2597d0?auto=format&fit=crop&q=80&w=400"
+              alt="Ubicación"
+              className={styles.mapImg}
+            />
+            <div className={styles.mapOverlay}>
+              <a href="https://www.google.com/maps/place/Lim%C3%B3n/@10.0081724,-84.5694632,331437m/data=!3m2!1e3!4b1!4m6!3m5!1s0x8fa71808603dc769:0x5a58748f67d92dde!8m2!3d10.1064393!4d-83.5070203!16zL20vMDJwNzBs?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D" className={styles.mapBtn}>ABRIR GOOGLE MAPS</a>
+            </div>
+          </div>
+        </div>
 
-      </div>
+      </div>
 
       {/* Footer inferior */}
       <div className={styles['footer-bottom']}>

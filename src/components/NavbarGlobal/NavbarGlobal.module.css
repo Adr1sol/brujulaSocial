@@ -1,16 +1,4 @@
-/* ── Navbar wrapper — fijo, ancho completo, fondo oscuro semitransparente ── */
 .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 1.25rem 2rem;
-}
-
-/* ── Contenedor interior con efecto glass ── */
-.inner {
-    max-width: 80rem;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,9 +47,8 @@
     display: flex;
     list-style: none;
     align-items: center;
-    gap: 2.5rem;
+    gap: 2rem;
     margin: 0;
-    padding: 0;
 }
 
 .link {

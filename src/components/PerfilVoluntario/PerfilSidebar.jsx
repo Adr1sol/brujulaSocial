@@ -6,7 +6,7 @@ import logoBrujula from '../../images/logoNavbar.png';
 const navItems = [
     { id: 'resumen',           label: 'Mi Perfil',          icon: '◈', group: 'GENERAL' },
     { id: 'historial',         label: 'Mis Voluntariados', icon: '⏱️', group: 'GENERAL' },
-    { id: 'mis-organizaciones',label: 'Mis Organizaciones',icon: '🏢', group: 'GENERAL' },
+    { id: 'mis-organizaciones',label: 'Mis Aplicaciones',icon: '🏢', group: 'GENERAL' },
     { id: 'organizaciones',    label: 'Organizaciones',     icon: '🔍', group: 'GENERAL', route: '/buscador' },
 ];
 

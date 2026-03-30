@@ -26,7 +26,7 @@ function Buscador() {
     };
 
     const handleEditarPerfil = () => {
-        navigate('/perfil');
+        navigate('/perfil', { state: { openEdit: true } });
     };
 
     const handleEliminarCuenta = () => {
@@ -39,7 +39,7 @@ function Buscador() {
             <PerfilSidebar
                 user={user}
                 activeTab="organizaciones"
-                onTabChange={() => navigate('/perfil')}
+                onTabChange={(tab) => navigate('/perfil', { state: { tab } })}
                 onEditarPerfil={handleEditarPerfil}
                 onCerrarSesion={handleCerrarSesion}
                 onEliminarCuenta={handleEliminarCuenta}

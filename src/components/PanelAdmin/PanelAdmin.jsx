@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import ReactECharts from 'echarts-for-react'
 import ServiceUsuario from '../../services/ServiceUsuario'
 import ServiceOrganizaciones from '../../services/ServiceOrganizaciones'
 import ServiceHoras from '../../services/ServiceHoras'
@@ -7,10 +8,12 @@ import ServiceCategorias from '../../services/ServiceCategorias'
 import ServiceProvincias from '../../services/ServiceProvincias'
 import styles from './PanelAdmin.module.css'
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 import logoBrujula from '../../images/logoSinNombre.png'
 
 function PanelAdmin() {
 
+    const navigate = useNavigate()
     const [seccionActiva, setSeccionActiva] = useState("resumen")
     const [usuarios, setUsuarios] = useState([])
     const [organizaciones, setOrganizaciones] = useState([])
@@ -166,6 +169,25 @@ function PanelAdmin() {
         const r = await ServiceOrganizaciones.putOrganizaciones(obj, orgEditando.id)
         if (r) { Swal.fire({ icon: 'success', title: '¡Actualizada!', timer: 1500, showConfirmButton: false }); setModalOrg(false); cargarDatos() }
     }
+    function handleCerrarSesion() {
+        Swal.fire({
+            icon: 'question',
+            title: 'Cerrar sesión',
+            text: '¿Estás seguro de que quieres cerrar sesión?',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, cerrar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#14b8a6'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem('user')
+                localStorage.removeItem('miOrganizacion')
+                navigate('/')
+            }
+        })
+    }
+
     async function eliminarHoras(id) {
         Swal.fire({
             icon: 'warning', title: '¿Eliminar registro?',
@@ -182,6 +204,7 @@ function PanelAdmin() {
 
     const navItems = [
         { id: "resumen",        label: "Resumen",           icon: "◈",  badge: null,                  group: "GENERAL" },
+        { id: "dashboard",      label: "Dashboard",         icon: "📊", badge: null,                  group: "GENERAL" },
         { id: "organizaciones", label: "Organizaciones",    icon: "🏢", badge: organizaciones.length,  group: "GENERAL" },
         { id: "voluntarios",    label: "Voluntarios",       icon: "👥", badge: usuarios.length,        group: "GENERAL" },
         { id: "horas",          label: "Horas Registradas", icon: "⏱️", badge: null,                  group: "GENERAL" },
@@ -189,8 +212,162 @@ function PanelAdmin() {
     ]
 
     const titulos = {
-        resumen: "Resumen general", organizaciones: "Organizaciones",
-        voluntarios: "Voluntarios", horas: "Horas Registradas", aplicaciones: "Solicitudes"
+        resumen: "Resumen general", dashboard: "Dashboard Analytics",
+        organizaciones: "Organizaciones", voluntarios: "Voluntarios",
+        horas: "Horas Registradas", aplicaciones: "Solicitudes"
+    }
+
+    // ── DATOS PARA CHARTS ──
+    function chartOrgsPorCategoria() {
+        const mapa = {}
+        organizaciones.forEach(org => {
+            const nombre = getNombreCategoria(org.idCategoria)
+            mapa[nombre] = (mapa[nombre] || 0) + 1
+        })
+        return Object.entries(mapa).map(([name, value]) => ({ name, value }))
+    }
+
+    function chartTop5Voluntarios() {
+        const ranking = usuarios.map(u => ({
+            nombre: u.Nombre ? u.Nombre.split(" ")[0] : "?",
+            horas: horas.filter(h => String(h.idUsuario) === String(u.id))
+                        .reduce((s, h) => s + parseInt(h.horas || 0), 0)
+        })).sort((a, b) => b.horas - a.horas).slice(0, 6)
+        return { nombres: ranking.map(r => r.nombre), valores: ranking.map(r => r.horas) }
+    }
+
+    function chartSolicitudesPorOrg() {
+        const ranking = organizaciones.map(org => ({
+            nombre: org.NombreOrganizacion.length > 18
+                ? org.NombreOrganizacion.substring(0, 17) + "…"
+                : org.NombreOrganizacion,
+            total: aplicaciones.filter(a => String(a.idOrganizacion) === String(org.id)).length
+        })).filter(o => o.total > 0).sort((a, b) => b.total - a.total).slice(0, 6)
+        return { nombres: ranking.map(r => r.nombre), valores: ranking.map(r => r.total) }
+    }
+
+    function chartHorasPorMes() {
+        const meses = {}
+        horas.forEach(h => {
+            if (!h.fecha) return
+            const key = h.fecha.substring(0, 7) // "YYYY-MM"
+            meses[key] = (meses[key] || 0) + parseInt(h.horas || 0)
+        })
+        const sorted = Object.entries(meses).sort(([a], [b]) => a.localeCompare(b)).slice(-7)
+        return { meses: sorted.map(([k]) => k), valores: sorted.map(([, v]) => v) }
+    }
+
+    function chartVoluntariosPorProvincia() {
+        const mapa = {}
+        usuarios.forEach(u => {
+            const nombre = getNombreProvincia(u.IdProvincia)
+            mapa[nombre] = (mapa[nombre] || 0) + 1
+        })
+        return Object.entries(mapa)
+            .sort((a, b) => b[1] - a[1]).slice(0, 6)
+            .map(([name, value]) => ({ name, value }))
+    }
+
+    const CHART_COLORS = ['#14b8a6','#3b82f6','#f59e0b','#a855f7','#22c55e','#ef4444','#06b6d4','#ec4899']
+    const baseOpts = {
+        backgroundColor: 'transparent',
+        textStyle: { color: '#cbd5e1', fontFamily: 'Inter, system-ui, sans-serif' },
+        tooltip: {
+            backgroundColor: '#1e293b',
+            borderColor: 'rgba(255,255,255,0.1)',
+            textStyle: { color: '#f8fafc' }
+        }
+    }
+
+    function optDonutCategorias() {
+        const data = chartOrgsPorCategoria()
+        return {
+            ...baseOpts,
+            legend: { bottom: 0, textStyle: { color: '#94a3b8', fontSize: 12 }, itemWidth: 12, itemHeight: 12 },
+            series: [{
+                type: 'pie', radius: ['48%', '72%'], center: ['50%', '44%'],
+                label: { show: false },
+                emphasis: { label: { show: true, fontSize: 14, fontWeight: 'bold', color: '#f8fafc' } },
+                data: data.map((d, i) => ({
+                    ...d, itemStyle: { color: CHART_COLORS[i % CHART_COLORS.length], borderWidth: 2, borderColor: '#0f172a' }
+                }))
+            }]
+        }
+    }
+
+    function optBarVoluntarios() {
+        const { nombres, valores } = chartTop5Voluntarios()
+        return {
+            ...baseOpts,
+            grid: { left: 60, right: 20, top: 10, bottom: 30 },
+            xAxis: { type: 'category', data: nombres, axisLine: { lineStyle: { color: '#334155' } }, axisLabel: { color: '#94a3b8', fontSize: 12 } },
+            yAxis: { type: 'value', splitLine: { lineStyle: { color: '#1e293b' } }, axisLabel: { color: '#94a3b8', fontSize: 11 } },
+            series: [{
+                type: 'bar', data: valores, barMaxWidth: 40,
+                itemStyle: {
+                    color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+                        colorStops: [{ offset: 0, color: '#14b8a6' }, { offset: 1, color: '#0d9488' }] },
+                    borderRadius: [8, 8, 0, 0]
+                },
+                emphasis: { itemStyle: { color: '#2dd4bf' } },
+                label: { show: true, position: 'top', color: '#94a3b8', fontSize: 11 }
+            }]
+        }
+    }
+
+    function optBarSolicitudes() {
+        const { nombres, valores } = chartSolicitudesPorOrg()
+        return {
+            ...baseOpts,
+            grid: { left: 150, right: 30, top: 10, bottom: 20 },
+            xAxis: { type: 'value', splitLine: { lineStyle: { color: '#1e293b' } }, axisLabel: { color: '#94a3b8', fontSize: 11 } },
+            yAxis: { type: 'category', data: nombres, axisLine: { lineStyle: { color: '#334155' } }, axisLabel: { color: '#cbd5e1', fontSize: 12 } },
+            series: [{
+                type: 'bar', data: valores, barMaxWidth: 28,
+                itemStyle: {
+                    color: { type: 'linear', x: 0, y: 0, x2: 1, y2: 0,
+                        colorStops: [{ offset: 0, color: '#a855f7' }, { offset: 1, color: '#7c3aed' }] },
+                    borderRadius: [0, 8, 8, 0]
+                },
+                label: { show: true, position: 'right', color: '#94a3b8', fontSize: 11 }
+            }]
+        }
+    }
+
+    function optAreaHoras() {
+        const { meses, valores } = chartHorasPorMes()
+        return {
+            ...baseOpts,
+            grid: { left: 50, right: 20, top: 20, bottom: 30 },
+            xAxis: { type: 'category', data: meses, axisLine: { lineStyle: { color: '#334155' } }, axisLabel: { color: '#94a3b8', fontSize: 11 } },
+            yAxis: { type: 'value', splitLine: { lineStyle: { color: '#1e293b' } }, axisLabel: { color: '#94a3b8', fontSize: 11 } },
+            series: [{
+                type: 'line', data: valores, smooth: true, symbol: 'circle', symbolSize: 7,
+                lineStyle: { color: '#f59e0b', width: 3 },
+                itemStyle: { color: '#f59e0b', borderColor: '#0f172a', borderWidth: 2 },
+                areaStyle: {
+                    color: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
+                        colorStops: [{ offset: 0, color: 'rgba(245,158,11,0.35)' }, { offset: 1, color: 'rgba(245,158,11,0)' }] }
+                }
+            }]
+        }
+    }
+
+    function optPieProvincia() {
+        const data = chartVoluntariosPorProvincia()
+        return {
+            ...baseOpts,
+            legend: { bottom: 0, textStyle: { color: '#94a3b8', fontSize: 11 }, itemWidth: 10, itemHeight: 10 },
+            series: [{
+                type: 'pie', radius: ['0%', '65%'], center: ['50%', '42%'],
+                roseType: 'area',
+                label: { show: false },
+                emphasis: { label: { show: true, color: '#f8fafc', fontSize: 13, fontWeight: 'bold' } },
+                data: data.map((d, i) => ({
+                    ...d, itemStyle: { color: CHART_COLORS[i % CHART_COLORS.length] }
+                }))
+            }]
+        }
     }
 
     const stats = [
@@ -245,6 +422,10 @@ function PanelAdmin() {
                             <div className={styles.adminRole}>Super Admin</div>
                         </div>
                     </div>
+                    <button className={styles.navItem} onClick={handleCerrarSesion} style={{ color: '#f87171' }}>
+                        <span>🚪</span>
+                        <span>Cerrar sesión</span>
+                    </button>
                 </div>
             </aside>
 
@@ -262,13 +443,6 @@ function PanelAdmin() {
                         <h1 className={styles.pageTitle}>{titulos[seccionActiva]}</h1>
                     </div>
                     <div className={styles.topbarRight}>
-                        <div className={styles.searchBox}>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={styles.searchSvg}>
-                                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                            </svg>
-                            <input type="text" placeholder="Buscar..." value={busqueda}
-                                onChange={(e) => setBusqueda(e.target.value)} className={styles.searchInput} />
-                        </div>
                         <div className={styles.adminPill}>
                             <span className={styles.adminPillDot} />
                             Admin
@@ -329,6 +503,58 @@ function PanelAdmin() {
                                             <span className={styles.catCount}>{cat.count}</span>
                                         </div>
                                     ))}
+                                </div>
+                            </div>
+                        </>
+                    )}
+
+                    {/* ══ DASHBOARD ══ */}
+                    {seccionActiva === "dashboard" && (
+                        <>
+                            <div className={styles.dashGrid2}>
+                                {/* Donut: orgs por categoría */}
+                                <div className={styles.chartCard}>
+                                    <h3 className={styles.cardTitle}>
+                                        <span className={styles.cardDot} style={{background:'#14b8a6'}}/>
+                                        Organizaciones por categoría
+                                    </h3>
+                                    <ReactECharts option={optDonutCategorias()} style={{height:260}} theme="dark" />
+                                </div>
+                                {/* Pie rosa: voluntarios por provincia */}
+                                <div className={styles.chartCard}>
+                                    <h3 className={styles.cardTitle}>
+                                        <span className={styles.cardDot} style={{background:'#3b82f6'}}/>
+                                        Voluntarios por provincia
+                                    </h3>
+                                    <ReactECharts option={optPieProvincia()} style={{height:260}} theme="dark" />
+                                </div>
+                            </div>
+
+                            {/* Area: horas por mes */}
+                            <div className={styles.chartCardFull}>
+                                <h3 className={styles.cardTitle}>
+                                    <span className={styles.cardDot} style={{background:'#f59e0b'}}/>
+                                    Horas registradas por mes
+                                </h3>
+                                <ReactECharts option={optAreaHoras()} style={{height:240}} theme="dark" />
+                            </div>
+
+                            <div className={styles.dashGrid2}>
+                                {/* Bar: top voluntarios */}
+                                <div className={styles.chartCard}>
+                                    <h3 className={styles.cardTitle}>
+                                        <span className={styles.cardDot} style={{background:'#14b8a6'}}/>
+                                        Top voluntarios por horas
+                                    </h3>
+                                    <ReactECharts option={optBarVoluntarios()} style={{height:260}} theme="dark" />
+                                </div>
+                                {/* Bar horizontal: solicitudes por org */}
+                                <div className={styles.chartCard}>
+                                    <h3 className={styles.cardTitle}>
+                                        <span className={styles.cardDot} style={{background:'#a855f7'}}/>
+                                        Solicitudes por organización
+                                    </h3>
+                                    <ReactECharts option={optBarSolicitudes()} style={{height:260}} theme="dark" />
                                 </div>
                             </div>
                         </>

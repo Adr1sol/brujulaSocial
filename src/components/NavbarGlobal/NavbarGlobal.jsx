@@ -9,36 +9,20 @@ export default function NavbarGlobal() {
     const location = useLocation();
     const path     = location.pathname;
 
-    if (path === '/inicio' || path === '/registro' || path === '/register' || path === '/perfil' || path === "" || path === '/buscador' || path === '/terminos')  return null;
+    if (path === '/inicio' || path === '/registro' || path === '/register' || path === '/perfil' || path === '/buscador' || path === '/miOrganizacion' || path === '/panel') return null;
+    // /explorar es una página pública, el navbar sí se muestra (no se oculta aquí)
 
     const usuario = JSON.parse(localStorage.getItem("user") || "null");
     const tipo    = usuario?.Tipo || null;
     const esHome  = path === '/' || path === '/home';
 
     const handleLogout = () => {
-        Swal.fire({
-            title: '¿Cerrar sesión?',
-            text: "Tendrás que ingresar tus datos nuevamente para entrar.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#078A87',
-            cancelButtonColor: '#EF8514',
-            confirmButtonText: 'Sí, salir',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                localStorage.removeItem("user");
-                localStorage.removeItem("miOrganizacion");
-                navigate('/');
-                Swal.fire({
-                    title: '¡Sesión cerrada!',
-                    text: 'Te esperamos pronto.',
-                    icon: 'success',
-                    timer: 1500,
-                    showConfirmButton: false
-                });
-            }
-        });
+        const confirmar = window.confirm("¿Estás seguro de que deseas cerrar sesión?");
+        if (confirmar) {
+            localStorage.removeItem("user");
+            localStorage.removeItem("miOrganizacion");
+            navigate('/');
+        }
     };
 
     const scrollTo = (id) => {
@@ -175,19 +159,17 @@ export default function NavbarGlobal() {
                 </Link>
             </div>
 
-                {/* Links */}
-                <ul className={styles.navLinks}>
-                    {links.map((item, index) => renderLink(item, index))}
+            <ul className={styles.navLinks}>
+                {links.map((item, index) => renderLink(item, index))}
 
-                    {usuario && (
-                        <li>
-                            <button onClick={handleLogout} className={styles.btnLogout}>
-                                Cerrar sesión
-                            </button>
-                        </li>
-                    )}
-                </ul>
-            
+                {usuario && (
+                    <li>
+                        <button onClick={handleLogout} className={styles.btnLogout}>
+                            Cerrar sesión
+                        </button>
+                    </li>
+                )}
+            </ul>
         </nav>
     );
 }

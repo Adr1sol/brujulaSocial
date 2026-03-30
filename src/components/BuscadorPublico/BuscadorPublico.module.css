@@ -1,0 +1,219 @@
+.page {
+    background: var(--bg-main);
+    min-height: 100vh;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ══════════════════════════════════════
+   BANNER
+══════════════════════════════════════ */
+.banner {
+    background: linear-gradient(135deg, #001f4d 0%, #003366 45%, #0a4080 100%);
+    padding: 40px 6% 36px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+/* glow teal sutil en la derecha */
+.banner::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,163,166,0.18) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* línea de acento superior animada */
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary), var(--accent), var(--secondary));
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.bannerContent {
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+}
+
+.bannerBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,163,166,0.2);
+    border: 1px solid rgba(0,163,166,0.45);
+    color: #5eead4;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+}
+
+.bannerTitle {
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin: 0 0 12px;
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+}
+
+.bannerAccent {
+    color: #2dd4bf;
+}
+
+.bannerSub {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.65;
+    margin: 0 0 20px;
+    max-width: 460px;
+}
+
+/* ── Botones ── */
+.bannerActions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.btnRegister {
+    padding: 13px 30px;
+    background: var(--secondary);
+    border: none;
+    border-radius: var(--radius-md);
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    box-shadow: 0 6px 20px rgba(0,163,166,0.4);
+}
+.btnRegister:hover {
+    background: #008a8d;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,163,166,0.5);
+}
+
+.btnLogin {
+    padding: 13px 26px;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.28);
+    border-radius: var(--radius-md);
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.btnLogin:hover {
+    background: rgba(255,255,255,0.16);
+    border-color: rgba(255,255,255,0.5);
+}
+
+/* ── Decoración ── */
+.bannerDecor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.bannerDecorItem {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    backdrop-filter: blur(6px);
+    transition: transform 0.3s ease;
+}
+.bannerDecorItem:hover { transform: translateY(-4px) scale(1.05); }
+
+/* ── Stats strip ── */
+.bannerStats {
+    display: flex;
+    gap: 28px;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.statNum {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    line-height: 1;
+}
+
+.statLabel {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.55);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* ══════════════════════════════════════
+   BODY
+══════════════════════════════════════ */
+.body {
+    padding: 2.5rem 5% 5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 900px) {
+    .banner { padding: 56px 6% 48px; flex-direction: column; align-items: flex-start; }
+    .bannerDecor { display: none; }
+    .bannerStats { gap: 20px; }
+}
+
+@media (max-width: 600px) {
+    .banner { padding: 48px 5% 40px; }
+    .bannerTitle { font-size: 26px; }
+    .bannerSub { font-size: 0.95rem; }
+    .bannerActions { flex-direction: column; align-items: stretch; }
+    .btnRegister, .btnLogin { text-align: center; }
+    .bannerStats { flex-wrap: wrap; gap: 16px; }
+}

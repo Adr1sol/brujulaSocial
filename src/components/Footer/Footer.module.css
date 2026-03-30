@@ -5,7 +5,7 @@
 .footer {
   background: var(--primary);
   color: white;
-  padding: 6rem 5% 2rem;
+  padding: 4rem 5% 2rem;
   margin-top: auto;
   position: relative;
   overflow: hidden;
@@ -223,7 +223,7 @@
 }
 
 .footer-bottom {
-  margin-top: 6rem;
+  margin-top: 4rem;
   padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;

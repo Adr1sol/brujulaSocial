@@ -1,6 +1,6 @@
 /* ===== BASE ===== */
 .pagina {
-    min-height: calc(100vh - var(--navbar-height));
+    min-height: 100vh;
     background: #F1EFE8;
     font-family: inherit;
 }

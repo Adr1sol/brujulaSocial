@@ -5,16 +5,14 @@ import ServiceHoras from '../../services/ServiceHoras';
 import ServiceCategorias from '../../services/ServiceCategorias';
 import ServiceUsuario from '../../services/ServiceUsuario';
 import styles from './PerfilVoluntario.module.css';
-import PerfilSidebar from './PerfilSidebar';
 import Swal from 'sweetalert2';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 import logoBrujula from '../../images/logoSinNombre.png';
 
 function PerfilVoluntario() {
-    const location = useLocation();
-    const [seccionActiva, setSeccionActiva] = useState(location.state?.tab || "resumen");
-
+    const [seccionActiva, setSeccionActiva] = useState("resumen");
+    
     const [usuario, setUsuario] = useState(null);
     const [organizaciones, setOrganizaciones] = useState([]);
     const [categorias, setCategorias] = useState([]);
@@ -67,13 +65,6 @@ function PerfilVoluntario() {
 
         const todasLasCategorias = await ServiceCategorias.getCategorias();
         setCategorias(todasLasCategorias || []);
-
-        if (location.state?.openEdit) {
-            setNombre(user.Nombre);
-            setCorreo(user.Correo);
-            setTelefono(user.Telefono || "");
-            setModalEditar(true);
-        }
     }
 
     function abrirModalEditar() {
@@ -145,25 +136,6 @@ function PerfilVoluntario() {
         });
     }
 
-    function handleCerrarSesion() {
-        Swal.fire({
-            icon: 'question',
-            title: 'Cerrar sesión',
-            text: '¿Estás seguro de que quieres cerrar sesión?',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, cerrar',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#ef4444',
-            cancelButtonColor: '#14b8a6'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                localStorage.removeItem('user');
-                localStorage.removeItem('miOrganizacion');
-                navigate('/');
-            }
-        });
-    }
-
     function getNombreOrg(idOrganizacion) {
         const org = organizaciones.find((o) => String(o.id) === String(idOrganizacion));
         return org ? org.NombreOrganizacion : "Desconocida";
@@ -183,11 +155,11 @@ function PerfilVoluntario() {
 
     function getNivel() {
         const total = calcularTotalHoras();
-        if (total === 0) return { nivel: "Nuevo", color: "#64748b", siguiente: 10, progreso: 0 };
-        if (total < 10) return { nivel: "Principiante", color: "#10b981", siguiente: 10, progreso: (total / 10) * 100 };
-        if (total < 50) return { nivel: "Intermedio", color: "#059669", siguiente: 50, progreso: (total / 50) * 100 };
-        if (total < 100) return { nivel: "Experto", color: "#065f46", siguiente: 100, progreso: (total / 100) * 100 };
-        return { nivel: "Embajador", color: "#064e3b", siguiente: null, progreso: 100 };
+        if (total === 0) return { nivel: "Nuevo", color: "#94a3b8", siguiente: 10, progreso: 0 };
+        if (total < 10) return { nivel: "Principiante", color: "#14b8a6", siguiente: 10, progreso: (total / 10) * 100 };
+        if (total < 50) return { nivel: "Intermedio", color: "#3b82f6", siguiente: 50, progreso: (total / 50) * 100 };
+        if (total < 100) return { nivel: "Experto", color: "#f59e0b", siguiente: 100, progreso: (total / 100) * 100 };
+        return { nivel: "Embajador", color: "#a855f7", siguiente: null, progreso: 100 };
     }
 
     function getInsignias() {
@@ -230,15 +202,19 @@ function PerfilVoluntario() {
         return Object.entries(resultado).map(([nombreStr, valor]) => ({ nombre: nombreStr, valor }));
     }
 
-    const COLORES_CHART = ["#063930", "#059669", "#10b981", "#34d399", "#6ee7b7", "#a7f3d0"];
+    const COLORES_CHART = ["#14b8a6", "#f59e0b", "#3b82f6", "#a855f7", "#22c55e", "#ef4444"];
     const nivel = getNivel();
     const insignias = getInsignias();
 
+    const navItems = [
+        { id: "resumen",        label: "Mi Perfil",         icon: "◈",  group: "GENERAL" },
+        { id: "historial",      label: "Mis Voluntariados", icon: "⏱️",  group: "GENERAL" },
+        { id: "organizaciones", label: "Mis Organizaciones", icon: "🏢",  group: "GENERAL" },
+    ];
 
     const titulos = {
         resumen: "Resumen de perfil",
         historial: "Historial de voluntariados y horas",
-        "mis-organizaciones": "Mis Organizaciones",
         organizaciones: "Organizaciones apoyadas"
     };
 
@@ -249,14 +225,51 @@ function PerfilVoluntario() {
     return (
         <div className={styles.layout}>
             {/* ── SIDEBAR ── */}
-            <PerfilSidebar
-                user={usuario}
-                activeTab={seccionActiva}
-                onTabChange={setSeccionActiva}
-                onEditarPerfil={abrirModalEditar}
-                onCerrarSesion={handleCerrarSesion}
-                onEliminarCuenta={handleEliminar}
-            />
+            <aside className={styles.sidebar}>
+                <div className={styles.sidebarBrand}>
+                    <img src={logoBrujula} alt="Brújula Social" className={styles.brandLogo} />
+                    <div>
+                        <div className={styles.brandName}>
+                            Brújula<span className={styles.brandAccent}>Social</span>
+                        </div>
+                        <div className={styles.brandSub}>VOLUNTARIO</div>
+                    </div>
+                </div>
+
+                <nav className={styles.sidebarNav}>
+                    <p className={styles.navGroupLabel}>GENERAL</p>
+                    {navItems.map(item => (
+                        <button
+                            key={item.id}
+                            className={`${styles.navItem} ${seccionActiva === item.id ? styles.navItemActive : ''}`}
+                            onClick={() => setSeccionActiva(item.id)}
+                        >
+                            <span className={styles.navIcon}>{item.icon}</span>
+                            <span className={styles.navLabel}>{item.label}</span>
+                        </button>
+                    ))}
+                    
+                    <p className={styles.navGroupLabel} style={{marginTop: '24px'}}>AJUSTES</p>
+                    <button className={styles.navItem} onClick={abrirModalEditar}>
+                        <span className={styles.navIcon}>✏️</span>
+                        <span className={styles.navLabel}>Editar Perfil</span>
+                    </button>
+                    <button className={styles.navItem} onClick={handleEliminar} style={{color: 'var(--red)'}}>
+                        <span className={styles.navIcon}>🗑️</span>
+                        <span className={styles.navLabel}>Eliminar Cuenta</span>
+                    </button>
+                </nav>
+
+                <div className={styles.sidebarFooter}>
+                    <div className={styles.adminInfo} onClick={abrirModalEditar}>
+                        <div className={styles.adminAvatar}>{getIniciales(usuario.Nombre)}</div>
+                        <div>
+                            <div className={styles.adminName}>{usuario.Nombre.split(" ")[0]}</div>
+                            <div className={styles.adminRole}>Ver Perfil</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
 
             {/* ── MAIN ── */}
             <main className={styles.main}>
@@ -287,30 +300,33 @@ function PerfilVoluntario() {
                                 <div className={styles.statCard}>
                                     <div className={styles.statTop}>
                                         <span className={styles.statLabel}>Horas Donadas</span>
-                                        <div className={styles.statIconBox} style={{background: '#ecfdf5', color: '#10b981', borderColor: '#d1fae5'}}>🌿</div>
+                                        <div className={styles.statIconBox} style={{background: 'rgba(20,184,166,0.15)', color: '#14b8a6'}}>🌿</div>
                                     </div>
-                                    <div className={styles.statNum}>{calcularTotalHoras()}</div>
+                                    <div className={styles.statNum} style={{color: '#14b8a6'}}>{calcularTotalHoras()}</div>
+                                    <div className={styles.statGlow} style={{background: '#14b8a6'}}/>
                                 </div>
                                 <div className={styles.statCard}>
                                     <div className={styles.statTop}>
                                         <span className={styles.statLabel}>Organizaciones</span>
-                                        <div className={styles.statIconBox} style={{background: '#f8fafc', color: '#063930', borderColor: '#e2e8f0'}}>🏢</div>
+                                        <div className={styles.statIconBox} style={{background: 'rgba(245,158,11,0.15)', color: '#f59e0b'}}>🏢</div>
                                     </div>
-                                    <div className={styles.statNum}>{orgsDelUsuario.length}</div>
+                                    <div className={styles.statNum} style={{color: '#f59e0b'}}>{orgsDelUsuario.length}</div>
+                                    <div className={styles.statGlow} style={{background: '#f59e0b'}}/>
                                 </div>
                                 <div className={styles.statCard}>
                                     <div className={styles.statTop}>
                                         <span className={styles.statLabel}>Aplicaciones</span>
-                                        <div className={styles.statIconBox} style={{background: '#f8fafc', color: '#063930', borderColor: '#e2e8f0'}}>📋</div>
+                                        <div className={styles.statIconBox} style={{background: 'rgba(59,130,246,0.15)', color: '#3b82f6'}}>📋</div>
                                     </div>
-                                    <div className={styles.statNum}>{aplicacionesDelUsuario.length}</div>
+                                    <div className={styles.statNum} style={{color: '#3b82f6'}}>{aplicacionesDelUsuario.length}</div>
+                                    <div className={styles.statGlow} style={{background: '#3b82f6'}}/>
                                 </div>
                             </div>
 
                             {/* Fila Dividida */}
                             <div className={styles.twoCol}>
                                 <div className={styles.card}>
-                                    <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#10b981'}}/>Nivel de voluntario</h3>
+                                    <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#a855f7'}}/>Nivel de voluntario</h3>
                                     <div className={styles.nivelRow}>
                                         <span className={styles.nivelNombre} style={{color: nivel.color}}>{nivel.nivel}</span>
                                         <span className={styles.nivelHoras}>
@@ -328,20 +344,20 @@ function PerfilVoluntario() {
                                 </div>
 
                                 <div className={styles.card}>
-                                    <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#063930'}}/>Impacto por categoría</h3>
+                                    <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#14b8a6'}}/>Impacto por categoría</h3>
                                     {getImpactoPorCategoria().length > 0 ? (
                                         <div className={styles.graficaWrap} style={{height:'180px', border:'none', background:'transparent', padding:0}}>
                                             <ResponsiveContainer width="100%" height="100%">
                                                 <PieChart>
                                                     <Pie
                                                         data={getImpactoPorCategoria()} dataKey="valor" nameKey="nombre"
-                                                        cx="50%" cy="50%" outerRadius={60} stroke="#ffffff"
+                                                        cx="50%" cy="50%" outerRadius={60} stroke="var(--navy-3)"
                                                     >
                                                         {getImpactoPorCategoria().map((_, i) => (
                                                             <Cell key={i} fill={COLORES_CHART[i % COLORES_CHART.length]} />
                                                         ))}
                                                     </Pie>
-                                                    <Tooltip contentStyle={{backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius:'8px', color: 'var(--text-1)', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.5)'}} itemStyle={{color:'var(--text-1)', fontWeight: '500'}} />
+                                                    <Tooltip contentStyle={{backgroundColor: 'var(--navy-2)', border: '1px solid var(--border)', borderRadius:'8px', color: 'var(--text-1)'}} itemStyle={{color:'var(--text-1)'}} />
                                                 </PieChart>
                                             </ResponsiveContainer>
                                         </div>
@@ -351,7 +367,7 @@ function PerfilVoluntario() {
 
                             {/* Colección Insignias */}
                             <div className={styles.card}>
-                                <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#10b981'}}/>Mis Insignias</h3>
+                                <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#f59e0b'}}/>Mis Insignias</h3>
                                 <div className={styles.insigniasGrid}>
                                     {insignias.map((ins) => (
                                         <div key={ins.id} className={`${styles.insigniaCard} ${ins.desbloqueada ? styles.insigniaDesbloqueada : styles.insigniaBloqueada}`}>
@@ -368,13 +384,13 @@ function PerfilVoluntario() {
                             {/* Gráfica de Barras */}
                             {getHorasPorMes().length > 0 && (
                                 <div className={styles.card}>
-                                    <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#063930'}}/>Horas por mes</h3>
+                                    <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#3b82f6'}}/>Horas por mes</h3>
                                     <div className={styles.graficaWrap}>
                                         <ResponsiveContainer width="100%" height="100%">
                                             <BarChart data={getHorasPorMes()}>
-                                                <XAxis dataKey="mes" tick={{ fill: '#64748b', fontSize: 12 }} axisLine={{stroke:'#e2e8f0'}} tickLine={false} />
-                                                <YAxis tick={{ fill: '#64748b', fontSize: 12 }} axisLine={{stroke:'#e2e8f0'}} tickLine={false} />
-                                                <Tooltip cursor={{fill: 'rgba(255,255,255,0.03)'}} contentStyle={{backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius:'8px', color: 'var(--text-1)', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.5)'}} />
+                                                <XAxis dataKey="mes" tick={{ fill: 'var(--text-3)', fontSize: 12 }} axisLine={{stroke:'var(--border-2)'}} tickLine={false} />
+                                                <YAxis tick={{ fill: 'var(--text-3)', fontSize: 12 }} axisLine={{stroke:'var(--border-2)'}} tickLine={false} />
+                                                <Tooltip cursor={{fill: 'rgba(255,255,255,0.05)'}} contentStyle={{backgroundColor: 'var(--navy-2)', border: '1px solid var(--border)', borderRadius:'8px', color: 'var(--text-1)'}} />
                                                 <Bar dataKey="horas" fill="var(--teal)" radius={[4, 4, 0, 0]} name="Horas" />
                                             </BarChart>
                                         </ResponsiveContainer>
@@ -388,7 +404,7 @@ function PerfilVoluntario() {
                     {seccionActiva === "historial" && (
                         <>
                             <div className={styles.card}>
-                                <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#10b981'}}/>Historial de horas</h3>
+                                <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#14b8a6'}}/>Historial de horas</h3>
                                 {horasDelUsuario.length > 0 ? (
                                     <div className={styles.tableWrap}>
                                         <table className={styles.table}>
@@ -411,7 +427,7 @@ function PerfilVoluntario() {
                             </div>
 
                             <div className={styles.card}>
-                                <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#063930'}}/>Solicitudes de voluntariado</h3>
+                                <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#3b82f6'}}/>Solicitudes de voluntariado</h3>
                                 {aplicacionesDelUsuario.length > 0 ? (
                                     <div className={styles.tableWrap}>
                                         <table className={styles.table}>
@@ -434,32 +450,10 @@ function PerfilVoluntario() {
                         </>
                     )}
 
-                    {/* ══ MIS ORGANIZACIONES ══ */}
-                    {seccionActiva === "mis-organizaciones" && (
-                        <div className={styles.card}>
-                            <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#10b981'}}/>Organizaciones apoyadas</h3>
-                            {orgsDelUsuario.length > 0 ? (
-                                <div style={{display:'flex', flexDirection:'column', gap:'4px'}}>
-                                    {orgsDelUsuario.map((org, i) => (
-                                        <div key={org.id} className={styles.orgRow}>
-                                            <div className={styles.orgAvatar} style={{background: COLORES_CHART[i % COLORES_CHART.length]}}>
-                                                {getIniciales(org.NombreOrganizacion)}
-                                            </div>
-                                            <div>
-                                                <div className={styles.orgNombre}>{org.NombreOrganizacion}</div>
-                                                <div className={styles.orgDesc}>{org.Descripcion}</div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : <p className={styles.emptyState}>Aún no has colaborado con ninguna organización.</p>}
-                        </div>
-                    )}
-
                     {/* ══ ORGANIZACIONES ══ */}
                     {seccionActiva === "organizaciones" && (
                         <div className={styles.card}>
-                            <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#10b981'}}/>Organizaciones apoyadas</h3>
+                            <h3 className={styles.cardTitle}><span className={styles.cardDot} style={{background:'#f59e0b'}}/>Organizaciones apoyadas</h3>
                             {orgsDelUsuario.length > 0 ? (
                                 <div style={{display:'flex', flexDirection:'column', gap:'4px'}}>
                                     {orgsDelUsuario.map((org, i) => (

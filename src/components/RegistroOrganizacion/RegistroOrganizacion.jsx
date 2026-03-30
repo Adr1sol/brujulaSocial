@@ -5,7 +5,6 @@ import ServiceUsuario from '../../services/ServiceUsuario'
 import { useNavigate, Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
-
 function RegistroOrganizacion() {
 
     const [nombreOrganizacion, setNombreOrganizacion] = useState("")
@@ -126,28 +125,35 @@ function RegistroOrganizacion() {
 
     return (
         <div className={styles.wrapper}>
+
+            {/* ── Lado visual ── */}
             <div className={styles.visualSide}>
                 <div className={styles.branding}>
-                    <h1>Impulsa tu ONG</h1>
-                    <p>Registra tu organización y conecta con miles de voluntarios dispuestos a generar un cambio positivo.</p>
+                    <h1>Registrá tu organización</h1>
+                    <p>Conectá con voluntarios comprometidos que quieren hacer la diferencia.</p>
                 </div>
             </div>
 
+            {/* ── Lado formulario ── */}
             <div className={styles.formSide}>
                 <div className={styles.card}>
+
+                    <Link to="/" className={styles.backLink}>← Volver al inicio</Link>
+
                     <div className={styles.header}>
-                        <h2>Registrar Organización</h2>
-                        <p className={styles.sub}>Completa los datos de tu institución para empezar.</p>
+                        <h2>Crear cuenta</h2>
+                        <p className={styles.sub}>Completá los datos de tu organización para comenzar.</p>
                     </div>
 
                     <div className={styles.form}>
+
                         <div className={styles.inputGroup}>
                             <label>Nombre de la organización</label>
                             <input
                                 type="text"
                                 value={nombreOrganizacion}
                                 onChange={(e) => setNombreOrganizacion(e.target.value)}
-                                placeholder="Escribe el nombre legal"
+                                placeholder="Nombre de la organización"
                             />
                         </div>
 
@@ -168,17 +174,16 @@ function RegistroOrganizacion() {
                                     type="password"
                                     value={contrasena}
                                     onChange={(e) => setContrasena(e.target.value)}
-                                    placeholder="••••••••"
+                                    placeholder="Mínimo 6 caracteres"
                                 />
                             </div>
-
                             <div className={styles.inputGroup}>
                                 <label>Confirmar contraseña</label>
                                 <input
                                     type="password"
                                     value={confirmarContrasena}
                                     onChange={(e) => setConfirmarContrasena(e.target.value)}
-                                    placeholder="••••••••"
+                                    placeholder="Repetí la contraseña"
                                 />
                             </div>
                         </div>
@@ -187,7 +192,7 @@ function RegistroOrganizacion() {
                             <div className={styles.inputGroup}>
                                 <label>Categoría</label>
                                 <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
-                                    <option value="">Seleccionar categoría</option>
+                                    <option value="">Seleccionar</option>
                                     <option value="1">Medio Ambiente</option>
                                     <option value="2">Educación</option>
                                     <option value="3">Salud</option>
@@ -195,11 +200,10 @@ function RegistroOrganizacion() {
                                     <option value="5">Cultura</option>
                                 </select>
                             </div>
-
                             <div className={styles.inputGroup}>
                                 <label>Provincia</label>
                                 <select value={idProvincia} onChange={(e) => setIdProvincia(e.target.value)}>
-                                    <option value="">Seleccionar provincia</option>
+                                    <option value="">Seleccionar</option>
                                     <option value="1">San José</option>
                                     <option value="2">Alajuela</option>
                                     <option value="3">Cartago</option>
@@ -227,14 +231,21 @@ function RegistroOrganizacion() {
                             <textarea
                                 value={descripcion}
                                 onChange={(e) => setDescripcion(e.target.value)}
-                                placeholder="Describe brevemente la misión y objetivos de tu organización..."
+                                placeholder="Breve descripción de la organización"
                             />
                         </div>
 
                         <button className={styles.submitBtn} onClick={guardarOrganizacion}>
                             Registrar organización
                         </button>
+
                     </div>
+
+                    <p className={styles.login}>
+                        ¿Ya tenés una cuenta?{" "}
+                        <span onClick={() => navigate("/inicio")}>Iniciá sesión →</span>
+                    </p>
+
                 </div>
             </div>
         </div>

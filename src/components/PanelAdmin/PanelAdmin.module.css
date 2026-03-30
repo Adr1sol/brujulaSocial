@@ -28,7 +28,7 @@
     --r-sm: 8px;
 
     display: flex;
-    min-height: calc(100vh - var(--navbar-height));
+    min-height: 100vh;
     background: var(--navy);
     font-family: 'Inter', system-ui, sans-serif;
     color: var(--text-1);
@@ -173,6 +173,41 @@
 /* UTILIDADES */
 .emptyState { text-align: center; padding: 48px 20px; color: var(--text-muted); font-size: 15px; font-weight: 500; background: var(--navy-3); border-radius: 16px; border: 1px dashed var(--border); }
 .twoCol { display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px; margin-bottom: 24px; }
+
+/* ========== DASHBOARD / CHARTS ========== */
+.dashGrid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+.chartCard {
+    background: var(--navy-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 24px 16px;
+    animation: fadeUp 0.35s ease both;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    transition: box-shadow 0.25s, border-color 0.25s;
+}
+.chartCard:hover {
+    box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+    border-color: rgba(255,255,255,0.16);
+}
+.chartCardFull {
+    background: var(--navy-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 24px 16px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.35s ease both;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    transition: box-shadow 0.25s, border-color 0.25s;
+}
+.chartCardFull:hover {
+    box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+    border-color: rgba(255,255,255,0.16);
+}
 
 /* ANIMACIONES */
 @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }

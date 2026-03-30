@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import ServiceOrganizaciones from '../../services/ServiceOrganizaciones'
 import ServiceCategorias from '../../services/ServiceCategorias'
 import ServiceProvincias from '../../services/ServiceProvincias'
@@ -11,7 +11,7 @@ import Swal from 'sweetalert2'
 
 const COLORES = ["#1D9E75", "#E8841A", "#185FA5", "#534AB7", "#3B6D11", "#D4537E"]
 
-function BuscadorOrganizaciones({ filtros, onFiltroChange }) {
+function BuscadorOrganizaciones({ filtros, onFiltroChange, modoPublico }) {
 
     const [organizaciones, setOrganizaciones] = useState([])
     const [categorias, setCategorias] = useState([])
@@ -116,12 +116,54 @@ function BuscadorOrganizaciones({ filtros, onFiltroChange }) {
         }
     }
 
+    if (modoPublico) {
+        return (
+            <div className={styles.pagina}>
+                <FiltrosOrganizaciones filtros={filtros} onFiltroChange={onFiltroChange} modoPublico />
+                <div className={styles.wrapPublico}>
+                    {organizacionesFiltradas.length === 0 ? (
+                        <div className={styles.emptyStatePublico}>
+                            <div className={styles.emptyIcon}>🔍</div>
+                            <p>No se encontraron organizaciones con los filtros seleccionados.</p>
+                        </div>
+                    ) : (
+                        organizacionesFiltradas.map((org, i) => (
+                            <div key={org.id} className={styles.orgCardPublico}>
+                                <div className={styles.cardHeaderPublico}>
+                                    <div className={styles.orgAvatarPublico} style={{ background: COLORES[i % COLORES.length] }}>
+                                        {getIniciales(org.NombreOrganizacion)}
+                                    </div>
+                                    <div className={styles.orgNombrePublico}>{org.NombreOrganizacion}</div>
+                                </div>
+                                <div className={styles.orgBodyPublico}>
+                                    <div className={styles.orgDescPublico}>{org.Descripcion}</div>
+                                    {org.CorreoContacto && (
+                                        <div className={styles.orgCorreoPublico}>
+                                            ✉️ <a href={`mailto:${org.CorreoContacto}`}>{org.CorreoContacto}</a>
+                                        </div>
+                                    )}
+                                    <div className={styles.orgTagsPublico}>
+                                        <span className={styles.orgTagPublico}>🏷️ {getNombreCategoria(org.idCategoria)}</span>
+                                        <span className={styles.orgTagPublico}>📍 {getNombreProvincia(org.IdProvincia)}</span>
+                                        <span className={styles.orgTagPublico}>⏰ {getNombreDisponibilidad(org.idDisponibilidad)}</span>
+                                    </div>
+                                </div>
+                                <div className={styles.orgAccionPublico}>
+                                    <button className={styles.btnAplicarPublico} onClick={() => handleAplicar(org)}>
+                                        Aplicar
+                                    </button>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className={styles.pagina}>
-            <FiltrosOrganizaciones
-                filtros={filtros}
-                onFiltroChange={onFiltroChange}
-            />
+            <FiltrosOrganizaciones filtros={filtros} onFiltroChange={onFiltroChange} />
             <div className={styles.wrap}>
                 {organizacionesFiltradas.length === 0 ? (
                     <div className={styles.emptyState}>
@@ -131,38 +173,26 @@ function BuscadorOrganizaciones({ filtros, onFiltroChange }) {
                 ) : (
                     organizacionesFiltradas.map((org, i) => (
                         <div key={org.id} className={styles.orgCard}>
-                            <div className={styles.cardHeader}>
-                                <div
-                                    className={styles.orgAvatar}
-                                    style={{ background: COLORES[i % COLORES.length] }}
-                                >
-                                    {getIniciales(org.NombreOrganizacion)}
-                                </div>
-                                <div className={styles.orgNombre}>{org.NombreOrganizacion}</div>
+                            <div className={styles.orgAvatar} style={{ background: COLORES[i % COLORES.length] }}>
+                                {getIniciales(org.NombreOrganizacion)}
                             </div>
-
                             <div className={styles.orgBody}>
+                                <div className={styles.orgNombre}>{org.NombreOrganizacion}</div>
                                 <div className={styles.orgDesc}>{org.Descripcion}</div>
-
                                 {org.CorreoContacto && (
                                     <div className={styles.orgCorreo}>
-                                        <a href={`mailto:${org.CorreoContacto}`}>✉️ {org.CorreoContacto}</a>
+                                        ✉️ <a href={`mailto:${org.CorreoContacto}`}>{org.CorreoContacto}</a>
                                     </div>
                                 )}
-
                                 <div className={styles.orgTags}>
                                     <span className={styles.orgTag}>🏷️ {getNombreCategoria(org.idCategoria)}</span>
                                     <span className={styles.orgTag}>📍 {getNombreProvincia(org.IdProvincia)}</span>
                                     <span className={styles.orgTag}>⏰ {getNombreDisponibilidad(org.idDisponibilidad)}</span>
                                 </div>
                             </div>
-
                             <div className={styles.orgAccion}>
-                                <button
-                                    className={styles.btnAplicar}
-                                    onClick={() => handleAplicar(org)}
-                                >
-                                    Aplicar para Voluntariado
+                                <button className={styles.btnAplicar} onClick={() => handleAplicar(org)}>
+                                    Aplicar
                                 </button>
                             </div>
                         </div>
