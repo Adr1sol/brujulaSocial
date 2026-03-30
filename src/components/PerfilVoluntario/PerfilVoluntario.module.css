@@ -179,3 +179,40 @@
 @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes modalIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+
+/* PerfilVoluntario.module.css — modificaciones al sidebar */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;        /* ocupa toda la altura de la pantalla */
+    overflow: hidden;     /* evita scroll en el contenedor padre */
+}
+
+.sidebarBrand {
+    flex-shrink: 0;       /* nunca se comprime */
+}
+
+.sidebarNav {
+    flex: 1;              /* ocupa el espacio disponible entre brand y footer */
+    overflow-y: auto;     /* scroll solo en la navegación */
+    min-height: 0;        /* necesario para que flex + overflow funcionen */
+}
+
+/* scroll sutil */
+.sidebarNav::-webkit-scrollbar {
+    width: 4px;
+}
+.sidebarNav::-webkit-scrollbar-track {
+    background: transparent;
+}
+.sidebarNav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+}
+
+.sidebarFooter {
+    flex-shrink: 0;       /* siempre visible al fondo */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 8px;
+}
