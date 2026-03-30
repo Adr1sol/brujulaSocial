@@ -69,7 +69,7 @@ function Formregistro() {
     };
 
     try {
-      const response = await ServiceUsuario.postRegistro(newUser);
+      const response = await ServiceUsuario.postUsuario(newUser);
 
       if (response) {
         Swal.fire({
