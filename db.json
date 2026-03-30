@@ -220,17 +220,17 @@
       "idDisponibilidad": 1,
       "Descripcion": "Cuidado de la salud",
       "id": "bDW4HDn2tM4"
+    },
+    {
+      "NombreOrganizacion": "Marina Mar",
+      "idCategoria": 1,
+      "IdProvincia": 6,
+      "idDisponibilidad": 2,
+      "Descripcion": "Limpieza de playas y corales ",
+      "id": "OH5kYTEGaqY"
     }
   ],
   "usuarios": [
-    {
-      "id": "admin-01",
-      "Nombre": "Administrador",
-      "Correo": "admin@brujulasocial.com",
-      "Contrasena": "admin123",
-      "Tipo": "admin",
-      "FechaRegistro": "2026-01-01"
-    },
     {
       "id": "1",
       "Nombre": "María González",
@@ -404,6 +404,34 @@
       "idOrganizacion": "bDW4HDn2tM4",
       "FechaRegistro": "2026-03-26",
       "id": "RujMHiT7J2I"
+    },
+    {
+      "Nombre": "Olivia Jhon",
+      "Correo": "olivia@gmail.com",
+      "Contrasena": "123456",
+      "Telefono": "12121",
+      "Tipo": "voluntario",
+      "IdProvincia": 1,
+      "FechaRegistro": "2026-03-30",
+      "id": "Zz1MEmLKrpw"
+    },
+    {
+      "Nombre": "Marina Mar",
+      "Correo": "marina@gmail.com",
+      "Contrasena": "123456",
+      "Tipo": "organizacion",
+      "idOrganizacion": "OH5kYTEGaqY",
+      "FechaRegistro": "2026-03-30",
+      "id": "iHuWRry-Fqs"
+    },
+    {
+      "id": "admin-01",
+      "Nombre": "Administrador",
+      "Correo": "admin@brujulasocial.com",
+      "Contrasena": "admin123",
+      "Tipo": "admin",
+      "FechaRegistro": "2026-01-01",
+      "Telefono": "2222"
     }
   ],
   "aplicaciones": [
