@@ -81,7 +81,6 @@ const Terminos = () => {
                 </section>
 
                 <footer className={styles['terminos-footer']}>
-                    <p>Para más información, contáctenos en: [Su correo electrónico]</p>
                 </footer>
             </div>
         </div>
