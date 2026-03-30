@@ -212,7 +212,7 @@ function PanelAdmin() {
     ]
 
     const titulos = {
-        resumen: "Resumen general", dashboard: "Dashboard Analytics",
+        resumen: "Resumen general", dashboard: "Dashboard Impacto Social",
         organizaciones: "Organizaciones", voluntarios: "Voluntarios",
         horas: "Horas Registradas", aplicaciones: "Solicitudes"
     }
