@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import styles from './RegistroOrganizacion.module.css'
 import ServiceOrganizaciones from '../../services/ServiceOrganizaciones'
 import ServiceUsuario from '../../services/ServiceUsuario'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 function RegistroOrganizacion() {
@@ -123,81 +124,130 @@ function RegistroOrganizacion() {
     }
 
     return (
-        <div>
-            <h2>Registrar Organización</h2>
+        <div className={styles.wrapper}>
 
-            <p>Nombre de la organización</p>
-            <input
-                type="text"
-                value={nombreOrganizacion}
-                onChange={(e) => setNombreOrganizacion(e.target.value)}
-                placeholder="Nombre de la organización"
-            />
+            {/* ── Lado visual ── */}
+            <div className={styles.visualSide}>
+                <div className={styles.branding}>
+                    <h1>Registrá tu organización</h1>
+                    <p>Conectá con voluntarios comprometidos que quieren hacer la diferencia.</p>
+                </div>
+            </div>
 
-            <p>Correo de contacto</p>
-            <input
-                type="email"
-                value={correoOrganizacion}
-                onChange={(e) => setCorreoOrganizacion(e.target.value)}
-                placeholder="ejemplo@organizacion.org"
-            />
+            {/* ── Lado formulario ── */}
+            <div className={styles.formSide}>
+                <div className={styles.card}>
 
-            {/* ✅ Nuevos campos de contraseña */}
-            <p>Contraseña</p>
-            <input
-                type="password"
-                value={contrasena}
-                onChange={(e) => setContrasena(e.target.value)}
-                placeholder="Mínimo 6 caracteres"
-            />
+                    <Link to="/" className={styles.backLink}>← Volver al inicio</Link>
 
-            <p>Confirmar contraseña</p>
-            <input
-                type="password"
-                value={confirmarContrasena}
-                onChange={(e) => setConfirmarContrasena(e.target.value)}
-                placeholder="Repetí la contraseña"
-            />
+                    <div className={styles.header}>
+                        <h2>Crear cuenta</h2>
+                        <p className={styles.sub}>Completá los datos de tu organización para comenzar.</p>
+                    </div>
 
-            <p>Categoría</p>
-            <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
-                <option value="">Seleccionar categoría</option>
-                <option value="1">Medio Ambiente</option>
-                <option value="2">Educación</option>
-                <option value="3">Salud</option>
-                <option value="4">Bienestar Animal</option>
-                <option value="5">Cultura</option>
-            </select>
+                    <div className={styles.form}>
 
-            <p>Provincia</p>
-            <select value={idProvincia} onChange={(e) => setIdProvincia(e.target.value)}>
-                <option value="">Seleccionar provincia</option>
-                <option value="1">San José</option>
-                <option value="2">Alajuela</option>
-                <option value="3">Cartago</option>
-                <option value="4">Heredia</option>
-                <option value="5">Guanacaste</option>
-                <option value="6">Puntarenas</option>
-                <option value="7">Limón</option>
-            </select>
+                        <div className={styles.inputGroup}>
+                            <label>Nombre de la organización</label>
+                            <input
+                                type="text"
+                                value={nombreOrganizacion}
+                                onChange={(e) => setNombreOrganizacion(e.target.value)}
+                                placeholder="Nombre de la organización"
+                            />
+                        </div>
 
-            <p>Disponibilidad</p>
-            <select value={idDisponibilidad} onChange={(e) => setIdDisponibilidad(e.target.value)}>
-                <option value="">Seleccionar disponibilidad</option>
-                <option value="1">Fines de semana</option>
-                <option value="2">Por horas</option>
-                <option value="3">Remoto</option>
-                <option value="4">Entre semana</option>
-            </select>
+                        <div className={styles.inputGroup}>
+                            <label>Correo de contacto</label>
+                            <input
+                                type="email"
+                                value={correoOrganizacion}
+                                onChange={(e) => setCorreoOrganizacion(e.target.value)}
+                                placeholder="ejemplo@organizacion.org"
+                            />
+                        </div>
 
-            <p>Descripción</p>
-            <textarea
-                value={descripcion}
-                onChange={(e) => setDescripcion(e.target.value)}
-                placeholder="Breve descripción de la organización"
-            />
+                        <div className={styles.row}>
+                            <div className={styles.inputGroup}>
+                                <label>Contraseña</label>
+                                <input
+                                    type="password"
+                                    value={contrasena}
+                                    onChange={(e) => setContrasena(e.target.value)}
+                                    placeholder="Mínimo 6 caracteres"
+                                />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label>Confirmar contraseña</label>
+                                <input
+                                    type="password"
+                                    value={confirmarContrasena}
+                                    onChange={(e) => setConfirmarContrasena(e.target.value)}
+                                    placeholder="Repetí la contraseña"
+                                />
+                            </div>
+                        </div>
 
-            <button onClick={guardarOrganizacion}>Registrar organización</button>
+                        <div className={styles.row}>
+                            <div className={styles.inputGroup}>
+                                <label>Categoría</label>
+                                <select value={idCategoria} onChange={(e) => setIdCategoria(e.target.value)}>
+                                    <option value="">Seleccionar</option>
+                                    <option value="1">Medio Ambiente</option>
+                                    <option value="2">Educación</option>
+                                    <option value="3">Salud</option>
+                                    <option value="4">Bienestar Animal</option>
+                                    <option value="5">Cultura</option>
+                                </select>
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label>Provincia</label>
+                                <select value={idProvincia} onChange={(e) => setIdProvincia(e.target.value)}>
+                                    <option value="">Seleccionar</option>
+                                    <option value="1">San José</option>
+                                    <option value="2">Alajuela</option>
+                                    <option value="3">Cartago</option>
+                                    <option value="4">Heredia</option>
+                                    <option value="5">Guanacaste</option>
+                                    <option value="6">Puntarenas</option>
+                                    <option value="7">Limón</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label>Disponibilidad</label>
+                            <select value={idDisponibilidad} onChange={(e) => setIdDisponibilidad(e.target.value)}>
+                                <option value="">Seleccionar disponibilidad</option>
+                                <option value="1">Fines de semana</option>
+                                <option value="2">Por horas</option>
+                                <option value="3">Remoto</option>
+                                <option value="4">Entre semana</option>
+                            </select>
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label>Descripción</label>
+                            <textarea
+                                value={descripcion}
+                                onChange={(e) => setDescripcion(e.target.value)}
+                                placeholder="Breve descripción de la organización"
+                            />
+                        </div>
+
+                        <button className={styles.submitBtn} onClick={guardarOrganizacion}>
+                            Registrar organización
+                        </button>
+
+                    </div>
+
+                    <p className={styles.login}>
+                        ¿Ya tenés una cuenta?{" "}
+                        <span onClick={() => navigate("/inicio")}>Iniciá sesión →</span>
+                    </p>
+
+                </div>
+            </div>
         </div>
     )
 }

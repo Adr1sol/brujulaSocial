@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styles from './NavbarGlobal.module.css';
+import logoImg from '/logoredondo.png';
+import Swal from 'sweetalert2';
 
 export default function NavbarGlobal() {
     const navigate = useNavigate();
     const location = useLocation();
     const path     = location.pathname;
+
+    if (path === '/inicio' || path === '/registro' || path === '/register' || path === '/perfil' || path === '/buscador' || path === '/miOrganizacion' || path === '/panel') return null;
+    // /explorar es una página pública, el navbar sí se muestra (no se oculta aquí)
 
     const usuario = JSON.parse(localStorage.getItem("user") || "null");
     const tipo    = usuario?.Tipo || null;
@@ -14,7 +19,6 @@ export default function NavbarGlobal() {
     const handleLogout = () => {
         const confirmar = window.confirm("¿Estás seguro de que deseas cerrar sesión?");
         if (confirmar) {
-            // Limpia todo el localStorage al cerrar sesión
             localStorage.removeItem("user");
             localStorage.removeItem("miOrganizacion");
             navigate('/');
@@ -39,13 +43,32 @@ export default function NavbarGlobal() {
     let links = [];
 
     if (!usuario) {
-        links = [
-            { label: 'Sobre nosotros', scrollId: 'sobre-nosotros' },
-            { label: 'Organizaciones', scrollId: 'organizaciones' },
-            { label: 'Contacto',       scrollId: 'footer' },
-            { label: 'Iniciar sesión', path: '/inicio',   btn: 'login' },
-            { label: 'Registrarse',    path: '/registro', btn: 'register' },
-        ];
+        if (path === '/inicio') {
+            // ✅ En login — muestra scroll links + solo Registrarse
+            links = [
+                { label: 'Sobre nosotros', scrollId: 'sobre-nosotros' },
+                { label: 'Organizaciones', scrollId: 'organizaciones' },
+                { label: 'Contacto',       scrollId: 'footer' },
+                { label: 'Registrarse',    path: '/registro', btn: 'register' },
+            ];
+        } else if (path === '/registro') {
+            // ✅ En registro — muestra scroll links + solo Iniciar sesión
+            links = [
+                { label: 'Sobre nosotros', scrollId: 'sobre-nosotros' },
+                { label: 'Organizaciones', scrollId: 'organizaciones' },
+                { label: 'Contacto',       scrollId: 'footer' },
+                { label: 'Iniciar sesión', path: '/inicio', btn: 'login' },
+            ];
+        } else {
+            // Visitante en cualquier otra página
+            links = [
+                { label: 'Sobre nosotros', scrollId: 'sobre-nosotros' },
+                { label: 'Organizaciones', scrollId: 'organizaciones' },
+                { label: 'Contacto',       scrollId: 'footer' },
+                { label: 'Iniciar sesión', path: '/inicio',   btn: 'login' },
+                { label: 'Registrarse',    path: '/registro', btn: 'register' },
+            ];
+        }
 
     } else if (tipo === 'voluntario') {
         if (esHome) {
@@ -74,18 +97,15 @@ export default function NavbarGlobal() {
         }
 
     } else if (tipo === 'admin') {
-        links = [ { label: 'Home', path: '/' },
-              { label: 'Panel',           path: '/panel' },];
-        
+        links = [];
 
     } else if (tipo === 'organizacion') {
         links = [
-             { label: 'Home',           path: '/' },
             { label: 'Mi Organización', path: '/miOrganizacion' },
         ];
     }
 
-    // ── Renderiza cada link 
+    // ── Renderizar cada link ───────────────────────────────────
     const renderLink = (item, index) => {
         const isActive = item.path && path === item.path;
 
@@ -133,7 +153,10 @@ export default function NavbarGlobal() {
     return (
         <nav className={styles.navbar}>
             <div className={styles.logo}>
-                <Link to="/">🧭 Brújula Social</Link>
+                <Link to="/">
+                    <img src={logoImg} alt="Brújula Social Logo" className={styles.logoImage} />
+                    <span>Brújula Social</span>
+                </Link>
             </div>
 
             <ul className={styles.navLinks}>

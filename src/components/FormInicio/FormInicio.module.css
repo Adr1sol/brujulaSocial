@@ -1,89 +1,298 @@
-.container{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background-image: url('/fondoparaweb.png');
+/* ── Back link ───────────────────────────────────────── */
+.backLink {
+    display: inline-block;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #078A87;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.backLink:hover {
+    color: #EF8514;
+}
+
+.wrapper {
+    display: flex;
+    min-height: calc(100vh - var(--navbar-height));
+    width: 100%;
+    background-color: var(--bg-main);
+}
+
+/* ── VISUAL SIDE ─────────────────────────────────────── */
+.visualSide {
+    flex: 1.2;
+    position: relative;
+    /* ✅ Usa imagen disponible en src/images/ */
+    background-image: url('../../images/basura playa.jpg');
     background-size: cover;
-    background-position: center top;
+    background-position: center;
     background-repeat: no-repeat;
-    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 80px;
+    color: white;
 }
 
-.card{
-    width:380px;
-    background: rgba(255, 255, 255, 0.9);
-    padding:40px;
-    border-radius:15px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.1);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    position: relative;
-}
-
-h2{
-    text-align:center;
-    margin-bottom:5px;
-    background: linear-gradient(to right, #078A87, #EF8514, #50A154);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-size: 2.2rem;
-}
-
-.sub{
-    text-align:center;
-    color:gray;
-    margin-bottom:25px;
-}
-
-.form{
-    display:flex;
-    flex-direction:column;
-}
-
-.form label{
-    font-size:14px;
-    margin-top:10px;
-}
-
-.form input{
-    padding:10px;
-    border-radius:8px;
-    border:1px solid #ddd;
-    margin-top:5px;
-}
-
-.form button{
-    margin-top:20px;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    background:#22c55e;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-}
-
-.form button:hover{
-    background:#16a34a;
-}
-
-.register{
-    text-align:center;
-    margin-top:20px;
-}
-
-.register span{
-    color:#22c55e;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.logo{
+.visualSide::before {
+    content: '';
     position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 80px;
-    height: 80px;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 51, 102, 0.5) 0%, rgba(0, 163, 166, 0.4) 100%);
+    z-index: 1;
+}
+
+.branding {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+}
+
+.branding h1 {
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    font-weight: 800;
+    margin-bottom: 20px;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -2px;
+}
+
+.branding p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* ── FORM SIDE ─────────────────────────────────── */
+.formSide {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
     background-color: white;
+    position: relative;
+}
+
+.formSide::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #078A87, #EF8514, #50A154);
+}
+
+.card {
+    width: 100%;
+    max-width: 440px;
+}
+
+/* ── Header ──────────────────────────────────────────── */
+.header {
+    margin-bottom: 32px;
+}
+
+.header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--primary);
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -1px;
+}
+
+.sub {
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* ── SELECTOR ──────────────────────────────────── */
+.accountTypeHeader {
+    margin-bottom: 12px;
+}
+
+.tipo {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.selector {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.opcion {
+    flex: 1;
+    border: 2px solid #f1f5f9;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition);
+    background: #f8fafc;
+    position: relative;
+    user-select: none;
+}
+
+.opcion:hover {
+    border-color: rgba(0, 163, 166, 0.4);
+    background: white;
+}
+
+.opcion h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.activo {
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0, 163, 166, 0.2), var(--shadow-md);
+    border-color: var(--secondary);
+}
+
+.activo h4 {
+    color: var(--secondary);
+}
+
+/* ── FORM ────────────────────────────────────────────── */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inputGroup label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.inputGroup input {
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border: 2px solid #f1f5f9;
+    background-color: #f8fafc;
+    font-size: 1rem;
+    transition: var(--transition);
+    color: var(--text-main);
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.inputGroup input:focus {
+    outline: none;
+    border-color: var(--secondary);
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(0, 163, 166, 0.1);
+}
+
+/* ── Botón ───────────────────────────────────────────── */
+.submitBtn {
+    margin-top: 12px;
+    padding: 16px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-light) 100%);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 10px 25px rgba(0, 163, 166, 0.2);
+    font-family: inherit;
+    width: 100%;
+}
+
+.submitBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(0, 163, 166, 0.3);
+    filter: brightness(1.05);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ── Registro ────────────────────────────────────────── */
+.register {
+    text-align: center;
+    margin-top: 32px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.register a {
+    text-decoration: none;
+}
+
+.register span {
+    color: var(--accent);
+    font-weight: 800;
+    margin-left: 6px;
+    transition: var(--transition);
+}
+
+.register span:hover {
+    color: #D97706;
+    text-decoration: underline;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .visualSide { padding: 40px; }
+}
+
+@media (max-width: 768px) {
+    .visualSide { display: none; }
+    .formSide { padding: 40px 20px; }
+    .card { max-width: 100%; }
+}
+
+/* ── Hint organización ───────────────────────────────── */
+.hintBox {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.orgHint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.orgHintLink {
+    color: var(--secondary);
+    font-weight: 800;
+    cursor: pointer;
 }

@@ -76,7 +76,9 @@
       "idCategoria": 1,
       "IdProvincia": 2,
       "idDisponibilidad": 1,
-      "Descripcion": "Organización dedicada a la limpieza y conservación de espacios naturales."
+      "Descripcion": "Organización dedicada a la limpieza y conservación de espacios naturales.",
+      "Contrasena": "123456",
+      "correo": "eco@gmail.com"
     },
     {
       "id": "2",
@@ -182,7 +184,8 @@
       "idCategoria": 1,
       "IdProvincia": 7,
       "idDisponibilidad": 1,
-      "Descripcion": "Siembra de árboles"
+      "Descripcion": "Siembra de árboles",
+      "contrasena": "123456"
     },
     {
       "id": "-BEOLgMzg8Y",
@@ -200,6 +203,23 @@
       "idDisponibilidad": 4,
       "Descripcion": "Mejorando la calidad en salud ",
       "id": "U42Ij5nG7GA"
+    },
+    {
+      "NombreOrganizacion": "Caminos juntos",
+      "idCategoria": 1,
+      "IdProvincia": 6,
+      "idDisponibilidad": 1,
+      "Descripcion": "Limón limpio",
+      "id": "I25-umcszfw"
+    },
+    {
+      "NombreOrganizacion": "Cristal",
+      "CorreoContacto": "cristal@gmail.com",
+      "idCategoria": 3,
+      "IdProvincia": 1,
+      "idDisponibilidad": 1,
+      "Descripcion": "Cuidado de la salud",
+      "id": "bDW4HDn2tM4"
     }
   ],
   "usuarios": [
@@ -366,6 +386,24 @@
       "IdProvincia": 1,
       "FechaRegistro": "2026-03-25",
       "id": "dGHP6P5upio"
+    },
+    {
+      "Nombre": "Caminos juntos",
+      "Correo": "caminos@gmail.com",
+      "Contrasena": "123456",
+      "Tipo": "organizacion",
+      "idOrganizacion": "I25-umcszfw",
+      "FechaRegistro": "2026-03-26",
+      "id": "2wCFwP4eIic"
+    },
+    {
+      "Nombre": "Cristal",
+      "Correo": "cristal@gmail.com",
+      "Contrasena": "123456",
+      "Tipo": "organizacion",
+      "idOrganizacion": "bDW4HDn2tM4",
+      "FechaRegistro": "2026-03-26",
+      "id": "RujMHiT7J2I"
     }
   ],
   "aplicaciones": [
@@ -722,6 +760,12 @@
       "idOrganizacion": "-BEOLgMzg8Y",
       "FechaAplicacion": "2026-03-25",
       "id": "guDritLksVo"
+    },
+    {
+      "idUsuario": "dGHP6P5upio",
+      "idOrganizacion": "bDW4HDn2tM4",
+      "FechaAplicacion": "2026-03-26",
+      "id": "s8lVsNLh_No"
     }
   ],
   "horas": [
@@ -740,6 +784,30 @@
       "actividad": "Siembra de árbolitos",
       "fecha": "2026-03-23",
       "horas": 15
+    },
+    {
+      "idUsuario": "dGHP6P5upio",
+      "idOrganizacion": "1",
+      "actividad": "Limpieza de residuos en el Rio Torres",
+      "fecha": "2026-03-29",
+      "horas": 40,
+      "id": "JTmMbqvdC5g"
+    },
+    {
+      "idUsuario": "dGHP6P5upio",
+      "idOrganizacion": "3",
+      "actividad": "Rescate perrito en calle",
+      "fecha": "2026-02-15",
+      "horas": 20,
+      "id": "2_ifNWh734s"
+    },
+    {
+      "idUsuario": "245e",
+      "idOrganizacion": "1",
+      "actividad": "Limpieza de playa blanca",
+      "fecha": "2026-01-14",
+      "horas": 80,
+      "id": "U0ljBQPETs8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

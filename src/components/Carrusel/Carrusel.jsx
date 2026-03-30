@@ -1,6 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Carrusel.css';
+import styles from './Carrusel.module.css';
 
 // ✅ Todas las imágenes temáticas de src/images/
 import basuraPlaya   from '../../images/basura playa.jpg';
@@ -15,43 +15,43 @@ function Carrusel() {
         {
             src: basuraPlaya,
             alt: "Limpieza de playa",
-            title: "Cuida el planeta",
-            description: "Únete a nuestros voluntarios en la limpieza y conservación de espacios naturales."
+            title: "Transforma Nuestras Costas",
+            description: "Recuperemos la belleza de nuestras playas a través del voluntariado consciente y la acción ambiental."
         },
         {
             src: escuela,
             alt: "Educación",
-            title: "Educación para todos",
-            description: "Apoya a niños y jóvenes en zonas vulnerables de Costa Rica."
+            title: "Forjemos un Futuro Brillante",
+            description: "Brinda el conocimiento y apoyo que los niños en zonas vulnerables necesitan para alcanzar sus sueños."
         },
         {
             src: adultoMayor,
             alt: "Adulto mayor",
-            title: "Cuida a quienes más lo necesitan",
-            description: "Brinda compañía y apoyo a adultos mayores en tu comunidad."
+            title: "Honremos la Sabiduría",
+            description: "Tu tiempo y compañía son el regalo más valioso para los adultos mayores de nuestra comunidad."
         },
         {
             src: puente,
             alt: "Comunidad",
-            title: "Construyamos juntos",
-            description: "Conectamos el talento y el corazón de los costarricenses con las causas que lo necesitan."
+            title: "Construyamos Puentes de Esperanza",
+            description: "Unimos voluntades y talentos para reconstruir y fortalecer el tejido social costarricense."
         },
         {
             src: refugio,
             alt: "Refugio animal",
-            title: "Bienestar animal",
-            description: "Ayuda a rescatar y proteger animales en situación de vulnerabilidad."
+            title: "Protejamos a los que no tienen Voz",
+            description: "Sé parte de nuestra red de rescate y protección para brindarles una segunda oportunidad de vida."
         },
         {
             src: voluntariado,
             alt: "Voluntariado",
-            title: "Impacta tu mundo",
-            description: "Juntos construimos una Costa Rica más solidaria y comprometida."
+            title: "Tu Huella es el Cambio",
+            description: "Descubre el poder de tus acciones y transforma el mundo a través del voluntariado activo."
         }
     ];
 
     return (
-        <Carousel interval={4000} fade>
+        <Carousel interval={4000} fade controls={false} indicators={false}>
             {images.map((image, index) => (
                 <Carousel.Item key={index}>
                     <img
@@ -59,10 +59,6 @@ function Carrusel() {
                         src={image.src}
                         alt={image.alt}
                     />
-                    <Carousel.Caption>
-                        <h3>{image.title}</h3>
-                        <p>{image.description}</p>
-                    </Carousel.Caption>
                 </Carousel.Item>
             ))}
         </Carousel>
