@@ -125,6 +125,42 @@
     box-shadow: 0 12px 25px rgba(242, 140, 0, 0.4);
 }
 
+.btnDonar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.6rem 1.4rem;
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    background: linear-gradient(135deg, #ff4d6d 0%, #c9184a 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 8px 18px rgba(201, 24, 74, 0.3);
+    transition: var(--transition);
+}
+
+.btnDonar:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(201, 24, 74, 0.45);
+    color: white;
+}
+
+.donarHeart {
+    font-size: 1rem;
+    animation: heartbeat 1.4s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%       { transform: scale(1.25); }
+    28%       { transform: scale(1); }
+    42%       { transform: scale(1.15); }
+    56%       { transform: scale(1); }
+}
+
 .btnLogout {
     background: rgba(231, 76, 60, 0.1);
     border: 1px solid rgba(231, 76, 60, 0.3);

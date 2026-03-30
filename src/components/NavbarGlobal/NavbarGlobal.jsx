@@ -65,6 +65,7 @@ export default function NavbarGlobal() {
                 { label: 'Sobre nosotros', scrollId: 'sobre-nosotros' },
                 { label: 'Organizaciones', scrollId: 'organizaciones' },
                 { label: 'Contacto',       scrollId: 'footer' },
+                { label: 'Donar',          path: '/Donacion', btn: 'donar' },
                 { label: 'Iniciar sesión', path: '/inicio',   btn: 'login' },
                 { label: 'Registrarse',    path: '/registro', btn: 'register' },
             ];
@@ -77,22 +78,26 @@ export default function NavbarGlobal() {
                 { label: 'Organizaciones', scrollId: 'organizaciones' },
                 { label: 'Mi Perfil',      path: '/perfil' },
                 { label: 'Contacto',       scrollId: 'footer' },
+                { label: 'Donar',          path: '/Donacion', btn: 'donar' },
             ];
         } else if (path === '/buscador') {
             links = [
                 { label: 'Home',      path: '/' },
                 { label: 'Mi Perfil', path: '/perfil' },
+                { label: 'Donar',     path: '/Donacion', btn: 'donar' },
             ];
         } else if (path === '/perfil' || path === '/impacto') {
             links = [
                 { label: 'Home',           path: '/' },
                 { label: 'Organizaciones', path: '/buscador' },
+                { label: 'Donar',          path: '/Donacion', btn: 'donar' },
             ];
         } else {
             links = [
                 { label: 'Home',           path: '/' },
                 { label: 'Organizaciones', path: '/buscador' },
                 { label: 'Mi Perfil',      path: '/perfil' },
+                { label: 'Donar',          path: '/Donacion', btn: 'donar' },
             ];
         }
 
@@ -102,12 +107,23 @@ export default function NavbarGlobal() {
     } else if (tipo === 'organizacion') {
         links = [
             { label: 'Mi Organización', path: '/miOrganizacion' },
+            { label: 'Donar',           path: '/Donacion', btn: 'donar' },
         ];
     }
 
     // ── Renderizar cada link ───────────────────────────────────
     const renderLink = (item, index) => {
         const isActive = item.path && path === item.path;
+
+        if (item.btn === 'donar') {
+            return (
+                <li key={index}>
+                    <Link to={item.path} className={styles.btnDonar}>
+                        <span className={styles.donarHeart}>♥</span> {item.label}
+                    </Link>
+                </li>
+            );
+        }
 
         if (item.btn === 'login') {
             return (

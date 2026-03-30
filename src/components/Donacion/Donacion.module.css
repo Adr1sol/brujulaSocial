@@ -1,3 +1,4 @@
+/* Donacion.module.css */
 :root {
   --primary-teal: #006967;
   --accent-orange: #f49038;
@@ -6,25 +7,52 @@
   --input-bg: #f8f9fa;
 }
 
-.donation-card {
+.donationContainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.donationCard {
   background: white;
   width: 100%;
   max-width: 800px;
   padding: 40px;
   border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   margin: 20px auto;
   font-family: sans-serif;
 }
 
-.step-header {
+.mainTitle {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.mainTitle h2 {
+  color: var(--primary-teal);
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.mainTitle p {
+  color: var(--text-gray);
+  font-size: 1rem;
+}
+
+/* Step sections */
+.stepSection {
+  margin-bottom: 40px;
+}
+
+.stepHeader {
   display: flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 25px;
 }
 
-.step-number {
+.stepNumber {
   background: var(--primary-teal);
   color: white;
   width: 28px;
@@ -35,26 +63,25 @@
   justify-content: center;
   font-weight: bold;
   font-size: 14px;
+  flex-shrink: 0;
 }
 
-.step-header h3 {
+.stepHeader h3 {
   color: var(--primary-teal);
   margin: 0;
   font-size: 1.25rem;
 }
 
-.step-section {
-  margin-bottom: 40px;
-}
-
-/* Grillas interactuables */
-.options-grid, .amounts-grid {
+/* Grids */
+.optionsGrid,
+.amountsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 15px;
 }
 
-.option-btn, .amount-btn {
+/* Causa buttons */
+.optionBtn {
   border: 1px solid var(--border-light);
   background: white;
   padding: 18px;
@@ -68,34 +95,58 @@
   font-size: 1rem;
 }
 
-.option-btn.active {
+.optionBtn.active {
   border-color: var(--primary-teal);
   background-color: #f0f7f7;
   color: var(--primary-teal);
   font-weight: 600;
 }
 
-.amount-btn.active {
+.icon {
+  font-size: 1.5rem;
+}
+
+.label {
+  font-size: 0.9rem;
+}
+
+/* Amount buttons */
+.amountBtn {
+  border: 1px solid var(--border-light);
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.amountBtn.active {
   background-color: var(--accent-orange);
   border-color: var(--accent-orange);
   color: white;
   font-weight: 600;
 }
 
-/* Layout de pago */
-.payment-layout {
+/* Payment layout */
+.paymentLayout {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   gap: 30px;
 }
 
-.input-group {
+.paymentForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup {
   display: flex;
   flex-direction: column;
   margin-bottom: 18px;
 }
 
-.input-group label {
+.inputGroup label {
   font-size: 10px;
   font-weight: 700;
   color: #888;
@@ -103,7 +154,7 @@
   text-transform: uppercase;
 }
 
-.input-group input {
+.inputField {
   padding: 14px;
   border: 1px solid #eee;
   background-color: var(--input-bg);
@@ -111,23 +162,31 @@
   outline: none;
   font-size: 14px;
 }
-.custom-amount-input {
-    background-color: var(--accent-orange);
-    border-color: var(--accent-orange);
-    color: white;
-    font-weight: 600;
+
+.customAmountInput {
+  padding: 14px;
+  border: 1px solid var(--accent-orange);
+  background-color: var(--accent-orange);
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  color: white;
+  font-weight: 600;
+  margin-top: 12px;
 }
-.custom-amount-input::placeholder {
-    color: #f2f2f2;
+
+.customAmountInput::placeholder {
+  color: #f2f2f2;
 }
-.form-row {
+
+.formRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
 }
 
-/* Sección Segura */
-.secure-info {
+/* Secure info */
+.secureInfo {
   background-color: #fafafa;
   border: 1px solid #f0f0f0;
   border-radius: 15px;
@@ -136,26 +195,27 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
-.shield-icon {
+.shieldIcon {
   font-size: 2.5rem;
   color: var(--primary-teal);
   margin-bottom: 12px;
 }
 
-.secure-info h4 {
+.secureInfo h4 {
   color: var(--primary-teal);
   margin-bottom: 8px;
 }
 
-.secure-info p {
+.secureInfo p {
   font-size: 12px;
   color: #666;
   line-height: 1.5;
 }
 
-.card-logos {
+.cardLogos {
   margin-top: 15px;
   font-size: 10px;
   font-weight: bold;
@@ -165,8 +225,8 @@
   gap: 10px;
 }
 
-/* Botón y Disclaimer */
-.submit-btn {
+/* Submit */
+.submitBtn {
   width: 100%;
   max-width: 320px;
   margin: 10px auto;
@@ -182,11 +242,11 @@
   transition: transform 0.1s;
 }
 
-.submit-btn:active {
+.submitBtn:active {
   transform: scale(0.98);
 }
 
-.tax-disclaimer {
+.taxDisclaimer {
   text-align: center;
   font-size: 12px;
   color: var(--primary-teal);
@@ -194,10 +254,10 @@
 }
 
 @media (max-width: 650px) {
-  .payment-layout {
+  .paymentLayout {
     grid-template-columns: 1fr;
   }
-  .donation-card {
+  .donationCard {
     padding: 20px;
   }
 }
