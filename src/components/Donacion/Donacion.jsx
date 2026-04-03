@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-
-import './Donacion.css';
-
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import styles from './Donacion.module.css';
 
 const Donacion = () => {
     const [causa, setCausa] = useState('Educación');
@@ -11,150 +9,138 @@ const Donacion = () => {
 
     const causas = [
         { id: 'edu', nombre: 'Educación', icon: '🎓' },
-
         { id: 'amb', nombre: 'Ambiente', icon: '🍃' },
-
         { id: 'adu', nombre: 'Adulto Mayor', icon: '👴' },
         { id: 'res', nombre: 'Rescate Animal', icon: '🐾' },
     ];
 
-    const montos = ['5.000', '10.000', '25.000', 'Otro monto'];
+    const montos = ['5.000', '10.000', '25.000', 'Otro'];
 
     const handleDonarClick = () => {
         Swal.fire({
-            title: 'Gracias Por tu Donacion',
-            text: 'Tu Donacion ha sido enviada con exito.',
+            title: '¡Gracias Por tu Donación!',
+            text: 'Tu contribución ayuda a seguir haciendo el cambio.',
             icon: 'success',
-            confirmButtonText: 'Aceptar'
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#078a87'
         });
     };
-    // success verde
-    // warning amarillo
-    // info celeste
 
     return (
+        <div className={styles.donationContainer}>
+            <div className={styles.donationCard}>
 
-        <div className="donation-card">
-
-            {/* Paso 1: Selecciona una Causa */}
-            <section className="step-section">
-                <div className="step-header">
-                    <span className="step-number">1</span>
-                    <h3>Selecciona una Causa</h3>
+                {/* Header Section */}
+                <div className={styles.mainTitle}>
+                    <h2>Haz la Diferencia Hoy</h2>
+                    <p>Tu contribución directa ayuda a transformar comunidades en Costa Rica.</p>
                 </div>
-                <div className="options-grid">
-                    {causas.map((c) => (
-                        <button
-                            key={c.id}
-                            className={`option-btn ${causa === c.nombre ? 'active' : ''}`}
-                            onClick={() => setCausa(c.nombre)}
-                        >
-                            <span className="icon">{c.icon}</span>
-                            <span className="label">{c.nombre}</span>
 
-                        </button>
-                    ))}
-                </div>
-            </section>
-
-            {/* Paso 2: Monto de la Donación */}
-
-            <section className="step-section">
-                <div className="step-header">
-                    <span className="step-number">2</span>
-                    <h3>Monto de la Donación</h3>
-                </div>
-                <div className="amounts-grid">
-                    {montos.map((m) => (
-                        <button
-                            key={m}
-                            className={`amount-btn ${monto === m ? 'active' : ''}`}
-
-                            onClick={() => setMonto(m)}
-                        >
-                            {m !== 'Otro monto' ? `₡${m}` : m}
-                        </button>
-                    ))}
-                </div>
-                {monto === 'Otro monto' && (
-
-                    <div className="input-group">
-
-                        <label>Ingresa un monto personalizado</label>
-                        <input
-                            type="number"
-                            placeholder="Otro Monto"
-                            value={otroMonto}
-                            onChange={(e) => setOtroMonto(e.target.value)}
-
-                            className="custom-amount-input"
-
-                        />
+                {/* Paso 1: Selecciona una Causa */}
+                <section className={styles.stepSection}>
+                    <div className={styles.stepHeader}>
+                        <span className={styles.stepNumber}>1</span>
+                        <h3>Selecciona una Causa</h3>
                     </div>
-                )}
-            </section>
+                    <div className={styles.optionsGrid}>
+                        {causas.map((c) => (
+                            <button
+                                key={c.id}
+                                className={`${styles.optionBtn} ${causa === c.nombre ? styles.active : ''}`}
+                                onClick={() => setCausa(c.nombre)}
+                            >
+                                <span className={styles.icon}>{c.icon}</span>
+                                <span className={styles.label}>{c.nombre}</span>
+                            </button>
+                        ))}
+                    </div>
+                </section>
 
-            {/* Paso 3: Información de Pago */}
-
-            <section className="step-section">
-                <div className="step-header">
-                    <span className="step-number">3</span>
-                    <h3>Información de Pago</h3>
-                </div>
-
-                <div className="payment-layout">
-                    <div className="payment-form">
-                        <div className="input-group">
-                            <label>NOMBRE DEL TITULAR</label>
-                            <input type="text" placeholder="Ej. María García" />
+                {/* Paso 2: Monto de la Donación */}
+                <section className={styles.stepSection}>
+                    <div className={styles.stepHeader}>
+                        <span className={styles.stepNumber}>2</span>
+                        <h3>Monto de la Donación</h3>
+                    </div>
+                    <div className={styles.amountsGrid}>
+                        {montos.map((m) => (
+                            <button
+                                key={m}
+                                className={`${styles.amountBtn} ${monto === m ? styles.active : ''}`}
+                                onClick={() => setMonto(m)}
+                            >
+                                {m !== 'Otro' ? `₡${m}` : m}
+                            </button>
+                        ))}
+                    </div>
+                    {monto === 'Otro' && (
+                        <div className={styles.inputGroup}>
+                            <label>Ingresa un monto personalizado</label>
+                            <input
+                                type="number"
+                                placeholder="Monto en Colones"
+                                value={otroMonto}
+                                onChange={(e) => setOtroMonto(e.target.value)}
+                                className={styles.customAmountInput}
+                            />
                         </div>
-                        <div className="input-group">
-                            <label>NÚMERO DE TARJETA</label>
-                            <div className="card-input-wrapper">
-                                <input type="text" placeholder="0000 0000 0000 0000" />
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="input-group">
-                                <label>VENCIMIENTO</label>
-                                <input type="text" placeholder="MM/YY" />
-                            </div>
-                            <div className="input-group">
+                    )}
+                </section>
 
-                                <label>CVV</label>
-                                <input type="password" placeholder="***" />
-                            </div>
-                        </div>
+                {/* Paso 3: Información de Pago */}
+                <section className={styles.stepSection}>
+                    <div className={styles.stepHeader}>
+                        <span className={styles.stepNumber}>3</span>
+                        <h3>Información de Pago</h3>
                     </div>
 
+                    <div className={styles.paymentLayout}>
+                        <div className={styles.paymentForm}>
+                            <div className={styles.inputGroup}>
+                                <label>NOMBRE DEL TITULAR</label>
+                                <input type="text" placeholder="Ej. Ana Pérez" className={styles.inputField} />
+                            </div>
+                            <div className={styles.inputGroup}>
+                                <label>NÚMERO DE TARJETA</label>
+                                <input type="text" placeholder="0000 0000 0000 0000" className={styles.inputField} />
+                            </div>
+                            <div className={styles.formRow}>
+                                <div className={styles.inputGroup}>
+                                    <label>VENCIMIENTO</label>
+                                    <input type="text" placeholder="MM/YY" className={styles.inputField} />
+                                </div>
+                                <div className={styles.inputGroup}>
+                                    <label>CVV</label>
+                                    <input type="password" placeholder="***" className={styles.inputField} />
+                                </div>
+                            </div>
+                        </div>
 
-                    <div className="secure-info">
-                        <div className="shield-icon">🛡️</div>
-                        <h4>Transacción Segura</h4>
-                        <p>Tus datos están protegidos bajo protocolos de seguridad de grado bancario.</p>
-                        <div className="card-logos">
-
-                            <span>VISA</span> <span>MC</span> <span>AMEX</span>
+                        <div className={styles.secureInfo}>
+                            <div className={styles.shieldIcon}>🛡️</div>
+                            <h4>Transacción Segura</h4>
+                            <p>Tus datos están protegidos bajo protocolos de encriptación de grado bancario.</p>
+                            <div className={styles.cardLogos}>
+                                <span>💳 VISA</span>
+                                <span>💳 MC</span>
+                                <span>💳 AMEX</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
+                <button className={styles.submitBtn} onClick={handleDonarClick}>
+                    <span>❤️</span> Donar Ahora
+                </button>
 
-            <button className="submit-btn" onClick={handleDonarClick}>
-                
-                🧡 Donar ahora
-            </button>
+                <p className={styles.taxDisclaimer}>
+                    ❤️ <p>Si deseas hacer una donación por medio de Sinpe Móvil al Numero +506 60029403 a nombre de Brujula Social.  </p>
 
-            
-            <p className="tax-disclaimer">
-
-                ✓ Tu donación es 100% deducible de impuestos.
-            </p>
+                    ✓ Tu donación es 100% deducible de impuestos en Costa Rica.
+                </p>
+            </div>
         </div>
     );
 };
 
-
 export default Donacion;
-

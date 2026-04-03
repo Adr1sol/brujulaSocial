@@ -165,6 +165,12 @@ export default function NavbarGlobal() {
                 <ul className={styles.navLinks}>
                     {links.map((item, index) => renderLink(item, index))}
 
+                    <li>
+                        <Link to="/donacion" className={styles.btnDonar}>
+                            <span>❤️</span> Donar
+                        </Link>
+                    </li>
+
                     {usuario && (
                         <li>
                             <button onClick={handleLogout} className={styles.btnLogout}>

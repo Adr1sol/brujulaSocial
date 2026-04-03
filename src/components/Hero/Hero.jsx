@@ -22,6 +22,10 @@ const Hero = () => {
       <div className="hero-content">
         <span className="hero-tag">🌿 VOLUNTARIADO EN COSTA RICA</span>
         <h1 className="hero-title">
+          <br />
+          <br />
+          <br />
+          <br />
           Encuentra tu causa.<br />
           <span className="hero-title-accent">Impacta tu mundo.</span>
         </h1>

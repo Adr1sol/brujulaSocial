@@ -1,219 +1,292 @@
-.donation-card {
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    max-width: 800px;
-    margin: 40px auto;
-    font-family: 'Poppins', sans-serif;
-    color: #333;
-    transition: all 0.3s ease;
+.donationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8fafc; /* Very light modern gray/blue background */
+  padding: 4rem 1rem;
 }
 
-.donation-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+.donationCard {
+  background: #ffffff;
+  max-width: 800px;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); /* Premium soft shadow */
+  padding: 3rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-.step-section {
-    margin-bottom: 35px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 35px;
+.mainTitle {
+  text-align: center;
+  margin-bottom: 2.5rem;
 }
 
-.step-section:last-of-type {
-    border-bottom: none;
-    padding-bottom: 20px;
+.mainTitle h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
 }
 
-.step-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 25px;
+.mainTitle p {
+  color: #64748b;
+  font-size: 1.1rem;
 }
 
-.step-number {
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-    font-size: 1.1em;
+/* Steps unified styling */
+.stepSection {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.step-header h3 {
-    margin: 0;
-    font-size: 1.6em;
-    font-weight: 600;
-    color: #0056b3;
+.stepSection:last-of-type {
+  border-bottom: none;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
-.options-grid,
-.amounts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
+.stepHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.option-btn,
-.amount-btn {
-    background-color: #f8f9fa;
-    border: 2px solid #dee2e6;
-    border-radius: 10px;
-    padding: 15px;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.3s ease;
-    font-size: 1em;
-    font-weight: 500;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+.stepNumber {
+  background: linear-gradient(135deg, #078a87, #00c2a8);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(7, 138, 135, 0.3);
 }
 
-.option-btn:hover,
-.amount-btn:hover {
-    transform: translateY(-3px);
-    border-color: #007bff;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+.stepHeader h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #334155;
+  margin: 0;
 }
 
-.option-btn.active,
-.amount-btn.active {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
-    font-weight: 600;
+/* Dynamic Grid for Option Cards */
+.optionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
 }
 
-.icon {
-    font-size: 1.8em;
+.optionBtn {
+  background: #f1f5f9;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
 }
 
-.input-group {
-    margin-top: 20px;
+.optionBtn:hover {
+  transform: translateY(-3px);
+  background: #ffffff;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
 }
 
-.input-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 0.9em;
-    color: #555;
+.optionBtn.active {
+  background: #ffffff;
+  border-color: #078a87;
+  box-shadow: 0 8px 20px rgba(7, 138, 135, 0.15);
 }
 
-.custom-amount-input,
-.payment-form input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1em;
-    transition: border-color 0.3s, box-shadow 0.3s;
+.optionBtn .icon {
+  font-size: 2rem;
 }
 
-.custom-amount-input:focus,
-.payment-form input:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+.optionBtn .label {
+  font-weight: 600;
+  color: #475569;
+  font-size: 1rem;
 }
 
-.payment-layout {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
-    align-items: center;
+.optionBtn.active .label {
+  color: #078a87;
 }
 
-.form-row {
-    display: flex;
-    gap: 15px;
+/* Amounts */
+.amountsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-.form-row .input-group {
-    flex: 1;
+.amountBtn {
+  background: #f8fafc;
+  color: #475569;
+  border: 2px solid #cbd5e1;
+  border-radius: 50px;
+  padding: 0.8rem 1rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.secure-info {
-    background-color: #e9f5ff;
-    border-radius: 10px;
-    padding: 25px;
-    text-align: center;
-    color: #0056b3;
+.amountBtn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
 }
 
-.shield-icon {
-    font-size: 3em;
-    margin-bottom: 10px;
+.amountBtn.active {
+  background: linear-gradient(135deg, #078a87, #00c2a8);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 6px 15px rgba(7, 138, 135, 0.3);
+  transform: scale(1.03);
 }
 
-.secure-info h4 {
-    margin: 0 0 10px;
-    font-size: 1.2em;
-    font-weight: 600;
+/* Input Styles */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+  width: 100%;
 }
 
-.secure-info p {
-    margin: 0 0 15px;
-    font-size: 0.9em;
-    line-height: 1.5;
+.inputGroup label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.card-logos span {
-    font-weight: bold;
-    margin: 0 8px;
-    font-size: 1.1em;
-    opacity: 0.7;
+.inputField, .customAmountInput {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  color: #1e293b;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.submit-btn {
-    background: linear-gradient(45deg, #ff6b6b, #f06595);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 15px 30px;
-    font-size: 1.2em;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 20px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+.inputField:focus, .customAmountInput:focus {
+  border-color: #078a87;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(7, 138, 135, 0.1);
 }
 
-.submit-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
-.tax-disclaimer {
-    text-align: center;
-    margin-top: 25px;
-    font-size: 0.9em;
-    color: #6c757d;
+/* Payment Layout */
+.paymentLayout {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2rem;
+  align-items: stretch;
 }
 
+.secureInfo {
+  background: #f0fdfa; /* Light teal background */
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #ccfbf1;
+}
+
+.shieldIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.secureInfo h4 {
+  color: #0d9488;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.secureInfo p {
+  color: #475569;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.cardLogos {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #64748b;
+}
+
+/* Submit Button */
+.submitBtn {
+  background: linear-gradient(135deg, #078a87, #00c2a8);
+  color: white;
+  width: 100%;
+  border: none;
+  padding: 1.2rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(7, 138, 135, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.submitBtn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(7, 138, 135, 0.5);
+  background: linear-gradient(135deg, #067270, #00ad96);
+}
+
+.taxDisclaimer {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .donation-card {
-        padding: 25px;
-    }
-
-    .payment-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .secure-info {
-        margin-top: 30px;
-    }
+  .donationCard {
+    padding: 1.5rem;
+  }
+  .paymentLayout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .mainTitle h2 {
+    font-size: 2rem;
+  }
 }

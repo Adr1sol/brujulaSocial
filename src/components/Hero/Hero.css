@@ -89,6 +89,39 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
 }
 
+/* Alineación de los botones del Hero */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap; /* En móviles se apilarán naturalmente */
+}
+
+/* Estilo Premium para el botón secundario (Ver organizaciones) */
+.btn-secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 3;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.btn-secondary:hover {
+  background-color: white;
+  color: #078a87; /* Toma el color de temática principal */
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+}
+
 .search-bar {
   position: absolute;
   bottom: -40px; /* This will position it sticking out from the bottom */
